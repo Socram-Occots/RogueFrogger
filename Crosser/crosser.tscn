@@ -143,10 +143,8 @@ animation = &"walk_side"
 frame_progress = 0.326372
 
 [node name="Camera2D" type="Camera2D" parent="crosser"]
-limit_left = -69
-limit_top = -160
-limit_right = 1215
-limit_bottom = 730
+limit_left = 0
+limit_right = 1280
 
 [node name="PlayerStart" type="Marker2D" parent="."]
 position = Vector2(592, 615)

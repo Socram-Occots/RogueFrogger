@@ -156,6 +156,7 @@ metadata/_edit_horizontal_guides_ = []
 metadata/_edit_vertical_guides_ = []
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource("TileSet_d2ib0")
 format = 2
 layer_0/name = "Gound"

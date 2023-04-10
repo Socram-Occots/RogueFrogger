@@ -28,7 +28,6 @@ shader = ExtResource("11_ly7cw")
 [node name="Items" type="Node2D"]
 
 [node name="Node0" type="Area2D" parent="."]
-visible = false
 collision_layer = 8
 script = ExtResource("1_y7hva")
 
@@ -69,6 +68,7 @@ region_enabled = true
 region_rect = Rect2(-2, 7, 118, 107)
 
 [node name="Node3" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 script = ExtResource("5_2gs8y")
 
