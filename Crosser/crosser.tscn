@@ -1,0 +1,152 @@
+[gd_scene load_steps=29 format=3 uid="uid://c1asyn1hn33d8"]
+
+[ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
+[ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
+[ext_resource type="Texture2D" uid="uid://2xgmpch6a1ju" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_2.png" id="2_mdwvt"]
+[ext_resource type="Texture2D" uid="uid://bpyhavr5ll4rc" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_3.png" id="3_36v63"]
+[ext_resource type="Texture2D" uid="uid://bkhwepvfnhkdh" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_4.png" id="4_uoduy"]
+[ext_resource type="Texture2D" uid="uid://v5u4i36dso07" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_5.png" id="5_44mg0"]
+[ext_resource type="Texture2D" uid="uid://dmnw4agi6lvlu" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_6.png" id="6_nad8e"]
+[ext_resource type="Texture2D" uid="uid://odwqk5smjh5v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_7.png" id="7_d1ap6"]
+[ext_resource type="Texture2D" uid="uid://blqbjn65t1q1p" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_8.png" id="8_wqsx7"]
+[ext_resource type="Texture2D" uid="uid://bpndplsa1ecfm" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_9.png" id="9_0a6ig"]
+[ext_resource type="Texture2D" uid="uid://d2cqy41l7nixa" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_2.png" id="10_aibo3"]
+[ext_resource type="Texture2D" uid="uid://6utdyo3egqgn" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_3.png" id="11_s644i"]
+[ext_resource type="Texture2D" uid="uid://dvpu4a0djjocp" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_4.png" id="12_n0523"]
+[ext_resource type="Texture2D" uid="uid://8nifi5whtv3b" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_5.png" id="13_f11qs"]
+[ext_resource type="Texture2D" uid="uid://cd4t4i3ik50er" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_6.png" id="14_ii3ir"]
+[ext_resource type="Texture2D" uid="uid://cyhpq8c2i82w4" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_7.png" id="15_06wfn"]
+[ext_resource type="Texture2D" uid="uid://i1gq1x4r5ngd" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_8.png" id="16_qcrw7"]
+[ext_resource type="Texture2D" uid="uid://cod63u0cmmruo" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Side_9.png" id="17_blce4"]
+[ext_resource type="Texture2D" uid="uid://dmgr34db514hh" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_2.png" id="18_52hso"]
+[ext_resource type="Texture2D" uid="uid://bohsfbsy2m10v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_3.png" id="19_txfu0"]
+[ext_resource type="Texture2D" uid="uid://dort3xovkv2i7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_4.png" id="20_oj40r"]
+[ext_resource type="Texture2D" uid="uid://qs2rltdivnhc" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_5.png" id="21_75s13"]
+[ext_resource type="Texture2D" uid="uid://6vapmi5b0ce0" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_6.png" id="22_sdx5x"]
+[ext_resource type="Texture2D" uid="uid://bpu6fxrirac83" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_7.png" id="23_rfwe5"]
+[ext_resource type="Texture2D" uid="uid://ccuycyg42oqx0" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_8.png" id="24_by8fg"]
+[ext_resource type="Texture2D" uid="uid://b4vexjyfep41v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_9.png" id="25_ru7x7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_typs2"]
+size = Vector2(30, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5abg2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_e3dyc")
+}],
+"loop": true,
+"name": &"stand",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mdwvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_36v63")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uoduy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_44mg0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nad8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d1ap6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wqsx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0a6ig")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_aibo3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_s644i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_n0523")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f11qs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ii3ir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_06wfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_qcrw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_blce4")
+}],
+"loop": true,
+"name": &"walk_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_52hso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_txfu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_oj40r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_75s13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_sdx5x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_rfwe5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_by8fg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_ru7x7")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[node name="player" type="Node2D"]
+
+[node name="crosser" type="CharacterBody2D" parent="."]
+collision_mask = 15
+script = ExtResource("1_5p142")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="crosser"]
+shape = SubResource("RectangleShape2D_typs2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="crosser"]
+sprite_frames = SubResource("SpriteFrames_5abg2")
+animation = &"walk_side"
+frame_progress = 0.326372
+
+[node name="Camera2D" type="Camera2D" parent="crosser"]
+limit_left = -69
+limit_top = -160
+limit_right = 1215
+limit_bottom = 730
+
+[node name="PlayerStart" type="Marker2D" parent="."]
+position = Vector2(592, 615)

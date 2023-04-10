@@ -1,0 +1,101 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://bvxtdoo1ovpx2"]
+
+[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_thpsb"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_pxlsv"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_osm33"]
+default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0, 1, 0.435), 6, 0.75]
+initialized = true
+script = ExtResource("1_thpsb")
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_jxsxa"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_k6ok7"]
+default_input_values = [0, 2.0, 1, 1.0]
+initialized = true
+script = ExtResource("2_pxlsv")
+
+[resource]
+code = "shader_type canvas_item;
+
+
+// OuterGlow
+vec4 _outerGlowFunc(sampler2D _samp_inglow, vec2 _uv_inglow, float _lod_inglow, float _rad_inglow, float _intns_inglow, vec4 _col_inglow){
+	_rad_inglow = abs(_rad_inglow);
+	
+	vec4 _color_inglow = vec4(0.0);
+	float _alpha_inv = 0.0;
+	float _alpha_inglow_b1 = 0.0;
+	int _amount_inglow = 3;
+	
+	if (_lod_inglow < 0.0)
+		_color_inglow = texture(_samp_inglow, _uv_inglow);
+	else
+		_color_inglow = textureLod(_samp_inglow, _uv_inglow, _lod_inglow);
+	
+	_amount_inglow = int(min(_rad_inglow + 7.0, 14.0));
+	for(int x = - _amount_inglow; x <= _amount_inglow; x++) {
+		for(int y = - _amount_inglow; y <= _amount_inglow; y++) {
+			vec2 _coord_blur_cst = _uv_inglow + vec2(float(x), float(y)) * _rad_inglow * 0.01;
+			_alpha_inglow_b1 += textureLod(_samp_inglow, _coord_blur_cst, 0.0).a;
+		}
+	}
+	int _nmb_neighbours_blur_cst = (_amount_inglow * 2 + 1) * (_amount_inglow * 2 + 1);
+	_alpha_inglow_b1 /= float(_nmb_neighbours_blur_cst);
+	
+	_alpha_inv = _alpha_inglow_b1; // inversion
+	_alpha_inv *= (1.0 - _color_inglow.a); // masking
+	
+	if (_alpha_inv > 0.0)
+		_alpha_inv *= (_intns_inglow + 1.0);
+	
+	vec4 _glow_col_result = vec4(_col_inglow.rgb, _alpha_inv * _col_inglow.a);
+	return mix(_glow_col_result, _color_inglow, _color_inglow.a);
+}
+
+void fragment() {
+// FloatConstant:3
+	float n_out3p0 = 1.000000;
+
+
+	float n_out4p0;
+// SinTIME:4
+	float n_in4p0 = 2.00000;
+	{
+		n_out4p0 = n_out3p0 * sin(n_in4p0 * TIME);
+	}
+
+
+	vec3 n_out2p0;
+	float n_out2p1;
+// OuterGlow:2
+	float n_in2p2 = -1.00000;
+	float n_in2p4 = 1.00000;
+	vec3 n_in2p5 = vec3(0.00000, 1.00000, 0.43500);
+	float n_in2p6 = 0.75000;
+	{
+		vec4 n_out2p0n_out2p1 = _outerGlowFunc(TEXTURE, UV.xy, n_in2p2, n_out4p0, n_in2p4, vec4(n_in2p5, n_in2p6));
+		n_out2p0 = n_out2p0n_out2p1.rgb;
+		n_out2p1 = n_out2p0n_out2p1.a;
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out2p0;
+	COLOR.a = n_out2p1;
+
+
+}
+"
+graph_offset = Vector2(-129.308, 137.5)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(400, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_osm33")
+nodes/fragment/2/position = Vector2(120, 200)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_jxsxa")
+nodes/fragment/3/position = Vector2(-300, 400)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_k6ok7")
+nodes/fragment/4/position = Vector2(-140, 280)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 1, 4, 0, 2, 3, 2, 0, 0, 0, 2, 1, 0, 1)

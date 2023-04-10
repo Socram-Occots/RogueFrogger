@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://cv2mr8ur0uh6v"]
+
+[ext_resource type="Texture2D" uid="uid://cuxmglv3okft5" path="res://RogueFroggerAssets/RFAssets/Car/Yellow1.png" id="1_38gab"]
+[ext_resource type="Script" path="res://Car/car.gd" id="1_nm587"]
+[ext_resource type="Texture2D" uid="uid://dfj18q0cftrun" path="res://RogueFroggerAssets/RFAssets/Car/Grey1.png" id="2_l8qon"]
+[ext_resource type="Texture2D" uid="uid://cdhqsaoscj2ku" path="res://RogueFroggerAssets/RFAssets/Car/Grey2.png" id="3_r6jlg"]
+[ext_resource type="Texture2D" uid="uid://cygy3o5wf2tny" path="res://RogueFroggerAssets/RFAssets/Car/Yellow2.png" id="5_07f0p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlwrd"]
+size = Vector2(180, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fqrn"]
+size = Vector2(169, 47)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m6aqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l8qon")
+}],
+"loop": false,
+"name": &"Grey1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_r6jlg")
+}],
+"loop": false,
+"name": &"Grey2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_38gab")
+}],
+"loop": false,
+"name": &"Yellow1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_07f0p")
+}],
+"loop": false,
+"name": &"Yellow2",
+"speed": 5.0
+}]
+
+[node name="car" type="Node2D"]
+
+[node name="car" type="Area2D" parent="."]
+y_sort_enabled = true
+collision_layer = 2
+script = ExtResource("1_nm587")
+
+[node name="CollisionShapeGrey" type="CollisionShape2D" parent="car"]
+y_sort_enabled = true
+shape = SubResource("RectangleShape2D_rlwrd")
+disabled = true
+
+[node name="CollisionShape2DYellow" type="CollisionShape2D" parent="car"]
+shape = SubResource("RectangleShape2D_2fqrn")
+disabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
+sprite_frames = SubResource("SpriteFrames_m6aqc")
+animation = &"Grey1"
+
+[connection signal="body_entered" from="car" to="car" method="_on_body_entered"]

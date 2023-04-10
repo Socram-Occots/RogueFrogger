@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://j537pvn5vvqf"]
+
+[ext_resource type="FontFile" uid="uid://40roepj74sr2" path="res://RogueFroggerAssets/RFAssets/Font/BLADRMF_.TTF" id="1_ngwsl"]
+
+[resource]
+default_font = ExtResource("1_ngwsl")
+default_font_size = 60

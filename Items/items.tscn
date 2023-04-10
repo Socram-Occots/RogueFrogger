@@ -1,0 +1,86 @@
+[gd_scene load_steps=17 format=3 uid="uid://bxyymwdbynjfb"]
+
+[ext_resource type="Script" path="res://Node0.gd" id="1_y7hva"]
+[ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="2_fcdun"]
+[ext_resource type="Texture2D" uid="uid://peidxpxcc4vg" path="res://RogueFroggerAssets/RFAssets/Level/item1.png" id="3_ao71y"]
+[ext_resource type="Script" path="res://Items/Node2.gd" id="3_dpuf5"]
+[ext_resource type="Script" path="res://Items/Node3.gd" id="4_36jmu"]
+[ext_resource type="Script" path="res://Items/Node4.gd" id="5_2gs8y"]
+[ext_resource type="Shader" uid="uid://bvxtdoo1ovpx2" path="res://Items/shading2.tres" id="5_lrnh4"]
+[ext_resource type="Texture2D" uid="uid://bm8mcw3irgyw6" path="res://RogueFroggerAssets/RFAssets/Level/image2.png" id="6_2tdbv"]
+[ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading3.tres" id="8_uibdt"]
+[ext_resource type="Texture2D" uid="uid://ks6645tcncjj" path="res://RogueFroggerAssets/RFAssets/Level/image3.png" id="9_giyvq"]
+[ext_resource type="Shader" uid="uid://4wgkx4w7bj1i" path="res://Items/shading4.tres" id="11_ly7cw"]
+[ext_resource type="Texture2D" uid="uid://5g1wd32no61o" path="res://RogueFroggerAssets/RFAssets/Level/image4.png" id="12_d02wp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwot6"]
+shader = ExtResource("2_fcdun")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5h204"]
+shader = ExtResource("5_lrnh4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xxsdt"]
+shader = ExtResource("8_uibdt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_600xy"]
+shader = ExtResource("11_ly7cw")
+
+[node name="Items" type="Node2D"]
+
+[node name="Node0" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+script = ExtResource("1_y7hva")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node0"]
+polygon = PackedVector2Array(-27, -15, -5, -15, -5, -24, 5, -24, 5, -15, 29, -15, 30, -13, 9, 2, 6, 2, 5, 9, -4, 18, -4, 9, -7, 8, -30, 25, -31, 23, -7, 1, -28, -12)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node0"]
+material = SubResource("ShaderMaterial_vwot6")
+texture = ExtResource("3_ao71y")
+region_enabled = true
+region_rect = Rect2(0, 0, 116, 113)
+
+[node name="Node1" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+script = ExtResource("3_dpuf5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node1"]
+polygon = PackedVector2Array(-12, -19, -15, -14, -15, 2, -8, 8, -8, 12, -10, 21, 10, 21, 8, 12, 8, 8, 15, 1, 15, -14, 12, -19, 10, -18, 10, -9, 9, -8, 9, -5, 6, -5, 3, -11, 3, -15, 2, -17, 2, -21, 0, -22, -2, -21, -2, -17, -3, -15, -3, -11, -6, -5, -9, -5, -9, -9, -10, -10, -10, -18)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node1"]
+material = SubResource("ShaderMaterial_5h204")
+texture = ExtResource("6_2tdbv")
+region_rect = Rect2(0, 0, 116, 114)
+
+[node name="Node2" type="Area2D" parent="."]
+visible = false
+collision_layer = 8
+script = ExtResource("4_36jmu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2"]
+polygon = PackedVector2Array(-6, -26, 7, -26, 7, -16, 14, -13, 17, -7, 25, -7, 25, 7, 16, 7, 13, 13, 7, 16, 7, 26, -6, 26, -6, 16, -13, 13, -16, 7, -24, 7, -24, -7, -16, -7, -13, -13, -6, -16)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2"]
+material = SubResource("ShaderMaterial_xxsdt")
+texture = ExtResource("9_giyvq")
+region_enabled = true
+region_rect = Rect2(-2, 7, 118, 107)
+
+[node name="Node3" type="Area2D" parent="."]
+collision_layer = 8
+script = ExtResource("5_2gs8y")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node3"]
+polygon = PackedVector2Array(-16, -22, 18, -22, 21, -19, 21, -6, 15, 0, 21, 5, 21, 22, -21, 22, -21, 15, -11, 15, -4, 8, -9, 4, -21, 4, -21, -17)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node3"]
+material = SubResource("ShaderMaterial_600xy")
+texture = ExtResource("12_d02wp")
+region_rect = Rect2(75, 75, 43, 44)
+
+[connection signal="body_entered" from="Node0" to="Node0" method="_on_body_entered"]
+[connection signal="body_entered" from="Node1" to="Node1" method="_on_body_entered"]
+[connection signal="body_entered" from="Node2" to="Node2" method="_on_body_entered"]
+[connection signal="body_entered" from="Node3" to="Node3" method="_on_body_entered"]

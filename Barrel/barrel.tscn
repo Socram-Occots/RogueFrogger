@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://7usolp78746g"]
+
+[ext_resource type="Texture2D" uid="uid://cvlpmnc6t6xf5" path="res://RogueFroggerAssets/RFAssets/Level/Objects.png" id="1_e7p8j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yp018"]
+size = Vector2(27, 3)
+
+[node name="Barrel" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_e7p8j")
+region_enabled = true
+region_rect = Rect2(128.754, 21.682, 29.633, 36.643)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_yp018")
