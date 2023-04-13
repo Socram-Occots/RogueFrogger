@@ -27,6 +27,9 @@ var dash = false
 var dash_mod = 1
 var dash_scaling = 100
 
+#Terrain
+var spawnTerrain = false
+
 func reset():
 	score = 0
 	player_speed_mod = 1

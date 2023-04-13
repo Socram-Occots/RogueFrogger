@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=9 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="PackedScene" uid="uid://c1asyn1hn33d8" path="res://Crosser/crosser.tscn" id="1_0quc1"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
@@ -41,8 +41,6 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_r73b3")
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ay8sh"]
-
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4er2a"]
 
 [node name="Level" type="Node"]
@@ -50,7 +48,16 @@ script = ExtResource("1_v6cxu")
 metadata/_edit_horizontal_guides_ = []
 metadata/_edit_vertical_guides_ = []
 
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="TileMap2" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_35jxt")
+cell_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(65536, 65536, 0, 65537, 65536, 0, 196608, 65536, 2, 196609, 65536, 2, 131072, 65536, 1, 131073, 65536, 1, 131074, 65536, 1, 131075, 65536, 1, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 65536, 1, 131089, 65536, 1, 131090, 65536, 1, 131091, 65536, 1, 131092, 65536, 1, 131093, 65536, 1, 131094, 65536, 1, 131095, 65536, 1, 131096, 65536, 1, 131097, 65536, 1, 131098, 65536, 1, 131099, 65536, 1, 131100, 65536, 1, 131101, 65536, 1, 131102, 65536, 1, 131103, 65536, 1, 131104, 65536, 1, 131105, 65536, 1, 131106, 65536, 1, 131107, 65536, 1, 131108, 65536, 1, 131109, 65536, 1, 131110, 65536, 1, 131111, 65536, 1, 131112, 65536, 1, 196607, 65536, 1, 262143, 65536, 2, 196610, 65536, 2, 196611, 65536, 2, 196612, 65536, 2, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 196624, 65536, 2, 196625, 65536, 2, 196626, 65536, 2, 196627, 65536, 2, 196628, 65536, 2, 196629, 65536, 2, 196630, 65536, 2, 196631, 65536, 2, 196632, 65536, 2, 196633, 65536, 2, 196634, 65536, 2, 196635, 65536, 2, 196636, 65536, 2, 196637, 65536, 2, 196638, 65536, 2, 196639, 65536, 2, 196640, 65536, 2, 196641, 65536, 2, 196642, 65536, 2, 196643, 65536, 2, 196644, 65536, 2, 196645, 65536, 2, 196646, 65536, 2, 196647, 65536, 2, 196648, 65536, 2, 65576, 65536, 0, 65575, 65536, 0, 65574, 65536, 0, 65573, 65536, 0, 65572, 65536, 0, 65571, 65536, 0, 65570, 65536, 0, 65569, 65536, 0, 65568, 65536, 0, 65567, 65536, 0, 65566, 65536, 0, 65565, 65536, 0, 65564, 65536, 0, 65563, 65536, 0, 65562, 65536, 0, 65561, 65536, 0, 65560, 65536, 0, 65559, 65536, 0, 65558, 65536, 0, 65557, 65536, 0, 65556, 65536, 0, 65555, 65536, 0, 65554, 65536, 0, 65553, 65536, 0, 65552, 65536, 0, 65551, 65536, 0, 65550, 65536, 0, 65549, 65536, 0, 65548, 65536, 0, 65547, 65536, 0, 65546, 65536, 0, 65545, 65536, 0, 65544, 65536, 0, 65543, 65536, 0, 65542, 65536, 0, 65541, 65536, 0, 65540, 65536, 0, 65539, 65536, 0, 65538, 65536, 0, 131071, 65536, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 33, 0, 0, 34, 0, 0, 35, 0, 0, 36, 0, 0, 37, 0, 0, 38, 0, 0, 39, 0, 0)
+
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource("TileSet_35jxt")
 cell_quadrant_size = 32
 format = 2
@@ -65,6 +72,25 @@ y_sort_enabled = true
 [node name="player" parent="Ysort" instance=ExtResource("1_0quc1")]
 y_sort_enabled = true
 position = Vector2(33, 88)
+
+[node name="border" type="Node" parent="."]
+
+[node name="leftcol" type="StaticBody2D" parent="border"]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border/leftcol"]
+position = Vector2(0, 355)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_4er2a")
+
+[node name="rightcol" type="StaticBody2D" parent="border"]
+position = Vector2(538, 398)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border/rightcol"]
+position = Vector2(742, -8)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_4er2a")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -91,7 +117,7 @@ anchor_right = 1.0
 offset_left = -72.0
 offset_bottom = 26.0
 grow_horizontal = 0
-text = "V 0.0.0.2"
+text = "V 0.0.0.3"
 
 [node name="Instructions" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
@@ -204,42 +230,6 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("10_vlqyf")
 region_enabled = true
 region_rect = Rect2(75, 75, 43, 44)
-
-[node name="border" type="Node" parent="CanvasLayer"]
-
-[node name="bottomcol" type="StaticBody2D" parent="CanvasLayer/border"]
-collision_layer = 4
-physics_material_override = SubResource("PhysicsMaterial_ay8sh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/border/bottomcol"]
-position = Vector2(553, 730)
-shape = SubResource("WorldBoundaryShape2D_4er2a")
-
-[node name="topcol" type="StaticBody2D" parent="CanvasLayer/border"]
-position = Vector2(-28, -935)
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/border/topcol"]
-position = Vector2(670, 935)
-rotation = 3.14159
-shape = SubResource("WorldBoundaryShape2D_4er2a")
-
-[node name="leftcol" type="StaticBody2D" parent="CanvasLayer/border"]
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/border/leftcol"]
-position = Vector2(0, 355)
-rotation = 1.5708
-shape = SubResource("WorldBoundaryShape2D_4er2a")
-
-[node name="rightcol" type="StaticBody2D" parent="CanvasLayer/border"]
-position = Vector2(538, 398)
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CanvasLayer/border/rightcol"]
-position = Vector2(742, -8)
-rotation = -1.5708
-shape = SubResource("WorldBoundaryShape2D_4er2a")
 
 [node name="spawnterrain" type="Marker2D" parent="CanvasLayer"]
 position = Vector2(0, -288)
