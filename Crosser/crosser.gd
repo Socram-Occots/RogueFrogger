@@ -3,12 +3,14 @@ extends CharacterBody2D
 #var speed = 250
 #var dash_distance = 100
 
-func _ready():
-	position = $"../PlayerStart".position
+#	func _ready():
+#		position = $"../PlayerStart".position
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-#	print(position)
+#	print(global_position)
+	Global.player_pos_x = global_position.x
+	Global.player_pos_y = global_position.y
 #	if Input.is_action_pressed("ui_copy"): print(position)
 	velocity = Vector2.ZERO
 	if Input.is_action_pressed("left_a"):

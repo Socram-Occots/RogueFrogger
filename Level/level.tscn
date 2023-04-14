@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=8 format=3 uid="uid://m58x3uoufppm"]
 
-[ext_resource type="PackedScene" uid="uid://c1asyn1hn33d8" path="res://Crosser/crosser.tscn" id="1_0quc1"]
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Texture2D" uid="uid://3q2am2jnwlsq" path="res://RogueFroggerAssets/RFAssets/Level/Street.png" id="2_pc7wh"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
@@ -48,13 +47,90 @@ script = ExtResource("1_v6cxu")
 metadata/_edit_horizontal_guides_ = []
 metadata/_edit_vertical_guides_ = []
 
-[node name="Tiles" type="Node2D" parent="."]
+[node name="spawnterrain" type="Marker2D" parent="."]
+position = Vector2(0, 624)
 
-[node name="TileMap2" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_35jxt")
-cell_quadrant_size = 32
-format = 2
-layer_0/tile_data = PackedInt32Array(65536, 65536, 0, 65537, 65536, 0, 196608, 65536, 2, 196609, 65536, 2, 131072, 65536, 1, 131073, 65536, 1, 131074, 65536, 1, 131075, 65536, 1, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 65536, 1, 131089, 65536, 1, 131090, 65536, 1, 131091, 65536, 1, 131092, 65536, 1, 131093, 65536, 1, 131094, 65536, 1, 131095, 65536, 1, 131096, 65536, 1, 131097, 65536, 1, 131098, 65536, 1, 131099, 65536, 1, 131100, 65536, 1, 131101, 65536, 1, 131102, 65536, 1, 131103, 65536, 1, 131104, 65536, 1, 131105, 65536, 1, 131106, 65536, 1, 131107, 65536, 1, 131108, 65536, 1, 131109, 65536, 1, 131110, 65536, 1, 131111, 65536, 1, 131112, 65536, 1, 196607, 65536, 1, 262143, 65536, 2, 196610, 65536, 2, 196611, 65536, 2, 196612, 65536, 2, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 196624, 65536, 2, 196625, 65536, 2, 196626, 65536, 2, 196627, 65536, 2, 196628, 65536, 2, 196629, 65536, 2, 196630, 65536, 2, 196631, 65536, 2, 196632, 65536, 2, 196633, 65536, 2, 196634, 65536, 2, 196635, 65536, 2, 196636, 65536, 2, 196637, 65536, 2, 196638, 65536, 2, 196639, 65536, 2, 196640, 65536, 2, 196641, 65536, 2, 196642, 65536, 2, 196643, 65536, 2, 196644, 65536, 2, 196645, 65536, 2, 196646, 65536, 2, 196647, 65536, 2, 196648, 65536, 2, 65576, 65536, 0, 65575, 65536, 0, 65574, 65536, 0, 65573, 65536, 0, 65572, 65536, 0, 65571, 65536, 0, 65570, 65536, 0, 65569, 65536, 0, 65568, 65536, 0, 65567, 65536, 0, 65566, 65536, 0, 65565, 65536, 0, 65564, 65536, 0, 65563, 65536, 0, 65562, 65536, 0, 65561, 65536, 0, 65560, 65536, 0, 65559, 65536, 0, 65558, 65536, 0, 65557, 65536, 0, 65556, 65536, 0, 65555, 65536, 0, 65554, 65536, 0, 65553, 65536, 0, 65552, 65536, 0, 65551, 65536, 0, 65550, 65536, 0, 65549, 65536, 0, 65548, 65536, 0, 65547, 65536, 0, 65546, 65536, 0, 65545, 65536, 0, 65544, 65536, 0, 65543, 65536, 0, 65542, 65536, 0, 65541, 65536, 0, 65540, 65536, 0, 65539, 65536, 0, 65538, 65536, 0, 131071, 65536, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 33, 0, 0, 34, 0, 0, 35, 0, 0, 36, 0, 0, 37, 0, 0, 38, 0, 0, 39, 0, 0)
+[node name="Node1" type="Marker2D" parent="spawnterrain"]
+position = Vector2(32, 48)
+gizmo_extents = 32.5
+
+[node name="Node2" type="Marker2D" parent="spawnterrain"]
+position = Vector2(96, 48)
+gizmo_extents = 32.5
+
+[node name="Node3" type="Marker2D" parent="spawnterrain"]
+position = Vector2(160, 48)
+gizmo_extents = 32.5
+
+[node name="Node4" type="Marker2D" parent="spawnterrain"]
+position = Vector2(224, 48)
+gizmo_extents = 32.5
+
+[node name="Node5" type="Marker2D" parent="spawnterrain"]
+position = Vector2(288, 48)
+gizmo_extents = 32.5
+
+[node name="Node6" type="Marker2D" parent="spawnterrain"]
+position = Vector2(352, 48)
+gizmo_extents = 32.5
+
+[node name="Node7" type="Marker2D" parent="spawnterrain"]
+position = Vector2(416, 48)
+gizmo_extents = 32.5
+
+[node name="Node8" type="Marker2D" parent="spawnterrain"]
+position = Vector2(480, 48)
+gizmo_extents = 32.5
+
+[node name="Node9" type="Marker2D" parent="spawnterrain"]
+position = Vector2(544, 48)
+gizmo_extents = 32.5
+
+[node name="Node10" type="Marker2D" parent="spawnterrain"]
+position = Vector2(608, 48)
+gizmo_extents = 32.5
+
+[node name="Node11" type="Marker2D" parent="spawnterrain"]
+position = Vector2(672, 48)
+gizmo_extents = 32.5
+
+[node name="Node12" type="Marker2D" parent="spawnterrain"]
+position = Vector2(736, 48)
+gizmo_extents = 32.5
+
+[node name="Node13" type="Marker2D" parent="spawnterrain"]
+position = Vector2(800, 48)
+gizmo_extents = 32.5
+
+[node name="Node14" type="Marker2D" parent="spawnterrain"]
+position = Vector2(864, 48)
+gizmo_extents = 32.5
+
+[node name="Node15" type="Marker2D" parent="spawnterrain"]
+position = Vector2(928, 48)
+gizmo_extents = 32.5
+
+[node name="Node16" type="Marker2D" parent="spawnterrain"]
+position = Vector2(992, 48)
+gizmo_extents = 32.5
+
+[node name="Node17" type="Marker2D" parent="spawnterrain"]
+position = Vector2(1056, 48)
+gizmo_extents = 32.5
+
+[node name="Node18" type="Marker2D" parent="spawnterrain"]
+position = Vector2(1120, 48)
+gizmo_extents = 32.5
+
+[node name="Node19" type="Marker2D" parent="spawnterrain"]
+position = Vector2(1184, 48)
+gizmo_extents = 32.5
+
+[node name="Node20" type="Marker2D" parent="spawnterrain"]
+position = Vector2(1248, 48)
+gizmo_extents = 32.5
+
+[node name="Tiles" type="Node2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
@@ -63,15 +139,18 @@ cell_quadrant_size = 32
 format = 2
 layer_0/tile_data = PackedInt32Array(65536, 65536, 0, 65537, 65536, 0, 196608, 65536, 2, 196609, 65536, 2, 131072, 65536, 1, 131073, 65536, 1, 131074, 65536, 1, 131075, 65536, 1, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 65536, 1, 131089, 65536, 1, 131090, 65536, 1, 131091, 65536, 1, 131092, 65536, 1, 131093, 65536, 1, 131094, 65536, 1, 131095, 65536, 1, 131096, 65536, 1, 131097, 65536, 1, 131098, 65536, 1, 131099, 65536, 1, 131100, 65536, 1, 131101, 65536, 1, 131102, 65536, 1, 131103, 65536, 1, 131104, 65536, 1, 131105, 65536, 1, 131106, 65536, 1, 131107, 65536, 1, 131108, 65536, 1, 131109, 65536, 1, 131110, 65536, 1, 131111, 65536, 1, 131112, 65536, 1, 196607, 65536, 1, 262143, 65536, 2, 196610, 65536, 2, 196611, 65536, 2, 196612, 65536, 2, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 196624, 65536, 2, 196625, 65536, 2, 196626, 65536, 2, 196627, 65536, 2, 196628, 65536, 2, 196629, 65536, 2, 196630, 65536, 2, 196631, 65536, 2, 196632, 65536, 2, 196633, 65536, 2, 196634, 65536, 2, 196635, 65536, 2, 196636, 65536, 2, 196637, 65536, 2, 196638, 65536, 2, 196639, 65536, 2, 196640, 65536, 2, 196641, 65536, 2, 196642, 65536, 2, 196643, 65536, 2, 196644, 65536, 2, 196645, 65536, 2, 196646, 65536, 2, 196647, 65536, 2, 196648, 65536, 2, 65576, 65536, 0, 65575, 65536, 0, 65574, 65536, 0, 65573, 65536, 0, 65572, 65536, 0, 65571, 65536, 0, 65570, 65536, 0, 65569, 65536, 0, 65568, 65536, 0, 65567, 65536, 0, 65566, 65536, 0, 65565, 65536, 0, 65564, 65536, 0, 65563, 65536, 0, 65562, 65536, 0, 65561, 65536, 0, 65560, 65536, 0, 65559, 65536, 0, 65558, 65536, 0, 65557, 65536, 0, 65556, 65536, 0, 65555, 65536, 0, 65554, 65536, 0, 65553, 65536, 0, 65552, 65536, 0, 65551, 65536, 0, 65550, 65536, 0, 65549, 65536, 0, 65548, 65536, 0, 65547, 65536, 0, 65546, 65536, 0, 65545, 65536, 0, 65544, 65536, 0, 65543, 65536, 0, 65542, 65536, 0, 65541, 65536, 0, 65540, 65536, 0, 65539, 65536, 0, 65538, 65536, 0, 131071, 65536, 0)
 
+[node name="TileMap2" type="TileMap" parent="."]
+visible = false
+tile_set = SubResource("TileSet_35jxt")
+cell_quadrant_size = 32
+format = 2
+layer_0/tile_data = PackedInt32Array(131075, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 131079, 65536, 1, 131080, 65536, 1, 131081, 65536, 1, 131082, 65536, 1, 131083, 65536, 1, 131084, 65536, 1, 131085, 65536, 1, 131086, 65536, 1, 131087, 65536, 1, 131088, 65536, 1, 131089, 65536, 1, 131090, 65536, 1, 131091, 65536, 1, 131092, 65536, 1, 131093, 65536, 1, 131094, 65536, 1, 131095, 65536, 1, 131096, 65536, 1, 131097, 65536, 1, 131098, 65536, 1, 131099, 65536, 1, 131100, 65536, 1, 131101, 65536, 1, 131102, 65536, 1, 131103, 65536, 1, 131104, 65536, 1, 131105, 65536, 1, 131106, 65536, 1, 131107, 65536, 1, 131108, 65536, 1, 131109, 65536, 1, 131110, 65536, 1, 131111, 65536, 1, 131112, 65536, 1, 196613, 65536, 2, 196614, 65536, 2, 196615, 65536, 2, 196616, 65536, 2, 196617, 65536, 2, 196618, 65536, 2, 196619, 65536, 2, 196620, 65536, 2, 196621, 65536, 2, 196622, 65536, 2, 196623, 65536, 2, 196624, 65536, 2, 196625, 65536, 2, 196626, 65536, 2, 196627, 65536, 2, 196628, 65536, 2, 196629, 65536, 2, 196630, 65536, 2, 196631, 65536, 2, 196632, 65536, 2, 196633, 65536, 2, 196634, 65536, 2, 196635, 65536, 2, 196636, 65536, 2, 196637, 65536, 2, 196638, 65536, 2, 196639, 65536, 2, 196640, 65536, 2, 196641, 65536, 2, 196642, 65536, 2, 196643, 65536, 2, 196644, 65536, 2, 196645, 65536, 2, 196646, 65536, 2, 196647, 65536, 2, 196648, 65536, 2, 65576, 65536, 0, 65575, 65536, 0, 65574, 65536, 0, 65573, 65536, 0, 65572, 65536, 0, 65571, 65536, 0, 65570, 65536, 0, 65569, 65536, 0, 65568, 65536, 0, 65567, 65536, 0, 65566, 65536, 0, 65565, 65536, 0, 65564, 65536, 0, 65563, 65536, 0, 65562, 65536, 0, 65561, 65536, 0, 65560, 65536, 0, 65559, 65536, 0, 65558, 65536, 0, 65557, 65536, 0, 65556, 65536, 0, 65555, 65536, 0, 65554, 65536, 0, 65553, 65536, 0, 65552, 65536, 0, 65551, 65536, 0, 65550, 65536, 0, 65549, 65536, 0, 65548, 65536, 0, 65547, 65536, 0, 65546, 65536, 0, 65545, 65536, 0, 65544, 65536, 0, 65543, 65536, 0, 65542, 65536, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0, 32, 0, 0, 33, 0, 0, 34, 0, 0, 35, 0, 0, 36, 0, 0, 37, 0, 0, 38, 0, 0, 39, 0, 0, 2, 0, 0, 131076, 65536, 1, 196612, 65536, 2, 196611, 65536, 2, 196610, 65536, 2, 131074, 65536, 1, 131073, 65536, 1, 131072, 65536, 1, 196607, 65536, 1, 1, 0, 0, 196608, 65536, 2, 262143, 65536, 2, 196609, 65536, 2, 0, 0, 0, 65537, 65536, 0, 65538, 65536, 0, 65539, 65536, 0, 65540, 65536, 0, 65541, 65536, 0, 65536, 65536, 0, 131071, 65536, 0, -589824, 0, 0, -589823, 65536, 0, -589822, 65536, 0, -589821, 65536, 0, -589820, 65536, 0, -589819, 65536, 0, -589818, 65536, 0, -589817, 65536, 0, -524288, 0, 1, -458752, 0, 2, -458751, 65536, 2, -458750, 65536, 2, -458749, 65536, 2, -458748, 65536, 2, -458747, 65536, 2, -458746, 65536, 2, -458745, 65536, 2, -524287, 65536, 1, -524286, 65536, 1, -524285, 65536, 1, -524284, 65536, 1, -524283, 65536, 1, -524282, 65536, 1, -524281, 65536, 1)
+
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(625, 703)
+position = Vector2(640, 695)
 
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
-
-[node name="player" parent="Ysort" instance=ExtResource("1_0quc1")]
-y_sort_enabled = true
-position = Vector2(33, 88)
 
 [node name="border" type="Node" parent="."]
 
@@ -230,86 +309,3 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("10_vlqyf")
 region_enabled = true
 region_rect = Rect2(75, 75, 43, 44)
-
-[node name="spawnterrain" type="Marker2D" parent="CanvasLayer"]
-position = Vector2(0, -288)
-
-[node name="Node1" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(32, 80)
-gizmo_extents = 32.5
-
-[node name="Node2" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(96, 80)
-gizmo_extents = 32.5
-
-[node name="Node3" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(160, 80)
-gizmo_extents = 32.5
-
-[node name="Node4" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(224, 80)
-gizmo_extents = 32.5
-
-[node name="Node5" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(288, 80)
-gizmo_extents = 32.5
-
-[node name="Node6" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(352, 80)
-gizmo_extents = 32.5
-
-[node name="Node7" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(416, 80)
-gizmo_extents = 32.5
-
-[node name="Node8" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(480, 80)
-gizmo_extents = 32.5
-
-[node name="Node9" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(544, 80)
-gizmo_extents = 32.5
-
-[node name="Node10" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(608, 80)
-gizmo_extents = 32.5
-
-[node name="Node11" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(672, 80)
-gizmo_extents = 32.5
-
-[node name="Node12" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(736, 80)
-gizmo_extents = 32.5
-
-[node name="Node13" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(800, 80)
-gizmo_extents = 32.5
-
-[node name="Node14" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(864, 80)
-gizmo_extents = 32.5
-
-[node name="Node15" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(928, 80)
-gizmo_extents = 32.5
-
-[node name="Node16" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(992, 80)
-gizmo_extents = 32.5
-
-[node name="Node17" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(1056, 80)
-gizmo_extents = 32.5
-
-[node name="Node18" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(1120, 80)
-gizmo_extents = 32.5
-
-[node name="Node19" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(1184, 80)
-gizmo_extents = 32.5
-
-[node name="Node20" type="Marker2D" parent="CanvasLayer/spawnterrain"]
-position = Vector2(1248, 80)
-gizmo_extents = 32.5
