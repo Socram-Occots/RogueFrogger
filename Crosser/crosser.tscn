@@ -145,3 +145,4 @@ frame_progress = 0.326372
 [node name="Camera2D" type="Camera2D" parent="crosser"]
 limit_left = 0
 limit_right = 1280
+limit_bottom = 720

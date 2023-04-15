@@ -58,7 +58,7 @@ func reset():
 func incrementDifficulty():
 	if score != 0:
 		car_speed_scaling *= 1.075
-		if (variation_scaling > 1):
+		if variation_scaling > 1:
 			variation_scaling /= 1.05
 		else:
 			variation_scaling = 1
