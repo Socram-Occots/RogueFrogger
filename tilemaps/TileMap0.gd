@@ -7,4 +7,4 @@ func _on_area_2d_body_entered(body):
 	if not_entered:
 		Global.spawnTerrain = true
 		not_entered = false
-		Global.score += 1
+#		Global.score += 1

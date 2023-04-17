@@ -23,7 +23,16 @@ func itemSpawn():
 	pass
 	
 func carSpawn():
-	pass
+	var car = CAR.instantiate().duplicate()
+	car.position.y = $spawnterrain/Node1.global_position.y
+	car.visible = true
+	$Ysort.add_child(car)
+	var side = randi_range(0,1)
+	if side == 0:
+		car.position.x = -128
+	else:
+		car.position.x = 1408
+	
 
 func firstTerrainSpawn(xpos, ypos):
 #	var tile_num = randi_range(0,1)
@@ -49,6 +58,7 @@ func terrainSpawn(type, xpos, ypos):
 	$Tiles.add_child(tile)
 	TERRAIN.append(tile)
 	
+	# item or car spawn
 	if type == 0:
 		itemSpawn()
 	elif type == 1:
