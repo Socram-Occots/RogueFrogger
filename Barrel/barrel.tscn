@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://7usolp78746g"]
+[gd_scene load_steps=4 format=3 uid="uid://7usolp78746g"]
 
 [ext_resource type="Texture2D" uid="uid://cvlpmnc6t6xf5" path="res://RogueFroggerAssets/RFAssets/Level/Objects.png" id="1_e7p8j"]
+[ext_resource type="Script" path="res://Barrel/barrel.gd" id="1_e8ssv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp018"]
 size = Vector2(27, 3)
 
 [node name="Barrel" type="StaticBody2D"]
+script = ExtResource("1_e8ssv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_e7p8j")

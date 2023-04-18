@@ -49,6 +49,7 @@ animations = [{
 }]
 
 [node name="carcontrol" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_r5b0g")
 
 [node name="car" type="Area2D" parent="."]
@@ -71,7 +72,6 @@ sprite_frames = SubResource("SpriteFrames_m6aqc")
 animation = &"Grey1"
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="cars" type="Node2D" parent="."]
 y_sort_enabled = true

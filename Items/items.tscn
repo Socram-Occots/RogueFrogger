@@ -1,5 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://bxyymwdbynjfb"]
+[gd_scene load_steps=18 format=3 uid="uid://bxyymwdbynjfb"]
 
+[ext_resource type="Script" path="res://Items/items.gd" id="1_5vc26"]
 [ext_resource type="Script" path="res://Node0.gd" id="1_y7hva"]
 [ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="2_fcdun"]
 [ext_resource type="Texture2D" uid="uid://peidxpxcc4vg" path="res://RogueFroggerAssets/RFAssets/Level/item1.png" id="3_ao71y"]
@@ -26,8 +27,10 @@ shader = ExtResource("8_uibdt")
 shader = ExtResource("11_ly7cw")
 
 [node name="Items" type="Node2D"]
+script = ExtResource("1_5vc26")
 
 [node name="Node0" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 script = ExtResource("1_y7hva")
 

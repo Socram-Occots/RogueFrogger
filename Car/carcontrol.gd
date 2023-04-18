@@ -14,10 +14,16 @@ func _ready():
 		car_speed = randf_range(car_speed_l, car_speed_h)
 		
 	$car.set_meta("speed", car_speed)
+	if global_position.x < 0: 
+		$car.set_meta("direction", -1)
+		$car/AnimatedSprite2D.flip_h = true
+	else:
+		$car.set_meta("direction", 1)
+		
 	var auto = $car.duplicate()
 	auto.visible = true
 	$cars.add_child(auto)
-	$Timer.wait_time = randf_range(Global.timer_l, Global.timer_h)
+	$Timer.start(randf_range(Global.timer_l, Global.timer_h))
 
 @warning_ignore("unused_parameter")
 func _process(delta):
