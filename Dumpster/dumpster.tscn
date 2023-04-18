@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://6h12bg2ssg42"]
+
+[ext_resource type="Texture2D" uid="uid://cxnno145xy7bn" path="res://RogueFroggerAssets/RFAssets/Level/dumpster_ROR.png" id="1_42wja"]
+[ext_resource type="Script" path="res://Dumpster/dumpster.gd" id="1_hjx3i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ayfel"]
+size = Vector2(192, 52)
+
+[node name="dumpster" type="StaticBody2D"]
+collision_mask = 16
+script = ExtResource("1_hjx3i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(64, 0)
+texture = ExtResource("1_42wja")
+region_rect = Rect2(130, 21.682, 28, 36.643)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64, -4)
+shape = SubResource("RectangleShape2D_ayfel")

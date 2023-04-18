@@ -6,6 +6,7 @@ const ITEM = preload("res://Items/items.tscn")
 const BARREL = preload("res://Barrel/barrel.tscn")
 const TILES = preload("res://tilemaps/tilemaps.tscn")
 const CROSSER = preload("res://Crosser/crosser.tscn")
+const DUMP = preload("res://Dumpster/dumpster.tscn")
 
 # spawning
 #var ITEM_LIST = []
@@ -21,24 +22,37 @@ var sidewalk = false;
 	
 func itemSpawn():
 	
-	# 80% of tiles are blank 15% of tiles have barrels 5% of tiles have items
-	for i in 20:
+	# at least one space must be open
+	var open  = randi_range(0, 19)
+	
+	# 80% of tiles blank 7.5% barrels
+	# 7.5% dumpsters 5% items
+	var i = 0;
+	while i < 20:
 		var chance = randf_range(0,99)
 		var dir = "spawnterrain/Node" + str(i)
-		if chance < 80:
+		
+		if chance < 80 || i == open:
 			pass
-		elif chance < 95:
+		elif chance < 87.5:
 			var barrel = BARREL.instantiate().duplicate()
 			barrel.visible = true
 			barrel.position = get_node(dir).global_position
 			$Ysort.add_child(barrel)
+		elif chance < 95 && !(open in range(i + 1, i + 4)) && i < 17:
+			var dump = DUMP.instantiate().duplicate()
+			dump.visible = true
+			dump.position = get_node(dir).global_position
+			$Ysort.add_child(dump)
+			i += 2
 		else:
 			var item_num = randi_range(0,3)
 			var item = ITEM.instantiate().get_node("Node" + str(item_num)).duplicate()
 			item.visible = true
 			item.position = get_node(dir).global_position
 			$Ysort.add_child(item)
-			
+		
+		i += 1
 	
 func carSpawn():
 	var car = CAR.instantiate().duplicate()

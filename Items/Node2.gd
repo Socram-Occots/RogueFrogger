@@ -7,3 +7,8 @@ func _on_body_entered(body):
 	if Global.car_speed_scaling < 100:
 		Global.car_speed_scaling = 100
 	queue_free()
+
+@warning_ignore("unused_parameter")
+func _process(delta):
+	if global_position.y - Global.player_pos_y > 777:
+		queue_free()

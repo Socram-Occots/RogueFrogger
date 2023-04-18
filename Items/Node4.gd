@@ -7,3 +7,8 @@ func _on_body_entered(body):
 	Global.timer_l *= Global.timer_scaling
 	Global.timer_h *= Global.timer_scaling
 	queue_free()
+
+@warning_ignore("unused_parameter")
+func _process(delta):
+	if global_position.y - Global.player_pos_y > 777:
+		queue_free()

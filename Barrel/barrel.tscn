@@ -4,15 +4,16 @@
 [ext_resource type="Script" path="res://Barrel/barrel.gd" id="1_e8ssv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yp018"]
-size = Vector2(27, 3)
+size = Vector2(26, 3)
 
 [node name="Barrel" type="StaticBody2D"]
+collision_mask = 16
 script = ExtResource("1_e8ssv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_e7p8j")
 region_enabled = true
-region_rect = Rect2(128.754, 21.682, 29.633, 36.643)
+region_rect = Rect2(130, 21.682, 28, 36.643)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5.5)

@@ -53,7 +53,6 @@ y_sort_enabled = true
 script = ExtResource("1_r5b0g")
 
 [node name="car" type="Area2D" parent="."]
-visible = false
 y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_nm587")
