@@ -5,7 +5,8 @@ var score = 0
 #base
 var player_base_speed = 250
 var car_base_speed = 125
-var dash_base = 100
+var dash_base = 2
+var dash_base_time = 0.5
 var variation_base = 1
 var timer_l = 3.2
 var timer_h = 4.4
@@ -13,20 +14,21 @@ var timer_base = 1
 
 # playerspeed
 var player_speed_mod = 1
-var player_speed_scaling = 250
+var player_speed_scaling = player_base_speed
 #car speed
 var car_speed_mod = 1
-var car_speed_scaling = 125
+var car_speed_scaling = car_base_speed
 var prev_car_speed = 99999
 #variation and timing
-var variation = 1
-var variation_scaling = 1
-var timer_mod = 1
-var timer_scaling = 1
+var variation = variation_base
+var variation_scaling = variation_base
+var timer_mod = timer_base
+var timer_scaling = timer_base
 #dash
 var dash = false
 var dash_mod = 1
-var dash_scaling = 100
+var dash_scaling = dash_base
+var dash_time = dash_base_time
 
 #Terrain
 var spawnTerrain = false
@@ -37,24 +39,30 @@ var player_pos_y = 0
 
 func reset():
 	score = 0
+	# playerspeed
 	player_speed_mod = 1
-	player_speed_scaling = 250
+	player_speed_scaling = player_base_speed
+	#car speed
 	car_speed_mod = 1
-	car_speed_scaling = 125
+	car_speed_scaling = car_base_speed
+	prev_car_speed = 99999
+	#variation and timing
+	variation = variation_base
+	variation_scaling = variation_base
+	timer_mod = timer_base
+	timer_scaling = timer_base
+	#dash
 	dash = false
 	dash_mod = 1
-	dash_scaling = 100
-	player_base_speed = 250
-	car_base_speed = 125
-	dash_base = 100
-	variation_base = 1
-	variation = 1
-	variation_scaling = 1
-	timer_mod = 1
-	timer_scaling = 1
-	timer_l = 3.2
-	timer_h = 4.4
-	timer_base = 1
+	dash_scaling = dash_base
+	dash_time = dash_base_time
+
+	#Terrain
+	spawnTerrain = false
+
+	# player
+	player_pos_x = 0
+	player_pos_y = 0
 
 func incrementDifficulty():
 	if score != 0:

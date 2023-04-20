@@ -67,7 +67,6 @@ size = Vector2(1344, 48)
 [node name="Tilemaps" type="Node2D"]
 
 [node name="TileMap0" type="TileMap" parent="."]
-visible = false
 tile_set = SubResource("TileSet_3bpyr")
 cell_quadrant_size = 32
 format = 2
