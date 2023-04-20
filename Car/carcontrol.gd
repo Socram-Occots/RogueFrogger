@@ -12,7 +12,11 @@ func _ready():
 		car_speed = car_speed_l
 	else:
 		car_speed = randf_range(car_speed_l, car_speed_h)
-		
+		while (car_speed > Global.prev_car_speed*0.9 && car_speed < Global.prev_car_speed*1.1):
+			car_speed = randf_range(car_speed_l, car_speed_h)
+	
+	Global.prev_car_speed = car_speed
+	
 	$car.set_meta("speed", car_speed)
 	if global_position.x < 0: 
 		$car.set_meta("direction", -1)

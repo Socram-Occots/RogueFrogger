@@ -1,10 +1,7 @@
 extends CharacterBody2D
 
-#var speed = 250
-#var dash_distance = 100
+@onready var dash = $dash
 
-#	func _ready():
-#		position = $"../PlayerStart".position
 
 @warning_ignore("unused_parameter")
 func _process(delta):
@@ -22,9 +19,18 @@ func _process(delta):
 	if Input.is_action_pressed("up_w"):
 		velocity.y-= 1
 	# scaling may change
-	velocity = velocity.normalized() * Global.player_speed_scaling
-	move_and_slide()
+	
+	velocity = Global.dash_scaling if dash.is_dashing() else velocity.normalized() * Global.player_speed_scaling
+	
+	if Input.is_action_just_pressed("dash"):
+		dash.start_dash(Global.dash_scaling)
+
+	
 	player_animation()
+	move_and_slide()
+	
+	
+	
 	
 func player_animation():
 #	$"AnimatedSprite2D".flip_h = false

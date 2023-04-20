@@ -139,5 +139,5 @@ func _ready():
 	player.visible = true
 	$Ysort.add_child(player)
 	firstTerrainSpawn(0, $spawnterrain.global_position.y)
-	for i in 9:
+	for i in 18:
 		terrainSpawnLogic()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=30 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://bpu6fxrirac83" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_7.png" id="23_rfwe5"]
 [ext_resource type="Texture2D" uid="uid://ccuycyg42oqx0" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_8.png" id="24_by8fg"]
 [ext_resource type="Texture2D" uid="uid://b4vexjyfep41v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_9.png" id="25_ru7x7"]
+[ext_resource type="Script" path="res://Crosser/dash.gd" id="27_nsirg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_typs2"]
 size = Vector2(30, 48)
@@ -38,7 +39,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"stand",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -139,10 +140,15 @@ shape = SubResource("RectangleShape2D_typs2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="crosser"]
 sprite_frames = SubResource("SpriteFrames_5abg2")
-animation = &"walk_side"
-frame_progress = 0.326372
+animation = &"stand"
 
 [node name="Camera2D" type="Camera2D" parent="crosser"]
 limit_left = 0
 limit_right = 1280
 limit_bottom = 720
+
+[node name="dash" type="Node2D" parent="."]
+script = ExtResource("27_nsirg")
+
+[node name="duration" type="Timer" parent="dash"]
+one_shot = true

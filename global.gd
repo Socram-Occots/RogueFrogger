@@ -4,11 +4,11 @@ var score = 0
 
 #base
 var player_base_speed = 250
-var car_base_speed = 250
+var car_base_speed = 125
 var dash_base = 100
 var variation_base = 1
-var timer_l = 1.6
-var timer_h = 2.2
+var timer_l = 3.2
+var timer_h = 4.4
 var timer_base = 1
 
 # playerspeed
@@ -16,7 +16,8 @@ var player_speed_mod = 1
 var player_speed_scaling = 250
 #car speed
 var car_speed_mod = 1
-var car_speed_scaling = 250
+var car_speed_scaling = 125
+var prev_car_speed = 99999
 #variation and timing
 var variation = 1
 var variation_scaling = 1
@@ -39,20 +40,20 @@ func reset():
 	player_speed_mod = 1
 	player_speed_scaling = 250
 	car_speed_mod = 1
-	car_speed_scaling = 250
+	car_speed_scaling = 125
 	dash = false
 	dash_mod = 1
 	dash_scaling = 100
 	player_base_speed = 250
-	car_base_speed = 250
+	car_base_speed = 125
 	dash_base = 100
 	variation_base = 1
 	variation = 1
 	variation_scaling = 1
 	timer_mod = 1
 	timer_scaling = 1
-	timer_l = 1.6
-	timer_h = 2.2
+	timer_l = 3.2
+	timer_h = 4.4
 	timer_base = 1
 
 func incrementDifficulty():
