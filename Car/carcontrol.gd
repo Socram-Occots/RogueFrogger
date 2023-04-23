@@ -5,8 +5,8 @@ var car_speed_l = car_speed
 var car_speed_h = car_speed
 
 func _ready():
-	car_speed_l = (Global.car_speed_scaling*0.7)/Global.variation_scaling
-	car_speed_h = (Global.car_speed_scaling*1.3)*Global.variation_scaling
+	car_speed_l = (Global.car_speed_scaling*0.7)
+	car_speed_h = (Global.car_speed_scaling*1.3)
 		
 	if car_speed_l > car_speed_h:
 		car_speed = car_speed_l

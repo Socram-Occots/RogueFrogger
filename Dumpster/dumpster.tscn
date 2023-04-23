@@ -7,7 +7,7 @@
 size = Vector2(192, 52)
 
 [node name="dumpster" type="StaticBody2D"]
-collision_mask = 16
+collision_layer = 16
 script = ExtResource("1_hjx3i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

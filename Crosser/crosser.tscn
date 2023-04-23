@@ -131,7 +131,7 @@ animations = [{
 [node name="player" type="Node2D"]
 
 [node name="crosser" type="CharacterBody2D" parent="."]
-collision_mask = 15
+collision_mask = 31
 script = ExtResource("1_5p142")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="crosser"]
@@ -146,3 +146,8 @@ frame_progress = 0.878932
 limit_left = 0
 limit_right = 1280
 limit_bottom = 720
+
+[node name="Cooldown" type="Timer" parent="crosser"]
+one_shot = true
+
+[connection signal="timeout" from="crosser/Cooldown" to="crosser" method="_on_cooldown_timeout"]

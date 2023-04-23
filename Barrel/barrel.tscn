@@ -7,7 +7,7 @@
 size = Vector2(26, 3)
 
 [node name="Barrel" type="StaticBody2D"]
-collision_mask = 16
+collision_layer = 16
 script = ExtResource("1_e8ssv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

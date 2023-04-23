@@ -2,10 +2,12 @@ extends Area2D
 
 @warning_ignore("unused_parameter")
 func _on_body_entered(body):
-	Global.variation += 1
-	Global.variation_scaling = 0.01*(log(Global.variation) / log(20)) + Global.variation_base
-	Global.timer_l /= Global.variation_scaling
-	Global.timer_h *= Global.variation_scaling
+	Global.dash = true
+	Global.dash_mod += 1
+	Global.dash_scaling = (Global.car_speed_mod-1)*0.03 + Global.dash_base
+	var adjustment = Global.dash_scaling/Global.dash_base
+	Global.dash_time = Global.dash_base_time/adjustment
+	Global.dash_cool_down = Global.dash_cool_down_base/1.01
 	queue_free()
 
 @warning_ignore("unused_parameter")

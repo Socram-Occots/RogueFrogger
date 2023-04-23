@@ -7,12 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cdhqsaoscj2ku" path="res://RogueFroggerAssets/RFAssets/Car/Grey2.png" id="3_r6jlg"]
 [ext_resource type="Texture2D" uid="uid://cygy3o5wf2tny" path="res://RogueFroggerAssets/RFAssets/Car/Yellow2.png" id="5_07f0p"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlwrd"]
-size = Vector2(180, 47)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fqrn"]
-size = Vector2(169, 47)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_m6aqc"]
 animations = [{
 "frames": [{
@@ -48,6 +42,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlwrd"]
+size = Vector2(180, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fqrn"]
+size = Vector2(169, 47)
+
 [node name="carcontrol" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_r5b0g")
@@ -57,6 +57,10 @@ y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_nm587")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
+sprite_frames = SubResource("SpriteFrames_m6aqc")
+animation = &"Yellow1"
+
 [node name="CollisionShapeGrey" type="CollisionShape2D" parent="car"]
 y_sort_enabled = true
 shape = SubResource("RectangleShape2D_rlwrd")
@@ -65,10 +69,6 @@ disabled = true
 [node name="CollisionShape2DYellow" type="CollisionShape2D" parent="car"]
 shape = SubResource("RectangleShape2D_2fqrn")
 disabled = true
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
-sprite_frames = SubResource("SpriteFrames_m6aqc")
-animation = &"Grey1"
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -93,6 +93,8 @@ dash={
 2d_physics/layer_2="Car"
 2d_physics/layer_3="Wall"
 2d_physics/layer_4="Items"
+2d_physics/layer_5="Obstacles"
+2d_physics/layer_6="Tiles"
 
 [rendering]
 

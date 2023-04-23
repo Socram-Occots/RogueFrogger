@@ -39,12 +39,12 @@ func itemSpawn():
 			barrel.visible = true
 			barrel.position = get_node(dir).global_position
 			$Ysort.add_child(barrel)
-		elif chance < 95 && !(open in range(i + 1, i + 4)) && i < 17:
+		elif chance < 95 && !(open in range(i + 1, i + 4)) && i < 16:
 			var dump = DUMP.instantiate().duplicate()
 			dump.visible = true
 			dump.position = get_node(dir).global_position
 			$Ysort.add_child(dump)
-			i += 2
+			i += 3
 		else:
 			var item_num = randi_range(0,3)
 			var item = ITEM.instantiate().get_node("Node" + str(item_num)).duplicate()
@@ -125,9 +125,11 @@ func terrainSpawnLogic():
 
 @warning_ignore("unused_parameter")
 func _process(delta):
+	$CanvasLayer/Score.text = "Score " + str(Global.score)
 	if Global.spawnTerrain:
 		Global.spawnTerrain = false
 		terrainSpawnLogic()
+		Global.incrementDifficulty()
 		
 func _ready():
 	var player = CROSSER.instantiate()
