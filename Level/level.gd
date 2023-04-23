@@ -39,7 +39,7 @@ func itemSpawn():
 			barrel.visible = true
 			barrel.position = get_node(dir).global_position
 			$Ysort.add_child(barrel)
-		elif chance < 95 && !(open in range(i + 1, i + 4)) && i < 16:
+		elif chance < 95 && !(open in range(i + 1, i + 3)) && i < 18:
 			var dump = DUMP.instantiate().duplicate()
 			dump.visible = true
 			dump.position = get_node(dir).global_position
@@ -109,6 +109,7 @@ func _input(event):
 	|| event.is_action_pressed("left_a")\
 	|| event.is_action_pressed("right_d"):
 		$CanvasLayer/Instructions.visible = false
+		$CanvasLayer/Items.visible = true
 		
 func terrainSpawnLogic():
 	if sidewalk:
@@ -125,12 +126,16 @@ func terrainSpawnLogic():
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	$CanvasLayer/Score.text = "Score " + str(Global.score)
+	$CanvasLayer/Items/PlayerSpeed.text = str(Global.player_speed_mod)
+	$CanvasLayer/Items/CarSpeed.text = str(Global.car_speed_mod)
+	$CanvasLayer/Items/Dash.text = str(Global.dash_mod)
+	$CanvasLayer/Items/CarSpacing.text = str(Global.timer_mod)
 	if Global.spawnTerrain:
+		$CanvasLayer/Score.text = "Score " + str(Global.score)
 		Global.spawnTerrain = false
 		terrainSpawnLogic()
 		Global.incrementDifficulty()
-		
+
 func _ready():
 	var player = CROSSER.instantiate()
 	player.position.x = $PlayerStart.global_position.x
@@ -141,5 +146,6 @@ func _ready():
 	player.visible = true
 	$Ysort.add_child(player)
 	firstTerrainSpawn(0, $spawnterrain.global_position.y)
-	for i in 18:
+	for i in 27:
 		terrainSpawnLogic()
+	$CanvasLayer/Score.text = "Score " + str(Global.score)

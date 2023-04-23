@@ -8,5 +8,5 @@ func _on_area_0_body_entered(body):
 		Global.spawnTerrain = true
 		not_entered = false
 		Global.score += 1
-		print(Global.player_pos_x)
-		print(Global.player_pos_y)
+#		print(Global.player_pos_x)
+#		print(Global.player_pos_y)

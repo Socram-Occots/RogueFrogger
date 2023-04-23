@@ -29,6 +29,7 @@ var dash_mod = 0
 var dash_scaling = dash_base
 var dash_time = dash_base_time
 var dash_cool_down = dash_cool_down_base
+var dash_cool_down_bool = false
 
 #timer
 var timer_mod = 0
@@ -61,6 +62,7 @@ func reset():
 	dash_scaling = dash_base
 	dash_time = dash_base_time
 	dash_cool_down = dash_cool_down_base
+	dash_cool_down_bool = false
 
 	#Terrain
 	spawnTerrain = false
@@ -72,8 +74,8 @@ func reset():
 func incrementDifficulty():
 	if score != 0 && score % 100 == 0:
 		car_speed_scaling += 25
-		timer_l -= 0.175
-		timer_l-= 0.175
+		timer_l -= 0.125
+		timer_l-= 0.125
 		if (timer_l < 1):
 			timer_l = 1
 		if (timer_h < 1):

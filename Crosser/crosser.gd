@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var candash = true
 @onready var dashing = false
 @onready var dashcooldown = true
+@onready var animated = $"AnimatedSprite2D"
 
 func move_player():
 	if Input.is_action_pressed("left_a"):
@@ -28,7 +29,8 @@ func _process(delta):
 	
 	
 	if Global.dash && dashcooldown && Input.is_action_just_pressed("dash") && velocity != Vector2.ZERO && candash:
-		print(Global.dash_scaling)
+#		print(Global.dash_scaling)
+		Global.dash_cool_down_bool = true
 		velocity *= Global.dash_scaling
 		dashing = true
 		candash = false
@@ -50,14 +52,14 @@ func _process(delta):
 	
 func player_animation():
 #	$"AnimatedSprite2D".flip_h = false
-	if $"AnimatedSprite2D".flip_h: $"AnimatedSprite2D".flip_h = (velocity.y == 0 && velocity.x < 0)
-	if velocity == Vector2.ZERO: $"AnimatedSprite2D".play("stand")
-	elif velocity.y > 0: $"AnimatedSprite2D".play("walk_down")
-	elif velocity.y < 0: $"AnimatedSprite2D".play("walk_up")
-	elif velocity.x < 0: $"AnimatedSprite2D".play("walk_side")
+	if animated.flip_h: animated.flip_h = (velocity.y == 0 && velocity.x < 0)
+	if velocity == Vector2.ZERO: animated.play("stand")
+	elif velocity.y > 0: animated.play("walk_down")
+	elif velocity.y < 0: animated.play("walk_up")
+	elif velocity.x < 0: animated.play("walk_side")
 	else: 
-		$"AnimatedSprite2D".play("walk_side")
-		$"AnimatedSprite2D".flip_h = true
+		animated.play("walk_side")
+		animated.flip_h = true
 #	elif velocity.x > 0:
 #		$"AnimatedSprite2D".play("walk_side")
 		

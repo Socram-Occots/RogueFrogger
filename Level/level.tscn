@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=7 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
+[ext_resource type="Texture2D" uid="uid://ks6645tcncjj" path="res://RogueFroggerAssets/RFAssets/Level/image3.png" id="4_pnsh1"]
+[ext_resource type="Script" path="res://Level/Sprite2D.gd" id="5_iks7j"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
 [ext_resource type="Texture2D" uid="uid://0f343mgnmuuj" path="res://RogueFroggerAssets/RFAssets/Level/Logos.png" id="10_vlqyf"]
 
@@ -23,75 +25,75 @@ position = Vector2(96, 48)
 gizmo_extents = 32.5
 
 [node name="Node2" type="Marker2D" parent="spawnterrain"]
-position = Vector2(1248, 48)
-gizmo_extents = 32.5
-
-[node name="Node3" type="Marker2D" parent="spawnterrain"]
 position = Vector2(160, 48)
 gizmo_extents = 32.5
 
-[node name="Node4" type="Marker2D" parent="spawnterrain"]
+[node name="Node3" type="Marker2D" parent="spawnterrain"]
 position = Vector2(224, 48)
 gizmo_extents = 32.5
 
-[node name="Node5" type="Marker2D" parent="spawnterrain"]
+[node name="Node4" type="Marker2D" parent="spawnterrain"]
 position = Vector2(288, 48)
 gizmo_extents = 32.5
 
-[node name="Node6" type="Marker2D" parent="spawnterrain"]
+[node name="Node5" type="Marker2D" parent="spawnterrain"]
 position = Vector2(352, 48)
 gizmo_extents = 32.5
 
-[node name="Node7" type="Marker2D" parent="spawnterrain"]
+[node name="Node6" type="Marker2D" parent="spawnterrain"]
 position = Vector2(416, 48)
 gizmo_extents = 32.5
 
-[node name="Node8" type="Marker2D" parent="spawnterrain"]
+[node name="Node7" type="Marker2D" parent="spawnterrain"]
 position = Vector2(480, 48)
 gizmo_extents = 32.5
 
-[node name="Node9" type="Marker2D" parent="spawnterrain"]
+[node name="Node8" type="Marker2D" parent="spawnterrain"]
 position = Vector2(544, 48)
 gizmo_extents = 32.5
 
-[node name="Node10" type="Marker2D" parent="spawnterrain"]
+[node name="Node9" type="Marker2D" parent="spawnterrain"]
 position = Vector2(608, 48)
 gizmo_extents = 32.5
 
-[node name="Node11" type="Marker2D" parent="spawnterrain"]
+[node name="Node10" type="Marker2D" parent="spawnterrain"]
 position = Vector2(672, 48)
 gizmo_extents = 32.5
 
-[node name="Node12" type="Marker2D" parent="spawnterrain"]
+[node name="Node11" type="Marker2D" parent="spawnterrain"]
 position = Vector2(736, 48)
 gizmo_extents = 32.5
 
-[node name="Node13" type="Marker2D" parent="spawnterrain"]
+[node name="Node12" type="Marker2D" parent="spawnterrain"]
 position = Vector2(800, 48)
 gizmo_extents = 32.5
 
-[node name="Node14" type="Marker2D" parent="spawnterrain"]
+[node name="Node13" type="Marker2D" parent="spawnterrain"]
 position = Vector2(864, 48)
 gizmo_extents = 32.5
 
-[node name="Node15" type="Marker2D" parent="spawnterrain"]
+[node name="Node14" type="Marker2D" parent="spawnterrain"]
 position = Vector2(928, 48)
 gizmo_extents = 32.5
 
-[node name="Node16" type="Marker2D" parent="spawnterrain"]
+[node name="Node15" type="Marker2D" parent="spawnterrain"]
 position = Vector2(992, 48)
 gizmo_extents = 32.5
 
-[node name="Node17" type="Marker2D" parent="spawnterrain"]
+[node name="Node16" type="Marker2D" parent="spawnterrain"]
 position = Vector2(1056, 48)
 gizmo_extents = 32.5
 
-[node name="Node18" type="Marker2D" parent="spawnterrain"]
+[node name="Node17" type="Marker2D" parent="spawnterrain"]
 position = Vector2(1120, 48)
 gizmo_extents = 32.5
 
-[node name="Node19" type="Marker2D" parent="spawnterrain"]
+[node name="Node18" type="Marker2D" parent="spawnterrain"]
 position = Vector2(1184, 48)
+gizmo_extents = 32.5
+
+[node name="Node19" type="Marker2D" parent="spawnterrain"]
+position = Vector2(1248, 48)
 gizmo_extents = 32.5
 
 [node name="Tiles" type="Node2D" parent="."]
@@ -175,9 +177,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -602.0
+offset_left = -555.0
 offset_top = 250.0
-offset_right = -338.0
+offset_right = -291.0
 offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -198,9 +200,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -272.0
+offset_left = -225.0
 offset_top = 250.0
-offset_right = -69.0
+offset_right = -22.0
 offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -214,23 +216,21 @@ texture = ExtResource("10_vlqyf")
 region_enabled = true
 region_rect = Rect2(65, 9, 30, 43)
 
-[node name="Variance" type="Label" parent="CanvasLayer/Instructions"]
+[node name="Dash" type="Label" parent="CanvasLayer/Instructions"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 6.0
-offset_top = 250.0
-offset_right = 197.0
-offset_bottom = 288.0
+offset_left = 56.0
+offset_top = 308.0
+offset_right = 247.0
+offset_bottom = 346.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_font_sizes/font_size = 30
-text = "+Variance"
+text = "+Dash"
+horizontal_alignment = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Instructions/Variance"]
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Instructions/Dash"]
 position = Vector2(103, -74)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("10_vlqyf")
@@ -244,9 +244,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 274.0
+offset_left = 321.0
 offset_top = 250.0
-offset_right = 509.0
+offset_right = 556.0
 offset_bottom = 288.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -259,3 +259,118 @@ scale = Vector2(2.5, 2.5)
 texture = ExtResource("10_vlqyf")
 region_enabled = true
 region_rect = Rect2(75, 75, 43, 44)
+
+[node name="Items" type="Node2D" parent="CanvasLayer"]
+
+[node name="PlayerSpeed" type="Label" parent="CanvasLayer/Items"]
+offset_left = 1015.0
+offset_top = 627.0
+offset_right = 1081.0
+offset_bottom = 672.0
+theme_override_font_sizes/font_size = 30
+text = "99"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Items/PlayerSpeed"]
+position = Vector2(-1, 64)
+scale = Vector2(1.145, 1.145)
+texture = ExtResource("10_vlqyf")
+region_enabled = true
+region_rect = Rect2(2, 9, 60, 49)
+
+[node name="CarSpeed" type="Label" parent="CanvasLayer/Items"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1082.0
+offset_top = 627.0
+offset_right = 1148.0
+offset_bottom = 672.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "99
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Items/CarSpeed"]
+position = Vector2(-1, 65)
+scale = Vector2(1.293, 1.293)
+texture = ExtResource("10_vlqyf")
+region_enabled = true
+region_rect = Rect2(65, 9, 30, 43)
+
+[node name="Dash" type="Label" parent="CanvasLayer/Items"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 1148.0
+offset_top = 627.0
+offset_right = 1214.0
+offset_bottom = 672.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "99
+"
+
+[node name="Sprite2D" type="TextureRect" parent="CanvasLayer/Items/Dash"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = 6.0
+offset_right = 58.0
+offset_bottom = 120.0
+scale = Vector2(0.999442, 0.999442)
+texture = ExtResource("4_pnsh1")
+script = ExtResource("5_iks7j")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/Items/Dash/Sprite2D"]
+self_modulate = Color(0.290196, 0.290196, 0.290196, 0.733333)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+fill_mode = 5
+texture_progress = ExtResource("4_pnsh1")
+
+[node name="Timer" type="Timer" parent="CanvasLayer/Items/Dash/Sprite2D/TextureProgressBar"]
+one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Items/Dash/Sprite2D"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = -64.0
+offset_right = -28.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Items/Dash/Sprite2D/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("8_5vect")
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+clip_text = true
+
+[node name="CarSpacing" type="Label" parent="CanvasLayer/Items"]
+offset_left = 1214.0
+offset_top = 627.0
+offset_right = 1280.0
+offset_bottom = 672.0
+theme_override_font_sizes/font_size = 30
+text = "99
+"
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Items/CarSpacing"]
+position = Vector2(-1.00002, 67)
+scale = Vector2(1.18023, 1.18023)
+texture = ExtResource("10_vlqyf")
+region_enabled = true
+region_rect = Rect2(75, 75, 43, 44)
+
+[connection signal="timeout" from="CanvasLayer/Items/Dash/Sprite2D/TextureProgressBar/Timer" to="CanvasLayer/Items/Dash/Sprite2D" method="_on_timer_timeout"]

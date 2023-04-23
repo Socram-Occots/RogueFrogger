@@ -6,13 +6,13 @@ var car_speed_h = car_speed
 
 func _ready():
 	car_speed_l = (Global.car_speed_scaling*0.7)
-	car_speed_h = (Global.car_speed_scaling*1.3)
+	car_speed_h = (Global.car_speed_scaling*1.4)
 		
 	if car_speed_l > car_speed_h:
 		car_speed = car_speed_l
 	else:
 		car_speed = randf_range(car_speed_l, car_speed_h)
-		while (car_speed > Global.prev_car_speed*0.9 && car_speed < Global.prev_car_speed*1.1):
+		while (car_speed > Global.prev_car_speed*0.9 && car_speed < Global.prev_car_speed*1.2):
 			car_speed = randf_range(car_speed_l, car_speed_h)
 	
 	Global.prev_car_speed = car_speed
