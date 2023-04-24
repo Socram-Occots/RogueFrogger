@@ -1,12 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=6 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Texture2D" uid="uid://ks6645tcncjj" path="res://RogueFroggerAssets/RFAssets/Level/image3.png" id="4_pnsh1"]
 [ext_resource type="Script" path="res://Level/Sprite2D.gd" id="5_iks7j"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
 [ext_resource type="Texture2D" uid="uid://0f343mgnmuuj" path="res://RogueFroggerAssets/RFAssets/Level/Logos.png" id="10_vlqyf"]
-
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4er2a"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_v6cxu")
@@ -104,24 +102,7 @@ position = Vector2(640, 672)
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="border" type="Node" parent="."]
-
-[node name="leftcol" type="StaticBody2D" parent="border"]
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="border/leftcol"]
-position = Vector2(0, 355)
-rotation = 1.5708
-shape = SubResource("WorldBoundaryShape2D_4er2a")
-
-[node name="rightcol" type="StaticBody2D" parent="border"]
-position = Vector2(538, 398)
-collision_layer = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="border/rightcol"]
-position = Vector2(742, -8)
-rotation = -1.5708
-shape = SubResource("WorldBoundaryShape2D_4er2a")
+[node name="border" type="Node2D" parent="."]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

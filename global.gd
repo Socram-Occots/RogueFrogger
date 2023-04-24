@@ -8,8 +8,8 @@ var player_base_speed = 250
 #car
 var car_base_speed = 125
 #dash
-var dash_base = 1.5
-var dash_base_time = 0.2
+var dash_base = 1.5 - 0.03
+var dash_base_time = 0.3
 var dash_cool_down_base = 2
 #timer
 var timer_base_l = 3.2
@@ -72,11 +72,10 @@ func reset():
 	player_pos_y = 0
 
 func incrementDifficulty():
-	if score != 0 && score % 100 == 0:
-		car_speed_scaling += 25
-		timer_l -= 0.125
-		timer_l-= 0.125
-		if (timer_l < 1):
-			timer_l = 1
-		if (timer_h < 1):
-			timer_h = 1
+	car_speed_scaling += 25
+	timer_l -= 0.125
+	timer_l-= 0.125
+	if (timer_l < 1):
+		timer_l = 1
+	if (timer_h < 1):
+		timer_h = 1

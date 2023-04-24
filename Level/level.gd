@@ -7,10 +7,12 @@ const BARREL = preload("res://Barrel/barrel.tscn")
 const TILES = preload("res://tilemaps/tilemaps.tscn")
 const CROSSER = preload("res://Crosser/crosser.tscn")
 const DUMP = preload("res://Dumpster/dumpster.tscn")
+const BORDER = preload("res://Level/border.tscn")
 
 # spawning
 #var ITEM_LIST = []
 #var BARRELS = []
+var BORDERS = []
 var TERRAIN = []
 var num_items = 5
 
@@ -110,6 +112,8 @@ func _input(event):
 	|| event.is_action_pressed("right_d"):
 		$CanvasLayer/Instructions.visible = false
 		$CanvasLayer/Items.visible = true
+#	if event.is_action_released("dash"):
+#		print(Global.car_speed_scaling)
 		
 func terrainSpawnLogic():
 	if sidewalk:
@@ -134,7 +138,22 @@ func _process(delta):
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
 		Global.spawnTerrain = false
 		terrainSpawnLogic()
-		Global.incrementDifficulty()
+		if Global.score != 0:
+			if Global.score % 50 == 0:
+				Global.incrementDifficulty()
+			if Global.score % 100 == 0:
+				spawnBorder(640, Global.player_pos_y)
+
+func spawnBorder(x, y):
+	var border = BORDER.instantiate().duplicate()
+	border.position.x = x
+	border.position.y = y
+#	print(border.global_position)
+	BORDERS.append(border)
+	$border.add_child(border)
+	if BORDERS.size() > 1:
+		BORDERS[0].queue_free()
+		BORDERS.remove_at(0)
 
 func _ready():
 	var player = CROSSER.instantiate()
@@ -142,6 +161,7 @@ func _ready():
 	player.position.y = $PlayerStart.global_position.y
 	Global.player_pos_x = player.position.x
 	Global.player_pos_y = player.position.y
+	spawnBorder(640, Global.player_pos_y)
 	$PlayerStart.queue_free()
 	player.visible = true
 	$Ysort.add_child(player)
