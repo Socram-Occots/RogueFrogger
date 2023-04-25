@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=8 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
+[ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
 [ext_resource type="Texture2D" uid="uid://ks6645tcncjj" path="res://RogueFroggerAssets/RFAssets/Level/image3.png" id="4_pnsh1"]
 [ext_resource type="Script" path="res://Level/Sprite2D.gd" id="5_iks7j"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
 [ext_resource type="Texture2D" uid="uid://0f343mgnmuuj" path="res://RogueFroggerAssets/RFAssets/Level/Logos.png" id="10_vlqyf"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iu5ys"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_v6cxu")
@@ -103,6 +106,14 @@ position = Vector2(640, 672)
 y_sort_enabled = true
 
 [node name="border" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="border"]
+position = Vector2(640, 720)
+collision_layer = 4
+script = ExtResource("2_xp0ov")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_iu5ys")
 
 [node name="lineofdeath" type="Node2D" parent="."]
 

@@ -9,13 +9,15 @@ const CROSSER = preload("res://Crosser/crosser.tscn")
 const DUMP = preload("res://Dumpster/dumpster.tscn")
 const BORDER = preload("res://Level/border.tscn")
 const LINE = preload("res://lineofdeath/lineofdeath.tscn")
+const POP = preload("res://GameUI/popups.tscn")
 
 # spawning
 #var ITEM_LIST = []
 #var BARRELS = []
-var BORDERS = []
-var TERRAIN = []
-var num_items = 5
+@onready var BORDERS = []
+@onready var TERRAIN = []
+#var num_items = 5
+@onready var dashpopup = true 
 
 # randomization
 #const ITEM_NAME_LIST = ['0', '1', '2', '3']
@@ -135,6 +137,10 @@ func _process(delta):
 	$CanvasLayer/Items/CarSpeed.text = str(Global.car_speed_mod)
 	$CanvasLayer/Items/Dash.text = str(Global.dash_mod)
 	$CanvasLayer/Items/CarSpacing.text = str(Global.timer_mod)
+	if Global.dash && dashpopup: 
+		dashpopup = false
+		var dash_pop_up = POP.instantiate()
+		$CanvasLayer.add_child(dash_pop_up)
 	if Global.spawnTerrain:
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
 		Global.spawnTerrain = false
