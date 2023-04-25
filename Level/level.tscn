@@ -104,6 +104,8 @@ y_sort_enabled = true
 
 [node name="border" type="Node2D" parent="."]
 
+[node name="lineofdeath" type="Node2D" parent="."]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Score" type="Label" parent="CanvasLayer"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=28 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -27,9 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://ccuycyg42oqx0" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_8.png" id="24_by8fg"]
 [ext_resource type="Texture2D" uid="uid://b4vexjyfep41v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_9.png" id="25_ru7x7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_typs2"]
-size = Vector2(30, 48)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_5abg2"]
 animations = [{
 "frames": [{
@@ -38,7 +35,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"stand",
-"speed": 10.0
+"speed": 1.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -67,7 +64,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -96,7 +93,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_side",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -125,7 +122,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="player" type="Node2D"]
@@ -134,13 +131,14 @@ animations = [{
 collision_mask = 31
 script = ExtResource("1_5p142")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="crosser"]
-shape = SubResource("RectangleShape2D_typs2")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="crosser"]
 sprite_frames = SubResource("SpriteFrames_5abg2")
-animation = &"walk_down"
-frame_progress = 0.878932
+animation = &"walk_up"
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="crosser"]
+position = Vector2(-0.483869, 0.484708)
+scale = Vector2(0.967742, 0.969387)
+polygon = PackedVector2Array(0.499998, -25.2579, -6.39569, -25.2579, -11.9, -20.1, -15, -5.92312, -15, 13.5442, -13.9667, 19.1, -10.8177, 24.2579, 12.9, 24.2579, 16, 19.1, 16, 12.9105, 16, -5.41653, 12.9, -20.1, 7.73333, -25.2579)
 
 [node name="Camera2D" type="Camera2D" parent="crosser"]
 limit_left = 0

@@ -8,6 +8,7 @@ const TILES = preload("res://tilemaps/tilemaps.tscn")
 const CROSSER = preload("res://Crosser/crosser.tscn")
 const DUMP = preload("res://Dumpster/dumpster.tscn")
 const BORDER = preload("res://Level/border.tscn")
+const LINE = preload("res://lineofdeath/lineofdeath.tscn")
 
 # spawning
 #var ITEM_LIST = []
@@ -124,7 +125,7 @@ func terrainSpawnLogic():
 		
 #	print(TERRAIN[0].global_position.y)
 #	print(Global.player_pos_y)
-	if !TERRAIN.is_empty() && TERRAIN[0].global_position.y - Global.player_pos_y > 777:
+	if !TERRAIN.is_empty() && TERRAIN[0].global_position.y - Global.player_pos_y > 888:
 		TERRAIN[0].queue_free()
 		TERRAIN.remove_at(0)
 
@@ -156,16 +157,25 @@ func spawnBorder(x, y):
 		BORDERS.remove_at(0)
 
 func _ready():
+	#player
 	var player = CROSSER.instantiate()
 	player.position.x = $PlayerStart.global_position.x
 	player.position.y = $PlayerStart.global_position.y
 	Global.player_pos_x = player.position.x
 	Global.player_pos_y = player.position.y
-	spawnBorder(640, Global.player_pos_y)
 	$PlayerStart.queue_free()
 	player.visible = true
 	$Ysort.add_child(player)
+	# level
+	spawnBorder(640, Global.player_pos_y)
 	firstTerrainSpawn(0, $spawnterrain.global_position.y)
 	for i in 27:
 		terrainSpawnLogic()
 	$CanvasLayer/Score.text = "Score " + str(Global.score)
+	# lineofdeath
+	var line = LINE.instantiate()
+	line.position.x = 0
+	line.position.y = 720
+	$lineofdeath.add_child(line)
+	
+	
