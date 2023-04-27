@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_a52sa"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_tdait"]
-default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0.5, 0.5, 0.5), 6, 0.75]
+default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0, 1, 1), 6, 0.75]
 initialized = true
 script = ExtResource("1_u0cto")
 
@@ -72,7 +72,7 @@ void fragment() {
 // OuterGlow:2
 	float n_in2p2 = -1.00000;
 	float n_in2p4 = 1.00000;
-	vec3 n_in2p5 = vec3(0.50000, 0.50000, 0.50000);
+	vec3 n_in2p5 = vec3(0.00000, 1.00000, 1.00000);
 	float n_in2p6 = 0.75000;
 	{
 		vec4 n_out2p0n_out2p1 = _outerGlowFunc(TEXTURE, UV.xy, n_in2p2, n_out4p0, n_in2p4, vec4(n_in2p5, n_in2p6));
@@ -88,7 +88,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-357.673, 117.5)
+graph_offset = Vector2(-84.5052, 131.159)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(400, 140)

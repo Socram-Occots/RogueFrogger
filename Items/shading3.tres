@@ -5,7 +5,7 @@
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_bv7ek"]
 output_port_for_preview = 0
-default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(1, 0.602, 0), 6, 0.75]
+default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(1, 0, 0), 6, 0.75]
 initialized = true
 script = ExtResource("1_mr2nj")
 
@@ -73,7 +73,7 @@ void fragment() {
 // OuterGlow:2
 	float n_in2p2 = -1.00000;
 	float n_in2p4 = 1.00000;
-	vec3 n_in2p5 = vec3(1.00000, 0.60200, 0.00000);
+	vec3 n_in2p5 = vec3(1.00000, 0.00000, 0.00000);
 	float n_in2p6 = 0.75000;
 	{
 		vec4 n_out2p0n_out2p1 = _outerGlowFunc(TEXTURE, UV.xy, n_in2p2, n_out4p0, n_in2p4, vec4(n_in2p5, n_in2p6));
@@ -89,7 +89,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-8.45795, 93.9975)
+graph_offset = Vector2(-45.2419, 90.3464)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(400, 140)

@@ -8,7 +8,7 @@ func _process(delta):
 		position.y = Global.player_pos_y + 540
 		activated = true
 	if activated:
-		position.y -= 0.15
+		position.y -= 0.3
 
 @warning_ignore("unused_parameter")
 func _on_body_entered(body):

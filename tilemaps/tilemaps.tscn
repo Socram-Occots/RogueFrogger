@@ -65,8 +65,10 @@ sources/0 = SubResource("TileSetAtlasSource_r73b3")
 size = Vector2(1344, 48)
 
 [node name="Tilemaps" type="Node2D"]
+texture_filter = 1
 
 [node name="TileMap0" type="TileMap" parent="."]
+texture_filter = 1
 tile_set = SubResource("TileSet_3bpyr")
 cell_quadrant_size = 32
 format = 2
@@ -81,7 +83,7 @@ position = Vector2(640, 24)
 shape = SubResource("RectangleShape2D_6mwse")
 
 [node name="TileMap1" type="TileMap" parent="."]
-visible = false
+texture_filter = 1
 tile_set = SubResource("TileSet_3bpyr")
 cell_quadrant_size = 32
 format = 2

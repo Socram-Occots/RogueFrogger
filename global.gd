@@ -71,11 +71,12 @@ func reset():
 	player_pos_x = 0
 	player_pos_y = 0
 
-func incrementDifficulty():
-	car_speed_scaling += 25
-	timer_l -= 0.125
-	timer_l-= 0.125
-	if (timer_l < 1):
-		timer_l = 1
-	if (timer_h < 1):
-		timer_h = 1
+func incrementDifficulty(x):
+	if score != 0 && score % x == 0:
+		car_speed_scaling += 1
+		timer_l -= 0.005
+		timer_l-= 0.005
+		if (timer_l < 1):
+			timer_l = 1
+		if (timer_h < 1):
+			timer_h = 1

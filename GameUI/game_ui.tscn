@@ -97,3 +97,42 @@ theme_override_font_sizes/font_size = 44
 text = "Press r to restart"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ICONcredits" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 355.0
+offset_top = -60.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+theme = ExtResource("2_hmaht")
+theme_override_font_sizes/font_size = 10
+text = "Item icons by game-icons.net 
+from by Delapouite, Skoll, and Lorc, 
+under creativecommons.org/licenses/by/3.0/ 
+(modified through photoshop)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AssetCredits" type="Label" parent="ICONcredits"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.5
+offset_top = -16.0
+offset_right = 80.5
+offset_bottom = -1.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_hmaht")
+theme_override_font_sizes/font_size = 10
+text = "Assets from Clear Code"
+horizontal_alignment = 1
+vertical_alignment = 1

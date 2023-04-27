@@ -145,11 +145,9 @@ func _process(delta):
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
 		Global.spawnTerrain = false
 		terrainSpawnLogic()
-		if Global.score != 0:
-			if Global.score % 50 == 0:
-				Global.incrementDifficulty()
-			if Global.score % 100 == 0:
-				spawnBorder(640, Global.player_pos_y)
+		Global.incrementDifficulty(2)
+		if Global.score % 100 == 0:
+			spawnBorder(640, Global.player_pos_y)
 
 func spawnBorder(x, y):
 	var border = BORDER.instantiate().duplicate()
@@ -175,7 +173,7 @@ func _ready():
 	# level
 	spawnBorder(640, Global.player_pos_y)
 	firstTerrainSpawn(0, $spawnterrain.global_position.y)
-	for i in 27:
+	for i in 18:
 		terrainSpawnLogic()
 	$CanvasLayer/Score.text = "Score " + str(Global.score)
 	# lineofdeath

@@ -16,6 +16,9 @@ func move_player():
 		velocity.y -= 1
 	velocity = velocity.normalized() * Global.player_speed_scaling
 
+	if Input.is_action_pressed("shift"):
+		velocity /= 2
+
 
 func _on_cooldown_timeout():
 	dashcooldown = true
@@ -52,11 +55,18 @@ func _process(delta):
 	
 func player_animation():
 #	$"AnimatedSprite2D".flip_h = false
-	if animated.flip_h: animated.flip_h = (velocity.y == 0 && velocity.x < 0)
-	if velocity == Vector2.ZERO: animated.play("stand")
-	elif velocity.y > 0: animated.play("walk_down")
-	elif velocity.y < 0: animated.play("walk_up")
-	elif velocity.x < 0: animated.play("walk_side")
+	if velocity == Vector2.ZERO: 
+		animated.play("stand")
+		animated.flip_h = false
+	elif velocity.y > 0: 
+		animated.play("walk_down")
+		animated.flip_h = false
+	elif velocity.y < 0: 
+		animated.play("walk_up")
+		animated.flip_h = false
+	elif velocity.x < 0: 
+		animated.play("walk_side")
+		animated.flip_h = false
 	else: 
 		animated.play("walk_side")
 		animated.flip_h = true

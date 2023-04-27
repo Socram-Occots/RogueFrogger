@@ -1,23 +1,32 @@
-[gd_scene load_steps=17 format=3 uid="uid://bxyymwdbynjfb"]
+[gd_scene load_steps=20 format=3 uid="uid://bxyymwdbynjfb"]
 
 [ext_resource type="Script" path="res://Node0.gd" id="1_y7hva"]
 [ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="2_fcdun"]
-[ext_resource type="Texture2D" uid="uid://peidxpxcc4vg" path="res://RogueFroggerAssets/RFAssets/Level/item1.png" id="3_ao71y"]
+[ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
 [ext_resource type="Script" path="res://Items/Node2.gd" id="3_dpuf5"]
 [ext_resource type="Script" path="res://Items/Node3.gd" id="4_36jmu"]
 [ext_resource type="Script" path="res://Items/Node4.gd" id="5_2gs8y"]
 [ext_resource type="Shader" uid="uid://bvxtdoo1ovpx2" path="res://Items/shading2.tres" id="5_lrnh4"]
-[ext_resource type="Texture2D" uid="uid://bm8mcw3irgyw6" path="res://RogueFroggerAssets/RFAssets/Level/image2.png" id="6_2tdbv"]
+[ext_resource type="Texture2D" uid="uid://bpt2galsb2l13" path="res://RogueFroggerAssets/RFAssets/Level/playerspeedglow.png" id="6_dc3xs"]
 [ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading3.tres" id="8_uibdt"]
-[ext_resource type="Texture2D" uid="uid://ks6645tcncjj" path="res://RogueFroggerAssets/RFAssets/Level/image3.png" id="9_giyvq"]
+[ext_resource type="Texture2D" uid="uid://cb5cf0nxgbwol" path="res://RogueFroggerAssets/RFAssets/Level/fire-dashglowpng.png" id="9_wjxbm"]
 [ext_resource type="Shader" uid="uid://4wgkx4w7bj1i" path="res://Items/shading4.tres" id="11_ly7cw"]
-[ext_resource type="Texture2D" uid="uid://5g1wd32no61o" path="res://RogueFroggerAssets/RFAssets/Level/image4.png" id="12_d02wp"]
+[ext_resource type="Texture2D" uid="uid://dsifb04d3tc7t" path="res://RogueFroggerAssets/RFAssets/Level/carspacingglow.png" id="12_87jbj"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwot6"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
+size = Vector2(48, 48)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4us6v"]
 shader = ExtResource("2_fcdun")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kcrvm"]
+size = Vector2(48, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5h204"]
 shader = ExtResource("5_lrnh4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2iiea"]
+size = Vector2(48, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xxsdt"]
 shader = ExtResource("8_uibdt")
@@ -32,43 +41,48 @@ visible = false
 collision_layer = 8
 script = ExtResource("1_y7hva")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node0"]
-polygon = PackedVector2Array(-27, -15, -5, -15, -5, -24, 5, -24, 5, -15, 29, -15, 30, -13, 9, 2, 6, 2, 5, 9, -4, 18, -4, 9, -7, 8, -30, 25, -31, 23, -7, 1, -28, -12)
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node0"]
+shape = SubResource("RectangleShape2D_wrigo")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node0"]
-material = SubResource("ShaderMaterial_vwot6")
-texture = ExtResource("3_ao71y")
-region_enabled = true
-region_rect = Rect2(0, 0, 116, 113)
+texture_filter = 1
+material = SubResource("ShaderMaterial_4us6v")
+position = Vector2(-1.13687e-13, 0)
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("3_buw3s")
+region_rect = Rect2(-80, -64, 736, 680)
 
 [node name="Node1" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
 script = ExtResource("3_dpuf5")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node1"]
-polygon = PackedVector2Array(-12, -19, -15, -14, -15, 2, -8, 8, -8, 12, -10, 21, 10, 21, 8, 12, 8, 8, 15, 1, 15, -14, 12, -19, 10, -18, 10, -9, 9, -8, 9, -5, 6, -5, 3, -11, 3, -15, 2, -17, 2, -21, 0, -22, -2, -21, -2, -17, -3, -15, -3, -11, -6, -5, -9, -5, -9, -9, -10, -10, -10, -18)
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node1"]
+shape = SubResource("RectangleShape2D_kcrvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node1"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_5h204")
-texture = ExtResource("6_2tdbv")
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("6_dc3xs")
 region_rect = Rect2(0, 0, 116, 114)
 
 [node name="Node2" type="Area2D" parent="."]
+visible = false
 collision_layer = 8
 script = ExtResource("4_36jmu")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node2"]
-polygon = PackedVector2Array(-6, -26, 7, -26, 7, -16, 14, -13, 17, -7, 25, -7, 25, 7, 16, 7, 13, 13, 7, 16, 7, 26, -6, 26, -6, 16, -13, 13, -16, 7, -24, 7, -24, -7, -16, -7, -13, -13, -6, -16)
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node2"]
+shape = SubResource("RectangleShape2D_2iiea")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_xxsdt")
-texture = ExtResource("9_giyvq")
-region_enabled = true
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("9_wjxbm")
 region_rect = Rect2(-2, 7, 118, 107)
 
 [node name="Node3" type="Area2D" parent="."]
-visible = false
 collision_layer = 8
 script = ExtResource("5_2gs8y")
 
@@ -76,8 +90,10 @@ script = ExtResource("5_2gs8y")
 polygon = PackedVector2Array(-16, -22, 18, -22, 21, -19, 21, -6, 15, 0, 21, 5, 21, 22, -21, 22, -21, 15, -11, 15, -4, 8, -9, 4, -21, 4, -21, -17)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node3"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_600xy")
-texture = ExtResource("12_d02wp")
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("12_87jbj")
 region_rect = Rect2(75, 75, 43, 44)
 
 [connection signal="body_entered" from="Node0" to="Node0" method="_on_body_entered"]
