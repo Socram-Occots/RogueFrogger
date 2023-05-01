@@ -4,8 +4,8 @@ extends Area2D
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	if position.y - Global.player_pos_y > 540:
-		position.y = Global.player_pos_y + 540
+	if position.y - Global.player_pos_y > 450:
+		position.y = Global.player_pos_y + 450
 		activated = true
 	if activated:
 		position.y -= 0.3
