@@ -43,6 +43,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_v64i0")
 theme_override_font_sizes/font_size = 17
-text = "WASD + \"space\" to dash!"
+text = "Move + \"space\" to dash!"
 
 [node name="the_tims" type="Node2D" parent="dashpopup"]
