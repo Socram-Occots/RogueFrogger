@@ -1,6 +1,6 @@
-[gd_scene load_steps=20 format=3 uid="uid://bxyymwdbynjfb"]
+[gd_scene load_steps=20 format=3 uid="uid://dpwcm3s7t344w"]
 
-[ext_resource type="Script" path="res://Node0.gd" id="1_y7hva"]
+[ext_resource type="Script" path="res://Items/Node0.gd" id="1_vl5uj"]
 [ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="2_fcdun"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
 [ext_resource type="Script" path="res://Items/Node2.gd" id="3_dpuf5"]
@@ -39,7 +39,7 @@ shader = ExtResource("11_ly7cw")
 [node name="Node0" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
-script = ExtResource("1_y7hva")
+script = ExtResource("1_vl5uj")
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node0"]
 shape = SubResource("RectangleShape2D_wrigo")
