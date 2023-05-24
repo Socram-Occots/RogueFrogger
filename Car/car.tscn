@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cv2mr8ur0uh6v"]
+[gd_scene load_steps=26 format=3 uid="uid://cv2mr8ur0uh6v"]
 
 [ext_resource type="Texture2D" uid="uid://cuxmglv3okft5" path="res://RogueFroggerAssets/RFAssets/Car/Yellow1.png" id="1_38gab"]
 [ext_resource type="Script" path="res://Car/car.gd" id="1_nm587"]
@@ -6,6 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://dfj18q0cftrun" path="res://RogueFroggerAssets/RFAssets/Car/Grey1.png" id="2_l8qon"]
 [ext_resource type="Texture2D" uid="uid://cdhqsaoscj2ku" path="res://RogueFroggerAssets/RFAssets/Car/Grey2.png" id="3_r6jlg"]
 [ext_resource type="Texture2D" uid="uid://cygy3o5wf2tny" path="res://RogueFroggerAssets/RFAssets/Car/Yellow2.png" id="5_07f0p"]
+[ext_resource type="Texture2D" uid="uid://brcsen4jgqq41" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORblue.png" id="7_fv3kn"]
+[ext_resource type="Texture2D" uid="uid://c5dni4dyjawui" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORcyan.png" id="8_2so1t"]
+[ext_resource type="Texture2D" uid="uid://bicd0iqdti770" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORgreen.png" id="9_3que0"]
+[ext_resource type="Texture2D" uid="uid://cg4iwqi4qve4v" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORpurple.png" id="10_tob03"]
+[ext_resource type="Texture2D" uid="uid://d1qbiyrxjoimo" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORpink.png" id="11_wo5ob"]
+[ext_resource type="Texture2D" uid="uid://cns6rw4xgm52p" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORred.png" id="12_ennyj"]
+[ext_resource type="Texture2D" uid="uid://b526hjt06fmh8" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORblue.png" id="13_7pdqw"]
+[ext_resource type="Texture2D" uid="uid://d2opqams5lq1c" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORcyan.png" id="14_5wij1"]
+[ext_resource type="Texture2D" uid="uid://bp761ha787k6r" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORgreen.png" id="15_7aumu"]
+[ext_resource type="Texture2D" uid="uid://md50hmxad2pt" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORorange.png" id="15_ph4mg"]
+[ext_resource type="Texture2D" uid="uid://cac2upn22q7dh" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORpurple.png" id="16_rvbkc"]
+[ext_resource type="Texture2D" uid="uid://br8b4mscwry6a" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORred.png" id="17_no21j"]
+[ext_resource type="Texture2D" uid="uid://c3qwhn8h5gxf5" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORyellow.png" id="18_j1au3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m6aqc"]
 animations = [{
@@ -40,13 +53,126 @@ animations = [{
 "loop": false,
 "name": &"Yellow2",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fv3kn")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_2so1t")
+}],
+"loop": true,
+"name": &"cyan",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_3que0")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_tob03")
+}],
+"loop": true,
+"name": &"pink",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_wo5ob")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_ennyj")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rlwrd"]
 size = Vector2(180, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2fqrn"]
-size = Vector2(169, 47)
+size = Vector2(168, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p1il7"]
+size = Vector2(158, 40)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbssy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_7pdqw")
+}],
+"loop": true,
+"name": &"blue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_5wij1")
+}],
+"loop": true,
+"name": &"cyan",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_7aumu")
+}],
+"loop": true,
+"name": &"green",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_ph4mg")
+}],
+"loop": true,
+"name": &"orange",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_rvbkc")
+}],
+"loop": true,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_no21j")
+}],
+"loop": true,
+"name": &"red",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_j1au3")
+}],
+"loop": true,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0wql5"]
+size = Vector2(106, 8)
 
 [node name="carcontrol" type="Node2D"]
 y_sort_enabled = true
@@ -54,13 +180,13 @@ texture_filter = 1
 script = ExtResource("1_r5b0g")
 
 [node name="car" type="Area2D" parent="."]
-y_sort_enabled = true
 collision_layer = 2
 script = ExtResource("1_nm587")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
+visible = false
 sprite_frames = SubResource("SpriteFrames_m6aqc")
-animation = &"Grey1"
+animation = &"Yellow1"
 
 [node name="CollisionShapeGrey" type="CollisionShape2D" parent="car"]
 y_sort_enabled = true
@@ -68,8 +194,23 @@ shape = SubResource("RectangleShape2D_rlwrd")
 disabled = true
 
 [node name="CollisionShape2DYellow" type="CollisionShape2D" parent="car"]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_2fqrn")
 disabled = true
+
+[node name="CollisionShape2Dcolor" type="CollisionShape2D" parent="car"]
+shape = SubResource("RectangleShape2D_p1il7")
+disabled = true
+
+[node name="AnimatedSprite2DMotorcycle" type="AnimatedSprite2D" parent="car"]
+visible = false
+position = Vector2(3, 0)
+scale = Vector2(0.678, 0.678)
+sprite_frames = SubResource("SpriteFrames_pbssy")
+animation = &"blue"
+
+[node name="CollisionShape2Dmotorcycle" type="CollisionShape2D" parent="car"]
+shape = SubResource("RectangleShape2D_0wql5")
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -21,6 +21,7 @@ func _ready():
 	if global_position.x < 0: 
 		$car.set_meta("direction", -1)
 		$car/AnimatedSprite2D.flip_h = true
+		$car/AnimatedSprite2DMotorcycle.flip_h = true
 	else:
 		$car.set_meta("direction", 1)
 		
