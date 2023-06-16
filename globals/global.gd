@@ -5,6 +5,7 @@ var score = -1
 #base
 #player
 var player_base_speed = 250
+var player_prev_vel = 0
 #car
 var car_base_speed = 125
 #dash
@@ -46,6 +47,7 @@ var player_pos_y = 0
 func reset():
 	score = -1
 	# playerspeed
+	player_prev_vel = 0
 	player_speed_mod = 0
 	player_speed_scaling = player_base_speed
 	#car speed

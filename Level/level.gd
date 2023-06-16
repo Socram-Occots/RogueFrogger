@@ -10,6 +10,7 @@ const DUMP = preload("res://Dumpster/dumpster.tscn")
 const BORDER = preload("res://Level/border.tscn")
 const LINE = preload("res://lineofdeath/lineofdeath.tscn")
 const POP = preload("res://GameUI/popups.tscn")
+const EXPLBARREL = preload("res://Barrel/exploding_barrel.tscn")
 
 # spawning
 #var ITEM_LIST = []
@@ -44,6 +45,11 @@ func itemSpawn():
 			barrel.visible = true
 			barrel.position = get_node(dir).global_position
 			$Ysort.add_child(barrel)
+		elif chance < 93:
+			var explbarrel = EXPLBARREL.instantiate().duplicate()
+			explbarrel.visible = true
+			explbarrel.position = get_node(dir).global_position
+			$Ysort.add_child(explbarrel)
 		elif chance < 95 && !(open in range(i + 1, i + 3)) && i < 18:
 			var dump = DUMP.instantiate().duplicate()
 			dump.visible = true

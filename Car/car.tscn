@@ -181,7 +181,9 @@ script = ExtResource("1_r5b0g")
 
 [node name="car" type="Area2D" parent="."]
 collision_layer = 2
+collision_mask = 1921
 script = ExtResource("1_nm587")
+metadata/Car = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
 visible = false
@@ -211,6 +213,7 @@ animation = &"blue"
 
 [node name="CollisionShape2Dmotorcycle" type="CollisionShape2D" parent="car"]
 shape = SubResource("RectangleShape2D_0wql5")
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 

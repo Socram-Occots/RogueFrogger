@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=3 uid="uid://e7ohgba71xgm"]
+
+[ext_resource type="Texture2D" uid="uid://r03cvcpomnbf" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png" id="1_ntsr0"]
+[ext_resource type="Script" path="res://Barrel/explodingbarrelrigidbody.gd" id="1_wmlc5"]
+[ext_resource type="Texture2D" uid="uid://dvqd5i8gxujey" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_2.png" id="2_g1m8v"]
+[ext_resource type="Texture2D" uid="uid://dkiqelh15heoq" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_3.png" id="3_n2isk"]
+[ext_resource type="Texture2D" uid="uid://cao7eenveaa2w" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_4.png" id="4_myexs"]
+[ext_resource type="Texture2D" uid="uid://dj2j1rdh02rf3" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_5.png" id="5_wm68a"]
+[ext_resource type="Texture2D" uid="uid://ci6nhbnnqjbmt" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_6.png" id="6_udhn5"]
+[ext_resource type="Texture2D" uid="uid://dnq4eu3uidx8h" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_7.png" id="7_w3doq"]
+[ext_resource type="Texture2D" uid="uid://c0etpwjascnyq" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_8.png" id="8_y4rj8"]
+[ext_resource type="Texture2D" uid="uid://dpyaa7r8yoorr" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_9.png" id="9_00bwt"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_trkfx"]
+rough = true
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_23q0i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ntsr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_g1m8v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_n2isk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_myexs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wm68a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_udhn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_w3doq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_y4rj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_00bwt")
+}],
+"loop": true,
+"name": &"explosion",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0j4y"]
+size = Vector2(30, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v677n"]
+size = Vector2(13.1842, 3.75087)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_snvwa"]
+radius = 32.0
+height = 86.0
+
+[node name="explodingbarrelbody" type="RigidBody2D"]
+collision_layer = 1024
+collision_mask = 1183
+mass = 10.0
+physics_material_override = SubResource("PhysicsMaterial_trkfx")
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_wmlc5")
+metadata/ExplodingBarrel = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -21)
+sprite_frames = SubResource("SpriteFrames_23q0i")
+animation = &"explosion"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_a0j4y")
+
+[node name="impulse" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 415
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="impulse"]
+position = Vector2(0, -8)
+scale = Vector2(2.57884, 3.19925)
+shape = SubResource("RectangleShape2D_v677n")
+
+[node name="explosionbarrelexplosion" type="Area2D" parent="."]
+position = Vector2(-27, 1)
+collision_layer = 512
+collision_mask = 671
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="explosionbarrelexplosion"]
+position = Vector2(27, -1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_snvwa")
+disabled = true
+
+[connection signal="area_entered" from="impulse" to="." method="_on_impulse_area_entered"]
+[connection signal="body_entered" from="impulse" to="." method="_on_impulse_body_entered"]
+[connection signal="area_entered" from="explosionbarrelexplosion" to="." method="_on_explosionbarrelexplosion_area_entered"]
+[connection signal="body_entered" from="explosionbarrelexplosion" to="." method="_on_explosionbarrelexplosion_body_entered"]

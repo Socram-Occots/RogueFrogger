@@ -100,6 +100,10 @@ shift={
 2d_physics/layer_5="Obstacles"
 2d_physics/layer_6="Tiles"
 2d_physics/layer_7="lineofdeath"
+2d_physics/layer_8="special"
+2d_physics/layer_9="explosionbarrelcore"
+2d_physics/layer_10="explosionbarrelexplosion"
+2d_physics/layer_11="explodingbarrelphysical"
 
 [rendering]
 

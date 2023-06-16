@@ -47,11 +47,17 @@ func _process(delta):
 		velocity = Vector2.ZERO
 		move_player()
 	
+	# tracking velocity for rigidbodies
+	if velocity != Vector2.ZERO:
+		Global.player_prev_vel = velocity
+	
 	player_animation()
 	move_and_slide()
 	
-	
-	
+	# tracking velocity for rigidbodies
+	if velocity == Vector2.ZERO:
+		await get_tree().create_timer(0.1).timeout
+		Global.player_prev_vel = Vector2.ZERO
 	
 func player_animation():
 #	$"AnimatedSprite2D".flip_h = false

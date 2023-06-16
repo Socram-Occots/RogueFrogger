@@ -129,8 +129,9 @@ animations = [{
 texture_filter = 1
 
 [node name="crosser" type="CharacterBody2D" parent="."]
-collision_mask = 31
+collision_mask = 2015
 script = ExtResource("1_5p142")
+metadata/Player = false
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="crosser"]
 position = Vector2(-0.483869, 0.484708)

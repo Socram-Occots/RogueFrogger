@@ -39,7 +39,9 @@ shader = ExtResource("11_ly7cw")
 [node name="Node0" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
+collision_mask = 1921
 script = ExtResource("1_vl5uj")
+metadata/Item = false
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node0"]
 shape = SubResource("RectangleShape2D_wrigo")
@@ -55,7 +57,9 @@ region_rect = Rect2(-80, -64, 736, 680)
 [node name="Node1" type="Area2D" parent="."]
 visible = false
 collision_layer = 8
+collision_mask = 1921
 script = ExtResource("3_dpuf5")
+metadata/Item = false
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node1"]
 shape = SubResource("RectangleShape2D_kcrvm")
@@ -71,6 +75,7 @@ region_rect = Rect2(0, 0, 116, 114)
 visible = false
 collision_layer = 8
 script = ExtResource("4_36jmu")
+metadata/Item = false
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node2"]
 shape = SubResource("RectangleShape2D_2iiea")
@@ -85,6 +90,7 @@ region_rect = Rect2(-2, 7, 118, 107)
 [node name="Node3" type="Area2D" parent="."]
 collision_layer = 8
 script = ExtResource("5_2gs8y")
+metadata/Item = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node3"]
 polygon = PackedVector2Array(-16, -22, 18, -22, 21, -19, 21, -6, 15, 0, 21, 5, 21, 22, -21, 22, -21, 15, -11, 15, -4, 8, -9, 4, -21, 4, -21, -17)

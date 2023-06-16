@@ -12,4 +12,7 @@ func _process(delta):
 
 @warning_ignore("unused_parameter")
 func _on_body_entered(body):
-	get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
+	var metalist = body.get_meta_list()
+	if "Player" in metalist:
+		print("line")
+		get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
