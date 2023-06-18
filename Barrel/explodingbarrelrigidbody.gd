@@ -35,7 +35,8 @@ func explosion():
 
 @warning_ignore("unused_parameter")
 func _on_impulse_body_entered(body):
-	print("impact")
+	if body == self: return
+#	print("impact")
 	var metalist = body.get_meta_list()
 	if exploding: return
 #	if not_moving && "Player" in metalist:
@@ -45,13 +46,14 @@ func _on_impulse_body_entered(body):
 #		not_moving = false
 		apply_impulse(Global.player_prev_vel)
 		body.dashing = false
-	for i in ["Element"]:
+	for i in ["Element", "ExplodingBarrel"]:
 		if i in metalist:
 			explosion()
 		
 func _on_impulse_area_entered(area):
 	var metalist = area.get_meta_list()
-	for i in ["Car", "Item", "ExplodingBarrel"]:
+	if exploding: return
+	for i in ["Car", "Item"]:
 		if i in metalist:
 			explosion()
 	

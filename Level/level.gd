@@ -40,12 +40,12 @@ func itemSpawn():
 		
 		if chance < 80 || i == open:
 			pass
-		elif chance < 87.5:
+		elif chance < 89:
 			var barrel = BARREL.instantiate().duplicate()
 			barrel.visible = true
 			barrel.position = get_node(dir).global_position
 			$Ysort.add_child(barrel)
-		elif chance < 93:
+		elif chance < 90:
 			var explbarrel = EXPLBARREL.instantiate().duplicate()
 			explbarrel.visible = true
 			explbarrel.position = get_node(dir).global_position
@@ -55,7 +55,7 @@ func itemSpawn():
 			dump.visible = true
 			dump.position = get_node(dir).global_position
 			$Ysort.add_child(dump)
-			i += 3
+			i += 2
 		else:
 			var item_num = randi_range(0,3)
 			var item = ITEM.instantiate().get_node("Node" + str(item_num)).duplicate()
