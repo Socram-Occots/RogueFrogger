@@ -102,3 +102,4 @@ disabled = true
 [connection signal="body_entered" from="impulse" to="." method="_on_impulse_body_entered"]
 [connection signal="area_entered" from="explosionbarrelexplosion" to="." method="_on_explosionbarrelexplosion_area_entered"]
 [connection signal="body_entered" from="explosionbarrelexplosion" to="." method="_on_explosionbarrelexplosion_body_entered"]
+[connection signal="body_exited" from="explosionbarrelexplosion" to="." method="_on_explosionbarrelexplosion_body_exited"]

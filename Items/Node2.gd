@@ -5,7 +5,7 @@ func _on_body_entered(body):
 	var metalist = body.get_meta_list()
 	if "Player" in metalist:
 		Global.car_speed_mod += 1
-		Global.car_speed_scaling -= 3
+		Global.car_speed_scaling -= 4
 		if Global.car_speed_scaling < 100:
 			Global.car_speed_scaling = 100
 		queue_free()

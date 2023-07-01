@@ -3,7 +3,19 @@ extends CharacterBody2D
 @onready var candash = true
 @onready var dashing = false
 @onready var dashcooldown = true
-@onready var animated = $"AnimatedSprite2D"
+@onready var shield_up = false
+@onready var shield_comp = false
+@onready var shield_ready = true
+@onready var shield_gone = false
+@onready var animated = $"playermove"
+@onready var shieldAnimation = $shield
+
+
+func _ready():
+	shieldAnimation.visible = false
+	shieldAnimation.stop()
+	shieldAnimation.animation = "shield"
+	shieldAnimation.frame = 0
 
 func move_player():
 	if Input.is_action_pressed("left_a"):
@@ -50,9 +62,15 @@ func _process(delta):
 	# tracking velocity for rigidbodies
 	if velocity != Vector2.ZERO:
 		Global.player_prev_vel = velocity
-	
+		var vLength = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
+		animated.speed_scale = vLength/Global.player_base_speed
+
 	player_animation()
 	move_and_slide()
+	
+	# checking player shield
+	player_shield()
+	shield_compromised()
 	
 	# tracking velocity for rigidbodies
 	if velocity == Vector2.ZERO:
@@ -80,5 +98,22 @@ func player_animation():
 #		$"AnimatedSprite2D".play("walk_side")
 		
 
-
-
+func player_shield():
+	if shield_ready && shield_up:
+		shieldAnimation.visible = true
+		shieldAnimation.play("shield")
+		shield_ready = false
+		
+func shield_compromised():
+	if shield_comp:
+#		print("shield_comp true")
+		shieldAnimation.modulate = "ff0000"
+		
+	elif !shield_comp && shield_gone:
+		shieldAnimation.visible = false
+		shieldAnimation.modulate = "ffffff"
+		shield_up = false
+		shield_ready = true
+		shield_gone = false
+#		print(shield_up)
+		shieldAnimation.stop()

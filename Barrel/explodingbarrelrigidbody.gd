@@ -33,6 +33,7 @@ func explosion():
 	explosionCol.set_deferred("disabled", false)
 	animationExplo.play("explosion")
 
+# impulse
 @warning_ignore("unused_parameter")
 func _on_impulse_body_entered(body):
 	if body == self: return
@@ -57,17 +58,28 @@ func _on_impulse_area_entered(area):
 		if i in metalist:
 			explosion()
 	
+# explosions
+# bodies
 func _on_explosionbarrelexplosion_body_entered(body):
 	var metalist = body.get_meta_list()
 	if "Player" in metalist:
-		print("explosion")
-		get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
+		if !body.shield_up:
+			get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
+		else:
+			body.shield_comp = true
 	for i in ["Element"]:
 		if i in metalist:
 			body.queue_free()
 	if "ExplodingBarrel" in metalist:
 		body.explosion()
+	
+func _on_explosionbarrelexplosion_body_exited(body):
+	var metalist = body.get_meta_list()
+	if "Player" in metalist:
+		body.shield_gone = true
+		body.shield_comp = false
 		
+# areas
 func _on_explosionbarrelexplosion_area_entered(area):
 	var metalist = area.get_meta_list()
 	for i in ["Car", "Item", "ExplodingBarrel"]:
@@ -75,3 +87,5 @@ func _on_explosionbarrelexplosion_area_entered(area):
 			area.queue_free()
 	if "ExplodingBarrel" in metalist:
 		area.explosion()
+
+

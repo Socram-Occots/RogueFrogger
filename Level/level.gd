@@ -11,6 +11,7 @@ const BORDER = preload("res://Level/border.tscn")
 const LINE = preload("res://lineofdeath/lineofdeath.tscn")
 const POP = preload("res://GameUI/popups.tscn")
 const EXPLBARREL = preload("res://Barrel/exploding_barrel.tscn")
+const SHIELD = preload("res://Shield/shieldbattery.tscn")
 
 # spawning
 #var ITEM_LIST = []
@@ -31,8 +32,8 @@ func itemSpawn():
 	# at least one space must be open
 	var open  = randi_range(0, 19)
 	
-	# 80% of tiles blank 7.5% barrels
-	# 7.5% dumpsters 5% items
+	# 80% of tiles blank 9% barrels
+	# 5% dumpsters 4% items 1% explosive
 	var i = 0;
 	while i < 20:
 		var chance = randf_range(0,99)
@@ -57,8 +58,24 @@ func itemSpawn():
 			$Ysort.add_child(dump)
 			i += 2
 		else:
-			var item_num = randi_range(0,3)
-			var item = ITEM.instantiate().get_node("Node" + str(item_num)).duplicate()
+			var item_chance = randf_range(0,99)
+			var item_num = 0
+			var item
+			if item_chance < 24:
+				item_num = 0
+			elif item_chance < 48:
+				item_num = 1
+			elif item_chance < 72:
+				item_num = 2
+			elif item_chance < 96:
+				item_num = 3
+			else:
+				item_num = 4
+				
+			if item_num == 4:
+				item = SHIELD.instantiate().duplicate()
+			else:
+				item = ITEM.instantiate().get_node("Node" + str(item_num)).duplicate()
 			item.visible = true
 			item.position = get_node(dir).global_position
 			$Ysort.add_child(item)
@@ -187,5 +204,4 @@ func _ready():
 	line.position.x = 0
 	line.position.y = 720
 	$lineofdeath.add_child(line)
-	
 	

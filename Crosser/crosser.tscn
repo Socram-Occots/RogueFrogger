@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=49 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -26,6 +26,26 @@
 [ext_resource type="Texture2D" uid="uid://bpu6fxrirac83" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_7.png" id="23_rfwe5"]
 [ext_resource type="Texture2D" uid="uid://ccuycyg42oqx0" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_8.png" id="24_by8fg"]
 [ext_resource type="Texture2D" uid="uid://b4vexjyfep41v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_9.png" id="25_ru7x7"]
+[ext_resource type="Texture2D" uid="uid://xrt5sglhhl86" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_1.png" id="27_bfqrl"]
+[ext_resource type="Texture2D" uid="uid://obv2oahysjrv" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_2.png" id="28_m7mmt"]
+[ext_resource type="Texture2D" uid="uid://d0u3ipsctqyg2" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_3.png" id="29_ta18e"]
+[ext_resource type="Texture2D" uid="uid://b6iuqwvcdwcyl" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_4.png" id="30_1bevo"]
+[ext_resource type="Texture2D" uid="uid://mf3foi33r87u" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_5.png" id="31_gupy3"]
+[ext_resource type="Texture2D" uid="uid://cndj8nbqb7q0c" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_6.png" id="32_rmg0k"]
+[ext_resource type="Texture2D" uid="uid://1v36mm876ys1" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_7.png" id="33_ysfx3"]
+[ext_resource type="Texture2D" uid="uid://cw8rmiqwur3p7" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_8.png" id="34_6gdaw"]
+[ext_resource type="Texture2D" uid="uid://cpjkt15e42m6p" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_9.png" id="35_3kmu5"]
+[ext_resource type="Texture2D" uid="uid://cxh45w8w84dqb" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_10.png" id="36_dcjrh"]
+[ext_resource type="Texture2D" uid="uid://box3svr61cki" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_11.png" id="37_a25ha"]
+[ext_resource type="Texture2D" uid="uid://cil2uo6s5dqam" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_12.png" id="38_cresl"]
+[ext_resource type="Texture2D" uid="uid://cd4k8mo1rpv87" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_13.png" id="39_4ibru"]
+[ext_resource type="Texture2D" uid="uid://bft2opes22ho" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_14.png" id="40_wamqb"]
+[ext_resource type="Texture2D" uid="uid://cn8hpidsmu8un" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_15.png" id="41_5wwn1"]
+[ext_resource type="Texture2D" uid="uid://sa6os1jwa64c" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_16.png" id="42_eqarr"]
+[ext_resource type="Texture2D" uid="uid://dm01oui2t13e0" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_17.png" id="43_lgqon"]
+[ext_resource type="Texture2D" uid="uid://cuyjr0ij47tni" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_18.png" id="44_1af04"]
+[ext_resource type="Texture2D" uid="uid://kudfyslcxv8j" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_19.png" id="45_era0l"]
+[ext_resource type="Texture2D" uid="uid://dlwpx7nyy8tdk" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_20.png" id="46_6t7lh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5abg2"]
 animations = [{
@@ -64,7 +84,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -93,7 +113,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_side",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -122,32 +142,109 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 10.0
+"speed": 15.0
 }]
 
-[node name="player" type="Node2D"]
-texture_filter = 1
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqimd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_bfqrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_m7mmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ta18e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_1bevo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_gupy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_rmg0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_ysfx3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_6gdaw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_3kmu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_dcjrh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_a25ha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_cresl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_4ibru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_wamqb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_5wwn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_eqarr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_lgqon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_1af04")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_era0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_6t7lh")
+}],
+"loop": true,
+"name": &"shield",
+"speed": 15.0
+}]
 
-[node name="crosser" type="CharacterBody2D" parent="."]
+[node name="crosser" type="CharacterBody2D"]
+texture_filter = 1
 collision_mask = 2015
 script = ExtResource("1_5p142")
 metadata/Player = false
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="crosser"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-0.483869, 0.484708)
 scale = Vector2(0.967742, 0.969387)
 polygon = PackedVector2Array(0.499998, -25.2579, -6.39569, -25.2579, -11.9, -20.1, -15, -5.92312, -15, 13.5442, -13.9667, 19.1, -10.8177, 24.2579, 12.9, 24.2579, 16, 19.1, 16, 12.9105, 16, -5.41653, 12.9, -20.1, 7.73333, -25.2579)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="crosser"]
+[node name="playermove" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5abg2")
-animation = &"walk_down"
+animation = &"walk_side"
+frame_progress = 0.884631
 
-[node name="Camera2D" type="Camera2D" parent="crosser"]
+[node name="shield" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(0.46, 0.46)
+sprite_frames = SubResource("SpriteFrames_oqimd")
+animation = &"shield"
+
+[node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
 limit_right = 1280
 limit_bottom = 720
 
-[node name="Cooldown" type="Timer" parent="crosser"]
+[node name="Cooldown" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="timeout" from="crosser/Cooldown" to="crosser" method="_on_cooldown_timeout"]
+[node name="player" type="Node2D" parent="."]
+texture_filter = 1
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

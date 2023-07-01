@@ -14,5 +14,5 @@ func _process(delta):
 func _on_body_entered(body):
 	var metalist = body.get_meta_list()
 	if "Player" in metalist:
-		print("line")
+#		print("line")
 		get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")

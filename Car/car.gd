@@ -51,5 +51,15 @@ func _on_body_entered(body):
 #	print(current_car)
 	var metalist = body.get_meta_list()
 	if "Player" in metalist:
-		print("car")
-		get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
+#		print("car")
+		if !body.shield_up:
+			get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
+		else:
+			body.shield_comp = true
+			
+func _on_body_exited(body):
+	var metalist = body.get_meta_list()
+	if "Player" in metalist:
+		body.shield_gone = true
+		body.shield_comp = false
+		

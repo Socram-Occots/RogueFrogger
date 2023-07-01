@@ -44,6 +44,9 @@ var spawnTerrain = false
 var player_pos_x = 0
 var player_pos_y = 0
 
+# shield
+#var shield_enabled = false
+
 func reset():
 	score = -1
 	# playerspeed
@@ -72,6 +75,9 @@ func reset():
 	# player
 	player_pos_x = 0
 	player_pos_y = 0
+	
+	#shield
+#	shield_enabled = false
 
 func incrementDifficulty(x):
 	if score != 0 && score % x == 0:
