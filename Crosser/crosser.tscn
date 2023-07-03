@@ -227,7 +227,8 @@ polygon = PackedVector2Array(0.499998, -25.2579, -6.39569, -25.2579, -11.9, -20.
 [node name="playermove" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5abg2")
 animation = &"walk_side"
-frame_progress = 0.884631
+frame = 5
+frame_progress = 0.878767
 
 [node name="shield" type="AnimatedSprite2D" parent="."]
 visible = false

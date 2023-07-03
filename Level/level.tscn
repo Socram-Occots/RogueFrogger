@@ -144,7 +144,7 @@ anchor_right = 1.0
 offset_left = -72.0
 offset_bottom = 26.0
 grow_horizontal = 0
-text = "V 0.0.0.4"
+text = "V 0.0.0.5"
 
 [node name="Instructions" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
