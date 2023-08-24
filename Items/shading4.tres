@@ -18,6 +18,8 @@ script = ExtResource("2_a52sa")
 
 [resource]
 code = "shader_type canvas_item;
+render_mode blend_mix;
+
 
 
 // OuterGlow
