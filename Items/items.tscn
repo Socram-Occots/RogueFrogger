@@ -38,6 +38,7 @@ shader = ExtResource("11_ly7cw")
 
 [node name="Node0" type="Area2D" parent="."]
 visible = false
+scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("1_vl5uj")
@@ -56,6 +57,7 @@ region_rect = Rect2(-80, -64, 736, 680)
 
 [node name="Node1" type="Area2D" parent="."]
 visible = false
+scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("3_dpuf5")
@@ -72,6 +74,8 @@ texture = ExtResource("6_dc3xs")
 region_rect = Rect2(0, 0, 116, 114)
 
 [node name="Node2" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("4_36jmu")
 metadata/Item = false
@@ -88,6 +92,7 @@ region_rect = Rect2(-2, 7, 118, 107)
 
 [node name="Node3" type="Area2D" parent="."]
 visible = false
+scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("5_2gs8y")
 metadata/Item = false

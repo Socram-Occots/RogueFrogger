@@ -13,8 +13,8 @@ var dash_base = 1.5 - 0.03
 var dash_base_time = 0.3
 var dash_cool_down_base = 2
 #timer
-var timer_base_l = 3.2
-var timer_base_h = 4.4
+var timer_base_l = 4.2
+var timer_base_h = 5.4
 
 # playerspeed
 var player_speed_mod = 0
@@ -46,6 +46,12 @@ var player_pos_y = 0
 
 # shield
 #var shield_enabled = false
+
+#postions
+var despawn_lower = 1600
+var despawn_left = -200
+var despawn_right = 2150
+var despawn_upper = -1600
 
 func reset():
 	score = -1
@@ -82,9 +88,9 @@ func reset():
 func incrementDifficulty(x):
 	if score != 0 && score % x == 0:
 		car_speed_scaling += 1
-		timer_l -= 0.005
-		timer_l-= 0.005
-		if (timer_l < 1):
-			timer_l = 1
-		if (timer_h < 1):
-			timer_h = 1
+		timer_l -= 0.01
+		timer_l-= 0.01
+		if (timer_l < 1.5):
+			timer_l = 1.5
+		if (timer_h < 1.5):
+			timer_h = 1.5

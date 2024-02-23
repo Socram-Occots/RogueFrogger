@@ -5,7 +5,7 @@
 [node name="border" type="Node2D"]
 
 [node name="leftcol" type="StaticBody2D" parent="."]
-position = Vector2(-640, 0)
+position = Vector2(-960, 0)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="leftcol"]
@@ -13,7 +13,7 @@ rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_oc0wb")
 
 [node name="rightcol" type="StaticBody2D" parent="."]
-position = Vector2(640, 0)
+position = Vector2(960, 0)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rightcol"]

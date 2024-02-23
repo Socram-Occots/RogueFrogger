@@ -41,7 +41,7 @@ func _ready():
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if no_ignore:
-		if global_position.x > 2000 || global_position.x < -700:
+		if global_position.x > 3555 || global_position.x < -1200:
 			queue_free()
 		position.x -= car_speed * delta * direction
 

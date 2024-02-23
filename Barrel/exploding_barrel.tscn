@@ -71,29 +71,33 @@ metadata/ExplodingBarrel = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -21)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_23q0i")
 animation = &"explosion"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -5.035)
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_a0j4y")
 
 [node name="impulse" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
 collision_layer = 256
 collision_mask = 1439
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="impulse"]
-position = Vector2(0, -8)
+position = Vector2(0, -3.295)
 scale = Vector2(2.57884, 3.19925)
 shape = SubResource("RectangleShape2D_v677n")
 
 [node name="explosionbarrelexplosion" type="Area2D" parent="."]
 position = Vector2(-27, 1)
+scale = Vector2(1.5, 1.5)
 collision_layer = 512
 collision_mask = 671
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="explosionbarrelexplosion"]
-position = Vector2(27, -1)
+position = Vector2(17.995, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_snvwa")
 disabled = true

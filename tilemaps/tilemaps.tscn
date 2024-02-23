@@ -69,6 +69,7 @@ texture_filter = 1
 
 [node name="TileMap0" type="TileMap" parent="."]
 texture_filter = 1
+scale = Vector2(1.5, 1.5)
 tile_set = SubResource("TileSet_3bpyr")
 cell_quadrant_size = 32
 format = 2
@@ -84,6 +85,7 @@ shape = SubResource("RectangleShape2D_6mwse")
 
 [node name="TileMap1" type="TileMap" parent="."]
 texture_filter = 1
+scale = Vector2(1.5, 1.5)
 tile_set = SubResource("TileSet_3bpyr")
 cell_quadrant_size = 32
 format = 2

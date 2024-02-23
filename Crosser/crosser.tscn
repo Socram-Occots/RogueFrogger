@@ -215,6 +215,7 @@ animations = [{
 
 [node name="crosser" type="CharacterBody2D"]
 texture_filter = 1
+scale = Vector2(1.5, 1.5)
 collision_mask = 2015
 script = ExtResource("1_5p142")
 metadata/Player = false
@@ -226,9 +227,7 @@ polygon = PackedVector2Array(0.499998, -25.2579, -6.39569, -25.2579, -11.9, -20.
 
 [node name="playermove" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5abg2")
-animation = &"walk_side"
-frame = 5
-frame_progress = 0.878767
+animation = &"stand"
 
 [node name="shield" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -239,8 +238,8 @@ animation = &"shield"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
-limit_right = 1280
-limit_bottom = 720
+limit_right = 1920
+limit_bottom = 1080
 
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true

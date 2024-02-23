@@ -30,12 +30,12 @@ var sidewalk = false;
 func itemSpawn():
 	
 	# at least one space must be open
-	var open  = randi_range(0, 19)
+	var open  = randi_range(0, 14)
 	
 	# 80% of tiles blank 9% barrels
 	# 5% dumpsters 4% items 1% explosive
 	var i = 0;
-	while i < 20:
+	while i < 15:
 		var chance = randf_range(0,99)
 		var dir = "spawnterrain/Node" + str(i)
 		
@@ -51,7 +51,7 @@ func itemSpawn():
 			explbarrel.visible = true
 			explbarrel.position = get_node(dir).global_position
 			$Ysort.add_child(explbarrel)
-		elif chance < 95 && !(open in range(i + 1, i + 3)) && i < 18:
+		elif chance < 95 && !(open in range(i + 1, i + 2)) && i < 12:
 			var dump = DUMP.instantiate().duplicate()
 			dump.visible = true
 			dump.position = get_node(dir).global_position
@@ -89,9 +89,9 @@ func carSpawn():
 	
 	var side = randi_range(0,1)
 	if side == 0:
-		car.position.x = -128 #-128
+		car.position.x = Global.despawn_left
 	else:
-		car.position.x = 1408 #1408
+		car.position.x = Global.despawn_right
 		
 	$Ysort.add_child(car)
 	
@@ -104,7 +104,7 @@ func firstTerrainSpawn(xpos, ypos):
 	tile.position.y = ypos
 	tile.visible = true
 	TERRAIN.append(tile) 
-	$spawnterrain.global_position.y -= 96
+	$spawnterrain.global_position.y -= 144
 	
 	$Tiles.add_child(tile)
 	
@@ -129,7 +129,7 @@ func terrainSpawn(type, xpos, ypos):
 	elif type == 1:
 		carSpawn()
 	
-	$spawnterrain.global_position.y -= 96
+	$spawnterrain.global_position.y -= 144
 	
 func _input(event):
 	if event.is_action_pressed("down_s")\
@@ -150,7 +150,7 @@ func terrainSpawnLogic():
 		
 #	print(TERRAIN[0].global_position.y)
 #	print(Global.player_pos_y)
-	if !TERRAIN.is_empty() && TERRAIN[0].global_position.y - Global.player_pos_y > 888:
+	if !TERRAIN.is_empty() && TERRAIN[0].global_position.y - Global.player_pos_y > Global.despawn_lower:
 		TERRAIN[0].queue_free()
 		TERRAIN.remove_at(0)
 
@@ -170,7 +170,7 @@ func _process(delta):
 		terrainSpawnLogic()
 		Global.incrementDifficulty(2)
 		if Global.score % 100 == 0:
-			spawnBorder(640, Global.player_pos_y)
+			spawnBorder(960, Global.player_pos_y)
 
 func spawnBorder(x, y):
 	var border = BORDER.instantiate().duplicate()
@@ -194,7 +194,7 @@ func _ready():
 	player.visible = true
 	$Ysort.add_child(player)
 	# level
-	spawnBorder(640, Global.player_pos_y)
+	spawnBorder(960, Global.player_pos_y)
 	firstTerrainSpawn(0, $spawnterrain.global_position.y)
 	for i in 18:
 		terrainSpawnLogic()
@@ -202,6 +202,6 @@ func _ready():
 	# lineofdeath
 	var line = LINE.instantiate()
 	line.position.x = 0
-	line.position.y = 720
+	line.position.y = 1500
 	$lineofdeath.add_child(line)
 	

@@ -13,96 +13,74 @@
 
 [node name="Level" type="Node"]
 script = ExtResource("1_v6cxu")
-metadata/_edit_horizontal_guides_ = []
-metadata/_edit_vertical_guides_ = []
 
 [node name="spawnterrain" type="Marker2D" parent="."]
-position = Vector2(0, 624)
+position = Vector2(0, 936)
 
 [node name="Node0" type="Marker2D" parent="spawnterrain"]
-position = Vector2(32, 48)
+position = Vector2(64, 72)
 gizmo_extents = 32.5
 
 [node name="Node1" type="Marker2D" parent="spawnterrain"]
-position = Vector2(96, 48)
+position = Vector2(192, 72)
 gizmo_extents = 32.5
 
 [node name="Node2" type="Marker2D" parent="spawnterrain"]
-position = Vector2(160, 48)
+position = Vector2(320, 72)
 gizmo_extents = 32.5
 
 [node name="Node3" type="Marker2D" parent="spawnterrain"]
-position = Vector2(224, 48)
+position = Vector2(448, 72)
 gizmo_extents = 32.5
 
 [node name="Node4" type="Marker2D" parent="spawnterrain"]
-position = Vector2(288, 48)
+position = Vector2(576, 72)
 gizmo_extents = 32.5
 
 [node name="Node5" type="Marker2D" parent="spawnterrain"]
-position = Vector2(352, 48)
+position = Vector2(704, 72)
 gizmo_extents = 32.5
 
 [node name="Node6" type="Marker2D" parent="spawnterrain"]
-position = Vector2(416, 48)
+position = Vector2(832, 72)
 gizmo_extents = 32.5
 
 [node name="Node7" type="Marker2D" parent="spawnterrain"]
-position = Vector2(480, 48)
+position = Vector2(960, 72)
 gizmo_extents = 32.5
 
 [node name="Node8" type="Marker2D" parent="spawnterrain"]
-position = Vector2(544, 48)
+position = Vector2(1088, 72)
 gizmo_extents = 32.5
 
 [node name="Node9" type="Marker2D" parent="spawnterrain"]
-position = Vector2(608, 48)
+position = Vector2(1216, 72)
 gizmo_extents = 32.5
 
 [node name="Node10" type="Marker2D" parent="spawnterrain"]
-position = Vector2(672, 48)
+position = Vector2(1344, 72)
 gizmo_extents = 32.5
 
 [node name="Node11" type="Marker2D" parent="spawnterrain"]
-position = Vector2(736, 48)
+position = Vector2(1472, 72)
 gizmo_extents = 32.5
 
 [node name="Node12" type="Marker2D" parent="spawnterrain"]
-position = Vector2(800, 48)
+position = Vector2(1600, 72)
 gizmo_extents = 32.5
 
 [node name="Node13" type="Marker2D" parent="spawnterrain"]
-position = Vector2(864, 48)
+position = Vector2(1728, 72)
 gizmo_extents = 32.5
 
 [node name="Node14" type="Marker2D" parent="spawnterrain"]
-position = Vector2(928, 48)
-gizmo_extents = 32.5
-
-[node name="Node15" type="Marker2D" parent="spawnterrain"]
-position = Vector2(992, 48)
-gizmo_extents = 32.5
-
-[node name="Node16" type="Marker2D" parent="spawnterrain"]
-position = Vector2(1056, 48)
-gizmo_extents = 32.5
-
-[node name="Node17" type="Marker2D" parent="spawnterrain"]
-position = Vector2(1120, 48)
-gizmo_extents = 32.5
-
-[node name="Node18" type="Marker2D" parent="spawnterrain"]
-position = Vector2(1184, 48)
-gizmo_extents = 32.5
-
-[node name="Node19" type="Marker2D" parent="spawnterrain"]
-position = Vector2(1248, 48)
+position = Vector2(1856, 72)
 gizmo_extents = 32.5
 
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(640, 672)
+position = Vector2(960, 984)
 
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -110,11 +88,12 @@ y_sort_enabled = true
 [node name="border" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="border"]
-position = Vector2(640, 720)
+position = Vector2(960, 720)
 collision_layer = 4
 script = ExtResource("2_xp0ov")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D"]
+position = Vector2(0, 360)
 shape = SubResource("WorldBoundaryShape2D_iu5ys")
 
 [node name="lineofdeath" type="Node2D" parent="."]
@@ -144,7 +123,7 @@ anchor_right = 1.0
 offset_left = -72.0
 offset_bottom = 26.0
 grow_horizontal = 0
-text = "V 0.0.0.5"
+text = "V 0.0.0.6"
 
 [node name="Instructions" type="Label" parent="CanvasLayer"]
 anchors_preset = 8
