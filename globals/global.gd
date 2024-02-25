@@ -53,6 +53,13 @@ var despawn_left = -200
 var despawn_right = 2150
 var despawn_upper = -1600
 
+#itemlabels
+var playerspeedlabelon = false
+var carspeedlabelon = false
+var dashlabelon = false
+var carspacinglabelon = false
+var updatelabels = false
+
 func reset():
 	score = -1
 	# playerspeed
@@ -84,6 +91,13 @@ func reset():
 	
 	#shield
 #	shield_enabled = false
+
+	#itemlabels
+	playerspeedlabelon = false
+	carspeedlabelon = false
+	dashlabelon = false
+	carspacinglabelon = false
+	updatelabels = false
 
 func incrementDifficulty(x):
 	if score != 0 && score % x == 0:

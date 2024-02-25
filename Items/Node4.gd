@@ -4,9 +4,12 @@ extends Area2D
 func _on_body_entered(body):
 	var metalist = body.get_meta_list()
 	if "Player" in metalist:
+		if Global.timer_mod == 0:
+			Global.carspacinglabelon = true
 		Global.timer_mod += 1
 		Global.timer_l += 0.007
 		Global.timer_h += 0.007
+		Global.updatelabels = true
 		queue_free()
 
 @warning_ignore("unused_parameter")

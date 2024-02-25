@@ -12,6 +12,7 @@ const LINE = preload("res://lineofdeath/lineofdeath.tscn")
 const POP = preload("res://GameUI/popups.tscn")
 const EXPLBARREL = preload("res://Barrel/exploding_barrel.tscn")
 const SHIELD = preload("res://Shield/shieldbattery.tscn")
+const ITEMLABELS = preload("res://Items/itemlabels.tscn")
 
 # spawning
 #var ITEM_LIST = []
@@ -25,7 +26,17 @@ const SHIELD = preload("res://Shield/shieldbattery.tscn")
 #const ITEM_NAME_LIST = ['0', '1', '2', '3']
 #var TERRAIN_LIST =['0', '1']
 
-var sidewalk = false;
+var sidewalk = false
+
+var iconlabels = ITEMLABELS.instantiate()
+var playerspeedicon = iconlabels.get_node("PlayerSpeedVbox").duplicate()
+var carspeedicon = iconlabels.get_node("CarSpeedVbox").duplicate()
+var dashicon = iconlabels.get_node("DashVbox").duplicate()
+var carspacingicon = iconlabels.get_node("CarSpacingVbox").duplicate()
+
+@onready var hboxlabels = $CanvasLayer/HBoxContainer 
+#var verticalseperator = VSeparator.new()
+
 	
 func itemSpawn():
 	
@@ -137,7 +148,6 @@ func _input(event):
 	|| event.is_action_pressed("left_a")\
 	|| event.is_action_pressed("right_d"):
 		$CanvasLayer/Instructions.visible = false
-		$CanvasLayer/Items.visible = true
 #	if event.is_action_released("dash"):
 #		print(Global.car_speed_scaling)
 		
@@ -156,10 +166,31 @@ func terrainSpawnLogic():
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	$CanvasLayer/Items/PlayerSpeed.text = str(Global.player_speed_mod)
-	$CanvasLayer/Items/CarSpeed.text = str(Global.car_speed_mod)
-	$CanvasLayer/Items/Dash.text = str(Global.dash_mod)
-	$CanvasLayer/Items/CarSpacing.text = str(Global.timer_mod)
+#	$CanvasLayer/Items/PlayerSpeed.text = str(Global.player_speed_mod)
+#	$CanvasLayer/Items/CarSpeed.text = str(Global.car_speed_mod)
+#	$CanvasLayer/Items/Dash.text = str(Global.dash_mod)
+#	$CanvasLayer/Items/CarSpacing.text = str(Global.timer_mod)
+	
+	if Global.updatelabels:
+		Global.updatelabels = false
+		if Global.playerspeedlabelon:
+			hboxlabels.add_child(playerspeedicon)
+			Global.playerspeedlabelon = false
+		if Global.carspeedlabelon:
+			hboxlabels.add_child(carspeedicon)
+			Global.carspeedlabelon = false
+		if Global.dashlabelon:
+			hboxlabels.add_child(dashicon)
+			Global.dashlabelon = false
+		if Global.carspacinglabelon:
+			hboxlabels.add_child(carspacingicon)
+			Global.carspacinglabelon = false
+		
+		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
+		carspeedicon.get_node("CarSpeed").text = str(Global.car_speed_mod)
+		dashicon.get_node("Dash").text = str(Global.dash_mod)
+		carspacingicon.get_node("CarSpacing").text = str(Global.timer_mod)
+	
 	if Global.dash && dashpopup: 
 		dashpopup = false
 		var dash_pop_up = POP.instantiate()
@@ -204,4 +235,6 @@ func _ready():
 	line.position.x = 0
 	line.position.y = 1500
 	$lineofdeath.add_child(line)
+	#labels
+#	verticalseperator.add_theme_constant_override("separation", 50)
 	

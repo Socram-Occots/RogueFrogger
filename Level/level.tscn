@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=9 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
 [ext_resource type="Texture2D" uid="uid://cl1ge0cjttlc4" path="res://RogueFroggerAssets/RFAssets/Level/speedometer.png" id="4_scmkf"]
-[ext_resource type="Script" path="res://Level/Sprite2D.gd" id="5_iks7j"]
 [ext_resource type="Texture2D" uid="uid://c5yiligvb4ic4" path="res://RogueFroggerAssets/RFAssets/Level/playerspeed.png" id="5_ix7mv"]
 [ext_resource type="Texture2D" uid="uid://dylgqx8tcrhdh" path="res://RogueFroggerAssets/RFAssets/Level/fire-dash.png" id="6_wxtfu"]
 [ext_resource type="Texture2D" uid="uid://43d5edeu46fw" path="res://RogueFroggerAssets/RFAssets/Level/carspacing.png" id="7_atnel"]
@@ -101,12 +100,9 @@ shape = SubResource("WorldBoundaryShape2D_iu5ys")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Score" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -95.0
-offset_right = 95.0
-offset_bottom = 60.0
+offset_left = 865.0
+offset_right = 1055.0
+offset_bottom = 200.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
@@ -266,118 +262,18 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "hold shift to walk"
 
-[node name="Items" type="Node2D" parent="CanvasLayer"]
-scale = Vector2(1.4, 1.4)
-
-[node name="PlayerSpeed" type="Label" parent="CanvasLayer/Items"]
-offset_left = 647.143
-offset_top = 420.714
-offset_right = 713.143
-offset_bottom = 465.714
-theme_override_font_sizes/font_size = 30
-text = "99"
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Items/PlayerSpeed"]
-texture_filter = 1
-position = Vector2(7.85693, 64.022)
-scale = Vector2(0.113453, 0.113367)
-texture = ExtResource("4_scmkf")
-region_rect = Rect2(2, 9, 60, 49)
-
-[node name="CarSpeed" type="Label" parent="CanvasLayer/Items"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 714.143
-offset_top = 420.714
-offset_right = 780.143
-offset_bottom = 465.714
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "99
-"
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Items/CarSpeed"]
-texture_filter = 1
-position = Vector2(7.99993, 64)
-scale = Vector2(0.968667, 0.966666)
-texture = ExtResource("5_ix7mv")
-region_rect = Rect2(65, 9, 30, 43)
-
-[node name="Dash" type="Label" parent="CanvasLayer/Items"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 782.143
-offset_top = 420.714
-offset_right = 848.143
-offset_bottom = 465.714
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 30
-text = "99
-"
-
-[node name="Sprite2D" type="TextureRect" parent="CanvasLayer/Items/Dash"]
-texture_filter = 1
-layout_mode = 0
-offset_left = -21.4285
-offset_top = 35.0
-offset_right = 36.5715
-offset_bottom = 93.0
-scale = Vector2(0.999442, 0.999442)
-texture = ExtResource("6_wxtfu")
-expand_mode = 1
-script = ExtResource("5_iks7j")
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/Items/Dash/Sprite2D"]
-self_modulate = Color(0.470588, 0.470588, 0.470588, 1)
-texture_filter = 1
-layout_mode = 1
-anchors_preset = -1
-offset_right = 516.0
-offset_bottom = 516.0
-scale = Vector2(0.113, 0.113)
-fill_mode = 5
-texture_progress = ExtResource("6_wxtfu")
-
-[node name="Timer" type="Timer" parent="CanvasLayer/Items/Dash/Sprite2D/TextureProgressBar"]
-one_shot = true
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Items/Dash/Sprite2D"]
-layout_mode = 1
-anchors_preset = 12
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -35.0
-grow_horizontal = 2
+offset_left = -1914.0
+offset_top = -199.0
+offset_right = 5741.0
+offset_bottom = 596.0
+grow_horizontal = 0
 grow_vertical = 0
-
-[node name="Label" type="Label" parent="CanvasLayer/Items/Dash/Sprite2D/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-theme = ExtResource("8_5vect")
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-clip_text = true
-
-[node name="CarSpacing" type="Label" parent="CanvasLayer/Items"]
-offset_left = 848.143
-offset_top = 420.714
-offset_right = 914.143
-offset_bottom = 465.714
-theme_override_font_sizes/font_size = 30
-text = "99
-"
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Items/CarSpacing"]
-texture_filter = 1
-position = Vector2(7.5714, 63.94)
-scale = Vector2(0.968667, 0.968667)
-texture = ExtResource("7_atnel")
-region_rect = Rect2(75, 75, 43, 44)
-
-[connection signal="timeout" from="CanvasLayer/Items/Dash/Sprite2D/TextureProgressBar/Timer" to="CanvasLayer/Items/Dash/Sprite2D" method="_on_timer_timeout"]
+scale = Vector2(0.25, 0.25)
+mouse_filter = 2
+alignment = 2
