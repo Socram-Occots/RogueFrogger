@@ -1,20 +1,31 @@
 extends Node
 
+#verison
+var version = "V 0.0.0.6"
+
+#score
 var score = -1
+
+#gamestate
+var defeat_var = false
+
+#input
+var input_active = false
+#var paused = false
 
 #base
 #player
-var player_base_speed = 250
+const player_base_speed = 250
 var player_prev_vel = 0
 #car
-var car_base_speed = 125
+const car_base_speed = 125
 #dash
-var dash_base = 1.5 - 0.03
-var dash_base_time = 0.3
-var dash_cool_down_base = 2
+const dash_base = 1.5 - 0.03
+const dash_base_time = 0.3
+const dash_cool_down_base = 2
 #timer
-var timer_base_l = 4.2
-var timer_base_h = 5.4
+const timer_base_l = 4.2
+const timer_base_h = 5.4
 
 # playerspeed
 var player_speed_mod = 0
@@ -48,10 +59,10 @@ var player_pos_y = 0
 #var shield_enabled = false
 
 #postions
-var despawn_lower = 1600
-var despawn_left = -200
-var despawn_right = 2150
-var despawn_upper = -1600
+const despawn_lower = 1600
+const despawn_left = -200
+const despawn_right = 2150
+const despawn_upper = -1600
 
 #itemlabels
 var playerspeedlabelon = false
@@ -60,8 +71,19 @@ var dashlabelon = false
 var carspacinglabelon = false
 var updatelabels = false
 
+#global popups
+var game_over_pop_up = null
+var pause_popup = null
+var tutorial_over_pop_up = null
+
 func reset():
+	#input
+	input_active = false
+	#paused = false
+	#score
 	score = -1
+	#gamestate
+	defeat_var = false
 	# playerspeed
 	player_prev_vel = 0
 	player_speed_mod = 0
@@ -108,3 +130,22 @@ func incrementDifficulty(x):
 			timer_l = 1.5
 		if (timer_h < 1.5):
 			timer_h = 1.5
+	
+func defeat():
+	get_tree().paused = true
+	game_over_pop_up.set_visible(true)
+	
+func pause():
+	if (game_over_pop_up != null && !game_over_pop_up.visible) &&\
+	(tutorial_over_pop_up == null || !tutorial_over_pop_up.visible):
+			get_tree().paused = true
+			pause_popup.set_visible(true)
+		
+func unpause():
+		get_tree().paused = false
+		pause_popup.set_visible(false)
+
+func tutorialDone():
+	get_tree().paused = true
+	tutorial_over_pop_up.set_visible(true)
+	

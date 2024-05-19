@@ -1,0 +1,15 @@
+[remap]
+
+importer="dialogue_manager_compiler_12"
+type="Resource"
+uid="uid://cdklthbj1yhgn"
+path="res://.godot/imported/dialoguefortutorial.dialogue-c8a614ee0bae617d5c37dad157d1e6f4.tres"
+
+[deps]
+
+source_file="res://Speech/dialoguefortutorial.dialogue"
+dest_files=["res://.godot/imported/dialoguefortutorial.dialogue-c8a614ee0bae617d5c37dad157d1e6f4.tres"]
+
+[params]
+
+defaults=true

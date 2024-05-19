@@ -53,7 +53,7 @@ func _on_body_entered(body):
 	if "Player" in metalist:
 #		print("car")
 		if !body.shield_up:
-			get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
+			Global.defeat()
 		else:
 			body.shield_comp = true
 			

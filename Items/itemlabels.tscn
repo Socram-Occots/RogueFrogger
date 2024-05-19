@@ -10,7 +10,6 @@
 [node name="Control" type="Node"]
 
 [node name="PlayerSpeedVbox" type="VBoxContainer" parent="."]
-anchors_preset = -1
 offset_right = 513.305
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
@@ -30,7 +29,6 @@ texture = ExtResource("1_m21p5")
 expand_mode = 3
 
 [node name="CarSpeedVbox" type="VBoxContainer" parent="."]
-anchors_preset = -1
 offset_right = 513.305
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
@@ -50,7 +48,6 @@ texture = ExtResource("2_3mtff")
 expand_mode = 3
 
 [node name="DashVbox" type="VBoxContainer" parent="."]
-anchors_preset = -1
 offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
@@ -101,7 +98,6 @@ vertical_alignment = 1
 clip_text = true
 
 [node name="CarSpacingVbox" type="VBoxContainer" parent="."]
-anchors_preset = -1
 offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)

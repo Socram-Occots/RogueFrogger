@@ -64,7 +64,7 @@ func _on_explosionbarrelexplosion_body_entered(body):
 	var metalist = body.get_meta_list()
 	if "Player" in metalist:
 		if !body.shield_up:
-			get_tree().change_scene_to_file("res://GameUI/game_ui.tscn")
+			Global.defeat()
 		else:
 			body.shield_comp = true
 	for i in ["Element"]:

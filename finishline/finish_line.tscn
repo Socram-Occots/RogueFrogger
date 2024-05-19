@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://drn54gfulunxr"]
+
+[ext_resource type="Texture2D" uid="uid://cx31w7ipn7tgh" path="res://RogueFroggerAssets/RFAssets/finishline/checkered.webp" id="1_ji2js"]
+
+[node name="finish_line" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+modulate = Color(1, 1, 1, 0.498039)
+texture_repeat = 2
+scale = Vector2(1.5, 1.125)
+antialiased = true
+texture = ExtResource("1_ji2js")
+texture_offset = Vector2(1.14, 0)
+texture_scale = Vector2(7.815, 7.815)
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 64, 0, 64)

@@ -1,0 +1,327 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2c1lkwj4en4n"]
+
+[ext_resource type="Script" path="res://lineofdeath/lineofblocking.gd" id="1_0lcms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l58og"]
+size = Vector2(1280, 64)
+
+[node name="lineofblocking" type="StaticBody2D"]
+scale = Vector2(1.5, 1.46382)
+collision_layer = 64
+script = ExtResource("1_0lcms")
+metadata/LineOfDeath = false
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+antialiased = true
+polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 64, 0, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(640, 32)
+shape = SubResource("RectangleShape2D_l58og")
+
+[node name="Node" type="Node2D" parent="."]
+scale = Vector2(0.667, 0.667)
+
+[node name="Line2D" type="Line2D" parent="Node"]
+position = Vector2(4.47035e-08, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D2" type="Line2D" parent="Node"]
+position = Vector2(100, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D2"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D3" type="Line2D" parent="Node"]
+position = Vector2(200, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D3"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D4" type="Line2D" parent="Node"]
+position = Vector2(300, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D4"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D5" type="Line2D" parent="Node"]
+position = Vector2(400, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D5"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D6" type="Line2D" parent="Node"]
+position = Vector2(500, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D6"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D7" type="Line2D" parent="Node"]
+position = Vector2(600, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D7"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D8" type="Line2D" parent="Node"]
+position = Vector2(700, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D8"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D9" type="Line2D" parent="Node"]
+position = Vector2(800, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D9"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D10" type="Line2D" parent="Node"]
+position = Vector2(900, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D10"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D11" type="Line2D" parent="Node"]
+position = Vector2(1000, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D11"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D12" type="Line2D" parent="Node"]
+position = Vector2(1100, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D12"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D13" type="Line2D" parent="Node"]
+position = Vector2(1200, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D13"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D14" type="Line2D" parent="Node"]
+position = Vector2(1300, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D14"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D15" type="Line2D" parent="Node"]
+position = Vector2(1400, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D15"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D16" type="Line2D" parent="Node"]
+position = Vector2(1500, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D16"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D17" type="Line2D" parent="Node"]
+position = Vector2(1600, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D17"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D18" type="Line2D" parent="Node"]
+position = Vector2(1700, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D18"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D19" type="Line2D" parent="Node"]
+position = Vector2(1800, 0)
+scale = Vector2(1.82, 1.4293)
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true
+
+[node name="Line2D" type="Line2D" parent="Node/Line2D19"]
+position = Vector2(65.365, 0)
+rotation = 1.5708
+points = PackedVector2Array(60, 5, 5, 60)
+width = 14.655
+default_color = Color(1, 0, 0, 1)
+antialiased = true

@@ -1,0 +1,52 @@
+~ WELCOME
+
+Tutorial: Welcome to the tutorial! Here we will introduce you to the mechanics of this game. [next=auto]
+Tutorial: First things first, the only way to go is forward. [next=auto]
+Tutorial: Use the WASD key or arrow keys of move around. 
+
+=> END
+
+~ BARREL
+
+Tutorial: These are obstacles. They will get in your way! [next=auto]
+Tutorial: See that red one over there, you can push it and blow up things! [next=auto]
+Tutorial: Careful because that includes you too!
+
+=> END
+
+~ SPEED
+
+Tutorial: Collecting this item increases how fast you move.
+
+=> END
+
+~ CARSPEED
+
+Tutorial: This item decreases how fast the cars move.
+
+=> END
+
+~ DASH
+
+Tutorial: This item gives you a tiny dash. It may be small, but picking up more of them makes it stronger! [next=auto]
+Tutorial: Move + SPACEBAR to dash.
+
+=> END
+
+~ SPACING
+
+Tutorial: This item helps you by making cars spawn slower. The more spacious traffic is, the easier it is to weave through it!
+
+=> END
+
+~ SHIELD
+
+Tutorial: This rare Shield will give you a maximum of one extra life. Stopping you from losing to a dangerous hazard.
+
+=> END
+
+~ FINAL
+
+Tutorial: You are ready to go! Go out there and get a score of 20![next=2]
+
+=> END

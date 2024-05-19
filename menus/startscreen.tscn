@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw2h6olocn3pw"]
+
+[ext_resource type="Script" path="res://menus/Start.gd" id="1_bkxp6"]
+[ext_resource type="Script" path="res://menus/Quit.gd" id="2_bjh6m"]
+[ext_resource type="Script" path="res://menus/LeaderBoards.gd" id="2_pxtme"]
+[ext_resource type="Script" path="res://menus/Credits.gd" id="3_8ev4w"]
+[ext_resource type="Script" path="res://menus/Version.gd" id="5_851gh"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 1080)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_bottom = 1080.0
+grow_horizontal = 0
+theme_override_constants/separation = 0
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 216)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+action_mode = 0
+text = "Start"
+icon_alignment = 1
+script = ExtResource("1_bkxp6")
+
+[node name="Tutorial" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 216)
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+action_mode = 0
+text = "Tutorial"
+icon_alignment = 1
+script = ExtResource("3_8ev4w")
+
+[node name="LeaderBoards" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 216)
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+action_mode = 0
+text = "Leader
+Board"
+icon_alignment = 1
+script = ExtResource("2_pxtme")
+
+[node name="Credits" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 216)
+layout_mode = 2
+theme_override_font_sizes/font_size = 70
+action_mode = 0
+text = "Credits"
+icon_alignment = 1
+script = ExtResource("3_8ev4w")
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(250, 216)
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+action_mode = 0
+text = "Quit"
+icon_alignment = 1
+script = ExtResource("2_bjh6m")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Version" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 72.0
+grow_vertical = 0
+script = ExtResource("5_851gh")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="VBoxContainer/Start" to="VBoxContainer/Start" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Tutorial" to="VBoxContainer/Tutorial" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/LeaderBoards" to="VBoxContainer/LeaderBoards" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Credits" to="VBoxContainer/Credits" method="_on_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="VBoxContainer/Quit" method="_on_pressed"]

@@ -13,6 +13,9 @@ const POP = preload("res://GameUI/popups.tscn")
 const EXPLBARREL = preload("res://Barrel/exploding_barrel.tscn")
 const SHIELD = preload("res://Shield/shieldbattery.tscn")
 const ITEMLABELS = preload("res://Items/itemlabels.tscn")
+const DEFEAT = preload("res://GameUI/game_over.tscn")
+const PAUSE = preload("res://GameUI/pause_panel.tscn")
+
 
 # spawning
 #var ITEM_LIST = []
@@ -21,7 +24,7 @@ const ITEMLABELS = preload("res://Items/itemlabels.tscn")
 @onready var TERRAIN = []
 #var num_items = 5
 @onready var dashpopup = true 
-
+@onready var line = null
 # randomization
 #const ITEM_NAME_LIST = ['0', '1', '2', '3']
 #var TERRAIN_LIST =['0', '1']
@@ -105,7 +108,6 @@ func carSpawn():
 		car.position.x = Global.despawn_right
 		
 	$Ysort.add_child(car)
-	
 
 func firstTerrainSpawn(xpos, ypos):
 #	var tile_num = randi_range(0,1)
@@ -148,9 +150,13 @@ func _input(event):
 	|| event.is_action_pressed("left_a")\
 	|| event.is_action_pressed("right_d"):
 		$CanvasLayer/Instructions.visible = false
-#	if event.is_action_released("dash"):
-#		print(Global.car_speed_scaling)
-		
+		Global.input_active = true
+	elif event.is_action_released("down_s")\
+	|| event.is_action_released("up_w")\
+	|| event.is_action_released("left_a")\
+	|| event.is_action_released("right_d"):
+		Global.input_active = false
+	
 func terrainSpawnLogic():
 	if sidewalk:
 		terrainSpawn(1, 0, $spawnterrain.global_position.y)
@@ -164,13 +170,7 @@ func terrainSpawnLogic():
 		TERRAIN[0].queue_free()
 		TERRAIN.remove_at(0)
 
-@warning_ignore("unused_parameter")
-func _process(delta):
-#	$CanvasLayer/Items/PlayerSpeed.text = str(Global.player_speed_mod)
-#	$CanvasLayer/Items/CarSpeed.text = str(Global.car_speed_mod)
-#	$CanvasLayer/Items/Dash.text = str(Global.dash_mod)
-#	$CanvasLayer/Items/CarSpacing.text = str(Global.timer_mod)
-	
+func update_labels():
 	if Global.updatelabels:
 		Global.updatelabels = false
 		if Global.playerspeedlabelon:
@@ -190,11 +190,14 @@ func _process(delta):
 		carspeedicon.get_node("CarSpeed").text = str(Global.car_speed_mod)
 		dashicon.get_node("Dash").text = str(Global.dash_mod)
 		carspacingicon.get_node("CarSpacing").text = str(Global.timer_mod)
-	
+
+func dash_check():
 	if Global.dash && dashpopup: 
 		dashpopup = false
 		var dash_pop_up = POP.instantiate()
 		$CanvasLayer.add_child(dash_pop_up)
+
+func terrain_check():
 	if Global.spawnTerrain:
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
 		Global.spawnTerrain = false
@@ -202,6 +205,12 @@ func _process(delta):
 		Global.incrementDifficulty(2)
 		if Global.score % 100 == 0:
 			spawnBorder(960, Global.player_pos_y)
+
+@warning_ignore("unused_parameter")
+func _process(delta):
+	update_labels()
+	dash_check()
+	terrain_check()
 
 func spawnBorder(x, y):
 	var border = BORDER.instantiate().duplicate()
@@ -214,7 +223,28 @@ func spawnBorder(x, y):
 		BORDERS[0].queue_free()
 		BORDERS.remove_at(0)
 
+func spawnLineOfDeath():
+	line = LINE.instantiate()
+	line.position.x = 0
+	line.position.y = 1500
+	$lineofdeath.add_child(line)
+
+func loadDefeat():
+	var losepopup = DEFEAT.instantiate().duplicate()
+	losepopup.visible = false
+	$CanvasLayer.add_child(losepopup)
+	Global.game_over_pop_up = losepopup
+
+func loadPause():
+	var pausepopup = PAUSE.instantiate().duplicate()
+	pausepopup.visible = false
+	$CanvasLayer.add_child(pausepopup)
+	Global.pause_popup = pausepopup
+
 func _ready():
+	#load pause and game over menu
+	loadDefeat()
+	loadPause()
 	#player
 	var player = CROSSER.instantiate()
 	player.position.x = $PlayerStart.global_position.x
@@ -231,10 +261,6 @@ func _ready():
 		terrainSpawnLogic()
 	$CanvasLayer/Score.text = "Score " + str(Global.score)
 	# lineofdeath
-	var line = LINE.instantiate()
-	line.position.x = 0
-	line.position.y = 1500
-	$lineofdeath.add_child(line)
+	spawnLineOfDeath()
 	#labels
-#	verticalseperator.add_theme_constant_override("separation", 50)
-	
+
