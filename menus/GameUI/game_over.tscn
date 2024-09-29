@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b40fti5fs34lr"]
+[gd_scene load_steps=6 format=3 uid="uid://drdva4t3w7na0"]
 
-[ext_resource type="Script" path="res://GameUI/pause_panel.gd" id="1_he7c6"]
-[ext_resource type="Material" uid="uid://dw5ry2b5wv5ra" path="res://RogueFroggerAssets/RFAssets/shaders/blur.tres" id="2_c0ale"]
+[ext_resource type="Script" path="res://menus/GameUI/game_over.gd" id="1_7gqty"]
+[ext_resource type="Material" uid="uid://dw5ry2b5wv5ra" path="res://RogueFroggerAssets/RFAssets/shaders/blur.tres" id="2_87331"]
 
 [sub_resource type="Animation" id="Animation_wqa0x"]
 length = 0.001
@@ -39,18 +39,20 @@ _data = {
 "startpause": SubResource("Animation_f5j0v")
 }
 
-[node name="pause" type="Control"]
+[node name="game_over" type="Control"]
 process_mode = 3
+top_level = true
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_he7c6")
+script = ExtResource("1_7gqty")
 
 [node name="blur" type="ColorRect" parent="."]
-material = ExtResource("2_c0ale")
+material = ExtResource("2_87331")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,12 +76,12 @@ layout_mode = 2
 offset_right = 500.0
 offset_bottom = 500.0
 
-[node name="pause" type="Label" parent="CenterContainer/ColorRect/VBoxContainer"]
+[node name="game over" type="Label" parent="CenterContainer/ColorRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 164)
 layout_direction = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Paused
+text = "GAME OVER!
 "
 horizontal_alignment = 1
 vertical_alignment = 1

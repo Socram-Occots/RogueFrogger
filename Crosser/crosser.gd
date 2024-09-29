@@ -28,7 +28,7 @@ func move_player():
 		velocity.y -= 1
 	velocity = velocity.normalized() * Global.player_speed_scaling
 
-	if Input.is_action_pressed("shift"):
+	if Input.is_action_pressed("walk"):
 		velocity /= 2
 
 
@@ -42,8 +42,7 @@ func _process(delta):
 	Global.player_pos_y = global_position.y
 #	if Input.is_action_pressed("ui_copy"): print(position)
 	
-	
-	if Global.dash && dashcooldown && Input.is_action_just_pressed("dash") && velocity != Vector2.ZERO && candash:
+	if Input.is_action_just_pressed("dash") && Global.dash && dashcooldown && velocity != Vector2.ZERO && candash:
 #		print(Global.dash_scaling)
 		Global.dash_cool_down_bool = true
 		velocity *= Global.dash_scaling

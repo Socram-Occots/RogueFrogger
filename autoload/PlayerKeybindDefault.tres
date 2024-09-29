@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=8 format=3 uid="uid://gko0na7yltfq"]
+
+[ext_resource type="Script" path="res://autoload/PlayerKeybindResource.gd" id="1_ibwj6"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_dlwue"]
+device = -1
+physical_keycode = 32
+unicode = 32
+
+[sub_resource type="InputEventKey" id="InputEventKey_3sd2q"]
+device = -1
+physical_keycode = 83
+unicode = 83
+
+[sub_resource type="InputEventKey" id="InputEventKey_op4a0"]
+device = -1
+physical_keycode = 65
+unicode = 97
+
+[sub_resource type="InputEventKey" id="InputEventKey_6285q"]
+device = -1
+physical_keycode = 68
+unicode = 100
+
+[sub_resource type="InputEventKey" id="InputEventKey_sqax4"]
+device = -1
+physical_keycode = 87
+unicode = 119
+
+[sub_resource type="InputEventKey" id="InputEventKey_yfkmm"]
+device = -1
+physical_keycode = 4194325
+
+[resource]
+script = ExtResource("1_ibwj6")
+DEFAULT_MOVE_UP_KEY = SubResource("InputEventKey_sqax4")
+DEFAULT_MOVE_DOWN_KEY = SubResource("InputEventKey_3sd2q")
+DEFAULT_MOVE_RIGHT_KEY = SubResource("InputEventKey_6285q")
+DEFAULT_MOVE_LEFT_KEY = SubResource("InputEventKey_op4a0")
+DEFAULT_MOVE_DASH_KEY = SubResource("InputEventKey_dlwue")
+DEFAULT_MOVE_WALK_KEY = SubResource("InputEventKey_yfkmm")

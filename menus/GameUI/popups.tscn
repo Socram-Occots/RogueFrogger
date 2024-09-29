@@ -1,15 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0bwgf3gocuv8"]
 
-[ext_resource type="Script" path="res://GameUI/Panel.gd" id="1_nnd1k"]
+[ext_resource type="Script" path="res://menus/GameUI/Panel.gd" id="1_nnd1k"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="2_v64i0"]
 
 [node name="poopup" type="Control"]
+show_behind_parent = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_nnd1k")
 
 [node name="dashpopup" type="ColorRect" parent="."]
 layout_mode = 1
@@ -26,7 +29,6 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
 color = Color(0.443137, 0.458824, 0.443137, 1)
-script = ExtResource("1_nnd1k")
 
 [node name="Label" type="Label" parent="dashpopup"]
 layout_mode = 1

@@ -75,6 +75,7 @@ var updatelabels = false
 var game_over_pop_up = null
 var pause_popup = null
 var tutorial_over_pop_up = null
+var options_pop_up = null
 
 func reset():
 	#input
@@ -149,3 +150,17 @@ func tutorialDone():
 	get_tree().paused = true
 	tutorial_over_pop_up.set_visible(true)
 	
+func options_up():
+	if pause_popup != null && pause_popup.visible == true:
+		pause_popup.set_process(false)
+	elif score == -1:
+		get_tree().paused = true
+	options_pop_up.set_visible(true)
+	
+func options_down():
+	if pause_popup != null && pause_popup.visible == true:
+		pause_popup.set_process(true)
+	elif score == -1:
+		get_tree().paused = false
+	options_pop_up.set_visible(false)
+

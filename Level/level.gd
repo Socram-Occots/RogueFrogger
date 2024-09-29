@@ -9,12 +9,12 @@ const CROSSER = preload("res://Crosser/crosser.tscn")
 const DUMP = preload("res://Dumpster/dumpster.tscn")
 const BORDER = preload("res://Level/border.tscn")
 const LINE = preload("res://lineofdeath/lineofdeath.tscn")
-const POP = preload("res://GameUI/popups.tscn")
+const POP = preload("res://menus/GameUI/popups.tscn")
 const EXPLBARREL = preload("res://Barrel/exploding_barrel.tscn")
 const SHIELD = preload("res://Shield/shieldbattery.tscn")
 const ITEMLABELS = preload("res://Items/itemlabels.tscn")
-const DEFEAT = preload("res://GameUI/game_over.tscn")
-const PAUSE = preload("res://GameUI/pause_panel.tscn")
+const DEFEAT = preload("res://menus/GameUI/game_over.tscn")
+const PAUSE = preload("res://menus/GameUI/pause_panel.tscn")
 
 
 # spawning

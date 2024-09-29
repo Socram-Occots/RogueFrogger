@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d0iifqcwgsxbb"]
 
-[ext_resource type="Script" path="res://GameUI/game_ui.gd" id="1_2spks"]
+[ext_resource type="Script" path="res://menus/GameUI/game_ui.gd" id="1_2spks"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="2_hmaht"]
 [ext_resource type="Texture2D" uid="uid://du6igyi371djf" path="res://RogueFroggerAssets/RFAssets/Screens/SideWalkTexture.png" id="2_l825q"]
 
