@@ -80,3 +80,6 @@ func reset_buttons():
 		if i.button:
 			i.button.toggle_mode = true
 			i.set_process_unhandled_key_input(false)
+
+func _on_button_focus_exited() -> void:
+	pass

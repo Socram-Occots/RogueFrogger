@@ -2,7 +2,7 @@ extends Control
 
 @onready var option_button = $HBoxContainer/OptionButton as OptionButton
 
-const RESOLUTION_DICTIONARY : Dictionary = {
+var RESOLUTION_DICTIONARY : Dictionary = {
 	"480 x 234" : Vector2i(480, 234),
 	"640 x 360" : Vector2i(640, 360),
 	"960 x 540" : Vector2i(960, 540),
@@ -23,10 +23,22 @@ var DISPLAY_RESOLUTION_KEYS : Array = RESOLUTION_DICTIONARY.keys()
 
 
 func _ready():
+	var current_screen : int = DisplayServer.window_get_current_screen()
+	var displaysize = DisplayServer.screen_get_size(current_screen)
+	remove_higher_res(displaysize.x, displaysize.y)
 	option_button.item_selected.connect(on_resoltion_selected)
 	add_resolution_items()
 	load_data()
 	select_current_display_resolution()
+
+func remove_higher_res(viewportX: int, viewportY: int):
+	var total_view_pixels : int = viewportX * viewportY
+	for key in DISPLAY_RESOLUTION_KEYS:
+		var tempres : Vector2i = RESOLUTION_DICTIONARY[key]
+		if tempres.x * tempres.y > total_view_pixels:
+			RESOLUTION_DICTIONARY.erase(key)
+			
+	DISPLAY_RESOLUTION_KEYS = RESOLUTION_DICTIONARY.keys()
 
 func load_data() -> void:
 	on_resoltion_selected(SettingsDataContainer.get_resolution_index())
@@ -37,6 +49,8 @@ func add_resolution_items() -> void:
 		
 func on_resoltion_selected(index: int) -> void:
 	SettingsSignalBus.emit_on_resolution_selected(index)
+	# default dpi is 96
+	#var dpi = DisplayServer.screen_get_dpi() as float
 	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
 	center_window()
 	

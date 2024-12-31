@@ -81,9 +81,10 @@ func reset():
 	#input
 	input_active = false
 	#paused = false
+	
 	#score
 	score = -1
-	#gamestate
+	# gamestate
 	defeat_var = false
 	# playerspeed
 	player_prev_vel = 0
@@ -163,4 +164,3 @@ func options_down():
 	elif score == -1:
 		get_tree().paused = false
 	options_pop_up.set_visible(false)
-

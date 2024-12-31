@@ -48,6 +48,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_vmw6d")
 [node name="Button" type="Button" parent="HBoxContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+focus_mode = 0
 theme_override_font_sizes/font_size = 50
 toggle_mode = true
 text = "key_rebind"
@@ -57,4 +58,5 @@ layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_mhria")
 
+[connection signal="focus_exited" from="HBoxContainer/Button" to="." method="_on_button_focus_exited"]
 [connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]
