@@ -1,11 +1,11 @@
 extends TextureRect
 
 
-@onready var time_label = $"../Sprite2D/MarginContainer/Label"
-@onready var bar = $"../Sprite2D/TextureProgressBar"
-@onready var timer = $"../Sprite2D/TextureProgressBar/Timer"
-@onready var on = false
-@onready var cool_down_time = Global.dash_cool_down
+@onready var time_label : Label = $"../Sprite2D/MarginContainer/Label"
+@onready var bar : TextureProgressBar = $"../Sprite2D/TextureProgressBar"
+@onready var timer : Timer = $"../Sprite2D/TextureProgressBar/Timer"
+@onready var on : bool = false
+@onready var cool_down_time : float = Global.dash_cool_down
 
 func _ready():
 	time_label.hide()

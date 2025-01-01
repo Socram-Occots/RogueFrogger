@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var activated = false
+@onready var activated : bool = false
 
 @warning_ignore("unused_parameter")
 func _process(delta):
@@ -12,6 +12,6 @@ func _process(delta):
 
 @warning_ignore("unused_parameter")
 func _on_body_entered(body):
-	var metalist = body.get_meta_list()
+	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
 		Global.defeat()

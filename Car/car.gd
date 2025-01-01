@@ -1,11 +1,11 @@
 extends Area2D
 
-const CAR_LIST = ['Grey1', 'Grey2', 'colors', "Yellow1", 'Yellow2', "motorcycle"]
-const CAR_COLORS = ["red", "blue", "green", "cyan", "purple", "pink"]
-const MOTORC_COlORS = ["red", "blue", "green", "yellow", "cyan", "purple", "orange"]
-var no_ignore = false
-var car_speed = 0
-var direction = 0
+const CAR_LIST : Array[String] = ['Grey1', 'Grey2', 'colors', "Yellow1", 'Yellow2', "motorcycle"]
+const CAR_COLORS : Array[String] = ["red", "blue", "green", "cyan", "purple", "pink"]
+const MOTORC_COlORS : Array[String] = ["red", "blue", "green", "yellow", "cyan", "purple", "orange"]
+var no_ignore : bool = false
+var car_speed : float = 0
+var direction : int = 0
 #var current_car = ""
 
 func _ready():
@@ -20,7 +20,7 @@ func _ready():
 		car_speed = self.get_meta("speed")
 		direction = self.get_meta("direction")
 #	randomize()
-	var current_car = CAR_LIST[randi() % CAR_LIST.size()]
+	var current_car : String = CAR_LIST[randi() % CAR_LIST.size()]
 	
 	if current_car == "motorcycle":
 		$AnimatedSprite2DMotorcycle.visible = true
@@ -49,7 +49,7 @@ func _process(delta):
 @warning_ignore("unused_parameter")
 func _on_body_entered(body):
 #	print(current_car)
-	var metalist = body.get_meta_list()
+	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
 #		print("car")
 		if !body.shield_up:
@@ -58,7 +58,7 @@ func _on_body_entered(body):
 			body.shield_comp = true
 			
 func _on_body_exited(body):
-	var metalist = body.get_meta_list()
+	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
 		body.shield_gone = true
 		body.shield_comp = false

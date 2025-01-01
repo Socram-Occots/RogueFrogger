@@ -1,9 +1,9 @@
 extends Control
 
-const OPTIONS = preload("res://menus/Options/option_menu.tscn")
+const OPTIONS : Resource = preload("res://menus/Options/option_menu.tscn")
 
 func loadOptions():
-	var optionspopup = OPTIONS.instantiate().duplicate()
+	var optionspopup : Control = OPTIONS.instantiate().duplicate()
 	optionspopup.visible = false
 	$CanvasLayer.add_child(optionspopup)
 	Global.options_pop_up = optionspopup

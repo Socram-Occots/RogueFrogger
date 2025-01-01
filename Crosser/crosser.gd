@@ -1,14 +1,14 @@
 extends CharacterBody2D
 
-@onready var candash = true
-@onready var dashing = false
-@onready var dashcooldown = true
-@onready var shield_up = false
-@onready var shield_comp = false
-@onready var shield_ready = true
-@onready var shield_gone = false
-@onready var animated = $"playermove"
-@onready var shieldAnimation = $shield
+@onready var candash : bool = true
+@onready var dashing : bool = false
+@onready var dashcooldown : bool = true
+@onready var shield_up : bool = false
+@onready var shield_comp : bool = false
+@onready var shield_ready : bool = true
+@onready var shield_gone : bool = false
+@onready var animated : AnimatedSprite2D = $"playermove"
+@onready var shieldAnimation : AnimatedSprite2D = $shield
 
 
 func _ready():
@@ -17,7 +17,7 @@ func _ready():
 	shieldAnimation.animation = "shield"
 	shieldAnimation.frame = 0
 
-func move_player():
+func move_player() -> void:
 	if Input.is_action_pressed("left_a"):
 		velocity.x -= 1
 	if Input.is_action_pressed("right_d"):
@@ -61,7 +61,7 @@ func _process(delta):
 	# tracking velocity for rigidbodies
 	if velocity != Vector2.ZERO:
 		Global.player_prev_vel = velocity
-		var vLength = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
+		var vLength : float = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
 		animated.speed_scale = vLength/Global.player_base_speed
 
 	player_animation()
@@ -76,7 +76,7 @@ func _process(delta):
 		await get_tree().create_timer(0.1).timeout
 		Global.player_prev_vel = Vector2.ZERO
 	
-func player_animation():
+func player_animation() -> void:
 #	$"AnimatedSprite2D".flip_h = false
 	if velocity == Vector2.ZERO: 
 		animated.play("stand")
@@ -97,13 +97,13 @@ func player_animation():
 #		$"AnimatedSprite2D".play("walk_side")
 		
 
-func player_shield():
+func player_shield() -> void:
 	if shield_ready && shield_up:
 		shieldAnimation.visible = true
 		shieldAnimation.play("shield")
 		shield_ready = false
 		
-func shield_compromised():
+func shield_compromised() -> void:
 	if shield_comp:
 #		print("shield_comp true")
 		shieldAnimation.modulate = "ff0000"

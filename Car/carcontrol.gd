@@ -1,8 +1,8 @@
 extends Node2D
 
-var car_speed = Global.car_base_speed
-var car_speed_l = car_speed
-var car_speed_h = car_speed
+var car_speed : float = Global.car_base_speed
+var car_speed_l : float = car_speed
+var car_speed_h : float = car_speed
 
 func _ready():
 	car_speed_l = (Global.car_speed_scaling*0.7)
@@ -25,7 +25,7 @@ func _ready():
 	else:
 		$car.set_meta("direction", 1)
 		
-	var auto = $car.duplicate()
+	var auto : Area2D = $car.duplicate()
 	auto.visible = true
 	$cars.add_child(auto)
 	$Timer.start(randf_range(Global.timer_l, Global.timer_h))
@@ -36,6 +36,6 @@ func _process(delta):
 		queue_free()
 
 func _on_timer_timeout():
-	var auto = $car.duplicate()
+	var auto : Area2D = $car.duplicate()
 	auto.visible = true
 	$cars.add_child(auto)

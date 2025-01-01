@@ -1,9 +1,9 @@
 extends RigidBody2D
 
 #@onready var not_moving = true
-@onready var exploding = false
-@onready var animationExplo = $AnimatedSprite2D
-@onready var explosionCol = $explosionbarrelexplosion/CollisionShape2D
+@onready var exploding : bool = false
+@onready var animationExplo : AnimatedSprite2D = $AnimatedSprite2D
+@onready var explosionCol : CollisionShape2D = $explosionbarrelexplosion/CollisionShape2D
 @warning_ignore("unused_parameter")
 
 func _process(delta):
@@ -22,7 +22,7 @@ func _ready():
 	animationExplo.animation = "explosion"
 	animationExplo.frame = 0
 	
-func explosion():
+func explosion() -> void:
 	if exploding: return
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0
@@ -38,7 +38,7 @@ func explosion():
 func _on_impulse_body_entered(body):
 	if body == self: return
 #	print("impact")
-	var metalist = body.get_meta_list()
+	var metalist : PackedStringArray = body.get_meta_list()
 	if exploding: return
 #	if not_moving && "Player" in metalist:
 	if "Player" in metalist:
@@ -52,7 +52,7 @@ func _on_impulse_body_entered(body):
 			explosion()
 		
 func _on_impulse_area_entered(area):
-	var metalist = area.get_meta_list()
+	var metalist : PackedStringArray = area.get_meta_list()
 	if exploding: return
 	for i in ["Car", "Item"]:
 		if i in metalist:
@@ -61,7 +61,7 @@ func _on_impulse_area_entered(area):
 # explosions
 # bodies
 func _on_explosionbarrelexplosion_body_entered(body):
-	var metalist = body.get_meta_list()
+	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
 		if !body.shield_up:
 			Global.defeat()
@@ -74,18 +74,16 @@ func _on_explosionbarrelexplosion_body_entered(body):
 		body.explosion()
 	
 func _on_explosionbarrelexplosion_body_exited(body):
-	var metalist = body.get_meta_list()
+	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
 		body.shield_gone = true
 		body.shield_comp = false
-		
+
 # areas
 func _on_explosionbarrelexplosion_area_entered(area):
-	var metalist = area.get_meta_list()
+	var metalist : PackedStringArray = area.get_meta_list()
 	for i in ["Car", "Item", "ExplodingBarrel"]:
 		if i in metalist:
 			area.queue_free()
 	if "ExplodingBarrel" in metalist:
 		area.explosion()
-
-

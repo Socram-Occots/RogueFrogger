@@ -29,4 +29,3 @@ func on_aspect_selected(index: int) -> void:
 func select_current_aspect() -> void:
 	var index = ASPECT_DICTIONARY.values().find(get_window().content_scale_aspect)
 	option_button.select(index)
-

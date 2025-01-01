@@ -24,7 +24,7 @@ var DISPLAY_RESOLUTION_KEYS : Array = RESOLUTION_DICTIONARY.keys()
 
 func _ready():
 	var current_screen : int = DisplayServer.window_get_current_screen()
-	var displaysize = DisplayServer.screen_get_size(current_screen)
+	var displaysize : Vector2i = DisplayServer.screen_get_size(current_screen)
 	remove_higher_res(displaysize.x, displaysize.y)
 	option_button.item_selected.connect(on_resoltion_selected)
 	add_resolution_items()
@@ -55,12 +55,12 @@ func on_resoltion_selected(index: int) -> void:
 	center_window()
 	
 func center_window() -> void:
-	var center_screen = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2
-	var window_size = get_window().get_size_with_decorations()
+	var center_screen : Vector2i = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2
+	var window_size : Vector2i = get_window().get_size_with_decorations()
 	get_window().set_position(center_screen - window_size/2)
 	
 func select_current_display_resolution() -> void:
-	var current_resolution = DisplayServer.window_get_size()
-	var current_resolution_string = str(current_resolution.x) + " x " + str(current_resolution.y)
-	var index = DISPLAY_RESOLUTION_KEYS.find(current_resolution_string)
+	var current_resolution : Vector2i = DisplayServer.window_get_size()
+	var current_resolution_string : String = str(current_resolution.x) + " x " + str(current_resolution.y)
+	var index : int = DISPLAY_RESOLUTION_KEYS.find(current_resolution_string)
 	option_button.select(index)
