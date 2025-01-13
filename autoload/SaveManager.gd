@@ -19,7 +19,6 @@ func load_settings_data() -> void:
 	if not FileAccess.file_exists(SETTINGS_SAVE_PATH):
 		return
 	var save_settings_data_file = FileAccess.open_encrypted_with_pass(SETTINGS_SAVE_PATH, FileAccess.READ, "Sugma")
-	@warning_ignore("unused_variable")
 	var loaded_data : Dictionary = {}
 	
 	while save_settings_data_file.get_position() < save_settings_data_file.get_length():

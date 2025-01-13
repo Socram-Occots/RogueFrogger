@@ -242,6 +242,8 @@ animation = &"shield"
 limit_left = 0
 limit_right = 1920
 limit_bottom = 1080
+limit_smoothed = true
+position_smoothing_enabled = true
 
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true

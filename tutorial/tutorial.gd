@@ -4,7 +4,6 @@ extends "res://Level/level_gen.gd"
 # importing
 const DIALOG : Resource  = preload("res://Speech/dialoguefortutorial.dialogue")
 const DIALOGBOX : Resource  = preload("res://Speech/balloon.tscn")
-const FINISHLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const TUTDONE : Resource  = preload("res://menus/GameUI/tutorial_over.tscn")
 const BLINE : Resource  = preload("res://lineofdeath/lineofblocking.tscn")
 
@@ -27,55 +26,55 @@ const BLINE : Resource  = preload("res://lineofdeath/lineofblocking.tscn")
 func tutorialItemSpawn() -> void:
 	var i : int = 0
 	var dir : String = "spawnterrain/Node" + str(i)
-	if tutorial_state == 0:
-		dir = "spawnterrain/Node" + str(5)
-		var barrel : StaticBody2D = BARREL.instantiate().duplicate()
-		barrel.visible = true
-		barrel.position = get_node(dir).global_position
-		$Ysort.add_child(barrel)
-		dir = "spawnterrain/Node" + str(6)
-		var dumpster : StaticBody2D = DUMP.instantiate().duplicate()
-		dumpster.visible = true
-		dumpster.position = get_node(dir).global_position
-		$Ysort.add_child(dumpster)
-		dir = "spawnterrain/Node" + str(9)
-		var explbarrel : RigidBody2D = EXPLBARREL.instantiate().duplicate()
-		explbarrel.visible = true
-		explbarrel.position = get_node(dir).global_position
-		$Ysort.add_child(explbarrel)
-	elif tutorial_state == 1:
-		dir = "spawnterrain/Node" + str(7)
-		var speed : Area2D = ITEM.instantiate().get_node("Node" + str(0)).duplicate()
-		speed.visible = true
-		speed.position = get_node(dir).global_position
-		$Ysort.add_child(speed)
-	elif tutorial_state == 2:
-		dir = "spawnterrain/Node" + str(7)
-		var carspeed : Area2D = ITEM.instantiate().get_node("Node" + str(1)).duplicate()
-		carspeed.visible = true
-		carspeed.position = get_node(dir).global_position
-		$Ysort.add_child(carspeed)
-	elif tutorial_state == 3:
-		dir = "spawnterrain/Node" + str(7)
-		var dashitem : Area2D = ITEM.instantiate().get_node("Node" + str(2)).duplicate()
-		dashitem.visible = true
-		dashitem.position = get_node(dir).global_position
-		$Ysort.add_child(dashitem)
-	elif tutorial_state == 4:
-		dir = "spawnterrain/Node" + str(7)
-		var carspace : Area2D = ITEM.instantiate().get_node("Node" + str(3)).duplicate()
-		carspace.visible = true
-		carspace.position = get_node(dir).global_position
-		$Ysort.add_child(carspace)
-	elif tutorial_state == 5:
-		dir = "spawnterrain/Node" + str(7)
-		var sheldy : Area2D = SHIELD.instantiate().duplicate()
-		sheldy.visible = true
-		sheldy.position = get_node(dir).global_position
-		$Ysort.add_child(sheldy)
+	match tutorial_state:
+		0:
+			dir = "spawnterrain/Node" + str(5)
+			var barrel : StaticBody2D = BARREL.instantiate().duplicate()
+			barrel.visible = true
+			barrel.position = get_node(dir).global_position
+			$Ysort.add_child(barrel)
+			dir = "spawnterrain/Node" + str(6)
+			var dumpster : StaticBody2D = DUMP.instantiate().duplicate()
+			dumpster.visible = true
+			dumpster.position = get_node(dir).global_position
+			$Ysort.add_child(dumpster)
+			dir = "spawnterrain/Node" + str(9)
+			var explbarrel : RigidBody2D = EXPLBARREL.instantiate().duplicate()
+			explbarrel.visible = true
+			explbarrel.position = get_node(dir).global_position
+			$Ysort.add_child(explbarrel)
+		1:
+			dir = "spawnterrain/Node" + str(7)
+			var speed : Area2D = ITEM.instantiate().get_node("Node" + str(0)).duplicate()
+			speed.visible = true
+			speed.position = get_node(dir).global_position
+			$Ysort.add_child(speed)
+		2:
+			dir = "spawnterrain/Node" + str(7)
+			var carspeed : Area2D = ITEM.instantiate().get_node("Node" + str(1)).duplicate()
+			carspeed.visible = true
+			carspeed.position = get_node(dir).global_position
+			$Ysort.add_child(carspeed)
+		3:
+			dir = "spawnterrain/Node" + str(7)
+			var dashitem : Area2D = ITEM.instantiate().get_node("Node" + str(2)).duplicate()
+			dashitem.visible = true
+			dashitem.position = get_node(dir).global_position
+			$Ysort.add_child(dashitem)
+		4:
+			dir = "spawnterrain/Node" + str(7)
+			var carspace : Area2D = ITEM.instantiate().get_node("Node" + str(3)).duplicate()
+			carspace.visible = true
+			carspace.position = get_node(dir).global_position
+			$Ysort.add_child(carspace)
+		5:
+			dir = "spawnterrain/Node" + str(7)
+			var sheldy : Area2D = SHIELD.instantiate().duplicate()
+			sheldy.visible = true
+			sheldy.position = get_node(dir).global_position
+			$Ysort.add_child(sheldy)
 
-
-func tutorialTerrainSpawn(type, xpos, ypos) -> void:
+func tutorialTerrainSpawn(type : int, xpos : float, ypos : float) -> void:
 #	var tile_num = randi_range(0,1)
 	if type == 0:
 		sidewalk = true
@@ -126,7 +125,7 @@ func blockBottom() -> void:
 	$lineofdeath.add_child(bline)
 
 func spawn_finish_line() -> void:
-	var finish_line : Node2D = FINISHLINE.instantiate()
+	var finish_line : Node2D = CHECKERDLINE.instantiate()
 	finish_line.position.x = 0
 	finish_line.position.y = -4968
 	$lineofdeath.add_child(finish_line)

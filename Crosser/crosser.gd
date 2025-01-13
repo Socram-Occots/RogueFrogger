@@ -12,10 +12,17 @@ extends CharacterBody2D
 
 
 func _ready():
+	# stop camera from being weird initially
+	$Camera2D.reset_smoothing()
+	
 	shieldAnimation.visible = false
 	shieldAnimation.stop()
 	shieldAnimation.animation = "shield"
 	shieldAnimation.frame = 0
+	# this will be an option for camera smoothing
+	#$Camera2D.position_smoothing_enabled = true
+	#$Camera2D.limit_smoothed = true
+	
 
 func move_player() -> void:
 	if Input.is_action_pressed("left_a"):

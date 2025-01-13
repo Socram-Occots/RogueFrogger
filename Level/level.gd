@@ -29,3 +29,6 @@ func _ready() -> void:
 	# lineofdeath
 	spawnLineOfDeath()
 	#labels
+	# high score line
+	spawn_high_score_line()
+	

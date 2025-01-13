@@ -16,9 +16,11 @@ const SHIELD : Resource = preload("res://Shield/shieldbattery.tscn")
 const ITEMLABELS : Resource = preload("res://Items/itemlabels.tscn")
 const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
+const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 
 var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["PlayerSpeed", "CarSpeed", "Dash", "CarSpacing"], ["Shield"]]
+# the DEFAULT_CHANCE_LIST does not have to add up to 100
 var DEFAULT_CHANCE_LIST : Array[float] = [80, 9, 5, 1, 4.9, 0.1]
 
 @onready var BORDERS : Array = []
@@ -90,7 +92,7 @@ func spawnBarrel(dir : String, i : int) -> int:
 	barrel.position = get_node(dir).global_position
 	$Ysort.add_child(barrel)
 	return i
-	
+
 func spawnDumpster(dir : String, node_num : int, i : int) -> int:
 	# we have to check if this is the last node to prevent clipping out of bounds
 	if i + 1 >= node_num: return i
@@ -100,14 +102,14 @@ func spawnDumpster(dir : String, node_num : int, i : int) -> int:
 	$Ysort.add_child(dump)
 	# dumpsters are two wide so we need to skip a spawn node
 	return i + 1
-	
+
 func spawnExplBarrel(dir : String, i : int) -> int:
 	var explbarrel : RigidBody2D = EXPLBARREL.instantiate().duplicate()
 	explbarrel.visible = true
 	explbarrel.position = get_node(dir).global_position
 	$Ysort.add_child(explbarrel)
 	return i
-	
+
 func spawnItems(dir : String, item_num: int, i : int) -> int:
 	var item : Area2D
 	if item_num == 4:
@@ -118,7 +120,7 @@ func spawnItems(dir : String, item_num: int, i : int) -> int:
 	item.position = get_node(dir).global_position
 	$Ysort.add_child(item)
 	return i
-	
+
 func carSpawn() -> void:
 	var car : Node2D = CAR.instantiate().duplicate()
 	car.position.y = $spawnterrain/Node0.global_position.y - 5
@@ -143,8 +145,8 @@ func firstTerrainSpawn(xpos : float, ypos : float) -> void:
 	$spawnterrain.global_position.y -= 144
 	
 	$Tiles.add_child(tile)
-	
-func terrainSpawn(type, xpos, ypos) -> void:
+
+func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
 #	var tile_num = randi_range(0,1)
 	if type == 0:
 		sidewalk = true
@@ -218,7 +220,7 @@ func dash_check() -> void:
 		dashpopup = false
 		var dash_pop_up : Control = POP.instantiate()
 		$CanvasLayer.add_child(dash_pop_up)
-		
+
 func terrain_check() -> void:
 	if Global.spawnTerrain:
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
@@ -256,3 +258,12 @@ func loadPause() -> void:
 	pausepopup.visible = false
 	$CanvasLayer.add_child(pausepopup)
 	Global.pause_popup = pausepopup
+
+func spawn_high_score_line() -> void:
+	var high_score : int = SettingsDataContainer.get_high_score()
+	# don't spawn line at score 0
+	if high_score < 1: return
+	var high_score_line : Node2D = CHECKERDLINE.instantiate()
+	high_score_line.position.x = 0
+	high_score_line.position.y = high_score * -144 + 936
+	$lineofdeath.add_child(high_score_line)

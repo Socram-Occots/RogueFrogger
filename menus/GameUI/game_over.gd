@@ -6,6 +6,8 @@ func _ready():
 
 func _on_visibility_changed():
 	if visible:
+		SettingsSignalBus.emit_on_high_score_set(Global.score)
+		SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
 		$CenterContainer/ColorRect/VBoxContainer/Score.text = "Score: " + str(Global.score)
 		$AnimationPlayer.play("startpause")
 
