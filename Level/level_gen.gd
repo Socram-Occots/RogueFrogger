@@ -18,10 +18,10 @@ const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 
-var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
+@onready var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["PlayerSpeed", "CarSpeed", "Dash", "CarSpacing"], ["Shield"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
-var DEFAULT_CHANCE_LIST : Array[float] = [80, 9, 5, 1, 4.9, 0.1]
+@onready var DEFAULT_CHANCE_LIST : Array[float] = [80, 9, 5, 1, 4.9, 0.1]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -184,7 +184,7 @@ func _input(event):
 func terrainSpawnLogic() -> void:
 	if sidewalk:
 		terrainSpawn(1, 0, $spawnterrain.global_position.y)
-	else:	
+	else:
 		var tile_num = randi_range(0,1)
 		terrainSpawn(tile_num, 0, $spawnterrain.global_position.y)
 		
@@ -261,9 +261,10 @@ func loadPause() -> void:
 
 func spawn_high_score_line() -> void:
 	var high_score : int = SettingsDataContainer.get_high_score()
+	var high_score_dist : int = (high_score + 1) * -144 + 936
 	# don't spawn line at score 0
 	if high_score < 1: return
 	var high_score_line : Node2D = CHECKERDLINE.instantiate()
 	high_score_line.position.x = 0
-	high_score_line.position.y = high_score * -144 + 936
+	high_score_line.position.y = high_score_dist
 	$lineofdeath.add_child(high_score_line)

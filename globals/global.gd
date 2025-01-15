@@ -123,7 +123,7 @@ func reset() -> void:
 	carspacinglabelon = false
 	updatelabels = false
 
-func incrementDifficulty(x) -> void:
+func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
 		car_speed_scaling += 1
 		timer_l -= 0.01
@@ -165,13 +165,13 @@ func options_down() -> void:
 		get_tree().paused = false
 	options_pop_up.set_visible(false)
 
-func float_sum_array(array):
+func float_sum_array(array : Array) -> float:
 	var sum : float = 0.0
 	for element in array:
 		sum += element
 	return sum
 	
-func int_sum_array(array):
+func int_sum_array(array : Array) -> int:
 	var sum : int = 0
 	for element in array:
 		sum += element
