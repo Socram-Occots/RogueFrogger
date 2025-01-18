@@ -4,17 +4,13 @@ extends RigidBody2D
 @onready var exploding : bool = false
 @onready var animationExplo : AnimatedSprite2D = $AnimatedSprite2D
 @onready var explosionCol : CollisionShape2D = $explosionbarrelexplosion/CollisionShape2D
-@warning_ignore("unused_parameter")
 
+@warning_ignore("unused_parameter")
 func _process(delta):
 	
 	if animationExplo.frame == 3:
 		explosionCol.set_deferred("disabled", true)
-
-	if animationExplo.frame == 8:
-		queue_free()
-
-	if global_position.y - Global.player_pos_y > 777:
+	elif animationExplo.frame == 8 || global_position.y - Global.player_pos_y > 777:
 		queue_free()
 
 func _ready():

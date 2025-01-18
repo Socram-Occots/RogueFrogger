@@ -33,7 +33,7 @@ var player_speed_scaling = player_base_speed
 #car speed
 var car_speed_mod : float = 0
 var car_speed_scaling = car_base_speed
-var prev_car_speed : float = 99999
+var prev_car_speed : float = car_base_speed
 
 #dash
 var dash : bool = false
@@ -54,6 +54,9 @@ var spawnTerrain : bool = false
 # player
 var player_pos_x : float = 0
 var player_pos_y : float = 0
+
+# player attributes
+const player_width_px : int = 46
 
 # shield
 #var shield_enabled = false
@@ -93,7 +96,7 @@ func reset() -> void:
 	#car speed
 	car_speed_mod = 0
 	car_speed_scaling = car_base_speed
-	prev_car_speed = 99999
+	prev_car_speed = car_base_speed
 	#timing
 	timer_mod = 0
 	timer_l = timer_base_l

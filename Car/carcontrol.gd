@@ -6,18 +6,29 @@ var car_speed_h : float = car_speed
 
 func _ready():
 	car_speed_l = (Global.car_speed_scaling*0.7)
-	car_speed_h = (Global.car_speed_scaling*1.4)
-		
-	if car_speed_l > car_speed_h:
-		car_speed = car_speed_l
-	else:
-		car_speed = randf_range(car_speed_l, car_speed_h)
-		while (car_speed > Global.prev_car_speed*0.9 && car_speed < Global.prev_car_speed*1.2):
-			car_speed = randf_range(car_speed_l, car_speed_h)
+	car_speed_h = (Global.car_speed_scaling*1.3)
+	
+	if randi_range(0,1) == 0:
+		# rolled low
+		car_speed = randf_range(minf(Global.prev_car_speed*0.8, car_speed_l), maxf(Global.prev_car_speed*0.8, car_speed_l))
+	else :
+		car_speed = randf_range(minf(Global.prev_car_speed*1.2, car_speed_h), maxf(Global.prev_car_speed*1.2, car_speed_h))
 	
 	Global.prev_car_speed = car_speed
 	
+	# set car spacing
+	# we need it to not be too small
+	
+	var cross_gap_time : float = Global.player_width_px / car_speed
+	
+	var car_spacing_timer_l : float = cross_gap_time * 10
+	var car_spacing_timer_h : float = cross_gap_time * 20
+	
+	#print(car_spacing_timer_l, car_spacing_timer_h)
+	#print(car_speed)
+	
 	$car.set_meta("speed", car_speed)
+	
 	if global_position.x < 0: 
 		$car.set_meta("direction", -1)
 		$car/AnimatedSprite2D.flip_h = true
@@ -28,7 +39,7 @@ func _ready():
 	var auto : Area2D = $car.duplicate()
 	auto.visible = true
 	$cars.add_child(auto)
-	$Timer.start(randf_range(Global.timer_l, Global.timer_h))
+	$Timer.start(randf_range(car_spacing_timer_l, car_spacing_timer_h))
 
 @warning_ignore("unused_parameter")
 func _process(delta):

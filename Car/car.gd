@@ -41,9 +41,9 @@ func _ready():
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if no_ignore:
-		if global_position.x > 3555 || global_position.x < -1200:
-			queue_free()
 		position.x -= car_speed * delta * direction
+	if global_position.x > 3555 || global_position.x < -1200:
+		queue_free()
 
 
 @warning_ignore("unused_parameter")
@@ -60,6 +60,7 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
-		body.shield_gone = true
-		body.shield_comp = false
+		if body.shield_up:
+			body.shield_gone = true
+			body.shield_comp = false
 		

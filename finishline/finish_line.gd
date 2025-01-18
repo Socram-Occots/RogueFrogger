@@ -11,3 +11,5 @@ func _on_area_1_body_entered(body: Node2D) -> void:
 		var high_score_pop_up : Control = POP.instantiate()
 		high_score_pop_up.get_node("dashpopup/Label").text = "New High Score!"
 		get_node("/root/Level/CanvasLayer").add_child(high_score_pop_up)
+		await get_tree().create_timer(2).timeout
+		queue_free()
