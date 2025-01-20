@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://finishline/finish_line.gd" id="1_w73w0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjcgj"]
-size = Vector2(1920, 36)
+size = Vector2(1920, 72)
 
 [node name="finish_line" type="Node2D"]
 script = ExtResource("1_w73w0")
@@ -23,7 +23,7 @@ polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 64, 0, 64)
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area1"]
-position = Vector2(960, 18)
+position = Vector2(960, 36)
 shape = SubResource("RectangleShape2D_tjcgj")
 
 [connection signal="body_entered" from="Area1" to="." method="_on_area_1_body_entered"]

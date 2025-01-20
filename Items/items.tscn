@@ -11,7 +11,7 @@
 [ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading3.tres" id="8_uibdt"]
 [ext_resource type="Texture2D" uid="uid://cb5cf0nxgbwol" path="res://RogueFroggerAssets/RFAssets/Level/fire-dashglowpng.png" id="9_wjxbm"]
 [ext_resource type="Shader" uid="uid://4wgkx4w7bj1i" path="res://Items/shading4.tres" id="11_ly7cw"]
-[ext_resource type="Texture2D" uid="uid://dsifb04d3tc7t" path="res://RogueFroggerAssets/RFAssets/Level/carspacingglow.png" id="12_87jbj"]
+[ext_resource type="Texture2D" uid="uid://bqch01d5k0srg" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrel_glow.png" id="12_iin3t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
@@ -104,7 +104,7 @@ polygon = PackedVector2Array(-16, -22, 18, -22, 21, -19, 21, -6, 15, 0, 21, 5, 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_600xy")
 scale = Vector2(0.805, 0.805)
-texture = ExtResource("12_87jbj")
+texture = ExtResource("12_iin3t")
 region_rect = Rect2(75, 75, 43, 44)
 
 [connection signal="body_entered" from="Node0" to="Node0" method="_on_body_entered"]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dylgqx8tcrhdh" path="res://RogueFroggerAssets/RFAssets/Level/fire-dash.png" id="3_vma1t"]
 [ext_resource type="Script" path="res://Level/Sprite2D.gd" id="4_r72s8"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="5_r4njp"]
-[ext_resource type="Texture2D" uid="uid://43d5edeu46fw" path="res://RogueFroggerAssets/RFAssets/Level/carspacing.png" id="6_3qa3l"]
+[ext_resource type="Texture2D" uid="uid://dnvrjaq2e50w8" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png" id="6_bs6yk"]
 
 [node name="Control" type="Node"]
 
@@ -97,23 +97,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
-[node name="CarSpacingVbox" type="VBoxContainer" parent="."]
+[node name="expl_B_Vbox" type="VBoxContainer" parent="."]
 offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
 
-[node name="CarSpacing" type="Label" parent="CarSpacingVbox"]
+[node name="expl_B" type="Label" parent="expl_B_Vbox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 200
 text = "99"
 horizontal_alignment = 1
 
-[node name="Sprite2D" type="TextureRect" parent="CarSpacingVbox"]
+[node name="Sprite2D" type="TextureRect" parent="expl_B_Vbox"]
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("6_3qa3l")
+texture = ExtResource("6_bs6yk")
 expand_mode = 3
 
 [connection signal="timeout" from="DashVbox/Sprite2D/TextureProgressBar/Timer" to="DashVbox/Sprite2D" method="_on_timer_timeout"]

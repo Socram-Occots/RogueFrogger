@@ -20,6 +20,10 @@ func _ready():
 	
 func explosion() -> void:
 	if exploding: return
+	$explosionbarrelexplosion/CollisionShape2D.scale.x = Global.expl_B_size_mod
+	$explosionbarrelexplosion/CollisionShape2D.scale.y = Global.expl_B_size_mod
+	$AnimatedSprite2D.scale.x = Global.expl_B_size_mod + 0.5
+	$AnimatedSprite2D.scale.y = Global.expl_B_size_mod + 0.5
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0
 	sleeping = true
@@ -41,7 +45,7 @@ func _on_impulse_body_entered(body):
 #		print(body.get_meta_list())
 #		print(body.velocity)
 #		not_moving = false
-		apply_impulse(Global.player_prev_vel)
+		apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod)
 		body.dashing = false
 	for i in ["Element", "ExplodingBarrel"]:
 		if i in metalist:

@@ -15,45 +15,50 @@ var input_active : bool = false
 
 #base
 #player
-const player_base_speed : float = 250
+const player_base_speed : float = 250.0
 var player_prev_vel : Vector2 = Vector2(0,0)
 #car
-const car_base_speed : float = 125
+const car_base_speed : float = 125.0
 #dash
 const dash_base : float = 1.5 - 0.03
 const dash_base_time : float = 0.3
-const dash_cool_down_base : float = 2
+const dash_cool_down_base : float = 2.0
 #timer
 const timer_base_l : float = 4.2
 const timer_base_h : float = 5.4
 
 # playerspeed
-var player_speed_mod : float = 0
+var player_speed_mod : float = 0.0
 var player_speed_scaling = player_base_speed
 #car speed
-var car_speed_mod : float = 0
+var car_speed_mod : float = 0.0
 var car_speed_scaling = car_base_speed
 var prev_car_speed : float = car_base_speed
 
 #dash
 var dash : bool = false
-var dash_mod : float = 0
+var dash_mod : float = 0.0
 var dash_scaling = dash_base
 var dash_time = dash_base_time
 var dash_cool_down = dash_cool_down_base
 var dash_cool_down_bool : bool = false
 
 #timer
-var timer_mod : float = 0
+var timer_mod : int = 0
 var timer_l = timer_base_l
 var timer_h = timer_base_h
+
+# exploding barrel
+var expl_B_mod : int = 0
+var expl_B_impulse_mod : float = 1.0
+var expl_B_size_mod : float = 1.0
 
 #Terrain
 var spawnTerrain : bool = false
 
 # player
-var player_pos_x : float = 0
-var player_pos_y : float = 0
+var player_pos_x : float = 0.0
+var player_pos_y : float = 0.0
 
 # player attributes
 const player_width_px : int = 46
@@ -71,7 +76,7 @@ const despawn_upper : float = -1600
 var playerspeedlabelon : bool = false
 var carspeedlabelon : bool = false
 var dashlabelon : bool = false
-var carspacinglabelon : bool = false
+var expl_B_labelon : bool = false
 var updatelabels : bool = false
 
 #global popups
@@ -119,11 +124,16 @@ func reset() -> void:
 	#shield
 #	shield_enabled = false
 
+	# exploding barrel
+	expl_B_mod = 0
+	expl_B_impulse_mod = 1.0
+	expl_B_size_mod = 1.0
+
 	#itemlabels
 	playerspeedlabelon = false
 	carspeedlabelon = false
 	dashlabelon = false
-	carspacinglabelon = false
+	expl_B_labelon = false
 	updatelabels = false
 
 func incrementDifficulty(x : int) -> void:
