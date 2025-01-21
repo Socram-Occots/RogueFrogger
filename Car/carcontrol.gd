@@ -5,10 +5,10 @@ var car_speed_l : float = car_speed
 var car_speed_h : float = car_speed
 
 func _ready():
-	$CollisionShapeGrey.set_deferred("disabled", true)
-	$CollisionShape2DYellow.set_deferred("disabled", true)
-	$CollisionShape2Dmotorcycle.set_deferred("disabled", true)
-	$CollisionShape2Dcolor.set_deferred("disabled", true)
+	$car/CollisionShapeGrey.set_deferred("disabled", true)
+	$car/CollisionShape2DYellow.set_deferred("disabled", true)
+	$car/CollisionShape2Dmotorcycle.set_deferred("disabled", true)
+	$car/CollisionShape2Dcolor.set_deferred("disabled", true)
 	
 	car_speed_l = (Global.car_speed_scaling*0.7)
 	car_speed_h = (Global.car_speed_scaling*1.3)
@@ -54,5 +54,6 @@ func _process(delta):
 
 func _on_timer_timeout():
 	var auto : Area2D = $car.duplicate()
+	auto.set_meta("Car", false)
 	auto.visible = true
 	$cars.add_child(auto)

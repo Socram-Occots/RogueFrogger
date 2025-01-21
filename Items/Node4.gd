@@ -7,8 +7,9 @@ func _on_body_entered(body):
 		if Global.expl_B_mod == 0:
 			Global.expl_B_labelon = true
 		Global.expl_B_mod += 1
-		Global.expl_B_impulse_mod += 0.01
-		Global.expl_B_size_mod += 0.01
+		Global.expl_B_impulse_mod += 0.02
+		Global.expl_B_size_mod += 0.02
+		Global.expl_B_chance_mod += 1
 		Global.updatelabels = true
 		queue_free()
 

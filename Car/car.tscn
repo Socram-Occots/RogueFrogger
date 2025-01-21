@@ -184,7 +184,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 2
 collision_mask = 1921
 script = ExtResource("1_nm587")
-metadata/Car = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
 visible = false

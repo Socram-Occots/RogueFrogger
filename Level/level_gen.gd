@@ -51,20 +51,28 @@ chances : Array[float] = DEFAULT_CHANCE_LIST, node_num: int = 15) -> void:
 	
 	var i : int = 0
 	var chance_pool : float = Global.float_sum_array(chances)
+	
+	# adding ingame modified item chances
+	chance_pool += Global.expl_B_chance_mod
+	
 	var selected_array : int = -1
 	while i < node_num:
 		if i == open: i += 1
 		if i == node_num: break
-		
 		var chance : float = randf_range(0, chance_pool)
 		var dir : String = "spawnterrain/Node" + str(i)
 		for a in range(0, chances_length):
 			chance -= chances[a]
+			
+			# subtracting ingame modified item chances
+			match DEFAULT_ITEM_LIST[a]:
+				"ExplBarrel" : chance - Global.expl_B_chance_mod
+			
 			if chance <= 0:
 				selected_array = a
 				break
 		if selected_array == -1:
-			print(chance)
+			print("Item Selection Failure. Leftover chance: ", chance)
 			selected_array = chances_length - 1
 			
 		var lucky_array = items[selected_array] as Array[String]

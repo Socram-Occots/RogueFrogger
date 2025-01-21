@@ -52,6 +52,7 @@ var timer_h = timer_base_h
 var expl_B_mod : int = 0
 var expl_B_impulse_mod : float = 1.0
 var expl_B_size_mod : float = 1.0
+var expl_B_chance_mod : int = 0
 
 #Terrain
 var spawnTerrain : bool = false
@@ -128,6 +129,7 @@ func reset() -> void:
 	expl_B_mod = 0
 	expl_B_impulse_mod = 1.0
 	expl_B_size_mod = 1.0
+	expl_B_chance_mod = 0
 
 	#itemlabels
 	playerspeedlabelon = false
