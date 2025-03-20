@@ -66,7 +66,7 @@ chances : Array[float] = DEFAULT_CHANCE_LIST, node_num: int = 15) -> void:
 			
 			# subtracting ingame modified item chances
 			match DEFAULT_ITEM_LIST[a]:
-				"ExplBarrel" : chance - Global.expl_B_chance_mod
+				"ExplBarrel" : chance -= Global.expl_B_chance_mod
 			
 			if chance <= 0:
 				selected_array = a

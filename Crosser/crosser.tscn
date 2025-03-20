@@ -213,26 +213,30 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="crosser" type="CharacterBody2D"]
+[node name="crosser" type="RigidBody2D"]
 texture_filter = 1
-scale = Vector2(1.5, 1.5)
 collision_mask = 2015
+mass = 0.01
+gravity_scale = 0.0
+lock_rotation = true
+freeze_mode = 1
 script = ExtResource("1_5p142")
 metadata/Player = false
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-0.483869, 0.484708)
-scale = Vector2(0.967742, 0.969387)
+scale = Vector2(1.5, 1.502)
 polygon = PackedVector2Array(0.499998, -25.2579, -6.39569, -25.2579, -11.9, -20.1, -15, -5.92312, -15, 13.5442, -13.9667, 19.1, -10.8177, 24.2579, 12.9, 24.2579, 16, 19.1, 16, 12.9105, 16, -5.41653, 12.9, -20.1, 7.73333, -25.2579)
 
 [node name="playermove" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_5abg2")
 animation = &"walk_side"
 
 [node name="shield" type="AnimatedSprite2D" parent="."]
 visible = false
 texture_filter = 1
-scale = Vector2(0.46, 0.46)
+scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_oqimd")
 animation = &"shield"
 
@@ -248,5 +252,8 @@ one_shot = true
 
 [node name="player" type="Node2D" parent="."]
 texture_filter = 1
+
+[node name="GrappleCooldown" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

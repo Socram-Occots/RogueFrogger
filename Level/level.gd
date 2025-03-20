@@ -12,7 +12,7 @@ func _ready() -> void:
 	loadDefeat()
 	loadPause()
 	#player
-	var player : CharacterBody2D = CROSSER.instantiate()
+	var player : RigidBody2D = CROSSER.instantiate()
 	player.position.x = $PlayerStart.global_position.x
 	player.position.y = $PlayerStart.global_position.y
 	Global.player_pos_x = player.position.x

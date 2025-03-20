@@ -1,4 +1,6 @@
-extends CharacterBody2D
+extends RigidBody2D
+
+const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 
 @onready var candash : bool = true
 @onready var dashing : bool = false
@@ -9,7 +11,8 @@ extends CharacterBody2D
 @onready var shield_gone : bool = false
 @onready var animated : AnimatedSprite2D = $"playermove"
 @onready var shieldAnimation : AnimatedSprite2D = $shield
-
+@onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
+@onready var grapplehook : Line2D
 
 func _ready():
 	# stop camera from being weird initially
@@ -23,36 +26,35 @@ func _ready():
 	#$Camera2D.position_smoothing_enabled = true
 	#$Camera2D.limit_smoothed = true
 	
+	# instantiate
+	grapplehook = GRAPPLE.instantiate()
+	grapplehook.crosser = $"."
+
+func move_and_slide_rigidbody() -> void:
+	apply_central_force(velocityRigid)
 
 func move_player() -> void:
 	if Input.is_action_pressed("left_a"):
-		velocity.x -= 1
+		velocityRigid.x -= 1
 	if Input.is_action_pressed("right_d"):
-		velocity.x += 1
+		velocityRigid.x += 1
 	if Input.is_action_pressed("down_s"):
-		velocity.y += 1
+		velocityRigid.y += 1
 	if Input.is_action_pressed("up_w"):
-		velocity.y -= 1
-	velocity = velocity.normalized() * Global.player_speed_scaling
+		velocityRigid.y -= 1
+	velocityRigid = velocityRigid.normalized() * Global.player_speed_scaling
 
 	if Input.is_action_pressed("walk"):
-		velocity /= 2
-
-
+		velocityRigid /= 2
+		
 func _on_cooldown_timeout():
 	dashcooldown = true
 
-@warning_ignore("unused_parameter")
-func _process(delta):
-#	print(global_position)
-	Global.player_pos_x = global_position.x
-	Global.player_pos_y = global_position.y
-#	if Input.is_action_pressed("ui_copy"): print(position)
-	
-	if Input.is_action_just_pressed("dash") && Global.dash && dashcooldown && velocity != Vector2.ZERO && candash:
+func dash_decision_tree():
+	if Input.is_action_just_pressed("dash") && Global.dash && dashcooldown && velocityRigid != Vector2.ZERO && candash:
 #		print(Global.dash_scaling)
 		Global.dash_cool_down_bool = true
-		velocity *= Global.dash_scaling
+		velocityRigid *= Global.dash_scaling
 		dashing = true
 		candash = false
 		await get_tree().create_timer(Global.dash_time).timeout
@@ -60,41 +62,62 @@ func _process(delta):
 		candash = true
 		dashcooldown = false
 		$Cooldown.start(Global.dash_cool_down)
-		
+
+func grapple_decision_tree():
+	if Input.is_action_just_pressed("rope"):
+		var grappledupe : Line2D = grapplehook.duplicate()
+		grappledupe.dir_vector = velocityRigid.normalized()
+		grappledupe.global_position = global_position
+		grappledupe.crosser = $"."
+		get_parent().add_child(grappledupe)
+
+@warning_ignore("unused_parameter")
+func _process(delta):
+	#print(global_position)
+	Global.player_pos_x = global_position.x
+	Global.player_pos_y = global_position.y
+#	if Input.is_action_pressed("ui_copy"): print(position)
+	
+	dash_decision_tree()
+	grapple_decision_tree()
+
 	if (!dashing):
-		velocity = Vector2.ZERO
+		velocityRigid = Vector2.ZERO
+		# this sleeping line stops the player from sliding everywhere
+		# the body stops sleeping once the character moves or gets hit
+		sleeping = true
 		move_player()
 	
 	# tracking velocity for rigidbodies
-	if velocity != Vector2.ZERO:
-		Global.player_prev_vel = velocity
-		var vLength : float = sqrt(pow(velocity.x, 2) + pow(velocity.y, 2))
+	if velocityRigid != Vector2.ZERO:
+		Global.player_prev_vel = velocityRigid
+		var vLength : float = sqrt(pow(velocityRigid.x, 2) + pow(velocityRigid.y, 2))
 		animated.speed_scale = vLength/Global.player_base_speed
 
 	player_animation()
-	move_and_slide()
+	move_and_slide_rigidbody()
 	
 	# checking player shield
 	player_shield()
 	shield_compromised()
 	
 	# tracking velocity for rigidbodies
-	if velocity == Vector2.ZERO:
+	if velocityRigid == Vector2.ZERO:
 		await get_tree().create_timer(0.1).timeout
 		Global.player_prev_vel = Vector2.ZERO
 	
 func player_animation() -> void:
 #	$"AnimatedSprite2D".flip_h = false
-	if velocity == Vector2.ZERO: 
+	if velocityRigid == Vector2.ZERO: 
 		animated.play("stand")
 		animated.flip_h = false
-	elif velocity.y > 0: 
+	elif velocityRigid.y > 0: 
 		animated.play("walk_down")
 		animated.flip_h = false
-	elif velocity.y < 0: 
+	elif velocityRigid.y < 0: 
 		animated.play("walk_up")
 		animated.flip_h = false
-	elif velocity.x < 0: 
+	elif velocityRigid.x < 0: 
 		animated.play("walk_side")
 		animated.flip_h = false
 	else: 
@@ -103,7 +126,6 @@ func player_animation() -> void:
 #	elif velocity.x > 0:
 #		$"AnimatedSprite2D".play("walk_side")
 		
-
 func player_shield() -> void:
 	if shield_ready && shield_up:
 		shieldAnimation.visible = true

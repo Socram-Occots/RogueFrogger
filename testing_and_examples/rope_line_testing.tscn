@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7u87peit3h7j"]
+
+[ext_resource type="Texture2D" uid="uid://djkbax0mdicfw" path="res://addons/2d_essentials/icons/arrow_cross.svg" id="2_e1x1k"]
+[ext_resource type="PackedScene" uid="uid://bfmhx1wome8cm" path="res://testing_and_examples/crosser_test_rigid.tscn" id="3_e1ycf"]
+[ext_resource type="Script" path="res://testing_and_examples/line_test.gd" id="3_ycvgu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mpcfc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc11c"]
+size = Vector2(57, 126.75)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vp41i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vk5ug"]
+
+[node name="RopeTesting" type="Node2D"]
+
+[node name="crosser" parent="." instance=ExtResource("3_e1ycf")]
+
+[node name="RigidBody2DStop" type="StaticBody2D" parent="."]
+position = Vector2(499.615, -2.03726)
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_mpcfc")
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="RigidBody2DStop"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_oc11c")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2DStop"]
+position = Vector2(0.500021, 0)
+scale = Vector2(0.887097, 2)
+texture = ExtResource("2_e1x1k")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(130, 500)
+collision_layer = 4
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_vp41i")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+script = ExtResource("3_ycvgu")
+
+[node name="AreaBody" type="Area2D" parent="Line2D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/AreaBody"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_vk5ug")
+
+[node name="Sprite2D" type="Sprite2D" parent="Line2D/AreaBody"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_e1x1k")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="area_entered" from="Line2D/AreaBody" to="Line2D" method="_on_area_body_area_entered"]
+[connection signal="body_entered" from="Line2D/AreaBody" to="Line2D" method="_on_area_body_body_entered"]
+[connection signal="timeout" from="Timer" to="Line2D" method="_on_timer_timeout"]

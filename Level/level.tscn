@@ -80,7 +80,7 @@ gizmo_extents = 32.5
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(960, 984)
+position = Vector2(959.992, 1008)
 
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -88,12 +88,11 @@ y_sort_enabled = true
 [node name="border" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="border"]
-position = Vector2(960, 720)
+position = Vector2(960, 1080)
 collision_layer = 4
 script = ExtResource("2_xp0ov")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="border/StaticBody2D"]
-position = Vector2(0, 360)
 shape = SubResource("WorldBoundaryShape2D_iu5ys")
 
 [node name="lineofdeath" type="Node2D" parent="."]

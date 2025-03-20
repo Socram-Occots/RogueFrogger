@@ -1,0 +1,162 @@
+[gd_scene load_steps=8 format=3 uid="uid://ck7306kh08u5e"]
+
+[ext_resource type="Texture2D" uid="uid://djkbax0mdicfw" path="res://addons/2d_essentials/icons/arrow_cross.svg" id="1_06tv3"]
+[ext_resource type="Script" path="res://testing_and_examples/rope_testing.gd" id="1_rrwyo"]
+[ext_resource type="PackedScene" uid="uid://bfmhx1wome8cm" path="res://testing_and_examples/crosser_test_rigid.tscn" id="3_xp720"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7gq2c"]
+size = Vector2(126.125, 126.75)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_mpcfc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc11c"]
+size = Vector2(57, 126.75)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vp41i"]
+
+[node name="RopeTesting" type="Node2D"]
+position = Vector2(1000, 412)
+script = ExtResource("1_rrwyo")
+
+[node name="MousePin" type="PinJoint2D" parent="."]
+position = Vector2(61, 0)
+node_a = NodePath("../RigidBody2D")
+node_b = NodePath("FakeBody")
+
+[node name="FakeBody" type="StaticBody2D" parent="MousePin"]
+position = Vector2(29, -2)
+collision_layer = 8388608
+collision_mask = 0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(98.2999, -0.100006)
+collision_layer = 8388608
+collision_mask = 0
+input_pickable = true
+mass = 0.001
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+scale = Vector2(0.245, 0.245)
+shape = SubResource("RectangleShape2D_7gq2c")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_06tv3")
+
+[node name="DampedSpringJoint2D" type="PinJoint2D" parent="RigidBody2D"]
+position = Vector2(-0.14502, 0)
+rotation = -1.5708
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody2D2")
+softness = 1.0
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(130, 0)
+collision_layer = 0
+collision_mask = 0
+mass = 0.001
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+scale = Vector2(0.245, 0.245)
+shape = SubResource("RectangleShape2D_7gq2c")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_06tv3")
+
+[node name="DampedSpringJoint2D2" type="PinJoint2D" parent="RigidBody2D2"]
+position = Vector2(0, -1)
+rotation = -1.5708
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody2D3")
+softness = 1.0
+
+[node name="RigidBody2D3" type="RigidBody2D" parent="."]
+position = Vector2(161.571, -0.357178)
+collision_layer = 0
+collision_mask = 0
+mass = 0.001
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D3"]
+scale = Vector2(0.245, 0.245)
+shape = SubResource("RectangleShape2D_7gq2c")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D3"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_06tv3")
+
+[node name="DampedSpringJoint2D3" type="PinJoint2D" parent="RigidBody2D3"]
+rotation = -1.5708
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody2D4")
+softness = 1.0
+
+[node name="RigidBody2D4" type="RigidBody2D" parent="."]
+position = Vector2(193.167, 3.05176e-05)
+collision_layer = 0
+collision_mask = 0
+input_pickable = true
+mass = 0.001
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D4"]
+scale = Vector2(0.245, 0.245)
+shape = SubResource("RectangleShape2D_7gq2c")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D4"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_06tv3")
+
+[node name="DampedSpringJoint2D4" type="PinJoint2D" parent="RigidBody2D4"]
+rotation = -1.5708
+node_a = NodePath("..")
+node_b = NodePath("../../RigidBody2D5")
+softness = 1.0
+
+[node name="RigidBody2D5" type="RigidBody2D" parent="."]
+position = Vector2(224.868, 0.0183105)
+collision_layer = 0
+collision_mask = 0
+input_pickable = true
+mass = 0.001
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D5"]
+scale = Vector2(0.245, 0.245)
+shape = SubResource("RectangleShape2D_7gq2c")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D5"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_06tv3")
+
+[node name="DampedSpringJoint2D5" type="PinJoint2D" parent="RigidBody2D5"]
+rotation = -1.5708
+node_a = NodePath("..")
+node_b = NodePath("../../crosser")
+softness = 1.0
+
+[node name="crosser" parent="." instance=ExtResource("3_xp720")]
+position = Vector2(266.118, 0.018)
+lock_rotation = true
+
+[node name="RigidBody2DStop" type="StaticBody2D" parent="."]
+position = Vector2(129, 239)
+physics_material_override = SubResource("PhysicsMaterial_mpcfc")
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="RigidBody2DStop"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_oc11c")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2DStop"]
+position = Vector2(0.500021, 0)
+scale = Vector2(0.887097, 2)
+texture = ExtResource("1_06tv3")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(130, 311)
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_vp41i")

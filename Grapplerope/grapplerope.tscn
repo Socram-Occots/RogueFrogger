@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnxxavl04bpt0"]
+
+[ext_resource type="Script" path="res://Grapplerope/grapplerope.gd" id="1_x8yr7"]
+[ext_resource type="Texture2D" uid="uid://djkbax0mdicfw" path="res://addons/2d_essentials/icons/arrow_cross.svg" id="2_oymgl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q6w38"]
+
+[node name="grappleLine2D" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+script = ExtResource("1_x8yr7")
+
+[node name="grappleHead" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1310
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="grappleHead"]
+scale = Vector2(0.3, 0.3)
+shape = SubResource("CircleShape2D_q6w38")
+
+[node name="Sprite2D" type="Sprite2D" parent="grappleHead"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_oymgl")
+
+[connection signal="area_entered" from="grappleHead" to="." method="_on_grapple_head_area_entered"]
+[connection signal="body_entered" from="grappleHead" to="." method="_on_grapple_head_body_entered"]
