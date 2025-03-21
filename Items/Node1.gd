@@ -4,14 +4,12 @@ extends Area2D
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
-		if !Global.dash:
-			Global.dashlabelon = true
-			Global.dash = true
-		Global.dash_mod += 1
-		Global.dash_scaling += 0.02
-		var adjustment = Global.dash_scaling/Global.dash_base
-		Global.dash_time = Global.dash_base_time/adjustment
-		Global.dash_cool_down /= 1.005
+		if Global.car_speed_mod == 0:
+			Global.carspeedlabelon = true
+		Global.car_speed_mod += 1
+		Global.car_speed_scaling -= 4
+		if Global.car_speed_scaling < 100:
+			Global.car_speed_scaling = 100
 		Global.updatelabels = true
 		queue_free()
 

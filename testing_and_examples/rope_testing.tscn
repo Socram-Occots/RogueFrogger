@@ -140,7 +140,6 @@ softness = 1.0
 
 [node name="crosser" parent="." instance=ExtResource("3_xp720")]
 position = Vector2(266.118, 0.018)
-lock_rotation = true
 
 [node name="RigidBody2DStop" type="StaticBody2D" parent="."]
 position = Vector2(129, 239)

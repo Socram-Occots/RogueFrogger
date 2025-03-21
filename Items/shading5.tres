@@ -1,12 +1,12 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://4wgkx4w7bj1i"]
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://c51wyln4li7u0"]
 
-[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_u0cto"]
-[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_a52sa"]
+[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_fksdu"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_lto31"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_tdait"]
-default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(1, 0.5, 0), 6, 0.75]
+default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0.5, 0, 1), 6, 0.75]
 initialized = true
-script = ExtResource("1_u0cto")
+script = ExtResource("1_fksdu")
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_ah06s"]
 constant = 1.0
@@ -14,7 +14,7 @@ constant = 1.0
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dr7mm"]
 default_input_values = [0, 2.0, 1, 1.0]
 initialized = true
-script = ExtResource("2_a52sa")
+script = ExtResource("2_lto31")
 
 [resource]
 code = "shader_type canvas_item;
@@ -74,7 +74,7 @@ void fragment() {
 // OuterGlow:2
 	float n_in2p2 = -1.00000;
 	float n_in2p4 = 1.00000;
-	vec3 n_in2p5 = vec3(1.00000, 0.50000, 0.00000);
+	vec3 n_in2p5 = vec3(0.50000, 0.00000, 1.00000);
 	float n_in2p6 = 0.75000;
 	{
 		vec4 n_out2p0n_out2p1 = _outerGlowFunc(TEXTURE, UV.xy, n_in2p2, n_out4p0, n_in2p4, vec4(n_in2p5, n_in2p6));
@@ -90,14 +90,14 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-95, 62.5)
+graph_offset = Vector2(-375.716, -35.2752)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(400, 140)
+nodes/fragment/0/position = Vector2(660, 80)
 nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_tdait")
-nodes/fragment/2/position = Vector2(0, 120)
+nodes/fragment/2/position = Vector2(60, 120)
 nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_ah06s")
-nodes/fragment/3/position = Vector2(-540, 640)
+nodes/fragment/3/position = Vector2(-880, 480)
 nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_dr7mm")
 nodes/fragment/4/position = Vector2(-480, 340)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 1, 4, 0, 2, 3, 2, 0, 0, 0, 2, 1, 0, 1)

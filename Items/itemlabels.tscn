@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cdaurrqufg0hl"]
+[gd_scene load_steps=9 format=3 uid="uid://cdaurrqufg0hl"]
 
 [ext_resource type="Texture2D" uid="uid://cl1ge0cjttlc4" path="res://RogueFroggerAssets/RFAssets/Level/speedometer.png" id="1_m21p5"]
 [ext_resource type="Texture2D" uid="uid://c5yiligvb4ic4" path="res://RogueFroggerAssets/RFAssets/Level/playerspeed.png" id="2_3mtff"]
 [ext_resource type="Texture2D" uid="uid://dylgqx8tcrhdh" path="res://RogueFroggerAssets/RFAssets/Level/fire-dash.png" id="3_vma1t"]
-[ext_resource type="Script" path="res://Level/Sprite2D.gd" id="4_r72s8"]
+[ext_resource type="Script" path="res://Items/GrappleIcon.gd" id="4_r72s8"]
+[ext_resource type="Script" path="res://Items/DashIcon.gd" id="4_ydmct"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="5_r4njp"]
 [ext_resource type="Texture2D" uid="uid://dnvrjaq2e50w8" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png" id="6_bs6yk"]
+[ext_resource type="Texture2D" uid="uid://fl60k54d86s3" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png" id="7_kk2o0"]
 
 [node name="Control" type="Node"]
 
@@ -65,7 +67,7 @@ layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("3_vma1t")
 expand_mode = 3
-script = ExtResource("4_r72s8")
+script = ExtResource("4_ydmct")
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="DashVbox/Sprite2D"]
 self_modulate = Color(0.470588, 0.470588, 0.470588, 1)
@@ -116,4 +118,55 @@ size_flags_vertical = 3
 texture = ExtResource("6_bs6yk")
 expand_mode = 3
 
+[node name="GrappleVbox" type="VBoxContainer" parent="."]
+offset_right = 512.0
+offset_bottom = 792.0
+scale = Vector2(0.2, 0.2)
+alignment = 2
+
+[node name="Grapple" type="Label" parent="GrappleVbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 200
+text = "99"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="TextureRect" parent="GrappleVbox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("7_kk2o0")
+expand_mode = 3
+script = ExtResource("4_r72s8")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GrappleVbox/Sprite2D"]
+self_modulate = Color(0.470588, 0.470588, 0.470588, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+offset_right = 512.0
+offset_bottom = 512.0
+fill_mode = 5
+texture_progress = ExtResource("7_kk2o0")
+
+[node name="Timer" type="Timer" parent="GrappleVbox/Sprite2D/TextureProgressBar"]
+one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="GrappleVbox/Sprite2D"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GrappleVbox/Sprite2D/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("5_r4njp")
+theme_override_font_sizes/font_size = 200
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
 [connection signal="timeout" from="DashVbox/Sprite2D/TextureProgressBar/Timer" to="DashVbox/Sprite2D" method="_on_timer_timeout"]
+[connection signal="timeout" from="GrappleVbox/Sprite2D/TextureProgressBar/Timer" to="GrappleVbox/Sprite2D" method="_on_timer_timeout"]

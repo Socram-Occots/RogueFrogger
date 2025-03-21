@@ -9,10 +9,12 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 @onready var shield_comp : bool = false
 @onready var shield_ready : bool = true
 @onready var shield_gone : bool = false
+@onready var grappling : bool = false
 @onready var animated : AnimatedSprite2D = $"playermove"
 @onready var shieldAnimation : AnimatedSprite2D = $shield
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
 @onready var grapplehook : Line2D
+@onready var vLength : float = 0
 
 func _ready():
 	# stop camera from being weird initially
@@ -42,16 +44,17 @@ func move_player() -> void:
 		velocityRigid.y += 1
 	if Input.is_action_pressed("up_w"):
 		velocityRigid.y -= 1
+	
 	velocityRigid = velocityRigid.normalized() * Global.player_speed_scaling
 
 	if Input.is_action_pressed("walk"):
 		velocityRigid /= 2
-		
-func _on_cooldown_timeout():
-	dashcooldown = true
+		vLength = Global.player_speed_scaling / 2
+	else:
+		vLength = Global.player_speed_scaling
 
 func dash_decision_tree():
-	if Input.is_action_just_pressed("dash") && Global.dash && dashcooldown && velocityRigid != Vector2.ZERO && candash:
+	if Input.is_action_just_pressed("dash") && Global.dash && !Global.dash_cool_down_bool && velocityRigid != Vector2.ZERO && candash:
 #		print(Global.dash_scaling)
 		Global.dash_cool_down_bool = true
 		velocityRigid *= Global.dash_scaling
@@ -61,10 +64,11 @@ func dash_decision_tree():
 		dashing = false
 		candash = true
 		dashcooldown = false
-		$Cooldown.start(Global.dash_cool_down)
 
 func grapple_decision_tree():
-	if Input.is_action_just_pressed("rope"):
+	if Input.is_action_just_pressed("rope") && Global.grapple && !Global.grapple_cool_down_bool && !grappling:
+		Global.grapple_cool_down_bool = true
+		grappling = true
 		var grappledupe : Line2D = grapplehook.duplicate()
 		grappledupe.dir_vector = velocityRigid.normalized()
 		grappledupe.global_position = global_position
@@ -80,18 +84,18 @@ func _process(delta):
 	
 	dash_decision_tree()
 	grapple_decision_tree()
-
+	
 	if (!dashing):
 		velocityRigid = Vector2.ZERO
-		# this sleeping line stops the player from sliding everywhere
-		# the body stops sleeping once the character moves or gets hit
-		sleeping = true
 		move_player()
+	
+	# this sleeping line stops the player from sliding everywhere
+	# the body stops sleeping once the character moves or gets hit
+	sleeping = true
 	
 	# tracking velocity for rigidbodies
 	if velocityRigid != Vector2.ZERO:
 		Global.player_prev_vel = velocityRigid
-		var vLength : float = sqrt(pow(velocityRigid.x, 2) + pow(velocityRigid.y, 2))
 		animated.speed_scale = vLength/Global.player_base_speed
 
 	player_animation()
@@ -103,7 +107,7 @@ func _process(delta):
 	
 	# tracking velocity for rigidbodies
 	if velocityRigid == Vector2.ZERO:
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.075).timeout
 		Global.player_prev_vel = Vector2.ZERO
 	
 func player_animation() -> void:

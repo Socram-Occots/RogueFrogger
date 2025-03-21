@@ -1,17 +1,20 @@
-[gd_scene load_steps=20 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=26 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/Node0.gd" id="1_vl5uj"]
 [ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="2_fcdun"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
-[ext_resource type="Script" path="res://Items/Node2.gd" id="3_dpuf5"]
-[ext_resource type="Script" path="res://Items/Node3.gd" id="4_36jmu"]
-[ext_resource type="Script" path="res://Items/Node4.gd" id="5_2gs8y"]
+[ext_resource type="Script" path="res://Items/Node1.gd" id="3_dpuf5"]
+[ext_resource type="Script" path="res://Items/Node2.gd" id="4_36jmu"]
+[ext_resource type="Script" path="res://Items/Node3.gd" id="5_2gs8y"]
 [ext_resource type="Shader" uid="uid://bvxtdoo1ovpx2" path="res://Items/shading2.tres" id="5_lrnh4"]
 [ext_resource type="Texture2D" uid="uid://bpt2galsb2l13" path="res://RogueFroggerAssets/RFAssets/Level/playerspeedglow.png" id="6_dc3xs"]
 [ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading3.tres" id="8_uibdt"]
 [ext_resource type="Texture2D" uid="uid://cb5cf0nxgbwol" path="res://RogueFroggerAssets/RFAssets/Level/fire-dashglowpng.png" id="9_wjxbm"]
-[ext_resource type="Shader" uid="uid://4wgkx4w7bj1i" path="res://Items/shading4.tres" id="11_ly7cw"]
+[ext_resource type="Shader" uid="uid://c51wyln4li7u0" path="res://Items/shading5.tres" id="11_4ydew"]
+[ext_resource type="Shader" uid="uid://4wgkx4w7bj1i" path="res://Items/shading4.tres" id="11_ck568"]
 [ext_resource type="Texture2D" uid="uid://bqch01d5k0srg" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrel_glow.png" id="12_iin3t"]
+[ext_resource type="Script" path="res://Items/Node4.gd" id="13_a0wwr"]
+[ext_resource type="Texture2D" uid="uid://b8hl8mjlbba7r" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeglow.png" id="15_m0ddy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
@@ -31,8 +34,16 @@ size = Vector2(48, 48)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xxsdt"]
 shader = ExtResource("8_uibdt")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g40br"]
+size = Vector2(48, 48)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_600xy"]
-shader = ExtResource("11_ly7cw")
+shader = ExtResource("11_ck568")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqdux"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_df2u4"]
+shader = ExtResource("11_4ydew")
 
 [node name="Items" type="Node2D"]
 
@@ -44,7 +55,7 @@ collision_mask = 1921
 script = ExtResource("1_vl5uj")
 metadata/Item = false
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node0"]
 shape = SubResource("RectangleShape2D_wrigo")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node0"]
@@ -63,7 +74,7 @@ collision_mask = 1921
 script = ExtResource("3_dpuf5")
 metadata/Item = false
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node1"]
 shape = SubResource("RectangleShape2D_kcrvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node1"]
@@ -80,7 +91,7 @@ collision_layer = 8
 script = ExtResource("4_36jmu")
 metadata/Item = false
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Node2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2"]
 shape = SubResource("RectangleShape2D_2iiea")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2"]
@@ -97,8 +108,8 @@ collision_layer = 8
 script = ExtResource("5_2gs8y")
 metadata/Item = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node3"]
-polygon = PackedVector2Array(-16, -22, 18, -22, 21, -19, 21, -6, 15, 0, 21, 5, 21, 22, -21, 22, -21, 15, -11, 15, -4, 8, -9, 4, -21, 4, -21, -17)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node3"]
+shape = SubResource("RectangleShape2D_g40br")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node3"]
 texture_filter = 1
@@ -107,7 +118,24 @@ scale = Vector2(0.805, 0.805)
 texture = ExtResource("12_iin3t")
 region_rect = Rect2(75, 75, 43, 44)
 
+[node name="Node4" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+script = ExtResource("13_a0wwr")
+metadata/Item = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node4"]
+shape = SubResource("RectangleShape2D_wqdux")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node4"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_df2u4")
+scale = Vector2(0.094, 0.094)
+texture = ExtResource("15_m0ddy")
+
 [connection signal="body_entered" from="Node0" to="Node0" method="_on_body_entered"]
 [connection signal="body_entered" from="Node1" to="Node1" method="_on_body_entered"]
 [connection signal="body_entered" from="Node2" to="Node2" method="_on_body_entered"]
 [connection signal="body_entered" from="Node3" to="Node3" method="_on_body_entered"]
+[connection signal="body_entered" from="Node4" to="Node4" method="_on_body_entered"]

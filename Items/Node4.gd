@@ -4,12 +4,14 @@ extends Area2D
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
-		if Global.expl_B_mod == 0:
-			Global.expl_B_labelon = true
-		Global.expl_B_mod += 1
-		Global.expl_B_impulse_mod += 0.02
-		Global.expl_B_size_mod += 0.02
-		Global.expl_B_chance_mod += 1
+		if Global.grapple_mod == 0:
+			Global.grapple = true
+			Global.grapplelabelon = true
+		Global.grapple_mod += 1
+		Global.grapple_speed += 5
+		Global.grapple_strength += 5
+		Global.grapple_length += 5
+		Global.grapple_cool_down /= 1.005
 		Global.updatelabels = true
 		queue_free()
 

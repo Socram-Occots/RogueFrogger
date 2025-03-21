@@ -247,13 +247,5 @@ limit_bottom = 1080
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="Cooldown" type="Timer" parent="."]
-one_shot = true
-
 [node name="player" type="Node2D" parent="."]
 texture_filter = 1
-
-[node name="GrappleCooldown" type="Timer" parent="."]
-one_shot = true
-
-[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

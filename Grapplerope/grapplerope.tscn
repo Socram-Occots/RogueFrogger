@@ -16,6 +16,7 @@ collision_mask = 1310
 [node name="CollisionShape2D" type="CollisionShape2D" parent="grappleHead"]
 scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_q6w38")
+metadata/grapplehead = false
 
 [node name="Sprite2D" type="Sprite2D" parent="grappleHead"]
 scale = Vector2(0.1, 0.1)

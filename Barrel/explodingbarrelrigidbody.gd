@@ -42,11 +42,8 @@ func _on_impulse_body_entered(body):
 	if exploding: return
 #	if not_moving && "Player" in metalist:
 	if "Player" in metalist:
-#		print(body.get_meta_list())
-#		print(body.velocity)
-#		not_moving = false
 		apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod)
-		body.dashing = false
+		#body.dashing = false
 	for i in ["Element", "ExplodingBarrel"]:
 		if i in metalist:
 			explosion()
@@ -82,7 +79,7 @@ func _on_explosionbarrelexplosion_body_exited(body):
 # areas
 func _on_explosionbarrelexplosion_area_entered(area):
 	var metalist : PackedStringArray = area.get_meta_list()
-	for i in ["Car", "Item", "ExplodingBarrel"]:
+	for i in ["Car", "Item", "ExplodingBarrel", "Grapplehead"]:
 		if i in metalist:
 			area.queue_free()
 	if "ExplodingBarrel" in metalist:

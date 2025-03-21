@@ -1,9 +1,10 @@
 extends Line2D
 
 @onready var crosser_global_pos : Vector2 = Vector2(Global.player_pos_x, Global.player_pos_y)
-@onready var seeking = true
-@onready var direction = 1
+@onready var seeking : bool = true
+@onready var direction : int = 1
 @onready var grapple_head: Area2D = $grappleHead
+@onready var grapple_pos : Vector2 = grapple_head.global_position
 var crosser : RigidBody2D
 var dir_vector : Vector2
 
@@ -13,31 +14,37 @@ func _ready() -> void:
 	set_point_position(1, crosser_global_pos)
 
 func delete_rope() -> void:
+	crosser.grappling = false
 	grapple_head.queue_free()
 	queue_free()
 
 func _process(delta: float) -> void:
-	crosser_global_pos.x = Global.player_pos_x
-	crosser_global_pos.y = Global.player_pos_y
-	#print(crosser_global_pos, grapple_head.global_position)
 	
-	if seeking:
-		if dir_vector == Vector2.ZERO:
-			grapple_head.global_position.y += delta * -1 * 100
-		else:
-			grapple_head.global_position += dir_vector * 100 * delta
-	
-	set_point_position(0, to_local(crosser_global_pos))
-	set_point_position(1, to_local(grapple_head.global_position))
-	var areapos : Vector2 = grapple_head.global_position
-	var velocity = -1 * Vector2(crosser_global_pos.x - areapos.x, 
-	crosser_global_pos.y - areapos.y).normalized() * 100
-	
-	if !seeking:
-		crosser.apply_central_force(velocity)
-	
-	if crosser_global_pos.distance_to(areapos) > 500:
-		delete_rope()
+	if is_instance_valid(grapple_head):
+		crosser_global_pos.x = Global.player_pos_x
+		crosser_global_pos.y = Global.player_pos_y
+			
+		if seeking:
+			if dir_vector == Vector2.ZERO:
+				grapple_head.global_position.y += delta * -1 * Global.grapple_speed
+			else:
+				grapple_head.global_position += delta * dir_vector * Global.grapple_speed
+		
+		grapple_pos = grapple_head.global_position
+		
+		set_point_position(0, to_local(crosser_global_pos))
+		set_point_position(1, to_local(grapple_head.global_position))
+		var velocity = -1 * Vector2(crosser_global_pos.x - grapple_pos.x, 
+		crosser_global_pos.y - grapple_pos.y).normalized() * Global.grapple_strength
+		
+		if !seeking:
+			crosser.apply_central_force(velocity)
+		
+		if crosser_global_pos.distance_to(grapple_pos) > Global.grapple_length:
+			delete_rope()
+	else:
+		crosser.grappling = false
+		queue_free()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("rope"):
@@ -47,6 +54,8 @@ func end_seeking_and_attach(subject) -> void:
 	if seeking:
 		seeking = false
 		get_node("grappleHead").call_deferred("reparent", subject)
+	elif subject.get_collision_layer() == 4:
+		delete_rope()
 
 func _on_grapple_head_area_entered(area: Area2D) -> void:
 	end_seeking_and_attach(area)

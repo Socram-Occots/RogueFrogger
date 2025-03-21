@@ -15,7 +15,7 @@ var input_active : bool = false
 
 #base
 #player
-const player_base_speed : float = 250.0
+const player_base_speed : float = 150
 var player_prev_vel : Vector2 = Vector2(0,0)
 #car
 const car_base_speed : float = 125.0
@@ -26,6 +26,11 @@ const dash_cool_down_base : float = 2.0
 #timer
 const timer_base_l : float = 4.2
 const timer_base_h : float = 5.4
+#grapple
+const grapple_cool_down_base : float = 2.0
+const grapple_speed_base : float = 500
+const grapple_strength_base : float = 100
+const grapple_length_base : float = 250
 
 # playerspeed
 var player_speed_mod : float = 0.0
@@ -78,6 +83,7 @@ var playerspeedlabelon : bool = false
 var carspeedlabelon : bool = false
 var dashlabelon : bool = false
 var expl_B_labelon : bool = false
+var grapplelabelon : bool = false
 var updatelabels : bool = false
 
 #global popups
@@ -85,6 +91,16 @@ var game_over_pop_up = null
 var pause_popup = null
 var tutorial_over_pop_up = null
 var options_pop_up = null
+
+#grapplerope
+var grapple : bool = false
+var grapple_cool_down : float = grapple_cool_down_base
+var grapple_cool_down_bool : bool = false
+var grapple_mod : int = 0
+var grapple_speed : float = grapple_speed_base
+var grapple_strength : float = grapple_strength_base
+var grapple_length : float = grapple_length_base
+
 
 func reset() -> void:
 	#input
@@ -136,8 +152,18 @@ func reset() -> void:
 	carspeedlabelon = false
 	dashlabelon = false
 	expl_B_labelon = false
+	grapplelabelon = false
 	updatelabels = false
-
+	
+	#grapplerope
+	grapple = false
+	grapple_cool_down = grapple_cool_down_base
+	grapple_cool_down_bool = false
+	grapple_mod = 0
+	grapple_speed = grapple_speed_base
+	grapple_strength = grapple_strength_base
+	grapple_length = grapple_length_base
+	
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
 		car_speed_scaling += 1
