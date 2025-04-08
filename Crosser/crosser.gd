@@ -10,13 +10,14 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 @onready var shield_ready : bool = true
 @onready var shield_gone : bool = false
 @onready var grappling : bool = false
+@onready var gliding : bool = false
 @onready var animated : AnimatedSprite2D = $"playermove"
 @onready var shieldAnimation : AnimatedSprite2D = $shield
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
 @onready var grapplehook : Line2D
 @onready var vLength : float = 0
 
-func _ready():
+func _ready() -> void:
 	# stop camera from being weird initially
 	$Camera2D.reset_smoothing()
 	
@@ -53,7 +54,7 @@ func move_player() -> void:
 	else:
 		vLength = Global.player_speed_scaling
 
-func dash_decision_tree():
+func dash_decision_tree() -> void:
 	if Input.is_action_just_pressed("dash") && Global.dash && !Global.dash_cool_down_bool && velocityRigid != Vector2.ZERO && candash:
 #		print(Global.dash_scaling)
 		Global.dash_cool_down_bool = true
@@ -65,7 +66,7 @@ func dash_decision_tree():
 		candash = true
 		dashcooldown = false
 
-func grapple_decision_tree():
+func grapple_decision_tree() -> void:
 	if Input.is_action_just_pressed("rope") && Global.grapple && !Global.grapple_cool_down_bool && !grappling:
 		Global.grapple_cool_down_bool = true
 		grappling = true
@@ -75,8 +76,15 @@ func grapple_decision_tree():
 		grappledupe.crosser = $"."
 		get_parent().add_child(grappledupe)
 
+func glide_decision_tree() -> void:
+	if Input.is_action_just_pressed("glide") && Global.glide && !Global.glide_cool_down_bool && !gliding:
+		Global.glide_cool_down_bool = true
+		gliding = true
+		await get_tree().create_timer(Global.dash_time).timeout
+		gliding = false
+
 @warning_ignore("unused_parameter")
-func _process(delta):
+func _process(delta) -> void:
 	#print(global_position)
 	Global.player_pos_x = global_position.x
 	Global.player_pos_y = global_position.y
@@ -84,6 +92,7 @@ func _process(delta):
 	
 	dash_decision_tree()
 	grapple_decision_tree()
+	glide_decision_tree()
 	
 	if (!dashing):
 		velocityRigid = Vector2.ZERO

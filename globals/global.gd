@@ -31,6 +31,10 @@ const grapple_cool_down_base : float = 2.0
 const grapple_speed_base : float = 500
 const grapple_strength_base : float = 100
 const grapple_length_base : float = 250
+#glide
+const glide_cool_down_base : float = 2.0
+const glide_base_time : float = 0.5
+
 
 # playerspeed
 var player_speed_mod : float = 0.0
@@ -84,6 +88,7 @@ var carspeedlabelon : bool = false
 var dashlabelon : bool = false
 var expl_B_labelon : bool = false
 var grapplelabelon : bool = false
+var glidelabelon : bool = false
 var updatelabels : bool = false
 
 #global popups
@@ -101,6 +106,12 @@ var grapple_speed : float = grapple_speed_base
 var grapple_strength : float = grapple_strength_base
 var grapple_length : float = grapple_length_base
 
+#glide
+var glide : bool = false
+var glide_cool_down : float = grapple_cool_down_base
+var glide_cool_down_bool : bool = false
+var glide_mod : int = 0
+var glide_time : float = glide_base_time
 
 func reset() -> void:
 	#input
@@ -153,6 +164,7 @@ func reset() -> void:
 	dashlabelon = false
 	expl_B_labelon = false
 	grapplelabelon = false
+	glidelabelon = false
 	updatelabels = false
 	
 	#grapplerope
@@ -163,6 +175,13 @@ func reset() -> void:
 	grapple_speed = grapple_speed_base
 	grapple_strength = grapple_strength_base
 	grapple_length = grapple_length_base
+	
+	#glide
+	glide = false
+	glide_cool_down = grapple_cool_down_base
+	glide_cool_down_bool = false
+	glide_mod = 0
+	glide_time = glide_base_time
 	
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
