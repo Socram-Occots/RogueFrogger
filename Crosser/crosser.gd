@@ -34,7 +34,8 @@ func _ready() -> void:
 	grapplehook.crosser = $"."
 
 func move_and_slide_rigidbody() -> void:
-	apply_central_force(velocityRigid)
+	if !gliding:
+		apply_central_force(velocityRigid)
 
 func move_player() -> void:
 	if Input.is_action_pressed("left_a"):
@@ -77,11 +78,43 @@ func grapple_decision_tree() -> void:
 		get_parent().add_child(grappledupe)
 
 func glide_decision_tree() -> void:
-	if Input.is_action_just_pressed("glide") && Global.glide && !Global.glide_cool_down_bool && !gliding:
-		Global.glide_cool_down_bool = true
-		gliding = true
-		await get_tree().create_timer(Global.dash_time).timeout
-		gliding = false
+	if Input.is_action_just_pressed("glide"):
+		print(gliding)
+		#Global.glide && !Global.glide_cool_down_bool &&
+		if  !gliding:
+			Global.glide_cool_down_bool = true
+			gliding = true
+			animated.pause()
+			await get_tree().create_timer(Global.glide_time).timeout
+			gliding = false
+			animated.play()
+		elif gliding:
+			gliding = false
+			
+func movement_logic() -> void:
+	
+	if (!dashing):
+		velocityRigid = Vector2.ZERO
+		move_player()
+	
+
+	
+	# tracking velocity for rigidbodies
+	if velocityRigid != Vector2.ZERO:
+		Global.player_prev_vel = velocityRigid
+		animated.speed_scale = vLength/Global.player_base_speed
+
+	if !gliding:
+
+		# this sleeping line stops the player from sliding everywhere
+		# the body stops sleeping once the character moves or gets hit
+		sleeping = true
+		
+		player_animation()
+		apply_central_force(velocityRigid)
+	
+
+	
 
 @warning_ignore("unused_parameter")
 func _process(delta) -> void:
@@ -94,21 +127,7 @@ func _process(delta) -> void:
 	grapple_decision_tree()
 	glide_decision_tree()
 	
-	if (!dashing):
-		velocityRigid = Vector2.ZERO
-		move_player()
-	
-	# this sleeping line stops the player from sliding everywhere
-	# the body stops sleeping once the character moves or gets hit
-	sleeping = true
-	
-	# tracking velocity for rigidbodies
-	if velocityRigid != Vector2.ZERO:
-		Global.player_prev_vel = velocityRigid
-		animated.speed_scale = vLength/Global.player_base_speed
-
-	player_animation()
-	move_and_slide_rigidbody()
+	movement_logic()
 	
 	# checking player shield
 	player_shield()
