@@ -5,6 +5,8 @@ extends Line2D
 @onready var direction : int = 1
 @onready var grapple_head: Area2D = $grappleHead
 @onready var grapple_pos : Vector2 = grapple_head.global_position
+@onready var glideandgrapplebonus : bool = false
+@onready var velocity : Vector2 = Vector2(0, 0)
 var crosser : RigidBody2D
 var dir_vector : Vector2
 
@@ -37,8 +39,8 @@ func _process(delta: float) -> void:
 		var velocity = -1 * Vector2(crosser_global_pos.x - grapple_pos.x, 
 		crosser_global_pos.y - grapple_pos.y).normalized() * Global.grapple_strength
 		
-		if !seeking:
-			crosser.apply_central_force(velocity)
+		if !(seeking || crosser.gliding):
+			crosser.apply_central_force(velocity * delta)
 		
 		if crosser_global_pos.distance_to(grapple_pos) > Global.grapple_length:
 			delete_rope()
@@ -54,6 +56,10 @@ func end_seeking_and_attach(subject) -> void:
 	if seeking:
 		seeking = false
 		get_node("grappleHead").call_deferred("reparent", subject)
+		
+		if crosser.gliding:
+			crosser.apply_central_force(velocity * get_process_delta_time())
+		
 	elif subject.get_collision_layer() == 4:
 		delete_rope()
 

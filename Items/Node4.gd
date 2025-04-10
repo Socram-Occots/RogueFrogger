@@ -9,7 +9,7 @@ func _on_body_entered(body):
 			Global.grapplelabelon = true
 		Global.grapple_mod += 1
 		Global.grapple_speed += 5
-		Global.grapple_strength += 5
+		Global.grapple_strength += 25
 		Global.grapple_length += 5
 		Global.grapple_cool_down /= 1.005
 		Global.updatelabels = true

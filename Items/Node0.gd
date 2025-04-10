@@ -7,7 +7,7 @@ func _on_body_entered(body):
 		if Global.player_speed_mod == 0:
 			Global.playerspeedlabelon = true
 		Global.player_speed_mod += 1
-		Global.player_speed_scaling += 4
+		Global.player_speed_scaling += 20
 		Global.updatelabels = true
 		queue_free()
 	

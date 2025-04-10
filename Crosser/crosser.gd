@@ -11,6 +11,7 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 @onready var shield_gone : bool = false
 @onready var grappling : bool = false
 @onready var gliding : bool = false
+@onready var glidethendashbonus : bool = false
 @onready var animated : AnimatedSprite2D = $"playermove"
 @onready var shieldAnimation : AnimatedSprite2D = $shield
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
@@ -62,10 +63,15 @@ func dash_decision_tree() -> void:
 		velocityRigid *= Global.dash_scaling
 		dashing = true
 		candash = false
+		
+		if gliding:
+			glidethendashbonus = true
+		
 		await get_tree().create_timer(Global.dash_time).timeout
 		dashing = false
 		candash = true
 		dashcooldown = false
+		glidethendashbonus = false
 
 func grapple_decision_tree() -> void:
 	if Input.is_action_just_pressed("rope") && Global.grapple && !Global.grapple_cool_down_bool && !grappling:
@@ -79,7 +85,6 @@ func grapple_decision_tree() -> void:
 
 func glide_decision_tree() -> void:
 	if Input.is_action_just_pressed("glide"):
-		print(gliding)
 		#Global.glide && !Global.glide_cool_down_bool &&
 		if  !gliding:
 			Global.glide_cool_down_bool = true
@@ -91,9 +96,9 @@ func glide_decision_tree() -> void:
 		elif gliding:
 			gliding = false
 			
-func movement_logic() -> void:
+func movement_logic(delta : float) -> void:
 	
-	if (!dashing):
+	if (!(dashing || gliding)):
 		velocityRigid = Vector2.ZERO
 		move_player()
 	
@@ -111,13 +116,16 @@ func movement_logic() -> void:
 		sleeping = true
 		
 		player_animation()
-		apply_central_force(velocityRigid)
+		apply_central_force(velocityRigid * delta)
+	elif glidethendashbonus:
+		glidethendashbonus = false
+		apply_central_force(velocityRigid * delta)
 	
 
 	
 
 @warning_ignore("unused_parameter")
-func _process(delta) -> void:
+func _process(delta : float) -> void:
 	#print(global_position)
 	Global.player_pos_x = global_position.x
 	Global.player_pos_y = global_position.y
@@ -127,7 +135,7 @@ func _process(delta) -> void:
 	grapple_decision_tree()
 	glide_decision_tree()
 	
-	movement_logic()
+	movement_logic(delta)
 	
 	# checking player shield
 	player_shield()

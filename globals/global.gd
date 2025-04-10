@@ -15,7 +15,7 @@ var input_active : bool = false
 
 #base
 #player
-const player_base_speed : float = 150
+const player_base_speed : float = 750
 var player_prev_vel : Vector2 = Vector2(0,0)
 #car
 const car_base_speed : float = 125.0
@@ -29,7 +29,7 @@ const timer_base_h : float = 5.4
 #grapple
 const grapple_cool_down_base : float = 2.0
 const grapple_speed_base : float = 500
-const grapple_strength_base : float = 100
+const grapple_strength_base : float = 500
 const grapple_length_base : float = 250
 #glide
 const glide_cool_down_base : float = 2.0
