@@ -14,6 +14,7 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 @onready var glidethendashbonus : bool = false
 @onready var animated : AnimatedSprite2D = $"playermove"
 @onready var shieldAnimation : AnimatedSprite2D = $shield
+@onready var glideBoots : ColorRect = $GlideBoots
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
 @onready var grapplehook : Line2D
 @onready var vLength : float = 0
@@ -22,15 +23,20 @@ func _ready() -> void:
 	# stop camera from being weird initially
 	$Camera2D.reset_smoothing()
 	
+	#making sure sheild is reset
 	shieldAnimation.visible = false
 	shieldAnimation.stop()
 	shieldAnimation.animation = "shield"
 	shieldAnimation.frame = 0
+	
+	# making sure glideboots are reset
+	glideBoots.visible = false
+	
 	# this will be an option for camera smoothing
 	#$Camera2D.position_smoothing_enabled = true
 	#$Camera2D.limit_smoothed = true
 	
-	# instantiate
+	# instantiate grapplie hook
 	grapplehook = GRAPPLE.instantiate()
 	grapplehook.crosser = $"."
 
@@ -90,11 +96,15 @@ func glide_decision_tree() -> void:
 			Global.glide_cool_down_bool = true
 			gliding = true
 			animated.pause()
+			glideBoots.visible = true
 			await get_tree().create_timer(Global.glide_time).timeout
 			gliding = false
 			animated.play()
+			glideBoots.visible = false
 		elif gliding:
 			gliding = false
+			animated.play()
+			glideBoots.visible = false
 			
 func movement_logic(delta : float) -> void:
 	

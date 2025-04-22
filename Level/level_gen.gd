@@ -19,7 +19,7 @@ const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 
 @onready var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
- ["ExplBarrel"], ["PlayerSpeed", "CarSpeed", "Dash", "expl_B", "Grapplerope"], ["Shield"]]
+ ["ExplBarrel"], ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "Grapplerope"], ["Shield"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
 @onready var DEFAULT_CHANCE_LIST : Array[float] = [80, 9, 5, 1, 4.9, 0.1]
 
@@ -34,7 +34,7 @@ var sidewalk : bool = false
 
 var iconlabels : Node = ITEMLABELS.instantiate()
 var playerspeedicon : VBoxContainer = iconlabels.get_node("PlayerSpeedVbox").duplicate()
-var carspeedicon : VBoxContainer = iconlabels.get_node("CarSpeedVbox").duplicate()
+var glideicon : VBoxContainer = iconlabels.get_node("GlideVbox").duplicate()
 var dashicon : VBoxContainer = iconlabels.get_node("DashVbox").duplicate()
 var expl_B_icon : VBoxContainer = iconlabels.get_node("expl_B_Vbox").duplicate()
 var grapple_icon : VBoxContainer = iconlabels.get_node("GrappleVbox").duplicate()
@@ -87,7 +87,7 @@ chances : Array[float] = DEFAULT_CHANCE_LIST, node_num: int = 15) -> void:
 			"Dumpster": i = spawnDumpster(dir, node_num, i)
 			"ExplBarrel": i = spawnExplBarrel(dir, i)
 			"PlayerSpeed": i = spawnItems(dir, 0, i)
-			"CarSpeed": i = spawnItems(dir, 1, i)
+			"GlideBoots": i = spawnItems(dir, 1, i)
 			"Dash": i = spawnItems(dir, 2, i)
 			"expl_B": i = spawnItems(dir, 3, i)
 			"Grapplerope": i = spawnItems(dir, 4, i)
@@ -210,9 +210,9 @@ func update_labels() -> void:
 		if Global.playerspeedlabelon:
 			hboxlabels.add_child(playerspeedicon)
 			Global.playerspeedlabelon = false
-		elif  Global.carspeedlabelon:
-			hboxlabels.add_child(carspeedicon)
-			Global.carspeedlabelon = false
+		elif  Global.glidelabelon:
+			hboxlabels.add_child(glideicon)
+			Global.glidelabelon = false
 		elif Global.dashlabelon:
 			hboxlabels.add_child(dashicon)
 			Global.dashlabelon = false
@@ -224,7 +224,7 @@ func update_labels() -> void:
 			Global.grapplelabelon = false
 		
 		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
-		carspeedicon.get_node("CarSpeed").text = str(Global.car_speed_mod)
+		glideicon.get_node("Glide").text = str(Global.car_speed_mod)
 		dashicon.get_node("Dash").text = str(Global.dash_mod)
 		expl_B_icon.get_node("expl_B").text = str(Global.expl_B_mod)
 		grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)
@@ -275,9 +275,10 @@ func loadPause() -> void:
 
 func spawn_high_score_line() -> void:
 	var high_score : int = SettingsDataContainer.get_high_score()
-	var high_score_dist : int = (high_score + 1) * -144 + 936
 	# don't spawn line at score 0
 	if high_score < 1: return
+	
+	var high_score_dist : int = (high_score + 1) * -144 + 936
 	var high_score_line : Node2D = CHECKERDLINE.instantiate()
 	high_score_line.position.x = 0
 	high_score_line.position.y = high_score_dist

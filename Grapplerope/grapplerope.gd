@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		
 		set_point_position(0, to_local(crosser_global_pos))
 		set_point_position(1, to_local(grapple_head.global_position))
-		var velocity = -1 * Vector2(crosser_global_pos.x - grapple_pos.x, 
+		velocity = -1 * Vector2(crosser_global_pos.x - grapple_pos.x, 
 		crosser_global_pos.y - grapple_pos.y).normalized() * Global.grapple_strength
 		
 		if !(seeking || crosser.gliding):

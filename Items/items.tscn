@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://Items/Node2.gd" id="4_36jmu"]
 [ext_resource type="Script" path="res://Items/Node3.gd" id="5_2gs8y"]
 [ext_resource type="Shader" uid="uid://bvxtdoo1ovpx2" path="res://Items/shading2.tres" id="5_lrnh4"]
-[ext_resource type="Texture2D" uid="uid://bpt2galsb2l13" path="res://RogueFroggerAssets/RFAssets/Level/playerspeedglow.png" id="6_dc3xs"]
+[ext_resource type="Texture2D" uid="uid://vyjh8w55rr0u" path="res://RogueFroggerAssets/RFAssets/Level/glidebootsglow.png" id="6_7pduo"]
 [ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading3.tres" id="8_uibdt"]
 [ext_resource type="Texture2D" uid="uid://cb5cf0nxgbwol" path="res://RogueFroggerAssets/RFAssets/Level/fire-dashglowpng.png" id="9_wjxbm"]
 [ext_resource type="Shader" uid="uid://c51wyln4li7u0" path="res://Items/shading5.tres" id="11_4ydew"]
@@ -67,7 +67,6 @@ texture = ExtResource("3_buw3s")
 region_rect = Rect2(-80, -64, 736, 680)
 
 [node name="Node1" type="Area2D" parent="."]
-visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
@@ -81,7 +80,7 @@ shape = SubResource("RectangleShape2D_kcrvm")
 texture_filter = 1
 material = SubResource("ShaderMaterial_5h204")
 scale = Vector2(0.805, 0.805)
-texture = ExtResource("6_dc3xs")
+texture = ExtResource("6_7pduo")
 region_rect = Rect2(0, 0, 116, 114)
 
 [node name="Node2" type="Area2D" parent="."]
