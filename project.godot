@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://globals/global.tscn"
-Helpers="*res://addons/2d_essentials/autoload/helpers.tscn"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 SettingsSignalBus="*res://autoload/SettingsSignalBus.gd"
 SettingsDataContainer="*res://autoload/SettingsDataContainer.gd"
@@ -39,7 +38,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_essentials/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 

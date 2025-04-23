@@ -15,12 +15,12 @@ func _ready():
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if Global.grapple_cool_down_bool && !on:
-		grapple_activated()
+		icon_activated()
 	elif on:
 		time_label.text = "%3.1f" % timer.time_left
 		bar.value = int((timer.time_left / cool_down_time) * 100)
 	
-func grapple_activated():
+func icon_activated():
 	cool_down_time = Global.grapple_cool_down
 	timer.start(cool_down_time)
 	time_label.show()

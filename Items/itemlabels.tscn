@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cdaurrqufg0hl"]
+[gd_scene load_steps=10 format=3 uid="uid://cdaurrqufg0hl"]
 
 [ext_resource type="Texture2D" uid="uid://cl1ge0cjttlc4" path="res://RogueFroggerAssets/RFAssets/Level/speedometer.png" id="1_m21p5"]
 [ext_resource type="Texture2D" uid="uid://dqlrhd483hrwc" path="res://RogueFroggerAssets/RFAssets/Level/glideboots.png" id="2_yvq7r"]
+[ext_resource type="Script" path="res://Items/GlideIcon.gd" id="3_vj6vb"]
 [ext_resource type="Texture2D" uid="uid://dylgqx8tcrhdh" path="res://RogueFroggerAssets/RFAssets/Level/fire-dash.png" id="3_vma1t"]
 [ext_resource type="Script" path="res://Items/GrappleIcon.gd" id="4_r72s8"]
 [ext_resource type="Script" path="res://Items/DashIcon.gd" id="4_ydmct"]
@@ -48,6 +49,37 @@ layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("2_yvq7r")
 expand_mode = 3
+script = ExtResource("3_vj6vb")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="GlideVbox/Sprite2D"]
+self_modulate = Color(0.470588, 0.470588, 0.470588, 1)
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+offset_right = 512.0
+offset_bottom = 512.0
+fill_mode = 5
+texture_progress = ExtResource("2_yvq7r")
+
+[node name="Timer" type="Timer" parent="GlideVbox/Sprite2D/TextureProgressBar"]
+one_shot = true
+
+[node name="MarginContainer" type="MarginContainer" parent="GlideVbox/Sprite2D"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GlideVbox/Sprite2D/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("5_r4njp")
+theme_override_font_sizes/font_size = 200
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
 
 [node name="DashVbox" type="VBoxContainer" parent="."]
 offset_right = 512.0
@@ -168,5 +200,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
 
+[connection signal="timeout" from="GlideVbox/Sprite2D/TextureProgressBar/Timer" to="GlideVbox/Sprite2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="DashVbox/Sprite2D/TextureProgressBar/Timer" to="DashVbox/Sprite2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="GrappleVbox/Sprite2D/TextureProgressBar/Timer" to="GrappleVbox/Sprite2D" method="_on_timer_timeout"]

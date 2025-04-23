@@ -224,7 +224,7 @@ func update_labels() -> void:
 			Global.grapplelabelon = false
 		
 		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
-		glideicon.get_node("Glide").text = str(Global.car_speed_mod)
+		glideicon.get_node("Glide").text = str(Global.glide_mod)
 		dashicon.get_node("Dash").text = str(Global.dash_mod)
 		expl_B_icon.get_node("expl_B").text = str(Global.expl_B_mod)
 		grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)

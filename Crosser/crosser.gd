@@ -90,9 +90,9 @@ func grapple_decision_tree() -> void:
 		get_parent().add_child(grappledupe)
 
 func glide_decision_tree() -> void:
-	if Input.is_action_just_pressed("glide"):
+	if Input.is_action_just_pressed("glide") && Global.glide:
 		#Global.glide && !Global.glide_cool_down_bool &&
-		if  !gliding:
+		if  !(Global.glide_cool_down_bool || gliding):
 			Global.glide_cool_down_bool = true
 			gliding = true
 			animated.pause()
