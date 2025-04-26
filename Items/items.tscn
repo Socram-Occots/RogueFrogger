@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=27 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/Node0.gd" id="1_vl5uj"]
 [ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="2_fcdun"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bqch01d5k0srg" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrel_glow.png" id="12_iin3t"]
 [ext_resource type="Script" path="res://Items/Node4.gd" id="13_a0wwr"]
 [ext_resource type="Texture2D" uid="uid://b8hl8mjlbba7r" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeglow.png" id="15_m0ddy"]
+[ext_resource type="Script" path="res://Items/Node5.gd" id="16_3bh8x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
@@ -67,6 +68,7 @@ texture = ExtResource("3_buw3s")
 region_rect = Rect2(-80, -64, 736, 680)
 
 [node name="Node1" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
@@ -133,8 +135,24 @@ material = SubResource("ShaderMaterial_df2u4")
 scale = Vector2(0.094, 0.094)
 texture = ExtResource("15_m0ddy")
 
+[node name="Node5" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+script = ExtResource("16_3bh8x")
+metadata/Item = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node5"]
+shape = SubResource("RectangleShape2D_wqdux")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node5"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_df2u4")
+scale = Vector2(0.094, 0.094)
+
 [connection signal="body_entered" from="Node0" to="Node0" method="_on_body_entered"]
 [connection signal="body_entered" from="Node1" to="Node1" method="_on_body_entered"]
 [connection signal="body_entered" from="Node2" to="Node2" method="_on_body_entered"]
 [connection signal="body_entered" from="Node3" to="Node3" method="_on_body_entered"]
 [connection signal="body_entered" from="Node4" to="Node4" method="_on_body_entered"]
+[connection signal="body_entered" from="Node5" to="Node5" method="_on_body_entered"]

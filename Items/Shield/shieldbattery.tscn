@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://dfwe8fyc3el5q"]
 
-[ext_resource type="Script" path="res://Shield/shieldbattery.gd" id="1_n761i"]
+[ext_resource type="Script" path="res://Items/Shield/shieldbattery.gd" id="1_n761i"]
 [ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="2_q7je1"]
 [ext_resource type="Texture2D" uid="uid://b0hfbr5polckj" path="res://RogueFroggerAssets/RFAssets/PlayerShield/shieldglow.png" id="2_r4gmn"]
 [ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="3_cmilt"]

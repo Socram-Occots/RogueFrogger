@@ -12,12 +12,11 @@ const BORDER : Resource = preload("res://Level/border.tscn")
 const LINE : Resource = preload("res://lineofdeath/lineofdeath.tscn")
 const POP : Resource = preload("res://menus/GameUI/popups.tscn")
 const EXPLBARREL : Resource = preload("res://Barrel/exploding_barrel.tscn")
-const SHIELD : Resource = preload("res://Shield/shieldbattery.tscn")
+const SHIELD : Resource = preload("res://Items/Shield/shieldbattery.tscn")
 const ITEMLABELS : Resource = preload("res://Items/itemlabels.tscn")
 const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
-
 @onready var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "Grapplerope"], ["Shield"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
