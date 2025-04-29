@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://d22obw3glinb8"]
+[gd_scene load_steps=3 format=3 uid="uid://d22obw3glinb8"]
 
 [ext_resource type="Texture2D" uid="uid://fl60k54d86s3" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png" id="1_a5sxj"]
+[ext_resource type="Script" path="res://Items/Gamba/gamba.gd" id="1_k641u"]
 
 [node name="Gamba" type="Node"]
+script = ExtResource("1_k641u")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 658.0
@@ -21,3 +23,8 @@ size_flags_horizontal = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 121
 text = "0x"
+
+[node name="ItemCycleTimer" type="Timer" parent="HBoxContainer"]
+one_shot = true
+
+[connection signal="timeout" from="HBoxContainer/ItemCycleTimer" to="." method="_on_item_cycle_timer_timeout"]
