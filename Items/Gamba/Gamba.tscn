@@ -5,6 +5,7 @@
 
 [node name="Gamba" type="Node"]
 script = ExtResource("1_k641u")
+item_pool = [null, null, null, null, null, null, null, null, null, null]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 658.0
