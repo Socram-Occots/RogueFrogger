@@ -17,6 +17,7 @@ const ITEMLABELS : Resource = preload("res://Items/itemlabels.tscn")
 const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
+const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 @onready var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "Grapplerope"], ["Shield"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
@@ -282,3 +283,13 @@ func spawn_high_score_line() -> void:
 	high_score_line.position.x = 0
 	high_score_line.position.y = high_score_dist
 	$lineofdeath.add_child(high_score_line)
+
+func spawn_gamba_picker() -> void:
+	var gamba_picker : Node = GAMBAPICKER.instantiate()
+	gamba_picker.get_node("HBoxContainer").visible = false
+	var input_array = []
+	for i in [playerspeedicon, glideicon, dashicon, expl_B_icon, grapple_icon]:
+		input_array.append(i.get_node("Sprite2D"))
+	gamba_picker.item_pool = input_array
+	gamba_picker.item_pool = 2
+	$CanvasLayer.add_child(gamba_picker)

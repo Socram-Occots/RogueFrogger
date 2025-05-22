@@ -1,11 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://d22obw3glinb8"]
+[gd_scene load_steps=2 format=3 uid="uid://d22obw3glinb8"]
 
-[ext_resource type="Texture2D" uid="uid://fl60k54d86s3" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png" id="1_a5sxj"]
 [ext_resource type="Script" path="res://Items/Gamba/gamba.gd" id="1_k641u"]
 
 [node name="Gamba" type="Node"]
 script = ExtResource("1_k641u")
-item_pool = [null, null, null, null, null, null, null, null, null, null]
+gamba_resut_time_seconds = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 offset_right = 658.0
@@ -14,8 +13,8 @@ scale = Vector2(0.35, 0.35)
 theme_override_constants/separation = 10
 
 [node name="GambaRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
-texture = ExtResource("1_a5sxj")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="HBoxContainer"]
