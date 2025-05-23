@@ -12,6 +12,9 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pass
+	  
+func begin_gamba() -> void:
 	if len_item_pool < 1:
 		return
 	timepercycle = gamba_resut_time_seconds / float(len_item_pool - 1)
@@ -40,9 +43,9 @@ func _on_item_cycle_timer_timeout() -> void:
 
 
 func start_cycle() -> void:
-	#print("counter: ",cycleitemcounter,"timeperitemcycle: ",timeperitemcycle,"timepercycle: ",timepercycle)
-	#print(item_pool)
-	#print("item_count: ", len_item_pool)
+	print("counter: ",cycleitemcounter,"timeperitemcycle: ",timeperitemcycle,"timepercycle: ",timepercycle)
+	print(item_pool)
+	print("item_count: ", len_item_pool)
 	gamba_rect.texture = item_pool[cycleitemcounter]
 	if len_item_pool < 2:
 		present_winner()
@@ -51,8 +54,8 @@ func start_cycle() -> void:
 	itemcycletimer.start(timeperitemcycle)
 
 func present_winner() -> void:
-	#print("winner!:", item_pool[cycleitemcounter])
-	#print("sec: ", total_sec)
+	print("winner!:", item_pool[cycleitemcounter])
+	print("sec: ", total_sec)
 	gamba_rect.texture = item_pool[cycleitemcounter]
 	await get_tree().create_timer(1).timeout
 	#hidegambawheel

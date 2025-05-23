@@ -11,6 +11,8 @@ func _ready() -> void:
 	#load pause and game over menu
 	loadDefeat()
 	loadPause()
+	# load gamba picker
+	load_gamba_picker()
 	#player
 	var player : RigidBody2D = CROSSER.instantiate()
 	player.position.x = $PlayerStart.global_position.x

@@ -39,6 +39,7 @@ var dashicon : VBoxContainer = iconlabels.get_node("DashVbox").duplicate()
 var expl_B_icon : VBoxContainer = iconlabels.get_node("expl_B_Vbox").duplicate()
 var grapple_icon : VBoxContainer = iconlabels.get_node("GrappleVbox").duplicate()
 
+var gamba_picker : Node
 
 func itemSpawn(items : Array[Array] = DEFAULT_ITEM_LIST, 
 chances : Array[float] = DEFAULT_CHANCE_LIST, node_num: int = 15) -> void:
@@ -180,16 +181,20 @@ func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
 	$spawnterrain.global_position.y -= 144
 
 func _input(event):
-	if event.is_action_pressed("down_s")\
-	|| event.is_action_pressed("up_w")\
-	|| event.is_action_pressed("left_a")\
-	|| event.is_action_pressed("right_d"):
-		Global.input_active = true
-	elif event.is_action_released("down_s")\
-	|| event.is_action_released("up_w")\
-	|| event.is_action_released("left_a")\
-	|| event.is_action_released("right_d"):
-		Global.input_active = false
+	#if event.is_action_pressed("down_s")\
+	#|| event.is_action_pressed("up_w")\
+	#|| event.is_action_pressed("left_a")\
+	#|| event.is_action_pressed("right_d"):
+		#Global.input_active = true
+	#elif event.is_action_released("down_s")\
+	#|| event.is_action_released("up_w")\
+	#|| event.is_action_released("left_a")\
+	#|| event.is_action_released("right_d"):
+		#Global.input_active = false
+		
+	if event.is_action_pressed("rope"):
+		gamba_picker.begin_gamba()
+		print("test")
 
 func terrainSpawnLogic() -> void:
 	if sidewalk:
@@ -284,12 +289,12 @@ func spawn_high_score_line() -> void:
 	high_score_line.position.y = high_score_dist
 	$lineofdeath.add_child(high_score_line)
 
-func spawn_gamba_picker() -> void:
-	var gamba_picker : Node = GAMBAPICKER.instantiate()
-	gamba_picker.get_node("HBoxContainer").visible = false
+func load_gamba_picker() -> void:
+	gamba_picker = GAMBAPICKER.instantiate()
+	#gamba_picker.get_node("HBoxContainer").visible = false
 	var input_array = []
 	for i in [playerspeedicon, glideicon, dashicon, expl_B_icon, grapple_icon]:
-		input_array.append(i.get_node("Sprite2D"))
+		input_array.append(i.get_node("Sprite2D").texture)
 	gamba_picker.item_pool = input_array
-	gamba_picker.item_pool = 2
+	gamba_picker.gamba_resut_time_seconds = 2
 	$CanvasLayer.add_child(gamba_picker)
