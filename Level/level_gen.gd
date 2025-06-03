@@ -192,9 +192,10 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	if event.is_action_pressed("rope"):
-		gamba_picker.begin_gamba()
-		print("test")
+	#if event.is_action_pressed("rope"):
+		#gamba_picker.begin_gamba()
+		#print("test")
+		pass
 
 func terrainSpawnLogic() -> void:
 	if sidewalk:
@@ -296,5 +297,8 @@ func load_gamba_picker() -> void:
 	for i in [playerspeedicon, glideicon, dashicon, expl_B_icon, grapple_icon]:
 		input_array.append(i.get_node("Sprite2D").texture)
 	gamba_picker.item_pool = input_array
-	gamba_picker.gamba_resut_time_seconds = 2
+	gamba_picker.gamba_result_time_seconds = 2
 	$CanvasLayer.add_child(gamba_picker)
+
+func gamba_check() -> void:
+	gamba_picker.begin_gamba()

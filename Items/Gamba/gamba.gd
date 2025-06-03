@@ -1,7 +1,7 @@
 extends Node
 
 @export var item_pool : Array = []
-@export var gamba_resut_time_seconds : int = 5
+@export var gamba_result_time_seconds : int = 5
 @onready var cycleitemcounter : int = 0
 @onready var itemcycletimer : Timer = $HBoxContainer/ItemCycleTimer
 @onready var gamba_rect: TextureRect = $HBoxContainer/GambaRect
@@ -17,7 +17,7 @@ func _ready() -> void:
 func begin_gamba() -> void:
 	if len_item_pool < 1:
 		return
-	timepercycle = gamba_resut_time_seconds / float(len_item_pool - 1)
+	timepercycle = gamba_result_time_seconds / float(len_item_pool - 1)
 	timeperitemcycle = timepercycle / (len_item_pool)
 	start_cycle()
 

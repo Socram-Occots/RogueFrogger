@@ -6,6 +6,7 @@ func _process(delta: float) -> void:
 	update_labels()
 	dash_check()
 	terrain_check()
+	gamba_check()
 
 func _ready() -> void:
 	#load pause and game over menu

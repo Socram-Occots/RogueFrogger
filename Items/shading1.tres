@@ -1,20 +1,20 @@
 [gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://bmg05aprts1e7"]
 
-[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_5vrs6"]
-[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_kitr4"]
+[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_thpsb"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_pxlsv"]
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ljkss"]
-default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0.612, 1.788, 0), 6, 0.75]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_osm33"]
+default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0, 0.5, 1), 6, 0.75]
 initialized = true
-script = ExtResource("1_5vrs6")
+script = ExtResource("1_thpsb")
 
-[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_db1q4"]
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_jxsxa"]
 constant = 1.0
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eb5dr"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_k6ok7"]
 default_input_values = [0, 2.0, 1, 1.0]
 initialized = true
-script = ExtResource("2_kitr4")
+script = ExtResource("2_pxlsv")
 
 [resource]
 code = "shader_type canvas_item;
@@ -74,7 +74,7 @@ void fragment() {
 // OuterGlow:2
 	float n_in2p2 = -1.00000;
 	float n_in2p4 = 1.00000;
-	vec3 n_in2p5 = vec3(0.61200, 1.78800, 0.00000);
+	vec3 n_in2p5 = vec3(0.00000, 0.50000, 1.00000);
 	float n_in2p6 = 0.75000;
 	{
 		vec4 n_out2p0n_out2p1 = _outerGlowFunc(TEXTURE, UV.xy, n_in2p2, n_out4p0, n_in2p4, vec4(n_in2p5, n_in2p6));
@@ -90,14 +90,14 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-175.788, 49.1406)
+graph_offset = Vector2(-243.921, -95.6851)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(600, 120)
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_ljkss")
-nodes/fragment/2/position = Vector2(100, 140)
-nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_db1q4")
-nodes/fragment/3/position = Vector2(-660, 300)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_eb5dr")
-nodes/fragment/4/position = Vector2(-320, 120)
+nodes/fragment/0/position = Vector2(880, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_osm33")
+nodes/fragment/2/position = Vector2(320, 200)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_jxsxa")
+nodes/fragment/3/position = Vector2(-520, 260)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_k6ok7")
+nodes/fragment/4/position = Vector2(-140, 280)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 1, 4, 0, 2, 3, 2, 0, 0, 0, 2, 1, 0, 1)

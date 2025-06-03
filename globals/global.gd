@@ -13,7 +13,7 @@ var defeat_var : bool = false
 var input_active : bool = false
 #var paused = false
 
-#base
+#region Base Values
 #player
 const player_base_speed : float = 750
 var player_prev_vel : Vector2 = Vector2(0,0)
@@ -34,8 +34,12 @@ const grapple_length_base : float = 250
 #glide
 const glide_cool_down_base : float = 2.0
 const glide_base_time : float = 0.5
+#gamba
+const gamba_result_sec_base : float = 2.0
+const gamba_update_base : bool = false
+#endregion
 
-
+#region Values
 # playerspeed
 var player_speed_mod : float = 0.0
 var player_speed_scaling = player_base_speed
@@ -113,6 +117,11 @@ var glide_cool_down_bool : bool = false
 var glide_mod : int = 0
 var glide_time : float = glide_base_time
 
+#gamba
+var gamba_result_sec : float = gamba_result_sec_base
+var gamba_update : bool = gamba_update_base
+#endregion
+
 func reset() -> void:
 	#input
 	input_active = false
@@ -182,6 +191,10 @@ func reset() -> void:
 	glide_cool_down_bool = false
 	glide_mod = 0
 	glide_time = glide_base_time
+	
+	#gamba
+	gamba_result_sec = gamba_result_sec_base
+	gamba_update = gamba_update_base
 	
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
