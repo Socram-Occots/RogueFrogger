@@ -19,9 +19,11 @@ const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 @onready var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
- ["ExplBarrel"], ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "Grapplerope"], ["Shield"]]
+ ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
-@onready var DEFAULT_CHANCE_LIST : Array[float] = [80, 9, 5, 1, 4.9, 0.1]
+@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 45]
+@onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "Grapplerope", "Shield", "Gamba"]
+@onready var DEFAULT_ITEMs_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 2]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -93,6 +95,7 @@ chances : Array[float] = DEFAULT_CHANCE_LIST, node_num: int = 15) -> void:
 			"expl_B": i = spawnItems(dir, 3, i)
 			"Grapplerope": i = spawnItems(dir, 4, i)
 			"Shield": i = spawnItems(dir, 5, i)
+			"Gamba": i = spawnItems(dir,6)
 			_: print("This randomly selected item does not exist!:", lucky_item)
 			
 		i += 1
@@ -180,6 +183,7 @@ func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
 	
 	$spawnterrain.global_position.y -= 144
 
+@warning_ignore("unused_parameter")
 func _input(event):
 	#if event.is_action_pressed("down_s")\
 	#|| event.is_action_pressed("up_w")\

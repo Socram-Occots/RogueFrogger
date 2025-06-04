@@ -4,7 +4,10 @@ extends Area2D
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
-
+		if Global.gamba_update:
+			Global.gamba_mod += 1
+		else:
+			Global.gamba_update = true
 		queue_free()
 
 @warning_ignore("unused_parameter")

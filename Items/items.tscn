@@ -1,17 +1,15 @@
-[gd_scene load_steps=30 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=28 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/Node0.gd" id="1_vl5uj"]
-[ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading0.tres" id="2_fcdun"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
 [ext_resource type="Script" path="res://Items/Node1.gd" id="3_dpuf5"]
 [ext_resource type="Script" path="res://Items/Node2.gd" id="4_36jmu"]
 [ext_resource type="Script" path="res://Items/Node3.gd" id="5_2gs8y"]
 [ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="5_lrnh4"]
 [ext_resource type="Texture2D" uid="uid://vyjh8w55rr0u" path="res://RogueFroggerAssets/RFAssets/Level/glidebootsglow.png" id="6_7pduo"]
-[ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading2.tres" id="8_uibdt"]
 [ext_resource type="Texture2D" uid="uid://cb5cf0nxgbwol" path="res://RogueFroggerAssets/RFAssets/Level/fire-dashglowpng.png" id="9_wjxbm"]
 [ext_resource type="Shader" uid="uid://c51wyln4li7u0" path="res://Items/shading4.tres" id="11_4ydew"]
-[ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading3.tres" id="11_ck568"]
+[ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading2.tres" id="11_ck568"]
 [ext_resource type="Texture2D" uid="uid://bqch01d5k0srg" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrel_glow.png" id="12_iin3t"]
 [ext_resource type="Script" path="res://Items/Node4.gd" id="13_a0wwr"]
 [ext_resource type="Texture2D" uid="uid://b8hl8mjlbba7r" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeglow.png" id="15_m0ddy"]
@@ -23,7 +21,7 @@
 size = Vector2(48, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4us6v"]
-shader = ExtResource("2_fcdun")
+shader = ExtResource("5_lrnh4")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcrvm"]
 size = Vector2(48, 48)
@@ -35,7 +33,7 @@ shader = ExtResource("5_lrnh4")
 size = Vector2(48, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xxsdt"]
-shader = ExtResource("8_uibdt")
+shader = ExtResource("11_ck568")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g40br"]
 size = Vector2(48, 48)
@@ -126,6 +124,7 @@ texture = ExtResource("12_iin3t")
 region_rect = Rect2(75, 75, 43, 44)
 
 [node name="Node4" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("13_a0wwr")
@@ -141,6 +140,7 @@ scale = Vector2(0.094, 0.094)
 texture = ExtResource("15_m0ddy")
 
 [node name="Node5" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("16_3bh8x")
