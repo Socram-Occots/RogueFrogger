@@ -18,12 +18,12 @@ const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
-@onready var DEFAULT_ITEM_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
+@onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
-@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 45]
+@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 50]
 @onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "Grapplerope", "Shield", "Gamba"]
-@onready var DEFAULT_ITEMs_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 2]
+@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 2]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -43,19 +43,24 @@ var grapple_icon : VBoxContainer = iconlabels.get_node("GrappleVbox").duplicate(
 
 var gamba_picker : Node
 
-func itemSpawn(items : Array[Array] = DEFAULT_ITEM_LIST, 
-chances : Array[float] = DEFAULT_CHANCE_LIST, node_num: int = 15) -> void:
-	var items_length : int = len(items)
+func itemSpawn(spawns : Array[Array] = DEFAULT_SPAWN_LIST, 
+chances : Array[float] = DEFAULT_CHANCE_LIST, 
+items : Array[String] = DEFAULT_ITEMS, 
+items_chances : Array[float] = DEFAULT_ITEMS_CHANCE_LIST, 
+node_num: int = 15) -> void:
+	var spawn_length : int = len(spawns)
 	var chances_length : int = len(chances)
+	var item_length : int = len(items)
+	var item_chances_length : int = len(items_chances)
+	
 	# both arrays need to be same length
-	if items_length != chances_length: return
+	if spawn_length != chances_length || item_length != item_chances_length: return
 
 	# at least one space must be open
 	var open : int  = randi_range(0, node_num - 1)
 	
 	var i : int = 0
 	var chance_pool : float = Global.float_sum_array(chances)
-	
 	# adding ingame modified item chances
 	chance_pool += Global.expl_B_chance_mod
 	
@@ -69,22 +74,39 @@ chances : Array[float] = DEFAULT_CHANCE_LIST, node_num: int = 15) -> void:
 			chance -= chances[a]
 			
 			# subtracting ingame modified item chances
-			if items[a].has("ExplBarrel"):
+			if spawns[a].has("ExplBarrel"):
 				chance -= Global.expl_B_chance_mod
 			
 			if chance <= 0:
 				selected_array = a
 				break
 		if selected_array == -1:
-			print("Item Selection Failure. Leftover chance: ", chance)
+			print("Spawn Selection Failure. Leftover chance: ", chance)
 			selected_array = chances_length - 1
 			
-		var lucky_array = items[selected_array] as Array[String]
+		var lucky_array = spawns[selected_array] as Array[String]
 		
 		# randomly select from lucky array
-		var lucky_item : String = lucky_array.pick_random()
+		var lucky_spawn : String = lucky_array.pick_random()
+		
+		if lucky_spawn == "Items":
+			var selected_item : int = -1
+			var item_chance_pool : float = Global.float_sum_array(chances)
+			chance = randf_range(0, item_chance_pool)
+			for a in range(0, item_chances_length):
+				chance -= items_chances[a]
+				
+				if chance <= 0:
+					selected_item = a
+					break
+			if selected_item == -1:
+				print("Item Selection Failure. Leftover chance: ", chance)
+				selected_item = chances_length - 1
+				
+			lucky_spawn = items[selected_item]
+		
 		# spawn the lucky item
-		match lucky_item:
+		match lucky_spawn:
 			"None": pass
 			"Barrel": i = spawnBarrel(dir, i)
 			"Dumpster": i = spawnDumpster(dir, node_num, i)
