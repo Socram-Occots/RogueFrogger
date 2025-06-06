@@ -5,6 +5,7 @@ extends Node
 @onready var cycleitemcounter : int = 0
 @onready var itemcycletimer : Timer = $HBoxContainer/ItemCycleTimer
 @onready var gamba_rect: TextureRect = $HBoxContainer/GambaRect
+@onready var h_box_container: HBoxContainer = $HBoxContainer
 @onready var timepercycle : float  
 @onready var timeperitemcycle : float
 @onready var len_item_pool : int = len(item_pool)
@@ -12,11 +13,12 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	h_box_container.visible = false
 	  
 func begin_gamba() -> void:
 	if len_item_pool < 1:
 		return
+	h_box_container.visible = true
 	timepercycle = gamba_result_time_seconds / float(len_item_pool - 1)
 	timeperitemcycle = timepercycle / (len_item_pool)
 	start_cycle()
@@ -59,3 +61,6 @@ func present_winner() -> void:
 	gamba_rect.texture = item_pool[cycleitemcounter]
 	await get_tree().create_timer(1).timeout
 	#hidegambawheel
+	Global.gamba_update = false
+	h_box_container.visible = false
+	

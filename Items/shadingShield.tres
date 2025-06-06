@@ -1,28 +1,22 @@
-[gd_scene load_steps=11 format=3 uid="uid://dfwe8fyc3el5q"]
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://drd4vprvkbdi1"]
 
-[ext_resource type="Script" path="res://Items/Shield/shieldbattery.gd" id="1_n761i"]
-[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="2_q7je1"]
-[ext_resource type="Texture2D" uid="uid://b0hfbr5polckj" path="res://RogueFroggerAssets/RFAssets/PlayerShield/shieldglow.png" id="2_r4gmn"]
-[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="3_cmilt"]
+[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_2bgnn"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_it1cw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3dfj"]
-size = Vector2(48, 48)
-
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ba6s4"]
-output_port_for_preview = 0
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_tdait"]
 default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0, 0.2, 1), 6, 0.75]
 initialized = true
-script = ExtResource("2_q7je1")
+script = ExtResource("1_2bgnn")
 
-[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_j4msr"]
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_ah06s"]
 constant = 1.0
 
-[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_rsyrl"]
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_dr7mm"]
 default_input_values = [0, 2.0, 1, 1.0]
 initialized = true
-script = ExtResource("3_cmilt")
+script = ExtResource("2_it1cw")
 
-[sub_resource type="VisualShader" id="VisualShader_pqvua"]
+[resource]
 code = "shader_type canvas_item;
 render_mode blend_mix;
 
@@ -96,35 +90,14 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-53.5325, 108.757)
 mode = 1
 flags/light_only = false
-nodes/fragment/0/position = Vector2(400, 140)
-nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_ba6s4")
-nodes/fragment/2/position = Vector2(840, 100)
-nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_j4msr")
-nodes/fragment/3/position = Vector2(-300, 400)
-nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_rsyrl")
-nodes/fragment/4/position = Vector2(-140, 280)
+nodes/fragment/0/position = Vector2(660, 80)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_tdait")
+nodes/fragment/2/position = Vector2(60, 120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_ah06s")
+nodes/fragment/3/position = Vector2(-880, 480)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_dr7mm")
+nodes/fragment/4/position = Vector2(-480, 340)
 nodes/fragment/connections = PackedInt32Array(3, 0, 4, 1, 4, 0, 2, 3, 2, 0, 0, 0, 2, 1, 0, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xetaj"]
-shader = SubResource("VisualShader_pqvua")
-
-[node name="shieldbattery" type="Area2D"]
-scale = Vector2(1.5, 1.5)
-collision_layer = 8
-collision_mask = 1921
-script = ExtResource("1_n761i")
-metadata/Item = false
-
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_j3dfj")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-material = SubResource("ShaderMaterial_xetaj")
-scale = Vector2(0.805, 0.805)
-texture = ExtResource("2_r4gmn")
-region_rect = Rect2(-2, 7, 118, 107)
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

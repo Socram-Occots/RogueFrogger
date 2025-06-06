@@ -12,7 +12,6 @@ const BORDER : Resource = preload("res://Level/border.tscn")
 const LINE : Resource = preload("res://lineofdeath/lineofdeath.tscn")
 const POP : Resource = preload("res://menus/GameUI/popups.tscn")
 const EXPLBARREL : Resource = preload("res://Barrel/exploding_barrel.tscn")
-const SHIELD : Resource = preload("res://Items/Shield/shieldbattery.tscn")
 const ITEMLABELS : Resource = preload("res://Items/itemlabels.tscn")
 const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
@@ -22,7 +21,7 @@ const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
  ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
 @onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 50]
-@onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "Grapplerope", "Shield", "Gamba"]
+@onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", "Gamba"]
 @onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 2]
 
 @onready var BORDERS : Array = []
@@ -111,14 +110,14 @@ node_num: int = 15) -> void:
 			"Barrel": i = spawnBarrel(dir, i)
 			"Dumpster": i = spawnDumpster(dir, node_num, i)
 			"ExplBarrel": i = spawnExplBarrel(dir, i)
-			"PlayerSpeed": i = spawnItems(dir, 0, i)
-			"GlideBoots": i = spawnItems(dir, 1, i)
-			"Dash": i = spawnItems(dir, 2, i)
-			"expl_B": i = spawnItems(dir, 3, i)
-			"Grapplerope": i = spawnItems(dir, 4, i)
-			"Shield": i = spawnItems(dir, 5, i)
-			"Gamba": i = spawnItems(dir,6)
-			_: print("This randomly selected item does not exist!:", lucky_item)
+			"PlayerSpeed": i = spawnItems(dir, "PlayerSpeed", i)
+			"GlideBoots": i = spawnItems(dir, "GlideBoots", i)
+			"Dash": i = spawnItems(dir, "Dash", i)
+			"expl_B": i = spawnItems(dir, "expl_B", i)
+			"GrappleRope": i = spawnItems(dir, "GrappleRope", i)
+			"Shield": i = spawnItems(dir, "Shield", i)
+			"Gamba": i = spawnItems(dir, "Gamba",i)
+			_: print("This randomly selected item does not exist!:", lucky_spawn)
 			
 		i += 1
 
@@ -146,12 +145,8 @@ func spawnExplBarrel(dir : String, i : int) -> int:
 	$Ysort.add_child(explbarrel)
 	return i
 
-func spawnItems(dir : String, item_num: int, i : int) -> int:
-	var item : Area2D
-	if item_num == 5:
-		item = SHIELD.instantiate().duplicate()
-	else:
-		item = ITEM.instantiate().get_node("Node" + str(item_num)).duplicate()
+func spawnItems(dir : String, item_str: String, i : int) -> int:
+	var item : Area2D = ITEM.instantiate().get_node(item_str).duplicate()
 	item.visible = true
 	item.position = get_node(dir).global_position
 	$Ysort.add_child(item)
@@ -327,4 +322,5 @@ func load_gamba_picker() -> void:
 	$CanvasLayer.add_child(gamba_picker)
 
 func gamba_check() -> void:
-	gamba_picker.begin_gamba()
+	if Global.gamba_update:
+		gamba_picker.begin_gamba()

@@ -1,12 +1,12 @@
 [gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://bmg05aprts1e7"]
 
-[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_5vrs6"]
-[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_kitr4"]
+[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_mukew"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_i6owc"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ljkss"]
 default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0.612, 1.788, 0), 6, 0.75]
 initialized = true
-script = ExtResource("1_5vrs6")
+script = ExtResource("1_mukew")
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_db1q4"]
 constant = 1.0
@@ -14,7 +14,7 @@ constant = 1.0
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_eb5dr"]
 default_input_values = [0, 2.0, 1, 1.0]
 initialized = true
-script = ExtResource("2_kitr4")
+script = ExtResource("2_i6owc")
 
 [resource]
 code = "shader_type canvas_item;
@@ -90,7 +90,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-175.788, 49.1406)
+graph_offset = Vector2(-94.5, 100)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(600, 120)

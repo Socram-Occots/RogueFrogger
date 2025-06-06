@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d22obw3glinb8"]
 
-[ext_resource type="Script" path="res://Items/Gamba/gamba.gd" id="1_k641u"]
+[ext_resource type="Script" path="res://Items/Gamba/gambapicker.gd" id="1_k641u"]
 
 [node name="Gamba" type="Node"]
 script = ExtResource("1_k641u")

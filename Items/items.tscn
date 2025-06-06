@@ -1,33 +1,38 @@
-[gd_scene load_steps=28 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=35 format=3 uid="uid://dpwcm3s7t344w"]
 
-[ext_resource type="Script" path="res://Items/Node0.gd" id="1_vl5uj"]
+[ext_resource type="Script" path="res://Items/PlayerSpeed.gd" id="1_vl5uj"]
+[ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shadingPlayerSpeed.tres" id="2_34d08"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
-[ext_resource type="Script" path="res://Items/Node1.gd" id="3_dpuf5"]
-[ext_resource type="Script" path="res://Items/Node2.gd" id="4_36jmu"]
-[ext_resource type="Script" path="res://Items/Node3.gd" id="5_2gs8y"]
-[ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shading1.tres" id="5_lrnh4"]
+[ext_resource type="Script" path="res://Items/GlideBoots.gd" id="3_dpuf5"]
+[ext_resource type="Script" path="res://Items/Dash.gd" id="4_36jmu"]
+[ext_resource type="Script" path="res://Items/expl_B.gd" id="5_2gs8y"]
+[ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shadingGlideBoots.tres" id="5_rs54r"]
 [ext_resource type="Texture2D" uid="uid://vyjh8w55rr0u" path="res://RogueFroggerAssets/RFAssets/Level/glidebootsglow.png" id="6_7pduo"]
 [ext_resource type="Texture2D" uid="uid://cb5cf0nxgbwol" path="res://RogueFroggerAssets/RFAssets/Level/fire-dashglowpng.png" id="9_wjxbm"]
-[ext_resource type="Shader" uid="uid://c51wyln4li7u0" path="res://Items/shading4.tres" id="11_4ydew"]
-[ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shading2.tres" id="11_ck568"]
+[ext_resource type="Shader" uid="uid://c51wyln4li7u0" path="res://Items/shadingGrappleRope.tres" id="11_4ydew"]
+[ext_resource type="Shader" uid="uid://ojtcn44gqc5b" path="res://Items/shadingDash.tres" id="11_ck568"]
+[ext_resource type="Shader" uid="uid://4wgkx4w7bj1i" path="res://Items/shadingexpl_B.tres" id="11_dat5o"]
 [ext_resource type="Texture2D" uid="uid://bqch01d5k0srg" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrel_glow.png" id="12_iin3t"]
-[ext_resource type="Script" path="res://Items/Node4.gd" id="13_a0wwr"]
+[ext_resource type="Script" path="res://Items/GrappleRope.gd" id="13_a0wwr"]
 [ext_resource type="Texture2D" uid="uid://b8hl8mjlbba7r" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeglow.png" id="15_m0ddy"]
-[ext_resource type="Script" path="res://Items/Node5.gd" id="16_3bh8x"]
+[ext_resource type="Script" path="res://Items/Gamba.gd" id="16_3bh8x"]
 [ext_resource type="Texture2D" uid="uid://d0cpq6rf35kim" path="res://RogueFroggerAssets/RFAssets/Level/gambaglow.png" id="17_5v3al"]
-[ext_resource type="Shader" uid="uid://b5q7636esn1fu" path="res://Items/shading5.tres" id="17_50xft"]
+[ext_resource type="Shader" uid="uid://b5q7636esn1fu" path="res://Items/shadingGamba.tres" id="17_50xft"]
+[ext_resource type="Script" path="res://Items/Shield.gd" id="17_njysa"]
+[ext_resource type="Shader" uid="uid://drd4vprvkbdi1" path="res://Items/shadingShield.tres" id="18_kt2h8"]
+[ext_resource type="Texture2D" uid="uid://b0hfbr5polckj" path="res://RogueFroggerAssets/RFAssets/PlayerShield/shieldglow.png" id="20_uciac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4us6v"]
-shader = ExtResource("5_lrnh4")
+shader = ExtResource("2_34d08")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcrvm"]
 size = Vector2(48, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5h204"]
-shader = ExtResource("5_lrnh4")
+shader = ExtResource("5_rs54r")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2iiea"]
 size = Vector2(48, 48)
@@ -39,7 +44,7 @@ shader = ExtResource("11_ck568")
 size = Vector2(48, 48)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_600xy"]
-shader = ExtResource("11_ck568")
+shader = ExtResource("11_dat5o")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqdux"]
 size = Vector2(48, 48)
@@ -50,9 +55,15 @@ shader = ExtResource("11_4ydew")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iar4c"]
 shader = ExtResource("17_50xft")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j3dfj"]
+size = Vector2(48, 48)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xetaj"]
+shader = ExtResource("18_kt2h8")
+
 [node name="Items" type="Node2D"]
 
-[node name="Node0" type="Area2D" parent="."]
+[node name="PlayerSpeed" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
@@ -60,10 +71,10 @@ collision_mask = 1921
 script = ExtResource("1_vl5uj")
 metadata/Item = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpeed"]
 shape = SubResource("RectangleShape2D_wrigo")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node0"]
+[node name="Sprite2D" type="Sprite2D" parent="PlayerSpeed"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_4us6v")
 position = Vector2(-1.13687e-13, 0)
@@ -71,7 +82,7 @@ scale = Vector2(0.805, 0.805)
 texture = ExtResource("3_buw3s")
 region_rect = Rect2(-80, -64, 736, 680)
 
-[node name="Node1" type="Area2D" parent="."]
+[node name="GlideBoots" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
@@ -79,85 +90,104 @@ collision_mask = 1921
 script = ExtResource("3_dpuf5")
 metadata/Item = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GlideBoots"]
 shape = SubResource("RectangleShape2D_kcrvm")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node1"]
+[node name="Sprite2D" type="Sprite2D" parent="GlideBoots"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_5h204")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("6_7pduo")
 region_rect = Rect2(0, 0, 116, 114)
 
-[node name="Node2" type="Area2D" parent="."]
+[node name="Dash" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("4_36jmu")
 metadata/Item = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dash"]
 shape = SubResource("RectangleShape2D_2iiea")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2"]
+[node name="Sprite2D" type="Sprite2D" parent="Dash"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_xxsdt")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("9_wjxbm")
 region_rect = Rect2(-2, 7, 118, 107)
 
-[node name="Node3" type="Area2D" parent="."]
+[node name="expl_B" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("5_2gs8y")
 metadata/Item = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="expl_B"]
 shape = SubResource("RectangleShape2D_g40br")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node3"]
+[node name="Sprite2D" type="Sprite2D" parent="expl_B"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_600xy")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("12_iin3t")
 region_rect = Rect2(75, 75, 43, 44)
 
-[node name="Node4" type="Area2D" parent="."]
+[node name="GrappleRope" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("13_a0wwr")
 metadata/Item = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleRope"]
 shape = SubResource("RectangleShape2D_wqdux")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node4"]
+[node name="Sprite2D" type="Sprite2D" parent="GrappleRope"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_df2u4")
 scale = Vector2(0.094, 0.094)
 texture = ExtResource("15_m0ddy")
 
-[node name="Node5" type="Area2D" parent="."]
+[node name="Gamba" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 script = ExtResource("16_3bh8x")
 metadata/Item = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node5"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Gamba"]
 shape = SubResource("RectangleShape2D_wqdux")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node5"]
+[node name="Sprite2D" type="Sprite2D" parent="Gamba"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_iar4c")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("17_5v3al")
 
-[connection signal="body_entered" from="Node0" to="Node0" method="_on_body_entered"]
-[connection signal="body_entered" from="Node1" to="Node1" method="_on_body_entered"]
-[connection signal="body_entered" from="Node2" to="Node2" method="_on_body_entered"]
-[connection signal="body_entered" from="Node3" to="Node3" method="_on_body_entered"]
-[connection signal="body_entered" from="Node4" to="Node4" method="_on_body_entered"]
-[connection signal="body_entered" from="Node5" to="Node5" method="_on_body_entered"]
+[node name="Shield" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+collision_mask = 1921
+script = ExtResource("17_njysa")
+metadata/Item = false
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Shield"]
+shape = SubResource("RectangleShape2D_j3dfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Shield"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_xetaj")
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("20_uciac")
+region_rect = Rect2(-2, 7, 118, 107)
+
+[connection signal="body_entered" from="PlayerSpeed" to="PlayerSpeed" method="_on_body_entered"]
+[connection signal="body_entered" from="GlideBoots" to="GlideBoots" method="_on_body_entered"]
+[connection signal="body_entered" from="Dash" to="Dash" method="_on_body_entered"]
+[connection signal="body_entered" from="expl_B" to="expl_B" method="_on_body_entered"]
+[connection signal="body_entered" from="GrappleRope" to="GrappleRope" method="_on_body_entered"]
+[connection signal="body_entered" from="Gamba" to="Gamba" method="_on_body_entered"]
+[connection signal="body_entered" from="Shield" to="Shield" method="_on_body_entered"]
