@@ -10,6 +10,7 @@ extends Node
 @onready var timeperitemcycle : float
 @onready var len_item_pool : int = len(item_pool)
 @onready var total_sec : float = 0
+@onready var temp_item_pool : Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,6 +19,7 @@ func _ready() -> void:
 func begin_gamba() -> void:
 	if len_item_pool < 1:
 		return
+	temp_item_pool = item_pool.duplicate()
 	h_box_container.visible = true
 	timepercycle = gamba_result_time_seconds / float(len_item_pool - 1)
 	timeperitemcycle = timepercycle / (len_item_pool)
@@ -35,9 +37,9 @@ func _on_item_cycle_timer_timeout() -> void:
 	
 	if cycleitemcounter == len_item_pool:
 		cycleitemcounter = 0
-		item_pool.remove_at(randi_range(0, len_item_pool - 1))
+		temp_item_pool.remove_at(randi_range(0, len_item_pool - 1))
 		len_item_pool -= 1
-		item_pool.shuffle()
+		temp_item_pool.shuffle()
 		if len_item_pool > 1:
 			timeperitemcycle = timepercycle / (len_item_pool)
 	
@@ -46,9 +48,9 @@ func _on_item_cycle_timer_timeout() -> void:
 
 func start_cycle() -> void:
 	print("counter: ",cycleitemcounter,"timeperitemcycle: ",timeperitemcycle,"timepercycle: ",timepercycle)
-	print(item_pool)
+	print(temp_item_pool)
 	print("item_count: ", len_item_pool)
-	gamba_rect.texture = item_pool[cycleitemcounter]
+	gamba_rect.texture = temp_item_pool[cycleitemcounter]
 	if len_item_pool < 2:
 		present_winner()
 		return
@@ -56,11 +58,13 @@ func start_cycle() -> void:
 	itemcycletimer.start(timeperitemcycle)
 
 func present_winner() -> void:
-	print("winner!:", item_pool[cycleitemcounter])
+	print("winner!:", temp_item_pool[cycleitemcounter])
 	print("sec: ", total_sec)
-	gamba_rect.texture = item_pool[cycleitemcounter]
+	gamba_rect.texture = temp_item_pool[cycleitemcounter]
 	await get_tree().create_timer(1).timeout
-	#hidegambawheel
-	Global.gamba_update = false
+	#reset length so gamba can function again
+	len_item_pool = len(item_pool)
+	#hidegambawheel an d declare gamba not running again
+	Global.gamba_running = false
 	h_box_container.visible = false
 	

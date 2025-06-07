@@ -20,9 +20,9 @@ const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 @onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
-@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 50]
+@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 99999]
 @onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", "Gamba"]
-@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 2]
+@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 99999]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -90,7 +90,7 @@ node_num: int = 15) -> void:
 		
 		if lucky_spawn == "Items":
 			var selected_item : int = -1
-			var item_chance_pool : float = Global.float_sum_array(chances)
+			var item_chance_pool : float = Global.float_sum_array(items_chances)
 			chance = randf_range(0, item_chance_pool)
 			for a in range(0, item_chances_length):
 				chance -= items_chances[a]
@@ -314,7 +314,7 @@ func spawn_high_score_line() -> void:
 func load_gamba_picker() -> void:
 	gamba_picker = GAMBAPICKER.instantiate()
 	#gamba_picker.get_node("HBoxContainer").visible = false
-	var input_array = []
+	var input_array : Array = []
 	for i in [playerspeedicon, glideicon, dashicon, expl_B_icon, grapple_icon]:
 		input_array.append(i.get_node("Sprite2D").texture)
 	gamba_picker.item_pool = input_array
@@ -323,4 +323,6 @@ func load_gamba_picker() -> void:
 
 func gamba_check() -> void:
 	if Global.gamba_update:
+		Global.gamba_update = false
+		Global.gamba_running = true
 		gamba_picker.begin_gamba()

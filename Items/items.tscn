@@ -1,12 +1,12 @@
 [gd_scene load_steps=35 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/PlayerSpeed.gd" id="1_vl5uj"]
-[ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shadingPlayerSpeed.tres" id="2_34d08"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
 [ext_resource type="Script" path="res://Items/GlideBoots.gd" id="3_dpuf5"]
 [ext_resource type="Script" path="res://Items/Dash.gd" id="4_36jmu"]
 [ext_resource type="Script" path="res://Items/expl_B.gd" id="5_2gs8y"]
-[ext_resource type="Shader" uid="uid://bmg05aprts1e7" path="res://Items/shadingGlideBoots.tres" id="5_rs54r"]
+[ext_resource type="Shader" uid="uid://ccv8qa3n24f2x" path="res://Items/shadingPlayerSpeed.tres" id="5_rs54r"]
+[ext_resource type="Shader" uid="uid://dmeyh0xw64y3q" path="res://Items/shadingGlideBoots.tres" id="5_sy5pp"]
 [ext_resource type="Texture2D" uid="uid://vyjh8w55rr0u" path="res://RogueFroggerAssets/RFAssets/Level/glidebootsglow.png" id="6_7pduo"]
 [ext_resource type="Texture2D" uid="uid://cb5cf0nxgbwol" path="res://RogueFroggerAssets/RFAssets/Level/fire-dashglowpng.png" id="9_wjxbm"]
 [ext_resource type="Shader" uid="uid://c51wyln4li7u0" path="res://Items/shadingGrappleRope.tres" id="11_4ydew"]
@@ -25,14 +25,14 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4us6v"]
-shader = ExtResource("2_34d08")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nd3lk"]
+shader = ExtResource("5_rs54r")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kcrvm"]
 size = Vector2(48, 48)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5h204"]
-shader = ExtResource("5_rs54r")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6whh1"]
+shader = ExtResource("5_sy5pp")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2iiea"]
 size = Vector2(48, 48)
@@ -64,7 +64,6 @@ shader = ExtResource("18_kt2h8")
 [node name="Items" type="Node2D"]
 
 [node name="PlayerSpeed" type="Area2D" parent="."]
-visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
@@ -76,7 +75,7 @@ shape = SubResource("RectangleShape2D_wrigo")
 
 [node name="Sprite2D" type="Sprite2D" parent="PlayerSpeed"]
 texture_filter = 1
-material = SubResource("ShaderMaterial_4us6v")
+material = SubResource("ShaderMaterial_nd3lk")
 position = Vector2(-1.13687e-13, 0)
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("3_buw3s")
@@ -95,10 +94,9 @@ shape = SubResource("RectangleShape2D_kcrvm")
 
 [node name="Sprite2D" type="Sprite2D" parent="GlideBoots"]
 texture_filter = 1
-material = SubResource("ShaderMaterial_5h204")
+material = SubResource("ShaderMaterial_6whh1")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("6_7pduo")
-region_rect = Rect2(0, 0, 116, 114)
 
 [node name="Dash" type="Area2D" parent="."]
 visible = false

@@ -45,13 +45,13 @@ func tutorialItemSpawn() -> void:
 			$Ysort.add_child(explbarrel)
 		1:
 			dir = "spawnterrain/Node" + str(7)
-			var speed : Area2D = ITEM.instantiate().get_node("Node" + str(0)).duplicate()
+			var speed : Area2D = ITEM.instantiate().get_node("PlayerSpeed").duplicate()
 			speed.visible = true
 			speed.position = get_node(dir).global_position
 			$Ysort.add_child(speed)
 		2:
 			dir = "spawnterrain/Node" + str(7)
-			var carspeed : Area2D = ITEM.instantiate().get_node("Node" + str(1)).duplicate()
+			var carspeed : Area2D = ITEM.instantiate().get_node("").duplicate()
 			carspeed.visible = true
 			carspeed.position = get_node(dir).global_position
 			$Ysort.add_child(carspeed)

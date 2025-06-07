@@ -1,12 +1,12 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://bmg05aprts1e7"]
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://dmeyh0xw64y3q"]
 
-[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_thpsb"]
-[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_pxlsv"]
+[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="1_qn8hq"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="2_hd23j"]
 
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_osm33"]
 default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(0, 0.5, 1), 6, 0.75]
 initialized = true
-script = ExtResource("1_thpsb")
+script = ExtResource("1_qn8hq")
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_jxsxa"]
 constant = 1.0
@@ -14,7 +14,7 @@ constant = 1.0
 [sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_k6ok7"]
 default_input_values = [0, 2.0, 1, 1.0]
 initialized = true
-script = ExtResource("2_pxlsv")
+script = ExtResource("2_hd23j")
 
 [resource]
 code = "shader_type canvas_item;
@@ -90,6 +90,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-149.995, 38.1511)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(880, 140)

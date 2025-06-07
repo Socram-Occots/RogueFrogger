@@ -120,6 +120,7 @@ var glide_time : float = glide_base_time
 #gamba
 var gamba_result_sec : float = gamba_result_sec_base
 var gamba_update : bool = false
+var gamba_running : bool = false
 var gamba_mod : int = gamba_mod_base
 #endregion
 
@@ -196,7 +197,9 @@ func reset() -> void:
 	#gamba
 	gamba_result_sec = gamba_result_sec_base
 	gamba_update = false
+	gamba_running = false
 	gamba_mod = gamba_mod_base
+
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
 		car_speed_scaling += 1
