@@ -6,7 +6,7 @@ func _on_body_entered(body):
 	if "Player" in metalist:
 		if Global.gamba_running:
 			Global.gamba_mod += 1
-		elif !Global.gamba_update:
+		elif !(Global.gamba_update || Global.gamba_done):
 			Global.gamba_update = true
 		queue_free()
 

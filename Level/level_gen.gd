@@ -20,9 +20,9 @@ const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 @onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
-@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 99999]
+@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 50]
 @onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", "Gamba"]
-@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 99999]
+@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 50]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -315,8 +315,8 @@ func load_gamba_picker() -> void:
 	gamba_picker = GAMBAPICKER.instantiate()
 	#gamba_picker.get_node("HBoxContainer").visible = false
 	var input_array : Array = []
-	for i in [playerspeedicon, glideicon, dashicon, expl_B_icon, grapple_icon]:
-		input_array.append(i.get_node("Sprite2D").texture)
+	for i in [["PlayerSpeed", playerspeedicon], ["GlideBoots", glideicon], ["Dash", dashicon], ["expl_B", expl_B_icon], ["GrappleRope", grapple_icon]]:
+		input_array.append([i[0], i[1].get_node("Sprite2D").texture])
 	gamba_picker.item_pool = input_array
 	gamba_picker.gamba_result_time_seconds = 2
 	$CanvasLayer.add_child(gamba_picker)

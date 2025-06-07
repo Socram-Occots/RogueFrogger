@@ -122,6 +122,7 @@ var gamba_result_sec : float = gamba_result_sec_base
 var gamba_update : bool = false
 var gamba_running : bool = false
 var gamba_mod : int = gamba_mod_base
+var gamba_done : bool = false
 #endregion
 
 func reset() -> void:
@@ -199,6 +200,7 @@ func reset() -> void:
 	gamba_update = false
 	gamba_running = false
 	gamba_mod = gamba_mod_base
+	gamba_done = false
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
@@ -253,3 +255,49 @@ func int_sum_array(array : Array) -> int:
 	for element in array:
 		sum += element
 	return sum
+
+func inc_PlayerSpeed(times : int) -> void:
+	if player_speed_mod == 0:
+		playerspeedlabelon = true
+	player_speed_mod += times
+	player_speed_scaling += 20 * times
+	updatelabels = true
+
+func inc_GlideBoots(times : int) -> void:
+	if glide_mod == 0:
+		glidelabelon = true
+		glide = true
+	glide_mod += times
+	glide_cool_down *= (1/1.005) * times
+	glide_time += 0.025 * times
+	updatelabels = true
+	
+func inc_Dash(times : int) -> void:
+	if !dash:
+		dashlabelon = true
+		dash = true
+	dash_mod += times
+	dash_scaling += 0.02 * times
+	dash_time = Global.dash_base_time/(Global.dash_scaling/Global.dash_base)
+	dash_cool_down *= (1/1.005) * times
+	updatelabels = true
+	
+func inc_expl_B(times : int) -> void:
+	if expl_B_mod == 0:
+		expl_B_labelon = true
+	expl_B_mod += times
+	expl_B_impulse_mod += 0.02 * times
+	expl_B_size_mod += 0.02 * times
+	expl_B_chance_mod += times
+	updatelabels = true
+
+func inc_GrappleRope(times : int) -> void:
+	if grapple_mod == 0:
+		grapple = true
+		grapplelabelon = true
+	grapple_mod += times
+	grapple_speed += 5 * times
+	grapple_strength += 25 * times
+	grapple_length += 5 * times
+	grapple_cool_down *= (1/1.005) * times
+	updatelabels = true
