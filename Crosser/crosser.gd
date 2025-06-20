@@ -16,6 +16,7 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 @onready var shieldAnimation : AnimatedSprite2D = $shield
 @onready var glideBoots : ColorRect = $GlideBoots
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
+@onready var velocityRigidDelta : Vector2 = Vector2(0.0, 0.0)
 @onready var grapplehook : Line2D
 @onready var vLength : float = 0
 
@@ -108,15 +109,17 @@ func glide_decision_tree() -> void:
 			
 func movement_logic(delta : float) -> void:
 	
+	# this must go first because this what is updating velocityRigid
 	if (!(dashing || gliding)):
 		velocityRigid = Vector2.ZERO
+		velocityRigidDelta = Vector2.ZERO
 		move_player()
+		velocityRigidDelta = velocityRigid * delta
 	
-
-	
+		
 	# tracking velocity for rigidbodies
 	if velocityRigid != Vector2.ZERO:
-		Global.player_prev_vel = velocityRigid
+		Global.player_prev_vel = velocityRigidDelta
 		animated.speed_scale = vLength/Global.player_base_speed
 
 	if !gliding:
@@ -126,10 +129,10 @@ func movement_logic(delta : float) -> void:
 		sleeping = true
 		
 		player_animation()
-		apply_central_force(velocityRigid * delta)
+		apply_central_force(velocityRigidDelta)
 	elif glidethendashbonus:
 		glidethendashbonus = false
-		apply_central_force(velocityRigid * delta)
+		apply_central_force(velocityRigidDelta)
 	
 
 	
@@ -147,14 +150,18 @@ func _process(delta : float) -> void:
 	
 	movement_logic(delta)
 	
+	# tracking player velocity every process for the followers
+	Global.follower_vel = velocityRigid
+	
 	# checking player shield
 	player_shield()
 	shield_compromised()
 	
 	# tracking velocity for rigidbodies
-	if velocityRigid == Vector2.ZERO:
+	if velocityRigidDelta == Vector2.ZERO && Global.player_prev_vel != Vector2.ZERO:
 		await get_tree().create_timer(0.075).timeout
 		Global.player_prev_vel = Vector2.ZERO
+	
 	
 func player_animation() -> void:
 #	$"AnimatedSprite2D".flip_h = false
