@@ -33,7 +33,7 @@ const FOLLOWERSCRIPT : Script = preload("res://Follower/follower.gd")
 @onready var line : Area2D = null
 @onready var hboxlabels : HBoxContainer = $CanvasLayer/HBoxContainer 
 
-@onready var curr_follower_id : int = 0
+@onready var curr_follower_id : int = 1
 
 var sidewalk : bool = false
 
@@ -217,11 +217,11 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	#if event.is_action_pressed("rope"):
+	if event.is_action_pressed("rope"):
 		#gamba_picker.begin_gamba()
 		#print("test")
-		pass
-
+		create_follower()
+	pass
 func terrainSpawnLogic() -> void:
 	if sidewalk:
 		terrainSpawn(1, 0, $spawnterrain.global_position.y)
@@ -335,12 +335,18 @@ func create_follower() -> void:
 	var follower : RigidBody2D = CROSSER.instantiate()
 	var follower_in_front : RigidBody2D = Global.follower_array[-1]
 	follower.set_script(FOLLOWERSCRIPT)
-	Global.follower_array.append(follower)
 	follower.get_node("Camera2D").queue_free()
 	follower.get_node("shield").queue_free()
 	follower.remove_meta("Player")
 	follower.set_meta("Follower", curr_follower_id)
 	curr_follower_id += 1
+	follower.set_collision_layer_value(1, false)
+	var timer = Timer.new()
+	timer.autostart = true
+	timer.wait_time = 0.075
+	timer.timeout.connect(follower._on_timer_timeout)
+	follower.add_child(timer)
 	follower.position.x = follower_in_front.position.x
 	follower.position.y = follower_in_front.position.y + 40
+	Global.follower_array.append(follower)
 	$Ysort.add_child(follower)

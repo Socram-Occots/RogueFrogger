@@ -68,6 +68,7 @@ func dash_decision_tree() -> void:
 #		print(Global.dash_scaling)
 		Global.dash_cool_down_bool = true
 		velocityRigid *= Global.dash_scaling
+		velocityRigidDelta *= Global.dash_scaling
 		dashing = true
 		candash = false
 		
@@ -149,9 +150,6 @@ func _process(delta : float) -> void:
 	glide_decision_tree()
 	
 	movement_logic(delta)
-	
-	# tracking player velocity every process for the followers
-	Global.follower_vel = velocityRigid
 	
 	# checking player shield
 	player_shield()
