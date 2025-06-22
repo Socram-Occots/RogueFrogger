@@ -17,7 +17,6 @@ var input_active : bool = false
 #player
 const player_base_speed : float = 750
 var player_prev_vel : Vector2 = Vector2(0,0)
-var follower_vel : Vector2 = Vector2(0,0) 
 
 #car
 const car_base_speed : float = 125.0
@@ -125,6 +124,9 @@ var gamba_update : bool = false
 var gamba_running : bool = false
 var gamba_mod : int = gamba_mod_base
 var gamba_done : bool = false
+
+#follower
+var follower_array : Array[RigidBody2D] = []
 #endregion
 
 func reset() -> void:
@@ -138,7 +140,6 @@ func reset() -> void:
 	defeat_var = false
 	# playerspeed
 	player_prev_vel = Vector2(0,0)
-	follower_vel = Vector2(0,0)
 	player_speed_mod = 0
 	player_speed_scaling = player_base_speed
 	#car speed
@@ -204,6 +205,9 @@ func reset() -> void:
 	gamba_running = false
 	gamba_mod = gamba_mod_base
 	gamba_done = false
+	
+	# follower
+	follower_array.clear()
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:

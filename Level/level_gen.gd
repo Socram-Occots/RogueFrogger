@@ -17,6 +17,8 @@ const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
+const FOLLOWERSCRIPT : Script = preload("res://Follower/follower.gd")
+
 @onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
@@ -30,6 +32,8 @@ const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 @onready var dashpopup : bool = true 
 @onready var line : Area2D = null
 @onready var hboxlabels : HBoxContainer = $CanvasLayer/HBoxContainer 
+
+@onready var curr_follower_id : int = 0
 
 var sidewalk : bool = false
 
@@ -326,3 +330,17 @@ func gamba_check() -> void:
 		Global.gamba_update = false
 		Global.gamba_running = true
 		gamba_picker.begin_gamba()
+		
+func create_follower() -> void:
+	var follower : RigidBody2D = CROSSER.instantiate()
+	var follower_in_front : RigidBody2D = Global.follower_array[-1]
+	follower.set_script(FOLLOWERSCRIPT)
+	Global.follower_array.append(follower)
+	follower.get_node("Camera2D").queue_free()
+	follower.get_node("shield").queue_free()
+	follower.remove_meta("Player")
+	follower.set_meta("Follower", curr_follower_id)
+	curr_follower_id += 1
+	follower.position.x = follower_in_front.position.x
+	follower.position.y = follower_in_front.position.y + 40
+	$Ysort.add_child(follower)

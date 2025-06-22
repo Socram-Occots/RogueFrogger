@@ -16,6 +16,7 @@ func _ready() -> void:
 	load_gamba_picker()
 	#player
 	var player : RigidBody2D = CROSSER.instantiate()
+	Global.follower_array.append(player)
 	player.position.x = $PlayerStart.global_position.x
 	player.position.y = $PlayerStart.global_position.y
 	Global.player_pos_x = player.position.x

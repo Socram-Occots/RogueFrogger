@@ -41,9 +41,9 @@ func _ready() -> void:
 	grapplehook = GRAPPLE.instantiate()
 	grapplehook.crosser = $"."
 
-func move_and_slide_rigidbody() -> void:
-	if !gliding:
-		apply_central_force(velocityRigid)
+#func move_and_slide_rigidbody() -> void:
+	#if !gliding:
+		#apply_central_force(velocityRigid)
 
 func move_player() -> void:
 	if Input.is_action_pressed("left_a"):

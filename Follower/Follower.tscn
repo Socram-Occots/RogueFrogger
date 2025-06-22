@@ -133,7 +133,7 @@ position = Vector2(1000, 500)
 
 [node name="Follower1" type="RigidBody2D" parent="."]
 texture_filter = 1
-position = Vector2(1000, 536.805)
+position = Vector2(1000, 540)
 collision_layer = 0
 collision_mask = 2014
 mass = 0.001
@@ -152,6 +152,23 @@ polygon = PackedVector2Array(0.499998, -25.2579, -6.39569, -25.2579, -11.9, -20.
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_5abg2")
 animation = &"walk_side"
+
+[node name="GlideBoots" type="ColorRect" parent="Follower1"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = 21.0
+offset_right = -20.625
+offset_bottom = 21.505
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(112.5, 27.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.129412, 1, 1, 1)
 
 [node name="Timer" type="Timer" parent="Follower1"]
 wait_time = 0.05
