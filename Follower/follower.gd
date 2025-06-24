@@ -12,7 +12,6 @@ extends RigidBody2D
 
 func find_prev_follower() -> void:
 	var self_index : int = Global.follower_array.find(self, 1)
-	print(self_index)
 	for i in range(self_index - 1, -1, -1):
 		if is_instance_valid(Global.follower_array[i]):
 			prev_follower_index = i
@@ -26,6 +25,8 @@ func find_prev_follower() -> void:
 
 func _ready() -> void:
 	find_prev_follower()
+	velocity_Logic()
+	apply_central_force(velocityRigid * get_process_delta_time())
 
 func _process(delta: float) -> void:
 	if !gliding:
@@ -35,7 +36,7 @@ func _process(delta: float) -> void:
 		dashandglidebonus = false
 		apply_central_force(velocityRigid * delta)
 
-func _on_timer_timeout() -> void:
+func velocity_Logic() -> void:
 	var temp_rigid : RigidBody2D = Global.follower_array[prev_follower_index]
 	#print(is_instance_valid(temp_rigid), temp_rigid.get_meta("Follower"))
 	if is_instance_valid(temp_rigid) && temp_rigid.get_meta("Follower") == prev_follower_id:
@@ -61,6 +62,9 @@ func _on_timer_timeout() -> void:
 		await get_tree().create_timer(Global.dash_time).timeout
 		dash_check = true
 		dashing = false
+
+func _on_timer_timeout() -> void:
+	velocity_Logic()
 
 func player_animation() -> void:
 #	$"AnimatedSprite2D".flip_h = false
