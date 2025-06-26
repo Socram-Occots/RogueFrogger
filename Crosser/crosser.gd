@@ -19,6 +19,8 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 @onready var velocityRigidDelta : Vector2 = Vector2(0.0, 0.0)
 @onready var grapplehook : Line2D
 @onready var vLength : float = 0
+@onready var velocityGrapple : Vector2 = Vector2(0.0, 0.0)
+@onready var grappled : bool = false
 
 func _ready() -> void:
 	# stop camera from being weird initially
@@ -120,7 +122,7 @@ func movement_logic(delta : float) -> void:
 		
 	# tracking velocity for rigidbodies
 	if velocityRigid != Vector2.ZERO:
-		Global.player_prev_vel = velocityRigidDelta
+		Global.player_prev_vel = velocityRigid
 		animated.speed_scale = vLength/Global.player_base_speed
 
 	if !gliding:

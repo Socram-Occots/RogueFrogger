@@ -343,7 +343,7 @@ func create_follower() -> void:
 	follower.set_collision_layer_value(1, false)
 	var timer = Timer.new()
 	timer.autostart = true
-	timer.wait_time = 0.075
+	timer.wait_time = 0.05
 	timer.timeout.connect(follower._on_timer_timeout)
 	follower.add_child(timer)
 	follower.position.x = follower_in_front.position.x

@@ -17,6 +17,7 @@ func _ready() -> void:
 
 func delete_rope() -> void:
 	crosser.grappling = false
+	crosser.grappled = false
 	grapple_head.queue_free()
 	queue_free()
 
@@ -39,13 +40,16 @@ func _process(delta: float) -> void:
 		velocity = -1 * Vector2(crosser_global_pos.x - grapple_pos.x, 
 		crosser_global_pos.y - grapple_pos.y).normalized() * Global.grapple_strength
 		
+		
 		if !(seeking || crosser.gliding):
 			crosser.apply_central_force(velocity * delta)
+			crosser.velocityGrapple = velocity
 		
 		if crosser_global_pos.distance_to(grapple_pos) > Global.grapple_length:
 			delete_rope()
 	else:
 		crosser.grappling = false
+		crosser.grappled = false
 		queue_free()
 
 func _input(event: InputEvent) -> void:
@@ -55,11 +59,12 @@ func _input(event: InputEvent) -> void:
 func end_seeking_and_attach(subject) -> void:
 	if seeking:
 		seeking = false
+		crosser.grappled = true
 		get_node("grappleHead").call_deferred("reparent", subject)
 		
 		if crosser.gliding:
 			crosser.apply_central_force(velocity * get_process_delta_time())
-		
+			crosser.velocityGrapple = velocity
 	elif subject.get_collision_layer() == 4:
 		delete_rope()
 

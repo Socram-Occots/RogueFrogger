@@ -1,14 +1,16 @@
 extends RigidBody2D
 
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
+@onready var velocityGrapple : Vector2 = Vector2(0.0, 0.0)
 @onready var prev_follower_index : int
 @onready var prev_follower_id : int
 @onready var glide_boots: ColorRect = $GlideBoots
 @onready var animated : AnimatedSprite2D = $playermove
 @onready var gliding : bool = false
-@onready var dashandglidebonus : bool = false
-@onready var dash_check : bool = true
 @onready var dashing : bool = false
+@onready var dash_check : bool = true
+@onready var grappled : bool = false
+@onready var grapple_check : bool = true
 
 func find_prev_follower() -> void:
 	var self_index : int = Global.follower_array.find(self, 1)
@@ -32,36 +34,47 @@ func _process(delta: float) -> void:
 	if !gliding:
 		sleeping = true
 		apply_central_force(velocityRigid * delta)
-	elif dashandglidebonus:
-		dashandglidebonus = false
-		apply_central_force(velocityRigid * delta)
+		if grappled:
+			apply_central_force(velocityGrapple * delta)
+	
 
 func velocity_Logic() -> void:
 	var temp_rigid : RigidBody2D = Global.follower_array[prev_follower_index]
 	#print(is_instance_valid(temp_rigid), temp_rigid.get_meta("Follower"))
-	if is_instance_valid(temp_rigid) && temp_rigid.get_meta("Follower") == prev_follower_id:
-		velocityRigid = temp_rigid.velocityRigid
-	else:
+	if !(is_instance_valid(temp_rigid) || temp_rigid.get_meta("Follower") == prev_follower_id):
 		find_prev_follower()
 		temp_rigid = Global.follower_array[prev_follower_index]
-		velocityRigid = temp_rigid.velocityRigid
 	
-	glide_boots.visible = temp_rigid.get_node("GlideBoots").visible
+	velocityRigid = temp_rigid.velocityRigid
+	velocityGrapple = temp_rigid.velocityGrapple
 	
-	if !glide_boots.visible:
-		gliding = false
-		player_animation()
+	glide_boots.visible = temp_rigid.gliding
+	
+	if temp_rigid.grappled:
+		grappled = true
 	else:
+		grapple_check = true
+		grappled = false
+	
+	if temp_rigid.gliding:
 		gliding = true
 		animated.pause()
-	
-	if temp_rigid.dashing && dash_check:
-		dashing = true
-		dash_check = false
-		dashandglidebonus = true
-		await get_tree().create_timer(Global.dash_time).timeout
-		dash_check = true
-		dashing = false
+		
+		if temp_rigid.dashing && dash_check:
+			dash_check = false
+			dashing = true
+			apply_central_force(velocityRigid * get_process_delta_time())
+			await get_tree().create_timer(Global.dash_time).timeout
+			dash_check = true
+			dashing = false
+			
+		if grappled && grapple_check:
+			grapple_check = false
+			apply_central_force(velocityRigid * get_process_delta_time())
+		
+	else:
+		gliding = false
+		player_animation()
 
 func _on_timer_timeout() -> void:
 	velocity_Logic()
