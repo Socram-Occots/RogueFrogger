@@ -4,10 +4,10 @@ extends Area2D
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
-		Global.inc_expl_B(1)
+		Global.inc_expl_B(1 * Global.follower_mod)
 		queue_free()
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	if global_position.y - Global.player_pos_y > 888:
+	if global_position.y - Global.player_pos_y > Global.despawn_lower:
 		queue_free()

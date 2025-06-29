@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://6ikqx5wqgre4"]
 
 [ext_resource type="PackedScene" uid="uid://c1asyn1hn33d8" path="res://Crosser/crosser.tscn" id="1_37dtc"]
-[ext_resource type="Script" path="res://Follower/follower.gd" id="2_3n6dc"]
+[ext_resource type="Script" path="res://Follower/followerLogic.gd" id="2_3n6dc"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="2_xu0om"]
 [ext_resource type="Texture2D" uid="uid://2xgmpch6a1ju" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_2.png" id="3_en3ql"]
 [ext_resource type="Texture2D" uid="uid://bpyhavr5ll4rc" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_3.png" id="4_5ddow"]

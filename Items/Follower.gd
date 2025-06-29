@@ -4,7 +4,7 @@ extends Area2D
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
-		Global.inc_Dash(1 * Global.follower_mod)
+		Global.inc_Follower(1)
 		queue_free()
 
 @warning_ignore("unused_parameter")

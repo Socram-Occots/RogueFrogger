@@ -17,14 +17,14 @@ const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
 const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
-const FOLLOWERSCRIPT : Script = preload("res://Follower/follower.gd")
+const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
 
 @onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
  ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
 @onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 50]
-@onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", "Gamba"]
-@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 50]
+@onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", "Gamba", "Follower"]
+@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 50, 5]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -43,6 +43,9 @@ var glideicon : VBoxContainer = iconlabels.get_node("GlideVbox").duplicate()
 var dashicon : VBoxContainer = iconlabels.get_node("DashVbox").duplicate()
 var expl_B_icon : VBoxContainer = iconlabels.get_node("expl_B_Vbox").duplicate()
 var grapple_icon : VBoxContainer = iconlabels.get_node("GrappleVbox").duplicate()
+var follower_icon : VBoxContainer = iconlabels.get_node("FollowerVbox").duplicate()
+
+var items_instantiate : Node = ITEM.instantiate()
 
 var gamba_picker : Node
 
@@ -121,6 +124,7 @@ node_num: int = 15) -> void:
 			"GrappleRope": i = spawnItems(dir, "GrappleRope", i)
 			"Shield": i = spawnItems(dir, "Shield", i)
 			"Gamba": i = spawnItems(dir, "Gamba",i)
+			"Follower": i = spawnItems(dir, "Follower",i)
 			_: print("This randomly selected item does not exist!:", lucky_spawn)
 			
 		i += 1
@@ -150,7 +154,7 @@ func spawnExplBarrel(dir : String, i : int) -> int:
 	return i
 
 func spawnItems(dir : String, item_str: String, i : int) -> int:
-	var item : Area2D = ITEM.instantiate().get_node(item_str).duplicate()
+	var item : Area2D = items_instantiate.get_node(item_str).duplicate()
 	item.visible = true
 	item.position = get_node(dir).global_position
 	$Ysort.add_child(item)
@@ -217,10 +221,10 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	if event.is_action_pressed("rope"):
-		#gamba_picker.begin_gamba()
-		#print("test")
-		create_follower()
+	#if event.is_action_pressed("rope"):
+		##gamba_picker.begin_gamba()
+		##print("test")
+		#create_follower()
 	pass
 func terrainSpawnLogic() -> void:
 	if sidewalk:
@@ -253,12 +257,19 @@ func update_labels() -> void:
 		elif Global.grapplelabelon:
 			hboxlabels.add_child(grapple_icon)
 			Global.grapplelabelon = false
+		elif Global.followerlabelon:
+			if Global.follower_mod == 1:
+				hboxlabels.remove_child(follower_icon)
+			else:
+				hboxlabels.add_child(follower_icon)
+			Global.followerlabelon = false
 		
 		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
 		glideicon.get_node("Glide").text = str(Global.glide_mod)
 		dashicon.get_node("Dash").text = str(Global.dash_mod)
 		expl_B_icon.get_node("expl_B").text = str(Global.expl_B_mod)
 		grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)
+		follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
 
 func dash_check() -> void:
 	if Global.dash && dashpopup: 
@@ -332,21 +343,30 @@ func gamba_check() -> void:
 		gamba_picker.begin_gamba()
 		
 func create_follower() -> void:
-	var follower : RigidBody2D = CROSSER.instantiate()
-	var follower_in_front : RigidBody2D = Global.follower_array[-1]
-	follower.set_script(FOLLOWERSCRIPT)
-	follower.get_node("Camera2D").queue_free()
-	follower.get_node("shield").queue_free()
-	follower.remove_meta("Player")
-	follower.set_meta("Follower", curr_follower_id)
-	curr_follower_id += 1
-	follower.set_collision_layer_value(1, false)
-	var timer = Timer.new()
-	timer.autostart = true
-	timer.wait_time = 0.05
-	timer.timeout.connect(follower._on_timer_timeout)
-	follower.add_child(timer)
-	follower.position.x = follower_in_front.position.x
-	follower.position.y = follower_in_front.position.y + 40
-	Global.follower_array.append(follower)
-	$Ysort.add_child(follower)
+	var follower_basic = CROSSER.instantiate()
+	for i in range(Global.follower_spawn_multi):
+		var follower : RigidBody2D = follower_basic.duplicate()
+		var follower_in_front : RigidBody2D = Global.follower_array[-1]
+		follower.set_script(FOLLOWERSCRIPT)
+		follower.get_node("Camera2D").queue_free()
+		follower.get_node("shield").queue_free()
+		follower.remove_meta("Player")
+		follower.set_meta("Follower", curr_follower_id)
+		curr_follower_id += 1
+		follower.set_collision_layer_value(1, false)
+		var timer = Timer.new()
+		timer.autostart = true
+		timer.wait_time = 0.05
+		timer.timeout.connect(follower._on_timer_timeout)
+		follower.add_child(timer)
+		follower.position.x = follower_in_front.position.x
+		follower.position.y = follower_in_front.position.y + 40
+		Global.follower_array.append(follower)
+		$Ysort.add_child(follower)
+	
+	Global.follower_spawn_multi = Global.follower_spawn_multi_base
+
+func follower_check() ->void:
+	if Global.Follower:
+		Global.Follower = false
+		create_follower()

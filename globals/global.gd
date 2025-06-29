@@ -38,6 +38,9 @@ const glide_base_time : float = 0.5
 #gamba
 const gamba_result_sec_base : float = 2.0
 const gamba_mod_base : int = 1
+#follower
+const follower_mod_base : int = 1
+const follower_spawn_multi_base : int = 1
 #endregion
 
 #region Values
@@ -127,6 +130,11 @@ var gamba_done : bool = false
 
 #follower
 var follower_array : Array[RigidBody2D] = []
+var follower_mod : int = follower_mod_base
+var spawn_follower_bool : bool = false
+var followerlabelon : bool = false
+var follower_spawn_multi = follower_spawn_multi_base
+var follower = false
 #endregion
 
 func reset() -> void:
@@ -181,6 +189,7 @@ func reset() -> void:
 	expl_B_labelon = false
 	grapplelabelon = false
 	glidelabelon = false
+	followerlabelon = false
 	updatelabels = false
 	
 	#grapplerope
@@ -208,6 +217,10 @@ func reset() -> void:
 	
 	# follower
 	follower_array.clear()
+	follower_mod = follower_mod_base
+	spawn_follower_bool = false
+	follower_spawn_multi = follower_spawn_multi_base
+	follower = false
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
@@ -308,3 +321,20 @@ func inc_GrappleRope(times : int) -> void:
 	grapple_length += 5 * times
 	grapple_cool_down *= (1/1.005) * times
 	updatelabels = true
+
+func inc_Follower(times : int) -> void:
+	if follower_mod == 1:
+		followerlabelon = true
+	spawn_follower_bool = true
+	follower_mod += times
+	follower_spawn_multi = times
+	follower = true
+	updatelabels = true
+
+func wipe_null_followers() -> void:
+	var temp_array : Array[int] = []
+	for i in range(0, len(follower_array)):
+		if !is_instance_valid(i):
+			temp_array.append(i)
+	for i in temp_array:
+		follower_array.remove_at(i)

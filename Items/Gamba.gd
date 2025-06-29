@@ -12,5 +12,5 @@ func _on_body_entered(body):
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	if global_position.y - Global.player_pos_y > 888:
+	if global_position.y - Global.player_pos_y > Global.despawn_lower:
 		queue_free()
