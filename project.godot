@@ -128,6 +128,7 @@ locale/translations_pot_files=PackedStringArray("res://addons/dialogmanger_examp
 2d_physics/layer_9="explosionbarrelcore"
 2d_physics/layer_10="explosionbarrelexplosion"
 2d_physics/layer_11="explodingbarrelphysical"
+2d_physics/layer_12="Follower"
 
 [rendering]
 

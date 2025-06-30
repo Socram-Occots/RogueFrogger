@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=50 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -213,9 +213,13 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ekbee"]
+size = Vector2(20, 2)
+
 [node name="crosser" type="RigidBody2D"]
 texture_filter = 1
-collision_mask = 2015
+collision_mask = 4062
+collision_priority = 3.0
 mass = 0.001
 gravity_scale = 0.0
 lock_rotation = true
@@ -224,15 +228,18 @@ script = ExtResource("1_5p142")
 metadata/Player = false
 metadata/Follower = 0
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-0.483869, 0.484708)
+[node name="TopCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2(1.5, 1.502)
-polygon = PackedVector2Array(0.499998, -25.2579, -6.39569, -25.2579, -11.9, -20.1, -15, -5.92312, -15, 13.5442, -13.9667, 19.1, -10.8177, 24.2579, 12.9, 24.2579, 16, 19.1, 16, 12.9105, 16, -5.41653, 12.9, -20.1, 7.73333, -25.2579)
+polygon = PackedVector2Array(-7.33333, -25.2996, -15.3333, -13.9814, -15.3333, -0.665779, 15.3333, -0.665779, 15.3333, -13.9814, 7.33333, -25.2996)
+
+[node name="BotCollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+scale = Vector2(1.5, 1.502)
+polygon = PackedVector2Array(-12, 24.6338, 12, 24.6338, 14.6667, 11.984, 15.3333, -0.665779, 6.66667, -0.665779, 6.66667, 0.665779, -6.66667, 0.665779, -6.66667, -0.665779, -15.3333, -0.665779, -15.3333, 11.984)
 
 [node name="playermove" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_5abg2")
-animation = &"walk_side"
+animation = &"stand"
 
 [node name="shield" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -267,3 +274,10 @@ position_smoothing_enabled = true
 
 [node name="player" type="Node2D" parent="."]
 texture_filter = 1
+
+[node name="FollowerCollision" type="StaticBody2D" parent="."]
+collision_layer = 2048
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FollowerCollision"]
+shape = SubResource("RectangleShape2D_ekbee")

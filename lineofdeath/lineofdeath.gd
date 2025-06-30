@@ -15,3 +15,5 @@ func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
 		Global.defeat()
+	elif "Follower" in  metalist:
+		body.remove_follower()

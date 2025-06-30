@@ -56,11 +56,11 @@ func _on_body_entered(body):
 			Global.defeat()
 		else:
 			body.shield_comp = true
-			
+	elif "Follower" in metalist:
+		body.remove_follower()
+
 func _on_body_exited(body):
 	var metalist : PackedStringArray = body.get_meta_list()
-	if "Player" in metalist:
-		if body.shield_up:
-			body.shield_gone = true
-			body.shield_comp = false
-		
+	if "Player" in metalist && body.shield_up:
+		body.shield_gone = true
+		body.shield_comp = false

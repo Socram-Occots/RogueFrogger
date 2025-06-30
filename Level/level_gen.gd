@@ -330,7 +330,7 @@ func load_gamba_picker() -> void:
 	gamba_picker = GAMBAPICKER.instantiate()
 	#gamba_picker.get_node("HBoxContainer").visible = false
 	var input_array : Array = []
-	for i in [["PlayerSpeed", playerspeedicon], ["GlideBoots", glideicon], ["Dash", dashicon], ["expl_B", expl_B_icon], ["GrappleRope", grapple_icon]]:
+	for i in [["Follower", follower_icon], ["PlayerSpeed", playerspeedicon], ["GlideBoots", glideicon], ["Dash", dashicon], ["expl_B", expl_B_icon], ["GrappleRope", grapple_icon]]:
 		input_array.append([i[0], i[1].get_node("Sprite2D").texture])
 	gamba_picker.item_pool = input_array
 	gamba_picker.gamba_result_time_seconds = 2
@@ -353,7 +353,7 @@ func create_follower() -> void:
 		follower.remove_meta("Player")
 		follower.set_meta("Follower", curr_follower_id)
 		curr_follower_id += 1
-		follower.set_collision_layer_value(1, false)
+		#follower.set_collision_layer_value(1, false)
 		var timer = Timer.new()
 		timer.autostart = true
 		timer.wait_time = 0.05

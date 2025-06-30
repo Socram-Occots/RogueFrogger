@@ -7,6 +7,7 @@ func _process(delta: float) -> void:
 	dash_check()
 	terrain_check()
 	gamba_check()
+	follower_check()
 
 func _ready() -> void:
 	#load pause and game over menu

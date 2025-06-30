@@ -41,9 +41,11 @@ func _on_impulse_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if exploding: return
 #	if not_moving && "Player" in metalist:
-	if "Player" in metalist:
-		apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod * get_process_delta_time())
-		#body.dashing = false
+	for i in ["Player", "Follower"]:
+		if i in metalist:
+			apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod * get_process_delta_time())
+			#body.dashing = false
+			break
 	for i in ["Element", "ExplodingBarrel"]:
 		if i in metalist:
 			explosion()
@@ -64,11 +66,13 @@ func _on_explosionbarrelexplosion_body_entered(body):
 			Global.defeat()
 		else:
 			body.shield_comp = true
+	elif "ExplodingBarrel" in metalist:
+		body.explosion()
+	elif "Follower" in metalist:
+		body.remove_follower()
 	for i in ["Element"]:
 		if i in metalist:
 			body.queue_free()
-	if "ExplodingBarrel" in metalist:
-		body.explosion()
 	
 func _on_explosionbarrelexplosion_body_exited(body):
 	var metalist : PackedStringArray = body.get_meta_list()

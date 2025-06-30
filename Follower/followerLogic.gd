@@ -39,11 +39,19 @@ func _process(delta: float) -> void:
 	
 
 func velocity_Logic() -> void:
-	var temp_rigid : RigidBody2D = Global.follower_array[prev_follower_index]
-	#print(is_instance_valid(temp_rigid), temp_rigid.get_meta("Follower"))
-	if !(is_instance_valid(temp_rigid) || temp_rigid.get_meta("Follower") == prev_follower_id):
+	var temp_rigid : RigidBody2D
+	if prev_follower_index < len(Global.follower_array):
+		temp_rigid = Global.follower_array[prev_follower_index]
+		if !(is_instance_valid(temp_rigid) || temp_rigid.get_meta("Follower") == prev_follower_id):
+			find_prev_follower()
+			temp_rigid = Global.follower_array[prev_follower_index]
+	else:
 		find_prev_follower()
 		temp_rigid = Global.follower_array[prev_follower_index]
+
+	if (global_position - temp_rigid.global_position).length() < Vector2(0,0.1).length():
+		#print((global_position - temp_rigid.global_position))
+		remove_follower()
 	
 	velocityRigid = temp_rigid.velocityRigid
 	velocityGrapple = temp_rigid.velocityGrapple
@@ -106,3 +114,4 @@ func remove_follower() -> void:
 	if Global.follower_mod == 1:
 		Global.followerlabelon = true
 		Global.updatelabels = true
+	queue_free()

@@ -134,7 +134,7 @@ var follower_mod : int = follower_mod_base
 var spawn_follower_bool : bool = false
 var followerlabelon : bool = false
 var follower_spawn_multi = follower_spawn_multi_base
-var follower = false
+var Follower = false
 #endregion
 
 func reset() -> void:
@@ -220,7 +220,7 @@ func reset() -> void:
 	follower_mod = follower_mod_base
 	spawn_follower_bool = false
 	follower_spawn_multi = follower_spawn_multi_base
-	follower = false
+	Follower = false
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
@@ -328,7 +328,7 @@ func inc_Follower(times : int) -> void:
 	spawn_follower_bool = true
 	follower_mod += times
 	follower_spawn_multi = times
-	follower = true
+	Follower = true
 	updatelabels = true
 
 func wipe_null_followers() -> void:

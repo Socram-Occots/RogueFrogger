@@ -67,12 +67,15 @@ func present_winner() -> void:
 	#print("sec: ", total_sec)
 	gamba_rect.texture = temp_item_pool[cycleitemcounter][1]
 	
+	var multi_result : int = Global.gamba_mod * Global.follower_spawn_multi
+	
 	match temp_item_pool[cycleitemcounter][0]:
-		"PlayerSpeed": Global.inc_PlayerSpeed(Global.gamba_mod)
-		"GlideBoots": Global.inc_GlideBoots(Global.gamba_mod)
-		"Dash": Global.inc_Dash(Global.gamba_mod)
-		"expl_B": Global.inc_expl_B(Global.gamba_mod)
-		"GrappleRope": Global.inc_GrappleRope(Global.gamba_mod)
+		"PlayerSpeed": Global.inc_PlayerSpeed(multi_result)
+		"GlideBoots": Global.inc_GlideBoots(multi_result)
+		"Dash": Global.inc_Dash(multi_result)
+		"expl_B": Global.inc_expl_B(multi_result)
+		"GrappleRope": Global.inc_GrappleRope(multi_result)
+		"Follower": Global.inc_Follower(Global.gamba_mod)
 		_: print("Uknown item in the Gamba Picker")
 		
 	
