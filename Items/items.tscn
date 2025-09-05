@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=43 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/PlayerSpeed.gd" id="1_vl5uj"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
@@ -24,6 +24,9 @@
 [ext_resource type="Script" path="res://Items/Follower.gd" id="22_d2h3b"]
 [ext_resource type="Shader" uid="uid://cpp8pav277vbr" path="res://Items/shadingFollower.tres" id="22_unf15"]
 [ext_resource type="Texture2D" uid="uid://be15lp37ucnes" path="res://RogueFroggerAssets/RFAssets/Level/follower_glow.png" id="23_8ygfu"]
+[ext_resource type="Script" path="res://Items/Shrink.gd" id="25_14yh6"]
+[ext_resource type="Shader" uid="uid://bxo3dodrjiwmy" path="res://Items/shadingShrink.tres" id="25_onvt6"]
+[ext_resource type="Texture2D" uid="uid://cdrdptw7dxvng" path="res://RogueFroggerAssets/RFAssets/Level/shrinkglow.png" id="26_h4357"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
@@ -66,6 +69,9 @@ shader = ExtResource("18_kt2h8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_psk51"]
 shader = ExtResource("22_unf15")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jamyc"]
+shader = ExtResource("25_onvt6")
 
 [node name="Items" type="Node2D"]
 
@@ -205,6 +211,20 @@ material = SubResource("ShaderMaterial_psk51")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("23_8ygfu")
 
+[node name="Shrink" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+script = ExtResource("25_14yh6")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Shrink"]
+shape = SubResource("RectangleShape2D_j3dfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Shrink"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_jamyc")
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("26_h4357")
+
 [connection signal="body_entered" from="PlayerSpeed" to="PlayerSpeed" method="_on_body_entered"]
 [connection signal="body_entered" from="GlideBoots" to="GlideBoots" method="_on_body_entered"]
 [connection signal="body_entered" from="Dash" to="Dash" method="_on_body_entered"]
@@ -213,3 +233,4 @@ texture = ExtResource("23_8ygfu")
 [connection signal="body_entered" from="Gamba" to="Gamba" method="_on_body_entered"]
 [connection signal="body_entered" from="Shield" to="Shield" method="_on_body_entered"]
 [connection signal="body_entered" from="Follower" to="Follower" method="_on_body_entered"]
+[connection signal="body_entered" from="Shrink" to="Shrink" method="_on_body_entered"]

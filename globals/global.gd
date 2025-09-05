@@ -41,6 +41,9 @@ const gamba_mod_base : int = 1
 #follower
 const follower_mod_base : int = 1
 const follower_spawn_multi_base : int = 1
+#shrink
+const shrink_percent_base : float = 0.5
+const shrink_mod_limit_base : int = 100
 #endregion
 
 #region Values
@@ -54,7 +57,7 @@ var prev_car_speed : float = car_base_speed
 
 #dash
 var dash : bool = false
-var dash_mod : float = 0.0
+var dash_mod : int = 0
 var dash_scaling = dash_base
 var dash_time = dash_base_time
 var dash_cool_down = dash_cool_down_base
@@ -135,6 +138,12 @@ var spawn_follower_bool : bool = false
 var followerlabelon : bool = false
 var follower_spawn_multi = follower_spawn_multi_base
 var Follower = false
+
+#shrink
+var shrink_mod : int = 0
+var shrink_percent : float = shrink_percent_base
+var shrink_mod_limit : int = shrink_mod_limit_base
+var shrinklabelon : bool = false
 #endregion
 
 func reset() -> void:
@@ -190,6 +199,7 @@ func reset() -> void:
 	grapplelabelon = false
 	glidelabelon = false
 	followerlabelon = false
+	shrinklabelon = false
 	updatelabels = false
 	
 	#grapplerope
@@ -221,6 +231,10 @@ func reset() -> void:
 	spawn_follower_bool = false
 	follower_spawn_multi = follower_spawn_multi_base
 	Follower = false
+	
+	shrink_mod = 0
+	shrink_percent = shrink_percent_base
+	shrink_mod_limit = shrink_mod_limit_base
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
@@ -288,7 +302,7 @@ func inc_GlideBoots(times : int) -> void:
 		glidelabelon = true
 		glide = true
 	glide_mod += times
-	glide_cool_down *= (1/1.005) * times
+	glide_cool_down *= (1/1.005) ** times
 	glide_time += 0.025 * times
 	updatelabels = true
 	
@@ -299,7 +313,7 @@ func inc_Dash(times : int) -> void:
 	dash_mod += times
 	dash_scaling += 0.02 * times
 	dash_time = Global.dash_base_time/(Global.dash_scaling/Global.dash_base)
-	dash_cool_down *= (1/1.005) * times
+	dash_cool_down *= (1/1.005) ** times
 	updatelabels = true
 	
 func inc_expl_B(times : int) -> void:
@@ -319,7 +333,7 @@ func inc_GrappleRope(times : int) -> void:
 	grapple_speed += 5 * times
 	grapple_strength += 25 * times
 	grapple_length += 5 * times
-	grapple_cool_down *= (1/1.005) * times
+	grapple_cool_down *= (1/1.005) ** times
 	updatelabels = true
 
 func inc_Follower(times : int) -> void:
@@ -331,10 +345,31 @@ func inc_Follower(times : int) -> void:
 	Follower = true
 	updatelabels = true
 
+func inc_Shrink(times : int) -> void:
+	if shrink_mod == 0:
+		shrinklabelon = true
+	shrink_mod += times
+	if shrink_mod < 100 and !follower_array.is_empty():
+		wipe_null_followers()
+		var temp_shrink_per : float = 1 - ((shrink_mod*shrink_percent)/100)
+		var temp_shrinkxy : float = 1 * temp_shrink_per
+		var temp_shrinkxy2 : float = 1.5 * temp_shrink_per
+		var temp_shrink : Vector2 = Vector2(temp_shrinkxy, temp_shrinkxy)
+		var temp_shrink2 : Vector2 = Vector2(temp_shrinkxy2, temp_shrinkxy2)
+		for i in range(0, len(follower_array)):
+			#print(follower_array[i].get_node("TopCollisionPolygon2D").scale)
+			follower_array[i].get_node("TopCollisionPolygon2D").scale = temp_shrink
+			follower_array[i].get_node("BotCollisionPolygon2D2").scale = temp_shrink
+			follower_array[i].get_node("playermove").scale = temp_shrink2
+			follower_array[i].get_node("shield").scale = temp_shrink
+			follower_array[i].get_node("GlideBoots").scale = temp_shrink
+			follower_array[i].get_node("FollowerCollision").scale = temp_shrink
+	updatelabels = true
+
 func wipe_null_followers() -> void:
 	var temp_array : Array[int] = []
 	for i in range(0, len(follower_array)):
-		if !is_instance_valid(i):
+		if !is_instance_valid(follower_array[i]):
 			temp_array.append(i)
 	for i in temp_array:
 		follower_array.remove_at(i)

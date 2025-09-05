@@ -109,9 +109,10 @@ func player_animation() -> void:
 
 func remove_follower() -> void:
 	var self_index : int = Global.follower_array.find(self, 1)
-	Global.follower_array.remove_at(self_index)
-	Global.follower_mod -= 1
-	if Global.follower_mod == 1:
-		Global.followerlabelon = true
-		Global.updatelabels = true
+	if self_index != -1:
+		Global.follower_array.remove_at(self_index)
+		Global.follower_mod -= 1
+		if Global.follower_mod == 1:
+			Global.followerlabelon = true
+			Global.updatelabels = true
 	queue_free()
