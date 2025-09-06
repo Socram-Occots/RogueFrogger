@@ -19,12 +19,16 @@ const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
 
-@onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], ["Dumpster"],
- ["ExplBarrel"], ["Items"]]
+@onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], 
+["Dumpster"], ["ExplBarrel"], ["Items"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
-@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 10, 999999]
-@onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", "Gamba", "Follower", "Shrink"]
-@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 50, 50, 50, 1, 999999, 5, 50]
+@onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 
+10, 50]
+@onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", 
+"GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", 
+"Gamba", "Follower", "Shrink", "Multi"]
+@onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 
+50, 50, 50, 1, 50, 5, 50, 100]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -35,8 +39,16 @@ const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
 
 @onready var curr_follower_id : int = 1
 
+var CAR_INST : Node2D = CAR.instantiate()
+var BARREL_INST : StaticBody2D = BARREL.instantiate()
+var TILES_INST : Node2D = TILES.instantiate()
+var DUMP_INST : StaticBody2D = DUMP.instantiate()
+var BORDER_INST : Node2D = BORDER.instantiate()
+var EXPLBARREL_INST : RigidBody2D = EXPLBARREL.instantiate()
+
 var sidewalk : bool = false
 
+# icons
 var iconlabels : Node = ITEMLABELS.instantiate()
 var playerspeedicon : VBoxContainer = iconlabels.get_node("PlayerSpeedVbox").duplicate()
 var glideicon : VBoxContainer = iconlabels.get_node("GlideVbox").duplicate()
@@ -46,9 +58,41 @@ var grapple_icon : VBoxContainer = iconlabels.get_node("GrappleVbox").duplicate(
 var follower_icon : VBoxContainer = iconlabels.get_node("FollowerVbox").duplicate()
 var shrink_icon : VBoxContainer = iconlabels.get_node("ShrinkVbox").duplicate()
 
+# glowicons
 var items_instantiate : Node = ITEM.instantiate()
+var playerspeedglowicon : Texture2D = items_instantiate.get_node("PlayerSpeed/Sprite2D").texture
+var glideglowicon : Texture2D = items_instantiate.get_node("GlideBoots/Sprite2D").texture
+var dashglowicon : Texture2D = items_instantiate.get_node("Dash/Sprite2D").texture
+var expl_B_glowicon : Texture2D = items_instantiate.get_node("expl_B/Sprite2D").texture
+var grapple_glowicon : Texture2D = items_instantiate.get_node("GrappleRope/Sprite2D").texture
+var follower_glowicon : Texture2D = items_instantiate.get_node("Follower/Sprite2D").texture
+var shrink_glowicon : Texture2D = items_instantiate.get_node("Shrink/Sprite2D").texture
+var gamba_glowicon : Texture2D = items_instantiate.get_node("Gamba/Sprite2D").texture
+var shield_glowicon : Texture2D = items_instantiate.get_node("Shield/Sprite2D").texture
+
+var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
+ ["Shrink", shrink_glowicon], ["Follower", follower_glowicon],
+ ["PlayerSpeed", playerspeedglowicon], ["GlideBoots", glideglowicon],
+ ["Dash", dashglowicon], ["expl_B", expl_B_glowicon],
+ ["GrappleRope", grapple_glowicon], ["Shield", shield_glowicon]]
+
+@onready var DEFAULT_MULTI_LIST : Array[String] = ["Gamba", "Shrink",
+"Follower", "PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope",
+"Shield"]
+@onready var DEFAULT_MULTI_CHANCE_LIST : Array[int] = [50, 50, 5, 50, 50, 50, 
+50, 50, 1]
 
 var gamba_picker : Node
+
+@onready var multi_quantity_sum_divide_const : float = 2
+@onready var multi_quantity_sum : float = sum_multi_chances(9)
+
+func sum_multi_chances(max_items : int = 9) -> float:
+	var initial : float = 150
+	var total : float = 150
+	for i in range(1, max_items - 1):
+		total += initial / (multi_quantity_sum_divide_const*i)
+	return total
 
 func itemSpawn(spawns : Array[Array] = DEFAULT_SPAWN_LIST, 
 chances : Array[float] = DEFAULT_CHANCE_LIST, 
@@ -106,6 +150,7 @@ node_num: int = 15) -> void:
 				if chance <= 0:
 					selected_item = a
 					break
+					
 			if selected_item == -1:
 				print("Item Selection Failure. Leftover chance: ", chance)
 				selected_item = chances_length - 1
@@ -127,12 +172,72 @@ node_num: int = 15) -> void:
 			"Gamba": i = spawnItems(dir, lucky_spawn,i)
 			"Follower": i = spawnItems(dir, lucky_spawn,i)
 			"Shrink": i = spawnItems(dir,lucky_spawn, i)
+			"Multi": i = spawnItems(dir,lucky_spawn, i)
 			_: print("This randomly selected item does not exist!:", lucky_spawn)
 			
 		i += 1
 
+func multiItemPicker(mulit_list : Array[String] = DEFAULT_MULTI_LIST,
+multi_chance_list : Array[int] = DEFAULT_MULTI_CHANCE_LIST, num_of_multi : int = 9) -> Array[Array]:
+	var result_multi_list : Array[Array] = []
+	var mulit_list_copy = mulit_list.duplicate(true)
+	var multi_chance_list_copy = multi_chance_list.duplicate(true)
+	var multi_chance_pool : float = Global.float_sum_array(multi_chance_list_copy)
+	var multi_chances_length : int = multi_chance_list_copy.size()
+	var initial : float = 150
+	var multi_quantity : int = 2
+	var lucky_multi : String
+	
+	var multi_quantity_sum_chance = randf_range(0, multi_quantity_sum) - initial
+	for i in range(1, num_of_multi):
+		if multi_quantity_sum_chance <= 0:
+			multi_quantity = i + 1
+			break
+		multi_quantity_sum_chance -= initial / (multi_quantity_sum_divide_const*i)
+	
+	result_multi_list.resize(multi_quantity)
+
+	for i in range(0, multi_quantity):
+
+		var selected_multi : int = -1
+		var chance : float = randf_range(0, multi_chance_pool)
+		
+		for a in range(0, multi_chances_length):
+			chance -= multi_chance_list_copy[a]
+			
+			if chance <= 0:
+				selected_multi = a
+				break
+				
+		if selected_multi == -1:
+			print("Multi Selection Failure. Leftover chance: ", chance)
+			selected_multi = multi_chances_length - 1
+		
+		lucky_multi = mulit_list_copy[selected_multi]
+
+		# spawn the lucky item
+		match lucky_multi:
+			"None": pass
+			"PlayerSpeed": result_multi_list[i] = [lucky_multi, playerspeedglowicon]
+			"GlideBoots": result_multi_list[i] = [lucky_multi, glideglowicon]
+			"Dash": result_multi_list[i] = [lucky_multi, dashglowicon]
+			"expl_B": result_multi_list[i] = [lucky_multi, expl_B_glowicon]
+			"GrappleRope": result_multi_list[i] = [lucky_multi, grapple_glowicon]
+			"Shield": result_multi_list[i] = [lucky_multi, shield_glowicon]
+			"Gamba": result_multi_list[i] = [lucky_multi, gamba_glowicon]
+			"Follower": result_multi_list[i] = [lucky_multi, follower_glowicon]
+			"Shrink": result_multi_list[i] = [lucky_multi, shrink_glowicon]
+			_: print("This randomly selected multi does not exist!:", lucky_multi)
+		
+		multi_chance_pool -= multi_chance_list_copy[selected_multi]
+		multi_chance_list_copy.remove_at(selected_multi)
+		mulit_list_copy.remove_at(selected_multi)
+		multi_chances_length -= 1
+
+	return result_multi_list
+
 func spawnBarrel(dir : String, i : int) -> int:
-	var barrel : StaticBody2D = BARREL.instantiate().duplicate()
+	var barrel : StaticBody2D = BARREL_INST.duplicate()
 	barrel.visible = true
 	barrel.position = get_node(dir).global_position
 	$Ysort.add_child(barrel)
@@ -141,7 +246,7 @@ func spawnBarrel(dir : String, i : int) -> int:
 func spawnDumpster(dir : String, node_num : int, i : int) -> int:
 	# we have to check if this is the last node to prevent clipping out of bounds
 	if i + 1 >= node_num: return i
-	var dump : StaticBody2D = DUMP.instantiate().duplicate()
+	var dump : StaticBody2D = DUMP_INST.duplicate()
 	dump.visible = true
 	dump.position = get_node(dir).global_position
 	$Ysort.add_child(dump)
@@ -149,7 +254,7 @@ func spawnDumpster(dir : String, node_num : int, i : int) -> int:
 	return i + 1
 
 func spawnExplBarrel(dir : String, i : int) -> int:
-	var explbarrel : RigidBody2D = EXPLBARREL.instantiate().duplicate()
+	var explbarrel : RigidBody2D = EXPLBARREL_INST.duplicate()
 	explbarrel.visible = true
 	explbarrel.position = get_node(dir).global_position
 	$Ysort.add_child(explbarrel)
@@ -157,13 +262,15 @@ func spawnExplBarrel(dir : String, i : int) -> int:
 
 func spawnItems(dir : String, item_str: String, i : int) -> int:
 	var item : Area2D = items_instantiate.get_node(item_str).duplicate()
+	if item_str == "Multi":
+		item.item_pool = multiItemPicker()
 	item.visible = true
 	item.position = get_node(dir).global_position
 	$Ysort.add_child(item)
 	return i
 
 func carSpawn() -> void:
-	var car : Node2D = CAR.instantiate().duplicate()
+	var car : Node2D = CAR_INST.duplicate()
 	car.position.y = $spawnterrain/Node0.global_position.y - 5
 	car.visible = true
 	
@@ -178,7 +285,7 @@ func carSpawn() -> void:
 func firstTerrainSpawn(xpos : float, ypos : float) -> void:
 #	var tile_num = randi_range(0,1)
 	sidewalk = true
-	var tile = TILES.instantiate().get_node("TileMap0").duplicate()
+	var tile = TILES_INST.get_node("TileMap0").duplicate()
 	tile.position.x = xpos
 	tile.position.y = ypos
 	tile.visible = true
@@ -295,7 +402,7 @@ func terrain_check() -> void:
 			spawnBorder(960, Global.player_pos_y)
 
 func spawnBorder(x : float, y : float) -> void:
-	var border : Node2D = BORDER.instantiate().duplicate()
+	var border : Node2D = BORDER_INST.duplicate()
 	border.position.x = x
 	border.position.y = y
 #	print(border.global_position)
@@ -336,9 +443,12 @@ func spawn_high_score_line() -> void:
 
 func load_gamba_picker() -> void:
 	gamba_picker = GAMBAPICKER.instantiate()
-	#gamba_picker.get_node("HBoxContainer").visible = false
-	var input_array : Array = []
-	for i in [["Shrink", shrink_icon], ["Follower", follower_icon], ["PlayerSpeed", playerspeedicon], ["GlideBoots", glideicon], ["Dash", dashicon], ["expl_B", expl_B_icon], ["GrappleRope", grapple_icon]]:
+	var temp_array : Array[Array] = [["Shrink", shrink_icon], 
+	["Follower", follower_icon], ["PlayerSpeed", playerspeedicon], 
+	["GlideBoots", glideicon], ["Dash", dashicon], 
+	["expl_B", expl_B_icon], ["GrappleRope", grapple_icon]]
+	var input_array : Array[Array] = []
+	for i in temp_array:
 		input_array.append([i[0], i[1].get_node("Sprite2D").texture])
 	gamba_picker.item_pool = input_array
 	gamba_picker.gamba_result_time_seconds = 2

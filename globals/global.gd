@@ -366,6 +366,13 @@ func inc_Shrink(times : int) -> void:
 			follower_array[i].get_node("FollowerCollision").scale = temp_shrink
 	updatelabels = true
 
+func inc_Gamba(times : int) -> void:
+	if gamba_running:
+		gamba_mod += times
+	elif !(gamba_update || gamba_done):
+		gamba_mod += times - 1
+		gamba_update = true
+
 func wipe_null_followers() -> void:
 	var temp_array : Array[int] = []
 	for i in range(0, len(follower_array)):

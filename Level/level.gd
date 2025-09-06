@@ -36,4 +36,3 @@ func _ready() -> void:
 	#labels
 	# high score line
 	spawn_high_score_line()
-	

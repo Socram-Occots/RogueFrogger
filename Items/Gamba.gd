@@ -5,10 +5,7 @@ func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	for i in ["Player", "Follower"]:
 		if i in metalist:
-			if Global.gamba_running:
-				Global.gamba_mod += 1
-			elif !(Global.gamba_update || Global.gamba_done):
-				Global.gamba_update = true
+			Global.inc_Gamba(1 * Global.follower_mod)
 			queue_free()
 			break
 

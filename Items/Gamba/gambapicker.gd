@@ -1,6 +1,6 @@
 extends Node
 
-@export var item_pool : Array = []
+@export var item_pool : Array[Array] = []
 @export var gamba_result_time_seconds : int = 5
 @onready var cycleitemcounter : int = 0
 @onready var itemcycletimer : Timer = $HBoxContainer/ItemCycleTimer
@@ -22,7 +22,7 @@ func begin_gamba() -> void:
 	if len_item_pool < 1:
 		return
 	set_process(true)
-	temp_item_pool = item_pool.duplicate()
+	temp_item_pool = item_pool.duplicate(true)
 	timepercycle = gamba_result_time_seconds / float(len_item_pool - 1)
 	timeperitemcycle = timepercycle / (len_item_pool)
 	label.text = str(Global.gamba_mod) + "x"
