@@ -335,8 +335,10 @@ func _input(event):
 	#if event.is_action_pressed("rope"):
 		##gamba_picker.begin_gamba()
 		##print("test")
-		#create_follower()
+		##create_follower()
+		#Global.inc_PlayerSlow(1)
 	pass
+
 func terrainSpawnLogic() -> void:
 	if sidewalk:
 		terrainSpawn(1, 0, $spawnterrain.global_position.y)

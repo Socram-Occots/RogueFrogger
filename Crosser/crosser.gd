@@ -57,16 +57,21 @@ func move_player() -> void:
 	if Input.is_action_pressed("up_w"):
 		velocityRigid.y -= 1
 	
-	velocityRigid = velocityRigid.normalized() * Global.player_speed_scaling
-
+	var playerspeed_penalty : float = (1 - (Global.playerslow_percent *\
+	(Global.playerslow_mod_real - 1)))
+	
+	velocityRigid = velocityRigid.normalized() *\
+	Global.player_speed_scaling * playerspeed_penalty
+	
 	if Input.is_action_pressed("walk"):
 		velocityRigid /= 2
-		vLength = Global.player_speed_scaling / 2
+		vLength = (Global.player_speed_scaling * playerspeed_penalty) / 2
 	else:
-		vLength = Global.player_speed_scaling
+		vLength = Global.player_speed_scaling * playerspeed_penalty
 
 func dash_decision_tree() -> void:
-	if Input.is_action_just_pressed("dash") && Global.dash && !Global.dash_cool_down_bool && velocityRigid != Vector2.ZERO && candash:
+	if Input.is_action_just_pressed("dash") && Global.dash &&\
+	 !Global.dash_cool_down_bool && velocityRigid != Vector2.ZERO && candash:
 #		print(Global.dash_scaling)
 		Global.dash_cool_down_bool = true
 		velocityRigid *= Global.dash_scaling
@@ -84,7 +89,8 @@ func dash_decision_tree() -> void:
 		glidethendashbonus = false
 
 func grapple_decision_tree() -> void:
-	if Input.is_action_just_pressed("rope") && Global.grapple && !Global.grapple_cool_down_bool && !grappling:
+	if Input.is_action_just_pressed("rope") && Global.grapple &&\
+	 !Global.grapple_cool_down_bool && !grappling:
 		Global.grapple_cool_down_bool = true
 		grappling = true
 		var grappledupe : Line2D = grapplehook.duplicate()
@@ -113,7 +119,7 @@ func glide_decision_tree() -> void:
 func movement_logic(delta : float) -> void:
 	
 	# this must go first because this what is updating velocityRigid
-	if (!(dashing || gliding)):
+	if !(dashing || gliding):
 		velocityRigid = Vector2.ZERO
 		velocityRigidDelta = Vector2.ZERO
 		move_player()
@@ -134,6 +140,7 @@ func movement_logic(delta : float) -> void:
 		player_animation()
 		apply_central_force(velocityRigidDelta)
 	elif glidethendashbonus:
+		#this is to make sure the glidedash bonus is given only once
 		glidethendashbonus = false
 		apply_central_force(velocityRigidDelta)
 	
@@ -158,7 +165,8 @@ func _process(delta : float) -> void:
 	shield_compromised()
 	
 	# tracking velocity for rigidbodies
-	if velocityRigidDelta == Vector2.ZERO && Global.player_prev_vel != Vector2.ZERO:
+	if velocityRigidDelta == Vector2.ZERO && Global.player_prev_vel\
+	 != Vector2.ZERO:
 		await get_tree().create_timer(0.075).timeout
 		Global.player_prev_vel = Vector2.ZERO
 	

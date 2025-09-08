@@ -44,11 +44,14 @@ const follower_spawn_multi_base : int = 1
 #shrink
 const shrink_percent_base : float = 0.5
 const shrink_mod_limit_base : int = 100
+#slow
+const playerslow_percent_base : float = 0.01
+const playerslow_mod_base : int = 1
 #endregion
 
 #region Values
 # playerspeed
-var player_speed_mod : float = 0.0
+var player_speed_mod : int = 0
 var player_speed_scaling = player_base_speed
 #car speed
 var car_speed_mod : float = 0.0
@@ -144,6 +147,12 @@ var shrink_mod : int = 0
 var shrink_percent : float = shrink_percent_base
 var shrink_mod_limit : int = shrink_mod_limit_base
 var shrinklabelon : bool = false
+
+#slow
+var playerslow_percent : float = playerslow_percent_base
+var playerslow_mod : int = playerslow_mod_base
+var playerslow_mod_real : int = playerslow_mod_base
+var playerslowlabelone : bool = false
 #endregion
 
 func reset() -> void:
@@ -200,6 +209,7 @@ func reset() -> void:
 	glidelabelon = false
 	followerlabelon = false
 	shrinklabelon = false
+	playerslowlabelone = false
 	updatelabels = false
 	
 	#grapplerope
@@ -232,9 +242,16 @@ func reset() -> void:
 	follower_spawn_multi = follower_spawn_multi_base
 	Follower = false
 	
+	#shrink
 	shrink_mod = 0
 	shrink_percent = shrink_percent_base
 	shrink_mod_limit = shrink_mod_limit_base
+	
+	#slow
+	playerslow_percent = playerslow_mod_base
+	playerslow_mod = playerslow_mod_base
+	playerslow_mod_real = playerslow_mod_base
+
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
@@ -380,3 +397,11 @@ func wipe_null_followers() -> void:
 			temp_array.append(i)
 	for i in temp_array:
 		follower_array.remove_at(i)
+
+func inc_PlayerSlow(times: int) -> void:
+	if playerslow_mod == 1:
+		playerslowlabelone = true
+	playerslow_mod += times
+	if playerslow_mod < 99:
+		playerslow_mod_real = playerslow_mod
+	updatelabels = true
