@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cdaurrqufg0hl"]
+[gd_scene load_steps=14 format=3 uid="uid://cdaurrqufg0hl"]
 
 [ext_resource type="Texture2D" uid="uid://cl1ge0cjttlc4" path="res://RogueFroggerAssets/RFAssets/Level/speedometer.png" id="1_m21p5"]
 [ext_resource type="Texture2D" uid="uid://dqlrhd483hrwc" path="res://RogueFroggerAssets/RFAssets/Level/glideboots.png" id="2_yvq7r"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://fl60k54d86s3" path="res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png" id="7_kk2o0"]
 [ext_resource type="Texture2D" uid="uid://xeac7is0i3xb" path="res://RogueFroggerAssets/RFAssets/Level/follower.png" id="10_4g14p"]
 [ext_resource type="Texture2D" uid="uid://bsgtvoo6c4xp0" path="res://RogueFroggerAssets/RFAssets/Level/shrink.png" id="11_iu5ds"]
+[ext_resource type="Texture2D" uid="uid://dfere3w8t7ltm" path="res://RogueFroggerAssets/RFAssets/Level/grow.png" id="12_3k61l"]
+[ext_resource type="Texture2D" uid="uid://cs0qooiqw33d8" path="res://RogueFroggerAssets/RFAssets/Level/slow.png" id="12_x4ent"]
 
 [node name="Control" type="Node"]
 
@@ -238,6 +240,44 @@ texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
 texture = ExtResource("11_iu5ds")
+expand_mode = 3
+
+[node name="SlowVbox" type="VBoxContainer" parent="."]
+offset_right = 515.0
+offset_bottom = 792.0
+scale = Vector2(0.2, 0.2)
+alignment = 2
+
+[node name="Slow" type="Label" parent="SlowVbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 200
+text = "99"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="TextureRect" parent="SlowVbox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("12_x4ent")
+expand_mode = 3
+
+[node name="GrowVbox" type="VBoxContainer" parent="."]
+offset_right = 512.0
+offset_bottom = 792.0
+scale = Vector2(0.2, 0.2)
+alignment = 2
+
+[node name="Grow" type="Label" parent="GrowVbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 200
+text = "99"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="TextureRect" parent="GrowVbox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("12_3k61l")
 expand_mode = 3
 
 [connection signal="timeout" from="GlideVbox/Sprite2D/TextureProgressBar/Timer" to="GlideVbox/Sprite2D" method="_on_timer_timeout"]

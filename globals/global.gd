@@ -47,6 +47,10 @@ const shrink_mod_limit_base : int = 100
 #slow
 const playerslow_percent_base : float = 0.01
 const playerslow_mod_base : int = 1
+const playerslow_mod_limit_base : int = 99
+#grow
+const grow_percent_base : float = 0.5
+const grow_mod_limit_base : int = 100
 #endregion
 
 #region Values
@@ -144,6 +148,7 @@ var Follower = false
 
 #shrink
 var shrink_mod : int = 0
+var shrink_mod_real : int = shrink_mod
 var shrink_percent : float = shrink_percent_base
 var shrink_mod_limit : int = shrink_mod_limit_base
 var shrinklabelon : bool = false
@@ -152,7 +157,15 @@ var shrinklabelon : bool = false
 var playerslow_percent : float = playerslow_percent_base
 var playerslow_mod : int = playerslow_mod_base
 var playerslow_mod_real : int = playerslow_mod_base
-var playerslowlabelone : bool = false
+var playerslowlabelon : bool = false
+var playerslow_mod_limit : int = playerslow_mod_limit_base
+
+#grow
+var grow_mod : int = 0
+var grow_mod_real : int = grow_mod
+var grow_percent: float = grow_percent_base
+var grow_mod_limit : int = grow_mod_limit_base
+var growlabelon : bool = false
 #endregion
 
 func reset() -> void:
@@ -209,7 +222,8 @@ func reset() -> void:
 	glidelabelon = false
 	followerlabelon = false
 	shrinklabelon = false
-	playerslowlabelone = false
+	playerslowlabelon = false
+	growlabelon = false
 	updatelabels = false
 	
 	#grapplerope
@@ -244,6 +258,7 @@ func reset() -> void:
 	
 	#shrink
 	shrink_mod = 0
+	shrink_mod_real = shrink_mod
 	shrink_percent = shrink_percent_base
 	shrink_mod_limit = shrink_mod_limit_base
 	
@@ -251,7 +266,13 @@ func reset() -> void:
 	playerslow_percent = playerslow_mod_base
 	playerslow_mod = playerslow_mod_base
 	playerslow_mod_real = playerslow_mod_base
-
+	playerslow_mod_limit = playerslow_mod_limit_base
+	
+	#grow
+	grow_mod = 0
+	grow_mod_real = grow_mod
+	grow_percent = grow_percent_base
+	grow_mod_limit = grow_mod_limit_base
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:
@@ -366,21 +387,14 @@ func inc_Shrink(times : int) -> void:
 	if shrink_mod == 0:
 		shrinklabelon = true
 	shrink_mod += times
-	if shrink_mod < 100 and !follower_array.is_empty():
-		wipe_null_followers()
-		var temp_shrink_per : float = 1 - ((shrink_mod*shrink_percent)/100)
-		var temp_shrinkxy : float = 1 * temp_shrink_per
-		var temp_shrinkxy2 : float = 1.5 * temp_shrink_per
-		var temp_shrink : Vector2 = Vector2(temp_shrinkxy, temp_shrinkxy)
-		var temp_shrink2 : Vector2 = Vector2(temp_shrinkxy2, temp_shrinkxy2)
-		for i in range(0, len(follower_array)):
-			#print(follower_array[i].get_node("TopCollisionPolygon2D").scale)
-			follower_array[i].get_node("TopCollisionPolygon2D").scale = temp_shrink
-			follower_array[i].get_node("BotCollisionPolygon2D2").scale = temp_shrink
-			follower_array[i].get_node("playermove").scale = temp_shrink2
-			follower_array[i].get_node("shield").scale = temp_shrink
-			follower_array[i].get_node("GlideBoots").scale = temp_shrink
-			follower_array[i].get_node("FollowerCollision").scale = temp_shrink
+	if shrink_mod < shrink_mod_limit:
+		shrink_mod_real = shrink_mod
+	else:
+		shrink_mod_real = shrink_mod_limit
+		
+	if !follower_array.is_empty():
+		change_player_follower_size()
+		
 	updatelabels = true
 
 func inc_Gamba(times : int) -> void:
@@ -400,8 +414,41 @@ func wipe_null_followers() -> void:
 
 func inc_PlayerSlow(times: int) -> void:
 	if playerslow_mod == 1:
-		playerslowlabelone = true
+		playerslowlabelon = true
 	playerslow_mod += times
-	if playerslow_mod < 99:
+	if playerslow_mod < playerslow_mod_limit:
 		playerslow_mod_real = playerslow_mod
+	else:
+		playerslow_mod_real = playerslow_mod_limit
 	updatelabels = true
+
+func inc_Grow(times : int) -> void:
+	if grow_mod == 0:
+		growlabelon = true
+	grow_mod += times
+	if grow_mod < grow_mod_limit:
+		grow_mod_real = grow_mod
+	else:
+		grow_mod_real = grow_mod_limit
+		
+	if !follower_array.is_empty():
+		change_player_follower_size()
+		
+	updatelabels = true
+	
+func change_player_follower_size() -> void:
+		wipe_null_followers()
+		var temp_shrink_per : float = 1 - (((shrink_mod_real*shrink_percent) 
+		- (grow_mod_real*grow_percent))/100)
+		var temp_shrinkxy : float = 1 * temp_shrink_per
+		var temp_shrinkxy2 : float = 1.5 * temp_shrink_per
+		var temp_shrink : Vector2 = Vector2(temp_shrinkxy, temp_shrinkxy)
+		var temp_shrink2 : Vector2 = Vector2(temp_shrinkxy2, temp_shrinkxy2)
+		for i in range(0, len(follower_array)):
+			#print(follower_array[i].get_node("TopCollisionPolygon2D").scale)
+			follower_array[i].get_node("TopCollisionPolygon2D").scale = temp_shrink
+			follower_array[i].get_node("BotCollisionPolygon2D2").scale = temp_shrink
+			follower_array[i].get_node("playermove").scale = temp_shrink2
+			follower_array[i].get_node("shield").scale = temp_shrink
+			follower_array[i].get_node("GlideBoots").scale = temp_shrink
+			follower_array[i].get_node("FollowerCollision").scale = temp_shrink

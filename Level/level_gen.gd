@@ -57,6 +57,9 @@ var expl_B_icon : VBoxContainer = iconlabels.get_node("expl_B_Vbox").duplicate()
 var grapple_icon : VBoxContainer = iconlabels.get_node("GrappleVbox").duplicate()
 var follower_icon : VBoxContainer = iconlabels.get_node("FollowerVbox").duplicate()
 var shrink_icon : VBoxContainer = iconlabels.get_node("ShrinkVbox").duplicate()
+var slow_icon : VBoxContainer = iconlabels.get_node("SlowVbox").duplicate()
+var grow_icon : VBoxContainer = iconlabels.get_node("GrowVbox").duplicate()
+
 
 # glowicons
 var items_instantiate : Node = ITEM.instantiate()
@@ -69,6 +72,9 @@ var follower_glowicon : Texture2D = items_instantiate.get_node("Follower/Sprite2
 var shrink_glowicon : Texture2D = items_instantiate.get_node("Shrink/Sprite2D").texture
 var gamba_glowicon : Texture2D = items_instantiate.get_node("Gamba/Sprite2D").texture
 var shield_glowicon : Texture2D = items_instantiate.get_node("Shield/Sprite2D").texture
+var slow_glowicon : Texture2D = items_instantiate.get_node("Slow/Sprite2D").texture
+var grow_glowicon : Texture2D = items_instantiate.get_node("Grow/Sprite2D").texture
+
 
 var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
  ["Shrink", shrink_glowicon], ["Follower", follower_glowicon],
@@ -332,11 +338,12 @@ func _input(event):
 		
 	#if event.is_action_pressed("dash"):
 		#Global.inc_Shrink(1)
-	#if event.is_action_pressed("rope"):
-		##gamba_picker.begin_gamba()
-		##print("test")
-		##create_follower()
+	if event.is_action_pressed("rope"):
+		#gamba_picker.begin_gamba()
+		#print("test")
+		#create_follower()
 		#Global.inc_PlayerSlow(1)
+		Global.inc_Grow(1)
 	pass
 
 func terrainSpawnLogic() -> void:
@@ -355,30 +362,39 @@ func terrainSpawnLogic() -> void:
 func update_labels() -> void:
 	if Global.updatelabels:
 		Global.updatelabels = false
+		# unfortunately this cannot be elif anymore
+		# In the case that 2+ items are picked up at once
+		# we need to check each one.
 		if Global.playerspeedlabelon:
 			hboxlabels.add_child(playerspeedicon)
 			Global.playerspeedlabelon = false
-		elif  Global.glidelabelon:
+		if  Global.glidelabelon:
 			hboxlabels.add_child(glideicon)
 			Global.glidelabelon = false
-		elif Global.dashlabelon:
+		if Global.dashlabelon:
 			hboxlabels.add_child(dashicon)
 			Global.dashlabelon = false
-		elif Global.expl_B_labelon:
+		if Global.expl_B_labelon:
 			hboxlabels.add_child(expl_B_icon)
 			Global.expl_B_labelon = false
-		elif Global.grapplelabelon:
+		if Global.grapplelabelon:
 			hboxlabels.add_child(grapple_icon)
 			Global.grapplelabelon = false
-		elif Global.followerlabelon:
+		if Global.followerlabelon:
 			if Global.follower_mod == 1:
 				hboxlabels.remove_child(follower_icon)
 			else:
 				hboxlabels.add_child(follower_icon)
 			Global.followerlabelon = false
-		elif Global.shrinklabelon:
+		if Global.shrinklabelon:
 			hboxlabels.add_child(shrink_icon)
 			Global.shrinklabelon = false
+		if Global.playerslowlabelon:
+			hboxlabels.add_child(slow_icon)
+			Global.playerslowlabelon = false
+		if Global.growlabelon:
+			hboxlabels.add_child(grow_icon)
+			Global.growlabelon = false
 		
 		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
 		glideicon.get_node("Glide").text = str(Global.glide_mod)
@@ -387,6 +403,8 @@ func update_labels() -> void:
 		grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)
 		follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
 		shrink_icon.get_node("Shrink").text = str(Global.shrink_mod)
+		slow_icon.get_node("Slow").text = str(Global.playerslow_mod - 1)
+		grow_icon.get_node("Grow").text = str(Global.grow_mod)
 
 func dash_check() -> void:
 	if Global.dash && dashpopup: 
