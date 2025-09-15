@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://7d834csju45f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fg4r1"]
+size = Vector2(74, 74)
+
+[node name="Teleportoutline" type="Node2D"]
+
+[node name="TopCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, -37, -17, -28, -24, -1, 24, -1, 17, -28, 7, -37)
+
+[node name="BotCollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-18, 37, 18, 37, 24, 16, 24, -1, 10, -1, 10, 1, -10, 1, -10, -1, -24, -1, -24, 16)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(61, 0)
+shape = SubResource("RectangleShape2D_fg4r1")

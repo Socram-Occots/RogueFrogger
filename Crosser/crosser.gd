@@ -143,9 +143,6 @@ func movement_logic(delta : float) -> void:
 		#this is to make sure the glidedash bonus is given only once
 		glidethendashbonus = false
 		apply_central_force(velocityRigidDelta)
-	
-
-	
 
 @warning_ignore("unused_parameter")
 func _process(delta : float) -> void:
