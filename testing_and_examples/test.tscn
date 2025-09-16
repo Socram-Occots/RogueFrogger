@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://bs4cbeqefjy2o"]
+[gd_scene load_steps=4 format=3 uid="uid://bs4cbeqefjy2o"]
 
 [ext_resource type="Script" path="res://testing_and_examples/test.gd" id="1_qji8c"]
+[ext_resource type="PackedScene" uid="uid://c1asyn1hn33d8" path="res://Crosser/crosser.tscn" id="2_6o5qw"]
+[ext_resource type="PackedScene" uid="uid://7d834csju45f" path="res://Items/Teleport/teleportoutline.tscn" id="3_0hm6w"]
 
 [node name="Test" type="Node2D"]
 script = ExtResource("1_qji8c")
+
+[node name="crosser" parent="." instance=ExtResource("2_6o5qw")]
+position = Vector2(1031.44, 494.425)
+
+[node name="Teleportoutline" parent="." instance=ExtResource("3_0hm6w")]
+position = Vector2(960, 540)
+
+[editable path="crosser"]
+[editable path="Teleportoutline"]
