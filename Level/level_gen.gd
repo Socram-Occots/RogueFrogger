@@ -343,7 +343,12 @@ func _input(event):
 		#print("test")
 		#create_follower()
 		#Global.inc_PlayerSlow(1)
-		Global.inc_Grow(1)
+		#Global.inc_Grow(1)
+		Global.follower_array[0].rand_teleport(
+			Vector2(
+				Global.player_width_px * 4,Global.player_width_px * 4
+				)
+			)
 	pass
 
 func terrainSpawnLogic() -> void:
@@ -437,6 +442,7 @@ func spawnLineOfDeath() -> void:
 	line.position.x = 0
 	line.position.y = 1500
 	$lineofdeath.add_child(line)
+	Global.game_line = line
 
 func loadDefeat() -> void:
 	var losepopup : Control = DEFEAT.instantiate().duplicate()

@@ -89,7 +89,7 @@ var player_pos_x : float = 0.0
 var player_pos_y : float = 0.0
 
 # player attributes
-const player_width_px : int = 46
+const player_width_px : int = 48
 
 # shield
 #var shield_enabled = false
@@ -166,6 +166,9 @@ var grow_mod_real : int = grow_mod
 var grow_percent: float = grow_percent_base
 var grow_mod_limit : int = grow_mod_limit_base
 var growlabelon : bool = false
+
+#line
+var game_line : Node2D = null
 #endregion
 
 func reset() -> void:
@@ -273,6 +276,9 @@ func reset() -> void:
 	grow_mod_real = grow_mod
 	grow_percent = grow_percent_base
 	grow_mod_limit = grow_mod_limit_base
+	
+	#line
+	game_line = null
 
 func incrementDifficulty(x : int) -> void:
 	if score != 0 && score % x == 0:

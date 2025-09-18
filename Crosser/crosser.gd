@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
+const TELE : Resource = preload("res://Items/Teleport/teleportoutline.tscn")
 
 @onready var candash : bool = true
 @onready var dashing : bool = false
@@ -17,10 +18,11 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 @onready var glideBoots : ColorRect = $GlideBoots
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
 @onready var velocityRigidDelta : Vector2 = Vector2(0.0, 0.0)
-@onready var grapplehook : Line2D
+@onready var grapplehook : Line2D = GRAPPLE.instantiate()
 @onready var vLength : float = 0
 @onready var velocityGrapple : Vector2 = Vector2(0.0, 0.0)
 @onready var grappled : bool = false
+@onready var tele : Area2D = TELE.instantiate()
 
 func _ready() -> void:
 	# stop camera from being weird initially
@@ -40,7 +42,7 @@ func _ready() -> void:
 	#$Camera2D.limit_smoothed = true
 	
 	# instantiate grapplie hook
-	grapplehook = GRAPPLE.instantiate()
+	#grapplehook = GRAPPLE.instantiate()
 	grapplehook.crosser = $"."
 
 #func move_and_slide_rigidbody() -> void:
@@ -166,8 +168,7 @@ func _process(delta : float) -> void:
 	 != Vector2.ZERO:
 		await get_tree().create_timer(0.075).timeout
 		Global.player_prev_vel = Vector2.ZERO
-	
-	
+
 func player_animation() -> void:
 #	$"AnimatedSprite2D".flip_h = false
 	if velocityRigid == Vector2.ZERO: 
@@ -207,3 +208,9 @@ func shield_compromised() -> void:
 		shield_gone = false
 #		print(shield_up)
 		shieldAnimation.stop()
+
+func rand_teleport(constraint_2dvec : Vector2 = Vector2.ZERO) -> void:
+	var temp_tele : Area2D = tele.duplicate()
+	temp_tele.global_position = global_position
+	temp_tele.constraint_2dvec = constraint_2dvec
+	get_parent().add_child(temp_tele)

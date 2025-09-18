@@ -10,7 +10,7 @@ collision_layer = 0
 collision_mask = 1366
 monitorable = false
 script = ExtResource("1_a2ecq")
-num_of_col = 180
+num_of_col = 188
 
 [node name="CollisionShape2D0" type="CollisionShape2D" parent="."]
 position = Vector2(74, 0)
@@ -730,6 +730,38 @@ shape = SubResource("RectangleShape2D_u57pi")
 
 [node name="CollisionShape2D179" type="CollisionShape2D" parent="."]
 position = Vector2(-74, 74)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D180" type="CollisionShape2D" parent="."]
+position = Vector2(0, -74)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D181" type="CollisionShape2D" parent="."]
+position = Vector2(0, -148)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D182" type="CollisionShape2D" parent="."]
+position = Vector2(0, -222)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D183" type="CollisionShape2D" parent="."]
+position = Vector2(0, -296)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D184" type="CollisionShape2D" parent="."]
+position = Vector2(0, 296)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D185" type="CollisionShape2D" parent="."]
+position = Vector2(0, 222)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D186" type="CollisionShape2D" parent="."]
+position = Vector2(0, 148)
+shape = SubResource("RectangleShape2D_u57pi")
+
+[node name="CollisionShape2D187" type="CollisionShape2D" parent="."]
+position = Vector2(0, 74)
 shape = SubResource("RectangleShape2D_u57pi")
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]

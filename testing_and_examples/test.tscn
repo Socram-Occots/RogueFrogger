@@ -8,7 +8,7 @@
 script = ExtResource("1_qji8c")
 
 [node name="crosser" parent="." instance=ExtResource("2_6o5qw")]
-position = Vector2(1031.44, 494.425)
+position = Vector2(960, 540)
 
 [node name="Teleportoutline" parent="." instance=ExtResource("3_0hm6w")]
 position = Vector2(960, 540)

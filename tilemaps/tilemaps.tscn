@@ -61,8 +61,8 @@ tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_odgav")
 sources/0 = SubResource("TileSetAtlasSource_r73b3")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mwse"]
-size = Vector2(1344, 48)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysh4n"]
+size = Vector2(1344, 96)
 
 [node name="Tilemaps" type="Node2D"]
 texture_filter = 1
@@ -80,8 +80,8 @@ script = ExtResource("3_myypk")
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap0/Area0"]
-position = Vector2(640, 24)
-shape = SubResource("RectangleShape2D_6mwse")
+position = Vector2(640, 48)
+shape = SubResource("RectangleShape2D_ysh4n")
 
 [node name="TileMap1" type="TileMap" parent="."]
 texture_filter = 1
@@ -96,8 +96,8 @@ script = ExtResource("4_umj8o")
 collision_layer = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap1/Area1"]
-position = Vector2(640, 24)
-shape = SubResource("RectangleShape2D_6mwse")
+position = Vector2(640, 48)
+shape = SubResource("RectangleShape2D_ysh4n")
 
 [connection signal="body_entered" from="TileMap0/Area0" to="TileMap0" method="_on_area_0_body_entered"]
 [connection signal="body_entered" from="TileMap1/Area1" to="TileMap1" method="_on_area_1_body_entered"]
