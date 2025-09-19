@@ -277,3 +277,7 @@ collision_mask = 0
 shape = SubResource("RectangleShape2D_ekbee")
 
 [node name="follower_cleanup_timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="follower_cleanup_timer" to="." method="_on_follower_cleanup_timer_timeout"]

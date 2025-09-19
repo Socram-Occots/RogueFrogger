@@ -61,6 +61,8 @@ var follower_icon : VBoxContainer = iconlabels.get_node("FollowerVbox").duplicat
 var shrink_icon : VBoxContainer = iconlabels.get_node("ShrinkVbox").duplicate()
 var slow_icon : VBoxContainer = iconlabels.get_node("SlowVbox").duplicate()
 var grow_icon : VBoxContainer = iconlabels.get_node("GrowVbox").duplicate()
+var longtele_icon : VBoxContainer = iconlabels.get_node("LongTeleportVbox").duplicate()
+var shorttele_icon : VBoxContainer = iconlabels.get_node("ShortTeleportVbox").duplicate()
 
 
 # glowicons
@@ -76,7 +78,8 @@ var gamba_glowicon : Texture2D = items_instantiate.get_node("Gamba/Sprite2D").te
 var shield_glowicon : Texture2D = items_instantiate.get_node("Shield/Sprite2D").texture
 var slow_glowicon : Texture2D = items_instantiate.get_node("Slow/Sprite2D").texture
 var grow_glowicon : Texture2D = items_instantiate.get_node("Grow/Sprite2D").texture
-
+var longtele_glowicon : Texture2D = items_instantiate.get_node("LongTeleport/Sprite2D").texture
+var shorttele_glowicon : Texture2D = items_instantiate.get_node("ShortTeleport/Sprite2D").texture
 
 var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
  ["Shrink", shrink_glowicon], ["Follower", follower_glowicon],
@@ -407,6 +410,18 @@ func update_labels() -> void:
 		if Global.growlabelon:
 			hboxlabels.add_child(grow_icon)
 			Global.growlabelon = false
+		if Global.longtelelabelon:
+			if Global.longtele_mod == 0:
+				hboxlabels.remove_child(longtele_icon)
+			else:
+				hboxlabels.add_child(longtele_icon)
+			Global.longtelelabelon = false
+		if Global.shorttelelabelon:
+			if Global.shorttele_mod == 0:
+				hboxlabels.remove_child(shorttele_icon)
+			else:
+				hboxlabels.add_child(shorttele_icon)
+			Global.shorttelelabelon = false
 		
 		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
 		glideicon.get_node("Glide").text = str(Global.glide_mod)
@@ -417,6 +432,8 @@ func update_labels() -> void:
 		shrink_icon.get_node("Shrink").text = str(Global.shrink_mod)
 		slow_icon.get_node("Slow").text = str(Global.playerslow_mod - 1)
 		grow_icon.get_node("Grow").text = str(Global.grow_mod)
+		longtele_icon.get_node("LongTeleport").text = str(Global.longtele_mod)
+		shorttele_icon.get_node("ShortTeleport").text = str(Global.shorttele_mod)
 
 func dash_check() -> void:
 	if Global.dash && dashpopup: 
@@ -512,6 +529,7 @@ func create_follower() -> void:
 		
 		follower.set_script(FOLLOWERSCRIPT)
 		follower.get_node("Camera2D").queue_free()
+		follower.get_node("follower_cleanup_timer").queue_free()
 		#follower.get_node("shield").queue_free()
 		follower.remove_meta("Player")
 		follower.set_meta("Follower", curr_follower_id)

@@ -20,7 +20,7 @@ func _on_body_entered(body):
 				"Dash": Global.inc_Dash(multi_result)
 				"expl_B": Global.inc_expl_B(multi_result)
 				"GrappleRope": Global.inc_GrappleRope(multi_result)
-				"Follower": Global.inc_Follower(multi_result)
+				"Follower": Global.inc_Follower(1)
 				"Shrink": Global.inc_Shrink(multi_result)
 				"Gamba": Global.inc_Gamba(multi_result)
 				"Shield": Global.follower_array[0].shield_up = true

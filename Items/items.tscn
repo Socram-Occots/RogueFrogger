@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=49 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/PlayerSpeed.gd" id="1_vl5uj"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
@@ -29,10 +29,8 @@
 [ext_resource type="Texture2D" uid="uid://cdrdptw7dxvng" path="res://RogueFroggerAssets/RFAssets/Level/shrinkglow.png" id="26_h4357"]
 [ext_resource type="Script" path="res://Items/multi.gd" id="28_i5ad0"]
 [ext_resource type="Shader" uid="uid://b2b2amsr8cdws" path="res://Items/shadingMulti.tres" id="28_omakc"]
-[ext_resource type="Script" path="res://Items/Slow.gd" id="30_fera6"]
 [ext_resource type="Texture2D" uid="uid://d128o4talm3y1" path="res://RogueFroggerAssets/RFAssets/Level/growglow.png" id="30_v0hxw"]
 [ext_resource type="Texture2D" uid="uid://dbxqf1ahlspr0" path="res://RogueFroggerAssets/RFAssets/Level/slowglow.png" id="31_f1now"]
-[ext_resource type="Script" path="res://Items/Grow.gd" id="32_rg1yh"]
 [ext_resource type="Texture2D" uid="uid://ckh58jglfag4" path="res://RogueFroggerAssets/RFAssets/Level/longteleportglow.png" id="34_234jt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
@@ -259,7 +257,6 @@ texture_filter = 1
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
-script = ExtResource("30_fera6")
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Slow"]
 shape = SubResource("RectangleShape2D_j3dfj")
@@ -275,7 +272,6 @@ texture_filter = 1
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
-script = ExtResource("32_rg1yh")
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Grow"]
 shape = SubResource("RectangleShape2D_j3dfj")
@@ -284,15 +280,16 @@ shape = SubResource("RectangleShape2D_j3dfj")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("30_v0hxw")
 
-[node name="TeleportLong" type="Area2D" parent="."]
+[node name="LongTeleport" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="TeleportLong"]
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="LongTeleport"]
 shape = SubResource("RectangleShape2D_j3dfj")
 
-[node name="Sprite2D" type="Sprite2D" parent="TeleportLong"]
+[node name="Sprite2D" type="Sprite2D" parent="LongTeleport"]
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("34_234jt")
 
@@ -307,5 +304,3 @@ texture = ExtResource("34_234jt")
 [connection signal="body_entered" from="Shrink" to="Shrink" method="_on_body_entered"]
 [connection signal="body_entered" from="Multi" to="Multi" method="_on_body_entered"]
 [connection signal="timeout" from="Multi/ItemCycleTimer" to="Multi" method="_on_item_cycle_timer_timeout"]
-[connection signal="body_entered" from="Slow" to="Slow" method="_on_body_entered"]
-[connection signal="body_entered" from="Grow" to="Grow" method="_on_body_entered"]

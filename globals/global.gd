@@ -51,6 +51,9 @@ const playerslow_mod_limit_base : int = 99
 #grow
 const grow_percent_base : float = 0.5
 const grow_mod_limit_base : int = 100
+# tele
+const longtele_cool_down_base : float = 0.5
+const shortele_cool_down_base : float = 120
 #endregion
 
 #region Values
@@ -174,6 +177,14 @@ var growlabelon : bool = false
 
 #line
 var game_line : Node2D = null
+
+# tele
+var longtele_mod : int = 0
+var shorttele_mod : int = 0
+var longtele_cool_down : float = longtele_cool_down_base
+var shortele_cool_down : float = shortele_cool_down_base
+var longtelelabelon : bool = false
+var shorttelelabelon : bool = false
 #endregion
 
 func reset() -> void:
@@ -237,6 +248,8 @@ func reset() -> void:
 	shrinklabelon = false
 	playerslowlabelon = false
 	growlabelon = false
+	longtelelabelon = false
+	shorttelelabelon = false
 	updatelabels = false
 	
 	#grapplerope
@@ -289,6 +302,12 @@ func reset() -> void:
 	
 	#line
 	game_line = null
+	
+	# tele
+	longtele_mod = 0
+	shorttele_mod = 0
+	longtele_cool_down = longtele_cool_down_base
+	shortele_cool_down = shortele_cool_down_base
 
 func incrementDifficulty(x : int = 2, int_multiple : int = 1) -> void:
 	if score != 0 && score % x == 0:
@@ -451,7 +470,19 @@ func inc_Grow(times : int) -> void:
 		change_player_follower_size()
 		
 	updatelabels = true
-	
+
+func inc_LongTele(times: int) -> void:
+	if longtele_mod == 0:
+		longtelelabelon = true
+	longtele_mod += times
+	updatelabels = true
+
+func inc_ShortTele(times: int) -> void:
+	if shorttele_mod == 0:
+		shorttelelabelon = true
+	shorttele_mod += times
+	updatelabels = true
+
 func change_player_follower_size() -> void:
 		wipe_null_followers()
 		var temp_shrink_per : float = 1 - (((shrink_mod_real*shrink_percent) 

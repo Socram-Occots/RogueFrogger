@@ -214,3 +214,12 @@ func rand_teleport(constraint_2dvec : Vector2 = Vector2.ZERO) -> void:
 	temp_tele.global_position = global_position
 	temp_tele.constraint_2dvec = constraint_2dvec
 	get_parent().add_child(temp_tele)
+
+func _on_follower_cleanup_timer_timeout() -> void:
+	if Global.follower_mod > 1:
+		for i in range(Global.follower_array.size() - 1, 0, -1):
+			for a in range(i - 1, -1, -1):
+				if (Global.follower_array[i].global_position - 
+				Global.follower_array[a].global_position).length() < 5:
+					Global.follower_array[i].remove_follower()
+					break

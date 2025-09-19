@@ -14,14 +14,20 @@ extends RigidBody2D
 
 func find_prev_follower() -> void:
 	var self_index : int = Global.follower_array.find(self, 1)
-	for i in range(self_index - 1, -1, -1):
-		if is_instance_valid(Global.follower_array[i]):
-			prev_follower_index = i
-			prev_follower_id = Global.follower_array[i].get_meta("Follower")
-			break
-		else:
-			Global.follower_array.remove_at(i)
-			i -= 1
+	
+	if self_index == -1:
+		remove_follower()
+		prev_follower_index = 0
+		prev_follower_id = Global.follower_array[0].get_meta("Follower")
+	else:
+		for i in range(self_index - 1, -1, -1):
+			if is_instance_valid(Global.follower_array[i]):
+				prev_follower_index = i
+				prev_follower_id = Global.follower_array[i].get_meta("Follower")
+				break
+			else:
+				Global.follower_array.remove_at(i)
+				i -= 1
 			
 	#print(prev_follower_index)
 
@@ -38,20 +44,17 @@ func _process(delta: float) -> void:
 			apply_central_force(velocityGrapple * delta)
 	
 
-func velocity_Logic() -> void:
+func velocity_Logic() -> void: 
 	var temp_rigid : RigidBody2D
-	if prev_follower_index < len(Global.follower_array):
-		temp_rigid = Global.follower_array[prev_follower_index]
-		if !(is_instance_valid(temp_rigid) || temp_rigid.get_meta("Follower") == prev_follower_id):
-			find_prev_follower()
-			temp_rigid = Global.follower_array[prev_follower_index]
-	else:
+	
+	if prev_follower_index > Global.follower_array.size() - 1:
 		find_prev_follower()
 		temp_rigid = Global.follower_array[prev_follower_index]
-	
-	if (global_position - temp_rigid.global_position).length() < 2:
-		#print((global_position - temp_rigid.global_position))
-		remove_follower()
+	else:
+		temp_rigid = Global.follower_array[prev_follower_index]
+		if !(is_instance_valid(temp_rigid) and temp_rigid.get_meta("Follower") == prev_follower_id):
+			find_prev_follower()
+			temp_rigid = Global.follower_array[prev_follower_index]
 	
 	velocityRigid = temp_rigid.velocityRigid
 	velocityGrapple = temp_rigid.velocityGrapple
