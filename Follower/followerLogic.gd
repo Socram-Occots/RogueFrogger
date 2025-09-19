@@ -48,8 +48,8 @@ func velocity_Logic() -> void:
 	else:
 		find_prev_follower()
 		temp_rigid = Global.follower_array[prev_follower_index]
-
-	if (global_position - temp_rigid.global_position).length() < Vector2(0,0.1).length():
+	
+	if (global_position - temp_rigid.global_position).length() < 2:
 		#print((global_position - temp_rigid.global_position))
 		remove_follower()
 	

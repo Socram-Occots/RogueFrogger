@@ -36,6 +36,7 @@ const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
 @onready var dashpopup : bool = true 
 @onready var line : Area2D = null
 @onready var hboxlabels : HBoxContainer = $CanvasLayer/HBoxContainer 
+@onready var canvas_layer : CanvasLayer = $CanvasLayer
 
 @onready var curr_follower_id : int = 1
 
@@ -45,6 +46,7 @@ var TILES_INST : Node2D = TILES.instantiate()
 var DUMP_INST : StaticBody2D = DUMP.instantiate()
 var BORDER_INST : Node2D = BORDER.instantiate()
 var EXPLBARREL_INST : RigidBody2D = EXPLBARREL.instantiate()
+var POP_INT : Control = POP.instantiate()
 
 var sidewalk : bool = false
 
@@ -272,6 +274,7 @@ func spawnItems(dir : String, item_str: String, i : int) -> int:
 		item.item_pool = multiItemPicker()
 	item.visible = true
 	item.position = get_node(dir).global_position
+	item.set_meta("Item", null)
 	$Ysort.add_child(item)
 	return i
 
@@ -297,7 +300,8 @@ func firstTerrainSpawn(xpos : float, ypos : float) -> void:
 	tile.visible = true
 	TERRAIN.append(tile) 
 	$spawnterrain.global_position.y -= 144
-	
+	Global.tiles_spawned += 1
+	tile.set_meta("TILE_ID", Global.tiles_spawned)
 	$Tiles.add_child(tile)
 
 func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
@@ -307,11 +311,12 @@ func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
 	else:
 		sidewalk = false
 		
-	var tile = TILES.instantiate().get_node("TileMap" + str(type)).duplicate()
+	var tile = TILES_INST.get_node("TileMap" + str(type)).duplicate()
 	tile.position.x = xpos
 	tile.position.y = ypos
 	tile.visible = true
-	
+	Global.tiles_spawned += 1
+	tile.set_meta("TILE_ID", Global.tiles_spawned)
 	TERRAIN.append(tile)
 	
 	$Tiles.add_child(tile)
@@ -336,8 +341,9 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	#if event.is_action_pressed("dash"):
+	if event.is_action_pressed("dash"):
 		#Global.inc_Shrink(1)
+		Global.inc_Follower(1)
 	if event.is_action_pressed("rope"):
 		#gamba_picker.begin_gamba()
 		#print("test")
@@ -346,23 +352,24 @@ func _input(event):
 		#Global.inc_Grow(1)
 		Global.follower_array[0].rand_teleport(
 			Vector2(
-				Global.player_width_px * 4,Global.player_width_px * 4
+				Global.player_width_px * 0,Global.player_width_px * 0
 				)
 			)
 	pass
 
-func terrainSpawnLogic() -> void:
-	if sidewalk:
-		terrainSpawn(1, 0, $spawnterrain.global_position.y)
-	else:
-		var tile_num = randi_range(0,1)
-		terrainSpawn(tile_num, 0, $spawnterrain.global_position.y)
-		
-#	print(TERRAIN[0].global_position.y)
-#	print(Global.player_pos_y)
-	if !TERRAIN.is_empty() && TERRAIN[0].global_position.y - Global.player_pos_y > Global.despawn_lower:
-		TERRAIN[0].queue_free()
-		TERRAIN.remove_at(0)
+func terrainSpawnLogic(times : int) -> void:
+	for i in range(times):
+		if sidewalk:
+			terrainSpawn(1, 0, $spawnterrain.global_position.y)
+		else:
+			var tile_num = randi_range(0,1)
+			terrainSpawn(tile_num, 0, $spawnterrain.global_position.y)
+			
+	#	print(TERRAIN[0].global_position.y)
+	#	print(Global.player_pos_y)
+		if !TERRAIN.is_empty() && TERRAIN[0].global_position.y - Global.player_pos_y > Global.despawn_lower:
+			TERRAIN[0].queue_free()
+			TERRAIN.remove_at(0)
 
 func update_labels() -> void:
 	if Global.updatelabels:
@@ -414,15 +421,25 @@ func update_labels() -> void:
 func dash_check() -> void:
 	if Global.dash && dashpopup: 
 		dashpopup = false
-		var dash_pop_up : Control = POP.instantiate()
+		var dash_pop_up : Control = POP_INT.duplicate()
 		$CanvasLayer.add_child(dash_pop_up)
 
 func terrain_check() -> void:
 	if Global.spawnTerrain:
+		if Global.race_condition_tiles.is_empty():
+			return
+		
+		var max_tile_int : int = Global.race_condition_tiles.max()
+		var score_diff : int = max_tile_int - Global.score  
+		if score_diff > -1:
+			Global.score = max_tile_int
+			if max_tile_int > SettingsDataContainer.get_high_score():
+				highscore_notif()
+		
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
 		Global.spawnTerrain = false
-		terrainSpawnLogic()
-		Global.incrementDifficulty(2)
+		terrainSpawnLogic(score_diff)
+		Global.incrementDifficulty(2, score_diff)
 		if Global.score % 100 == 0:
 			spawnBorder(960, Global.player_pos_y)
 
@@ -461,10 +478,11 @@ func spawn_high_score_line() -> void:
 	# don't spawn line at score 0
 	if high_score < 1: return
 	
-	var high_score_dist : int = (high_score + 1) * -144 + 936
+	var high_score_dist : int = (high_score * -144) + 936
 	var high_score_line : Node2D = CHECKERDLINE.instantiate()
 	high_score_line.position.x = 0
 	high_score_line.position.y = high_score_dist
+	Global.finish_line_tile = high_score_line
 	$lineofdeath.add_child(high_score_line)
 
 func load_gamba_picker() -> void:
@@ -485,7 +503,7 @@ func gamba_check() -> void:
 		Global.gamba_update = false
 		Global.gamba_running = true
 		gamba_picker.begin_gamba()
-		
+
 func create_follower() -> void:
 	var follower_basic = CROSSER.instantiate()
 	for i in range(Global.follower_spawn_multi):
@@ -526,3 +544,9 @@ func follower_check() ->void:
 	if Global.Follower:
 		Global.Follower = false
 		create_follower()
+
+func highscore_notif() -> void:
+	var high_score_pop_up : Control = POP_INT.duplicate()
+	high_score_pop_up.get_node("dashpopup/Label").text = "New High Score!"
+	canvas_layer.add_child(high_score_pop_up)
+	Global.finish_line_tile.queue_free()

@@ -20,15 +20,14 @@ func _ready() -> void:
 	var temp_rigid : RigidBody2D = Global.follower_array[0]
 	var temp_rigid_global : Vector2 = temp_rigid.global_position
 	var temp_line_global_y : float = Global.game_line.global_position.y
-
+	var temp_pw : int = Global.player_width_px
 	for i in range(0, len(canidates)) :
 		if canidates[i]:
 			var temp : CollisionShape2D = get_node("CollisionShape2D" + str(i))
 			var temp_global : Vector2 = temp.global_position
-			var temp_pw : int = Global.player_width_px
 			if temp_global.x > temp_pw \
-			and temp_global.x < (1920 - temp_pw) and \
-			temp_global.y < (temp_line_global_y - temp_pw):
+			and temp_global.x < 1920 - temp_pw and \
+			temp_global.y < temp_line_global_y - temp_pw:
 				if short_teleport:
 					if temp_global.x > (temp_rigid_global.x - constraint_2dvec.x) \
 					and temp_global.x < (temp_rigid_global.x + constraint_2dvec.x) \
@@ -39,10 +38,32 @@ func _ready() -> void:
 					qualified.append(temp_global)
 	
 	if !qualified.is_empty():
+		
+		var winner_vect2 : Vector2 = qualified.pick_random()
+		
 		PhysicsServer2D.body_set_state(
 			temp_rigid.get_rid(),
 			PhysicsServer2D.BODY_STATE_TRANSFORM,
-			Transform2D.IDENTITY.translated(qualified.pick_random())
+			Transform2D.IDENTITY.translated(winner_vect2)
+			)
+	
+		if Global.follower_mod > 1:
+			Global.wipe_null_followers()
+			var distance : Vector2 = winner_vect2 - temp_rigid_global
+			for i in range(1, Global.follower_array.size()):
+				var new_dist : Vector2 = Global.follower_array[i].global_position + distance
+				
+				if new_dist.x < temp_pw:
+					new_dist.x = temp_pw
+				elif new_dist.x > 1920 - temp_pw:
+					new_dist.x = 1920 - temp_pw
+				if new_dist.y > temp_line_global_y - temp_pw:
+					new_dist.y = temp_line_global_y - temp_pw
+					
+				PhysicsServer2D.body_set_state(
+					Global.follower_array[i].get_rid(),
+					PhysicsServer2D.BODY_STATE_TRANSFORM,
+					Transform2D.IDENTITY.translated(new_dist)
 			)
 	
 	queue_free()

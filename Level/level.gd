@@ -28,8 +28,7 @@ func _ready() -> void:
 	# level
 	spawnBorder(960, Global.player_pos_y)
 	firstTerrainSpawn(0, $spawnterrain.global_position.y)
-	for i in 18:
-		terrainSpawnLogic()
+	terrainSpawnLogic(18)
 	$CanvasLayer/Score.text = "Score " + str(Global.score)
 	# lineofdeath
 	spawnLineOfDeath()

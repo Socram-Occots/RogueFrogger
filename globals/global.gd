@@ -4,7 +4,7 @@ extends Node
 var version : String = "V 0.0.0.6"
 
 #score
-var score : int = -1
+var score : int = 0
 
 #gamestate
 var defeat_var : bool = false
@@ -54,6 +54,11 @@ const grow_mod_limit_base : int = 100
 #endregion
 
 #region Values
+#tiles
+var tiles_spawned : int = 0
+var race_condition_tiles : Array[int] = []
+var finish_line_tile : Node2D = null
+
 # playerspeed
 var player_speed_mod : int = 0
 var player_speed_scaling = player_base_speed
@@ -172,12 +177,17 @@ var game_line : Node2D = null
 #endregion
 
 func reset() -> void:
+	#tiles
+	tiles_spawned = 0
+	race_condition_tiles = []
+	finish_line_tile = null
+	
 	#input
 	input_active = false
 	#paused = false
 	
 	#score
-	score = -1
+	score = 0
 	# gamestate
 	defeat_var = false
 	# playerspeed
@@ -280,9 +290,9 @@ func reset() -> void:
 	#line
 	game_line = null
 
-func incrementDifficulty(x : int) -> void:
+func incrementDifficulty(x : int = 2, int_multiple : int = 1) -> void:
 	if score != 0 && score % x == 0:
-		car_speed_scaling += 1
+		car_speed_scaling += 1 * int_multiple
 		timer_l -= 0.01
 		timer_l-= 0.01
 		if (timer_l < 1.5):

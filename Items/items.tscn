@@ -91,7 +91,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("1_vl5uj")
-metadata/Item = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpeed"]
 shape = SubResource("RectangleShape2D_wrigo")
@@ -110,7 +109,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("3_dpuf5")
-metadata/Item = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlideBoots"]
 shape = SubResource("RectangleShape2D_kcrvm")
@@ -127,7 +125,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("4_36jmu")
-metadata/Item = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dash"]
 shape = SubResource("RectangleShape2D_2iiea")
@@ -145,7 +142,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("5_2gs8y")
-metadata/Item = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="expl_B"]
 shape = SubResource("RectangleShape2D_g40br")
@@ -163,7 +159,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("13_a0wwr")
-metadata/Item = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleRope"]
 shape = SubResource("RectangleShape2D_wqdux")
@@ -180,7 +175,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("16_3bh8x")
-metadata/Item = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Gamba"]
 shape = SubResource("RectangleShape2D_wqdux")
@@ -197,7 +191,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("17_njysa")
-metadata/Item = false
 
 [node name="CollisionPolygon2D" type="CollisionShape2D" parent="Shield"]
 shape = SubResource("RectangleShape2D_j3dfj")

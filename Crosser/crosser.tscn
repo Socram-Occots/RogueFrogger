@@ -275,3 +275,5 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FollowerCollision"]
 shape = SubResource("RectangleShape2D_ekbee")
+
+[node name="follower_cleanup_timer" type="Timer" parent="."]
