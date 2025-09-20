@@ -344,20 +344,16 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	if event.is_action_pressed("dash"):
-		#Global.inc_Shrink(1)
-		Global.inc_Follower(1)
+	#if event.is_action_pressed("dash"):
+		##Global.inc_Shrink(1)
+		#Global.inc_Follower(1)
 	if event.is_action_pressed("rope"):
 		#gamba_picker.begin_gamba()
 		#print("test")
 		#create_follower()
 		#Global.inc_PlayerSlow(1)
 		#Global.inc_Grow(1)
-		Global.follower_array[0].rand_teleport(
-			Vector2(
-				Global.player_width_px * 0,Global.player_width_px * 0
-				)
-			)
+		Global.inc_ShortTele(10)
 	pass
 
 func terrainSpawnLogic(times : int) -> void:

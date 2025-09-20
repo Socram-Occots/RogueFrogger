@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=50 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/PlayerSpeed.gd" id="1_vl5uj"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
@@ -31,6 +31,7 @@
 [ext_resource type="Shader" uid="uid://b2b2amsr8cdws" path="res://Items/shadingMulti.tres" id="28_omakc"]
 [ext_resource type="Texture2D" uid="uid://d128o4talm3y1" path="res://RogueFroggerAssets/RFAssets/Level/growglow.png" id="30_v0hxw"]
 [ext_resource type="Texture2D" uid="uid://dbxqf1ahlspr0" path="res://RogueFroggerAssets/RFAssets/Level/slowglow.png" id="31_f1now"]
+[ext_resource type="Texture2D" uid="uid://ca54rluno4rn8" path="res://RogueFroggerAssets/RFAssets/Level/shortteleportglow.png" id="33_7ghwk"]
 [ext_resource type="Texture2D" uid="uid://ckh58jglfag4" path="res://RogueFroggerAssets/RFAssets/Level/longteleportglow.png" id="34_234jt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
@@ -292,6 +293,19 @@ shape = SubResource("RectangleShape2D_j3dfj")
 [node name="Sprite2D" type="Sprite2D" parent="LongTeleport"]
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("34_234jt")
+
+[node name="ShortTeleport" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+collision_mask = 1921
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="ShortTeleport"]
+shape = SubResource("RectangleShape2D_j3dfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="ShortTeleport"]
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("33_7ghwk")
 
 [connection signal="body_entered" from="PlayerSpeed" to="PlayerSpeed" method="_on_body_entered"]
 [connection signal="body_entered" from="GlideBoots" to="GlideBoots" method="_on_body_entered"]

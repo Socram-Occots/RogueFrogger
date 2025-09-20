@@ -367,32 +367,42 @@ func inc_PlayerSpeed(times : int) -> void:
 	if player_speed_mod == 0:
 		playerspeedlabelon = true
 	player_speed_mod += times
+	if player_speed_mod == 0:
+		playerspeedlabelon = true
 	player_speed_scaling += 20 * times
 	updatelabels = true
 
 func inc_GlideBoots(times : int) -> void:
 	if glide_mod == 0:
-		glidelabelon = true
 		glide = true
+		glidelabelon = true
 	glide_mod += times
-	glide_cool_down *= (1/1.005) ** times
+	if glide_mod == 0:
+		glide = false
+		glidelabelon = true
+	glide_cool_down = glide_cool_down_base * ((1/1.005) ** glide_mod)
 	glide_time += 0.025 * times
 	updatelabels = true
 	
 func inc_Dash(times : int) -> void:
-	if !dash:
+	if dash_mod == 0:
 		dashlabelon = true
 		dash = true
 	dash_mod += times
+	if dash_mod == 0:
+		dash = false
+		dashlabelon = true
 	dash_scaling += 0.02 * times
 	dash_time = Global.dash_base_time/(Global.dash_scaling/Global.dash_base)
-	dash_cool_down *= (1/1.005) ** times
+	dash_cool_down = dash_cool_down_base * ((1/1.005) ** dash_mod)
 	updatelabels = true
 	
 func inc_expl_B(times : int) -> void:
 	if expl_B_mod == 0:
 		expl_B_labelon = true
 	expl_B_mod += times
+	if expl_B_mod == 0:
+		expl_B_labelon = true
 	expl_B_impulse_mod += 0.02 * times
 	expl_B_size_mod += 0.02 * times
 	expl_B_chance_mod += times
@@ -403,10 +413,13 @@ func inc_GrappleRope(times : int) -> void:
 		grapple = true
 		grapplelabelon = true
 	grapple_mod += times
+	if grapple_mod == 0:
+		grapple = false
+		grapplelabelon = true
 	grapple_speed += 5 * times
 	grapple_strength += 25 * times
 	grapple_length += 5 * times
-	grapple_cool_down *= (1/1.005) ** times
+	grapple_cool_down = grapple_cool_down_base * ((1/1.005) ** grapple_mod)
 	updatelabels = true
 
 func inc_Follower(times : int) -> void:
@@ -422,6 +435,8 @@ func inc_Shrink(times : int) -> void:
 	if shrink_mod == 0:
 		shrinklabelon = true
 	shrink_mod += times
+	if shrink_mod == 0:
+		shrinklabelon = true
 	if shrink_mod < shrink_mod_limit:
 		shrink_mod_real = shrink_mod
 	else:
@@ -451,6 +466,8 @@ func inc_PlayerSlow(times: int) -> void:
 	if playerslow_mod == 1:
 		playerslowlabelon = true
 	playerslow_mod += times
+	if playerslow_mod == 1:
+			playerslowlabelon = true
 	if playerslow_mod < playerslow_mod_limit:
 		playerslow_mod_real = playerslow_mod
 	else:
@@ -461,6 +478,8 @@ func inc_Grow(times : int) -> void:
 	if grow_mod == 0:
 		growlabelon = true
 	grow_mod += times
+	if grow_mod == 0:
+		growlabelon = true
 	if grow_mod < grow_mod_limit:
 		grow_mod_real = grow_mod
 	else:
@@ -475,12 +494,17 @@ func inc_LongTele(times: int) -> void:
 	if longtele_mod == 0:
 		longtelelabelon = true
 	longtele_mod += times
+	if longtele_mod == 0:
+		longtelelabelon = true
 	updatelabels = true
 
 func inc_ShortTele(times: int) -> void:
 	if shorttele_mod == 0:
 		shorttelelabelon = true
 	shorttele_mod += times
+	if shorttele_mod == 0:
+		shorttelelabelon = true
+	shortele_cool_down = shortele_cool_down_base * ((1/1.005) ** shorttele_mod)
 	updatelabels = true
 
 func change_player_follower_size() -> void:
