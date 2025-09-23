@@ -36,8 +36,4 @@ func _on_timer_timeout():
 		icon_activated()
 
 func teleportation_activated() -> void:
-	Global.follower_array[0].rand_teleport(
-			Vector2(
-				Global.player_width_px * 0,Global.player_width_px * 0
-				)
-			)
+	Global.follower_array[0].rand_teleport(Vector2.ZERO)

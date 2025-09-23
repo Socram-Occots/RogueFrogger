@@ -63,7 +63,7 @@ var slow_icon : VBoxContainer = iconlabels.get_node("SlowVbox").duplicate()
 var grow_icon : VBoxContainer = iconlabels.get_node("GrowVbox").duplicate()
 var longtele_icon : VBoxContainer = iconlabels.get_node("LongTeleportVbox").duplicate()
 var shorttele_icon : VBoxContainer = iconlabels.get_node("ShortTeleportVbox").duplicate()
-
+var cleanse_icon : VBoxContainer = iconlabels.get_node("CleanseVbox").duplicate()
 
 # glowicons
 var items_instantiate : Node = ITEM.instantiate()
@@ -80,6 +80,8 @@ var slow_glowicon : Texture2D = items_instantiate.get_node("Slow/Sprite2D").text
 var grow_glowicon : Texture2D = items_instantiate.get_node("Grow/Sprite2D").texture
 var longtele_glowicon : Texture2D = items_instantiate.get_node("LongTeleport/Sprite2D").texture
 var shorttele_glowicon : Texture2D = items_instantiate.get_node("ShortTeleport/Sprite2D").texture
+var cleanse_glowicon : Texture2D = items_instantiate.get_node("Cleanse/Sprite2D").texture
+
 
 var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
  ["Shrink", shrink_glowicon], ["Follower", follower_glowicon],
@@ -346,14 +348,15 @@ func _input(event):
 		
 	#if event.is_action_pressed("dash"):
 		##Global.inc_Shrink(1)
-		#Global.inc_Follower(1)
-	if event.is_action_pressed("rope"):
-		#gamba_picker.begin_gamba()
-		#print("test")
-		#create_follower()
-		#Global.inc_PlayerSlow(1)
-		#Global.inc_Grow(1)
-		Global.inc_ShortTele(10)
+		##Global.inc_Follower(1)
+		#Global.cleanse_curse(9)
+	#if event.is_action_pressed("rope"):
+		##gamba_picker.begin_gamba()
+		##print("test")
+		##create_follower()
+		#Global.inc_PlayerSlow(20)
+		#Global.inc_Grow(20)
+		#Global.inc_ShortTele(20)
 	pass
 
 func terrainSpawnLogic(times : int) -> void:
@@ -401,10 +404,16 @@ func update_labels() -> void:
 			hboxlabels.add_child(shrink_icon)
 			Global.shrinklabelon = false
 		if Global.playerslowlabelon:
-			hboxlabels.add_child(slow_icon)
+			if Global.playerslow_mod == Global.playerslow_mod_base:
+				hboxlabels.remove_child(slow_icon)
+			else:
+				hboxlabels.add_child(slow_icon)
 			Global.playerslowlabelon = false
 		if Global.growlabelon:
-			hboxlabels.add_child(grow_icon)
+			if Global.grow_mod == 0:
+				hboxlabels.remove_child(grow_icon)
+			else:
+				hboxlabels.add_child(grow_icon)
 			Global.growlabelon = false
 		if Global.longtelelabelon:
 			if Global.longtele_mod == 0:

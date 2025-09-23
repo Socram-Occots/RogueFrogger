@@ -14,8 +14,11 @@ func _ready() -> void:
 	if constraint_2dvec != Vector2.ZERO:
 		short_teleport = true
 	
-	await get_tree().process_frame
-	
+	# we need two of these because the engine waits a tick to
+	# look for its collisons after placing an entity
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+
 	var qualified : Array[Vector2] = []
 	var temp_rigid : RigidBody2D = Global.follower_array[0]
 	var temp_rigid_global : Vector2 = temp_rigid.global_position

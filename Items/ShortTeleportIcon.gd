@@ -38,6 +38,6 @@ func _on_timer_timeout():
 func teleportation_activated() -> void:
 	Global.follower_array[0].rand_teleport(
 			Vector2(
-				Global.player_width_px * 4,Global.player_width_px * 4
+				164,164
 				)
 			)

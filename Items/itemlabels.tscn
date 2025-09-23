@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cdaurrqufg0hl"]
+[gd_scene load_steps=19 format=3 uid="uid://cdaurrqufg0hl"]
 
 [ext_resource type="Texture2D" uid="uid://cl1ge0cjttlc4" path="res://RogueFroggerAssets/RFAssets/Level/speedometer.png" id="1_m21p5"]
 [ext_resource type="Texture2D" uid="uid://dqlrhd483hrwc" path="res://RogueFroggerAssets/RFAssets/Level/glideboots.png" id="2_yvq7r"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Items/LongTeleportIcon.gd" id="15_wfvy4"]
 [ext_resource type="Texture2D" uid="uid://cgld5amthxxui" path="res://RogueFroggerAssets/RFAssets/Level/shortteleport.png" id="16_ld7j3"]
 [ext_resource type="Script" path="res://Items/ShortTeleportIcon.gd" id="17_4pnj5"]
+[ext_resource type="Texture2D" uid="uid://higq8l0sgxc" path="res://RogueFroggerAssets/RFAssets/Level/cleanse.png" id="18_0vjan"]
 
 [node name="Control" type="Node"]
 
@@ -383,6 +384,25 @@ theme_override_font_sizes/font_size = 200
 horizontal_alignment = 1
 vertical_alignment = 1
 clip_text = true
+
+[node name="CleanseVbox" type="VBoxContainer" parent="."]
+offset_right = 512.0
+offset_bottom = 792.0
+scale = Vector2(0.2, 0.2)
+alignment = 2
+
+[node name="Cleanse" type="Label" parent="CleanseVbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 200
+text = "99"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="TextureRect" parent="CleanseVbox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("18_0vjan")
+expand_mode = 3
 
 [connection signal="timeout" from="GlideVbox/Sprite2D/TextureProgressBar/Timer" to="GlideVbox/Sprite2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="DashVbox/Sprite2D/TextureProgressBar/Timer" to="DashVbox/Sprite2D" method="_on_timer_timeout"]

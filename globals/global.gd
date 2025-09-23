@@ -507,6 +507,44 @@ func inc_ShortTele(times: int) -> void:
 	shortele_cool_down = shortele_cool_down_base * ((1/1.005) ** shorttele_mod)
 	updatelabels = true
 
+func cleanse_curse(times: int):
+	var curse_dict : Dictionary = {}
+	
+	if playerslow_mod > playerslow_mod_base:
+		curse_dict["playerslow"] = playerslow_mod
+	if grow_mod > 0:
+		curse_dict["grow"] = grow_mod
+	if longtele_mod > 0:
+		curse_dict["longtele"] = longtele_mod
+	if shorttele_mod > 0:
+		curse_dict["shorttele"] = shorttele_mod
+	
+	if curse_dict.is_empty():
+		return
+	
+	for i in range(times):
+		var chosen : String = curse_dict.keys().pick_random()
+		
+		if chosen == "playerslow":
+			inc_PlayerSlow(-1)
+			if playerslow_mod == playerslow_mod_base:
+				curse_dict.erase(chosen)
+		elif chosen == "grow":
+			inc_Grow(-1)
+			if grow_mod == 0:
+				curse_dict.erase(chosen)
+		elif chosen == "longtele":
+			inc_LongTele(-1)
+			if longtele_mod == 0:
+				curse_dict.erase(chosen)
+		elif chosen == "shorttele":
+			inc_ShortTele(-1)
+			if shorttele_mod == 0:
+				curse_dict.erase(chosen)
+		
+		if curse_dict.is_empty():
+			return
+
 func change_player_follower_size() -> void:
 		wipe_null_followers()
 		var temp_shrink_per : float = 1 - (((shrink_mod_real*shrink_percent) 

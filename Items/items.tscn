@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=54 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/PlayerSpeed.gd" id="1_vl5uj"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
@@ -33,6 +33,9 @@
 [ext_resource type="Texture2D" uid="uid://dbxqf1ahlspr0" path="res://RogueFroggerAssets/RFAssets/Level/slowglow.png" id="31_f1now"]
 [ext_resource type="Texture2D" uid="uid://ca54rluno4rn8" path="res://RogueFroggerAssets/RFAssets/Level/shortteleportglow.png" id="33_7ghwk"]
 [ext_resource type="Texture2D" uid="uid://ckh58jglfag4" path="res://RogueFroggerAssets/RFAssets/Level/longteleportglow.png" id="34_234jt"]
+[ext_resource type="Shader" uid="uid://4l6vbo5vrtok" path="res://Items/shadingCleanse.tres" id="34_lmn5n"]
+[ext_resource type="Script" path="res://Items/Cleanse.gd" id="34_qv6pk"]
+[ext_resource type="Texture2D" uid="uid://c21wuwjfn52uf" path="res://RogueFroggerAssets/RFAssets/Level/cleanseglow.png" id="35_8hwh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
@@ -81,6 +84,9 @@ shader = ExtResource("25_onvt6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3egv3"]
 shader = ExtResource("28_omakc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w81eb"]
+shader = ExtResource("34_lmn5n")
 
 [node name="Items" type="Node2D"]
 
@@ -307,6 +313,24 @@ shape = SubResource("RectangleShape2D_j3dfj")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("33_7ghwk")
 
+[node name="Cleanse" type="Area2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+collision_mask = 1921
+script = ExtResource("34_qv6pk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cleanse"]
+shape = SubResource("RectangleShape2D_wrigo")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cleanse"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_w81eb")
+position = Vector2(-1.13687e-13, 0)
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("35_8hwh4")
+region_rect = Rect2(-80, -64, 736, 680)
+
 [connection signal="body_entered" from="PlayerSpeed" to="PlayerSpeed" method="_on_body_entered"]
 [connection signal="body_entered" from="GlideBoots" to="GlideBoots" method="_on_body_entered"]
 [connection signal="body_entered" from="Dash" to="Dash" method="_on_body_entered"]
@@ -318,3 +342,4 @@ texture = ExtResource("33_7ghwk")
 [connection signal="body_entered" from="Shrink" to="Shrink" method="_on_body_entered"]
 [connection signal="body_entered" from="Multi" to="Multi" method="_on_body_entered"]
 [connection signal="timeout" from="Multi/ItemCycleTimer" to="Multi" method="_on_item_cycle_timer_timeout"]
+[connection signal="body_entered" from="Cleanse" to="Cleanse" method="_on_body_entered"]

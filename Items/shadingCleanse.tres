@@ -1,0 +1,212 @@
+[gd_resource type="VisualShader" load_steps=16 format=3 uid="uid://4l6vbo5vrtok"]
+
+[ext_resource type="Script" path="res://addons/shaderV/rgba/gradient4corners.gd" id="1_12gyj"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/TimeScaled.gd" id="1_87sj8"]
+[ext_resource type="Script" path="res://addons/shaderV/rgba/glow/outerGlow.gd" id="2_mtsg3"]
+[ext_resource type="Script" path="res://addons/shaderV/tools/sinTime.gd" id="3_fuxoh"]
+[ext_resource type="Script" path="res://addons/shaderV/uv/rotate.gd" id="4_q6dkv"]
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_ik1px"]
+default_input_values = [0, 0.5]
+initialized = true
+script = ExtResource("1_87sj8")
+
+[sub_resource type="VisualShaderNodeVectorFunc" id="VisualShaderNodeVectorFunc_7lp4m"]
+output_port_for_preview = 0
+function = 23
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_lwx8i"]
+default_input_values = [1, Vector3(-0.33, 1, 1), 2, 1.0, 3, Vector3(1, 1, 1), 4, 1.0, 5, Vector3(1, 1, 1), 6, 1.0, 7, Vector3(1, 1, 1), 8, 1.0]
+initialized = true
+script = ExtResource("1_12gyj")
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_p31t8"]
+constant = Color(0.0666666, 1, 0, 1)
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_qtbji"]
+constant = Color(0, 0.983334, 1, 1)
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_bi2el"]
+output_port_for_preview = 1
+default_input_values = [2, -1.0, 3, 0.0, 4, 1.0, 5, Vector3(1, 1, 0), 6, 0.75]
+initialized = true
+script = ExtResource("2_mtsg3")
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_7bmo4"]
+default_input_values = [0, 2.0, 1, 1.0]
+initialized = true
+script = ExtResource("3_fuxoh")
+
+[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_p1kmm"]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_qogkk"]
+output_port_for_preview = 0
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeCustom" id="VisualShaderNodeCustom_c04id"]
+output_port_for_preview = 0
+default_input_values = [1, 1.0, 2, Vector3(0.5, 0.5, 0)]
+initialized = true
+script = ExtResource("4_q6dkv")
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+
+
+// RotateUV
+vec3 _rotateUV(vec3 _rotate_uv, vec2 _rotate_pivot_vect, float _rotate_radians){
+	//_r0tation_r0tate = radians(_r0tationDeg_r0tate);
+	vec2 _rotation_angle = vec2(cos(_rotate_radians), sin(_rotate_radians));
+	_rotate_uv.xy -= _rotate_pivot_vect;
+	_rotate_uv.xy = vec2((_rotate_uv.x*_rotation_angle.x-_rotate_uv.y*_rotation_angle.y), 
+						 (_rotate_uv.x*_rotation_angle.y+_rotate_uv.y*_rotation_angle.x));
+	_rotate_uv.xy += _rotate_pivot_vect;
+	return _rotate_uv;
+}
+// Gradient4Corners
+vec4 _gradient4cornersFunc(vec2 _uv_corner, vec4 _top_left_corner, vec4 _top_right_corner, vec4 _bottom_left_corner, vec4 _bottom_right_corner){
+	vec4 _color_top_corner = mix(_top_left_corner, _top_right_corner, _uv_corner.x);
+	vec4 _color_bottom_corner = mix(_bottom_left_corner, _bottom_right_corner, _uv_corner.x);
+	return mix(_color_top_corner, _color_bottom_corner, _uv_corner.y);
+}
+// OuterGlow
+vec4 _outerGlowFunc(sampler2D _samp_inglow, vec2 _uv_inglow, float _lod_inglow, float _rad_inglow, float _intns_inglow, vec4 _col_inglow){
+	_rad_inglow = abs(_rad_inglow);
+	
+	vec4 _color_inglow = vec4(0.0);
+	float _alpha_inv = 0.0;
+	float _alpha_inglow_b1 = 0.0;
+	int _amount_inglow = 3;
+	
+	if (_lod_inglow < 0.0)
+		_color_inglow = texture(_samp_inglow, _uv_inglow);
+	else
+		_color_inglow = textureLod(_samp_inglow, _uv_inglow, _lod_inglow);
+	
+	_amount_inglow = int(min(_rad_inglow + 7.0, 14.0));
+	for(int x = - _amount_inglow; x <= _amount_inglow; x++) {
+		for(int y = - _amount_inglow; y <= _amount_inglow; y++) {
+			vec2 _coord_blur_cst = _uv_inglow + vec2(float(x), float(y)) * _rad_inglow * 0.01;
+			_alpha_inglow_b1 += textureLod(_samp_inglow, _coord_blur_cst, 0.0).a;
+		}
+	}
+	int _nmb_neighbours_blur_cst = (_amount_inglow * 2 + 1) * (_amount_inglow * 2 + 1);
+	_alpha_inglow_b1 /= float(_nmb_neighbours_blur_cst);
+	
+	_alpha_inv = _alpha_inglow_b1; // inversion
+	_alpha_inv *= (1.0 - _color_inglow.a); // masking
+	
+	if (_alpha_inv > 0.0)
+		_alpha_inv *= (_intns_inglow + 1.0);
+	
+	vec4 _glow_col_result = vec4(_col_inglow.rgb, _alpha_inv * _col_inglow.a);
+	return mix(_glow_col_result, _color_inglow, _color_inglow.a);
+}
+
+void fragment() {
+// FloatConstant:5
+	float n_out5p0 = 1.000000;
+
+
+	float n_out4p0;
+// SinTIME:4
+	float n_in4p0 = 2.00000;
+	{
+		n_out4p0 = n_out5p0 * sin(n_in4p0 * TIME);
+	}
+
+
+// Input:8
+	vec2 n_out8p0 = UV;
+
+
+	float n_out10p0;
+// ScaledTIME:10
+	float n_in10p0 = 0.50000;
+	{
+		n_out10p0 = n_in10p0 * TIME;
+	}
+
+
+	vec3 n_out9p0;
+// RotateUV:9
+	vec3 n_in9p2 = vec3(0.50000, 0.50000, 0.00000);
+	{
+		n_out9p0 = _rotateUV(vec3(n_out8p0, 0.0), n_in9p2.xy, n_out10p0);
+	}
+
+
+// ColorConstant:23
+	vec4 n_out23p0 = vec4(0.066667, 1.000000, 0.000000, 1.000000);
+
+
+// ColorConstant:24
+	vec4 n_out24p0 = vec4(0.000000, 0.983334, 1.000000, 1.000000);
+
+
+	vec3 n_out2p0;
+	float n_out2p1;
+// Gradient4Corners:2
+	float n_in2p2 = 1.00000;
+	float n_in2p4 = 1.00000;
+	float n_in2p6 = 1.00000;
+	float n_in2p8 = 1.00000;
+	{
+		vec4 n_out2p0n_out2p1 = _gradient4cornersFunc(n_out9p0.xy, vec4(vec3(n_out23p0.xyz), n_in2p2), vec4(vec3(n_out24p0.xyz), n_in2p4), vec4(vec3(n_out24p0.xyz), n_in2p6), vec4(vec3(n_out23p0.xyz), n_in2p8));
+		n_out2p0 = n_out2p0n_out2p1.rgb;
+		n_out2p1 = n_out2p0n_out2p1.a;
+	}
+
+
+// VectorFunc:11
+	vec3 n_out11p0 = round(n_out2p0);
+
+
+	vec3 n_out3p0;
+	float n_out3p1;
+// OuterGlow:3
+	float n_in3p2 = -1.00000;
+	float n_in3p4 = 1.00000;
+	float n_in3p6 = 0.75000;
+	{
+		vec4 n_out3p0n_out3p1 = _outerGlowFunc(TEXTURE, UV.xy, n_in3p2, n_out4p0, n_in3p4, vec4(n_out11p0, n_in3p6));
+		n_out3p0 = n_out3p0n_out3p1.rgb;
+		n_out3p1 = n_out3p0n_out3p1.a;
+	}
+
+
+// Output:0
+	COLOR.rgb = n_out3p0;
+	COLOR.a = n_out3p1;
+
+
+}
+"
+graph_offset = Vector2(-567.841, -25.6298)
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(140, 180)
+nodes/fragment/2/node = SubResource("VisualShaderNodeCustom_lwx8i")
+nodes/fragment/2/position = Vector2(-1580, 242.937)
+nodes/fragment/3/node = SubResource("VisualShaderNodeCustom_bi2el")
+nodes/fragment/3/position = Vector2(-380, 120)
+nodes/fragment/4/node = SubResource("VisualShaderNodeCustom_7bmo4")
+nodes/fragment/4/position = Vector2(-840, -20)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatConstant_p1kmm")
+nodes/fragment/5/position = Vector2(-1300, -120)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_qogkk")
+nodes/fragment/8/position = Vector2(-3280, -240)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCustom_c04id")
+nodes/fragment/9/position = Vector2(-2180, -140)
+nodes/fragment/10/node = SubResource("VisualShaderNodeCustom_ik1px")
+nodes/fragment/10/position = Vector2(-2900, 360)
+nodes/fragment/11/node = SubResource("VisualShaderNodeVectorFunc_7lp4m")
+nodes/fragment/11/position = Vector2(-1020, 400)
+nodes/fragment/23/node = SubResource("VisualShaderNodeColorConstant_p31t8")
+nodes/fragment/23/position = Vector2(-2080, 520)
+nodes/fragment/24/node = SubResource("VisualShaderNodeColorConstant_qtbji")
+nodes/fragment/24/position = Vector2(-2060, 760)
+nodes/fragment/connections = PackedInt32Array(5, 0, 4, 1, 4, 0, 3, 3, 3, 0, 0, 0, 3, 1, 0, 1, 8, 0, 9, 0, 9, 0, 2, 0, 10, 0, 9, 1, 2, 0, 11, 0, 11, 0, 3, 5, 23, 0, 2, 1, 24, 0, 2, 3, 24, 0, 2, 5, 23, 0, 2, 7)
