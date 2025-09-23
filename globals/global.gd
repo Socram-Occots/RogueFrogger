@@ -54,6 +54,8 @@ const grow_mod_limit_base : int = 100
 # tele
 const longtele_cool_down_base : float = 0.5
 const shortele_cool_down_base : float = 120
+#dvdbounce
+const dvd_vel_base : float = 250
 #endregion
 
 #region Values
@@ -185,6 +187,14 @@ var longtele_cool_down : float = longtele_cool_down_base
 var shortele_cool_down : float = shortele_cool_down_base
 var longtelelabelon : bool = false
 var shorttelelabelon : bool = false
+
+# dvd_bounce
+var dvd_spawn : bool = false
+var dvd_mod : int = 0
+var dvd_vel : float = 250
+var dvd_array : Array[RigidBody2D] = []
+var dvd_spawn_num : int = 0
+var dvdbouncelabelon = false
 #endregion
 
 func reset() -> void:
@@ -250,6 +260,7 @@ func reset() -> void:
 	growlabelon = false
 	longtelelabelon = false
 	shorttelelabelon = false
+	dvdbouncelabelon = false
 	updatelabels = false
 	
 	#grapplerope
@@ -308,6 +319,13 @@ func reset() -> void:
 	shorttele_mod = 0
 	longtele_cool_down = longtele_cool_down_base
 	shortele_cool_down = shortele_cool_down_base
+	
+	# dvd_bounce
+	dvd_spawn = false
+	dvd_mod = 0
+	dvd_vel = dvd_vel_base
+	dvd_spawn_num = 0
+	dvd_array.clear()
 
 func incrementDifficulty(x : int = 2, int_multiple : int = 1) -> void:
 	if score != 0 && score % x == 0:
@@ -506,6 +524,23 @@ func inc_ShortTele(times: int) -> void:
 		shorttelelabelon = true
 	shortele_cool_down = shortele_cool_down_base * ((1/1.005) ** shorttele_mod)
 	updatelabels = true
+
+func inc_DVD(times : int) -> void:
+	if dvd_mod == 0:
+		dvdbouncelabelon = true
+	dvd_mod += times
+	dvd_spawn_num = times
+	if dvd_mod == 0:
+		dvdbouncelabelon = true
+	if times > 0:
+		dvd_spawn = true
+	else:
+		for i in range(-1*dvd_spawn_num):
+			if dvd_array.is_empty():
+				break
+			else:
+				dvd_array[0].queue_free()
+				dvd_array.remove_at(0)
 
 func cleanse_curse(times: int):
 	var curse_dict : Dictionary = {}

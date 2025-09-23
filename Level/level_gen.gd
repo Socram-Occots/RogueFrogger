@@ -18,6 +18,7 @@ const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
 const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
+const DVDBOUNCE : Resource = preload("res://DVD_bounce/DVD_bounce.tscn")
 
 @onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], 
 ["Dumpster"], ["ExplBarrel"], ["Items"]]
@@ -46,9 +47,14 @@ var TILES_INST : Node2D = TILES.instantiate()
 var DUMP_INST : StaticBody2D = DUMP.instantiate()
 var BORDER_INST : Node2D = BORDER.instantiate()
 var EXPLBARREL_INST : RigidBody2D = EXPLBARREL.instantiate()
-var POP_INT : Control = POP.instantiate()
+var POP_INST : Control = POP.instantiate()
+var DVD_INST : Node2D = DVDBOUNCE.instantiate()
 
 var sidewalk : bool = false
+
+# DVD Bounce
+var DVDarea : Node2D = DVDBOUNCE.instantiate()
+var DVDnode : RigidBody2D = DVDarea.get_node("DVDnode")
 
 # icons
 var iconlabels : Node = ITEMLABELS.instantiate()
@@ -350,13 +356,14 @@ func _input(event):
 		##Global.inc_Shrink(1)
 		##Global.inc_Follower(1)
 		#Global.cleanse_curse(9)
-	#if event.is_action_pressed("rope"):
-		##gamba_picker.begin_gamba()
-		##print("test")
-		##create_follower()
+	if event.is_action_pressed("rope"):
+		#gamba_picker.begin_gamba()
+		#print("test")
+		#create_follower()
 		#Global.inc_PlayerSlow(20)
 		#Global.inc_Grow(20)
 		#Global.inc_ShortTele(20)
+		Global.inc_DVD(1)
 	pass
 
 func terrainSpawnLogic(times : int) -> void:
@@ -443,7 +450,7 @@ func update_labels() -> void:
 func dash_check() -> void:
 	if Global.dash && dashpopup: 
 		dashpopup = false
-		var dash_pop_up : Control = POP_INT.duplicate()
+		var dash_pop_up : Control = POP_INST.duplicate()
 		$CanvasLayer.add_child(dash_pop_up)
 
 func terrain_check() -> void:
@@ -569,7 +576,25 @@ func follower_check() ->void:
 		create_follower()
 
 func highscore_notif() -> void:
-	var high_score_pop_up : Control = POP_INT.duplicate()
+	var high_score_pop_up : Control = POP_INST.duplicate()
 	high_score_pop_up.get_node("dashpopup/Label").text = "New High Score!"
 	canvas_layer.add_child(high_score_pop_up)
 	Global.finish_line_tile.queue_free()
+
+func spawn_dvd_bounce_area() -> void:
+	canvas_layer.get_node("DVDbouncelayer").add_child(DVDarea)
+
+func dvd_bounce_check() -> void:
+	if Global.dvd_spawn:
+		Global.dvd_spawn = false
+		for i in range(Global.dvd_spawn_num):
+			var DVDnodetemp : RigidBody2D = DVDnode.duplicate()
+			DVDnodetemp.sleeping = false
+			DVDnodetemp.visible = true
+			DVDnodetemp.position = Vector2(randf_range(100, 1820), 
+			randf_range(100, 980))
+			DVDnodetemp.velocity = Vector2(250, 250).rotated(
+				deg_to_rad(randfn(0,360)))
+			DVDarea.get_node("DVDnodes").add_child(DVDnodetemp)
+			Global.dvd_array.append(DVDnodetemp)
+		Global.dvd_spawn_num = 0

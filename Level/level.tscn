@@ -1,11 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=6 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
-[ext_resource type="Texture2D" uid="uid://cl1ge0cjttlc4" path="res://RogueFroggerAssets/RFAssets/Level/speedometer.png" id="4_scmkf"]
-[ext_resource type="Texture2D" uid="uid://c5yiligvb4ic4" path="res://RogueFroggerAssets/RFAssets/Level/playerspeed.png" id="5_ix7mv"]
-[ext_resource type="Texture2D" uid="uid://dylgqx8tcrhdh" path="res://RogueFroggerAssets/RFAssets/Level/fire-dash.png" id="6_wxtfu"]
-[ext_resource type="Texture2D" uid="uid://43d5edeu46fw" path="res://RogueFroggerAssets/RFAssets/Level/carspacing.png" id="7_atnel"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="8_3m3b3"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
 
@@ -99,160 +95,7 @@ shape = SubResource("WorldBoundaryShape2D_iu5ys")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Score" type="Label" parent="CanvasLayer"]
-offset_left = 865.0
-offset_right = 1055.0
-offset_bottom = 200.0
-grow_horizontal = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme = ExtResource("8_5vect")
-theme_override_font_sizes/font_size = 50
-text = "Score"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Instructions" type="Label" parent="CanvasLayer"]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -454.0
-offset_top = -253.0
-offset_right = 454.0
-offset_bottom = -137.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme = ExtResource("8_5vect")
-theme_override_font_sizes/font_size = 100
-text = "WASD to move"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="arrow" type="Label" parent="CanvasLayer/Instructions"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -321.5
-offset_top = -2.0
-offset_right = 321.5
-offset_bottom = 70.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_font_sizes/font_size = 50
-text = "or use arrow keys"
-
-[node name="PlayerSpeed" type="Label" parent="CanvasLayer/Instructions"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -555.0
-offset_top = 406.0
-offset_right = -291.0
-offset_bottom = 444.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "+PlayerSpeed"
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Instructions/PlayerSpeed"]
-texture_filter = 1
-position = Vector2(140, -72.456)
-scale = Vector2(0.223, 0.216969)
-texture = ExtResource("4_scmkf")
-region_rect = Rect2(0, 8, 512, 504)
-
-[node name="CarSpeed" type="Label" parent="CanvasLayer/Instructions"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -225.0
-offset_top = 406.0
-offset_right = -22.0
-offset_bottom = 444.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "-CarSpeed"
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Instructions/CarSpeed"]
-texture_filter = 1
-position = Vector2(110, -74)
-scale = Vector2(1.904, 1.904)
-texture = ExtResource("5_ix7mv")
-region_rect = Rect2(65, 9, 30, 43)
-
-[node name="Dash" type="Label" parent="CanvasLayer/Instructions"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 56.0
-offset_top = 464.0
-offset_right = 247.0
-offset_bottom = 502.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 30
-text = "+Dash"
-horizontal_alignment = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Instructions/Dash"]
-texture_filter = 1
-position = Vector2(103, -74)
-scale = Vector2(0.223, 0.223)
-texture = ExtResource("6_wxtfu")
-region_rect = Rect2(7, 70, 51, 53)
-
-[node name="CarSpacing" type="Label" parent="CanvasLayer/Instructions"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 321.0
-offset_top = 406.0
-offset_right = 556.0
-offset_bottom = 444.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "+CarSpacing"
-
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Instructions/CarSpacing"]
-texture_filter = 1
-position = Vector2(120, -74)
-scale = Vector2(1.904, 1.904)
-texture = ExtResource("7_atnel")
-region_rect = Rect2(75, 75, 43, 44)
-
-[node name="Label" type="Label" parent="CanvasLayer/Instructions"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -383.5
-offset_top = 84.0
-offset_right = 383.5
-offset_bottom = 156.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "hold shift to walk"
+[node name="DVDbouncelayer" type="Node2D" parent="CanvasLayer"]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 3
@@ -269,6 +112,19 @@ grow_vertical = 0
 scale = Vector2(0.25, 0.25)
 mouse_filter = 2
 alignment = 2
+
+[node name="Score" type="Label" parent="CanvasLayer"]
+offset_left = 865.0
+offset_right = 1055.0
+offset_bottom = 200.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("8_5vect")
+theme_override_font_sizes/font_size = 50
+text = "Score"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Version" type="Label" parent="CanvasLayer"]
 anchors_preset = 2

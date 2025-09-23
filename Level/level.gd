@@ -8,6 +8,7 @@ func _process(delta: float) -> void:
 	terrain_check()
 	gamba_check()
 	follower_check()
+	dvd_bounce_check()
 
 func _ready() -> void:
 	#load pause and game over menu
@@ -35,3 +36,5 @@ func _ready() -> void:
 	#labels
 	# high score line
 	spawn_high_score_line()
+	#dvdbounce
+	spawn_dvd_bounce_area()

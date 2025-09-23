@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://d2w257vg7l7k5"]
+
+[ext_resource type="Script" path="res://DVD_bounce/dv_dnode.gd" id="1_u36i8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wu4r3"]
+size = Vector2(100, 1280)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0qper"]
+size = Vector2(1920, 100)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3vbyq"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wyadm"]
+size = Vector2(176, 90)
+
+[node name="DvdBounce" type="Node2D"]
+
+[node name="DVD_cage" type="StaticBody2D" parent="."]
+collision_layer = 4096
+collision_mask = 4096
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DVD_cage"]
+position = Vector2(-50, 540)
+shape = SubResource("RectangleShape2D_wu4r3")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DVD_cage"]
+position = Vector2(1970, 540)
+shape = SubResource("RectangleShape2D_wu4r3")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="DVD_cage"]
+position = Vector2(960, -50)
+shape = SubResource("RectangleShape2D_0qper")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="DVD_cage"]
+position = Vector2(960, 1130)
+shape = SubResource("RectangleShape2D_0qper")
+
+[node name="DVDnodes" type="Node2D" parent="."]
+
+[node name="DVDnode" type="RigidBody2D" parent="."]
+visible = false
+position = Vector2(0, -150)
+collision_layer = 0
+collision_mask = 4096
+mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_3vbyq")
+gravity_scale = 0.0
+sleeping = true
+lock_rotation = true
+custom_integrator = true
+linear_damp_mode = 1
+script = ExtResource("1_u36i8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DVDnode"]
+shape = SubResource("RectangleShape2D_wyadm")
+
+[node name="ColorRect" type="ColorRect" parent="DVDnode"]
+offset_left = -88.0
+offset_top = -45.0
+offset_right = 88.0
+offset_bottom = 45.0
+pivot_offset = Vector2(88, 45)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
