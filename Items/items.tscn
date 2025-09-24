@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dpwcm3s7t344w"]
+[gd_scene load_steps=55 format=3 uid="uid://dpwcm3s7t344w"]
 
 [ext_resource type="Script" path="res://Items/PlayerSpeed.gd" id="1_vl5uj"]
 [ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="3_buw3s"]
@@ -36,6 +36,7 @@
 [ext_resource type="Shader" uid="uid://4l6vbo5vrtok" path="res://Items/shadingCleanse.tres" id="34_lmn5n"]
 [ext_resource type="Script" path="res://Items/Cleanse.gd" id="34_qv6pk"]
 [ext_resource type="Texture2D" uid="uid://c21wuwjfn52uf" path="res://RogueFroggerAssets/RFAssets/Level/cleanseglow.png" id="35_8hwh4"]
+[ext_resource type="Texture2D" uid="uid://btukumgnbp32b" path="res://RogueFroggerAssets/RFAssets/Level/dvdbounceglowicon.png" id="37_g6ukk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wrigo"]
 size = Vector2(48, 48)
@@ -330,6 +331,18 @@ position = Vector2(-1.13687e-13, 0)
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("35_8hwh4")
 region_rect = Rect2(-80, -64, 736, 680)
+
+[node name="DVDBounce" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
+collision_layer = 8
+collision_mask = 1921
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="DVDBounce"]
+shape = SubResource("RectangleShape2D_j3dfj")
+
+[node name="Sprite2D" type="Sprite2D" parent="DVDBounce"]
+scale = Vector2(0.805, 0.805)
+texture = ExtResource("37_g6ukk")
 
 [connection signal="body_entered" from="PlayerSpeed" to="PlayerSpeed" method="_on_body_entered"]
 [connection signal="body_entered" from="GlideBoots" to="GlideBoots" method="_on_body_entered"]

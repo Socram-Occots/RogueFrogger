@@ -70,6 +70,7 @@ var grow_icon : VBoxContainer = iconlabels.get_node("GrowVbox").duplicate()
 var longtele_icon : VBoxContainer = iconlabels.get_node("LongTeleportVbox").duplicate()
 var shorttele_icon : VBoxContainer = iconlabels.get_node("ShortTeleportVbox").duplicate()
 var cleanse_icon : VBoxContainer = iconlabels.get_node("CleanseVbox").duplicate()
+var dvdbounce_icon : VBoxContainer = iconlabels.get_node("DVDBounceVbox").duplicate()
 
 # glowicons
 var items_instantiate : Node = ITEM.instantiate()
@@ -87,7 +88,7 @@ var grow_glowicon : Texture2D = items_instantiate.get_node("Grow/Sprite2D").text
 var longtele_glowicon : Texture2D = items_instantiate.get_node("LongTeleport/Sprite2D").texture
 var shorttele_glowicon : Texture2D = items_instantiate.get_node("ShortTeleport/Sprite2D").texture
 var cleanse_glowicon : Texture2D = items_instantiate.get_node("Cleanse/Sprite2D").texture
-
+var dvdbounce_glowicon : Texture2D = items_instantiate.get_node("DVDBounce/Sprite2D").texture
 
 var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
  ["Shrink", shrink_glowicon], ["Follower", follower_glowicon],
@@ -97,18 +98,19 @@ var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
 
 @onready var DEFAULT_MULTI_LIST : Array[String] = ["Gamba", "Shrink",
 "Follower", "PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope",
-"Shield"]
+"Shield", "Slow", "Grow", "LongTeleport", "ShortTeleport", "Cleanse", "DVDBounce"]
 @onready var DEFAULT_MULTI_CHANCE_LIST : Array[int] = [50, 50, 5, 50, 50, 50, 
-50, 50, 1]
+50, 50, 1, 10, 10, 10, 50, 10]
 
 var gamba_picker : Node
 
-@onready var multi_quantity_sum_divide_const : float = 2
-@onready var multi_quantity_sum : float = sum_multi_chances(9)
+@onready var multi_quantity_sum_divide_const : float = 3
+@onready var multi_quantity_sum : float = sum_multi_chances(15)
+@onready var multi_initial : float = 150
 
-func sum_multi_chances(max_items : int = 9) -> float:
-	var initial : float = 150
-	var total : float = 150
+func sum_multi_chances(max_items : int = 15) -> float:
+	var initial : float = multi_initial
+	var total : float = multi_initial
 	for i in range(1, max_items - 1):
 		total += initial / (multi_quantity_sum_divide_const*i)
 	return total
@@ -197,13 +199,13 @@ node_num: int = 15) -> void:
 		i += 1
 
 func multiItemPicker(mulit_list : Array[String] = DEFAULT_MULTI_LIST,
-multi_chance_list : Array[int] = DEFAULT_MULTI_CHANCE_LIST, num_of_multi : int = 9) -> Array[Array]:
+multi_chance_list : Array[int] = DEFAULT_MULTI_CHANCE_LIST, num_of_multi : int = 15) -> Array[Array]:
 	var result_multi_list : Array[Array] = []
 	var mulit_list_copy = mulit_list.duplicate(true)
 	var multi_chance_list_copy = multi_chance_list.duplicate(true)
 	var multi_chance_pool : float = Global.float_sum_array(multi_chance_list_copy)
 	var multi_chances_length : int = multi_chance_list_copy.size()
-	var initial : float = 150
+	var initial : float = multi_initial
 	var multi_quantity : int = 2
 	var lucky_multi : String
 	
@@ -246,6 +248,12 @@ multi_chance_list : Array[int] = DEFAULT_MULTI_CHANCE_LIST, num_of_multi : int =
 			"Gamba": result_multi_list[i] = [lucky_multi, gamba_glowicon]
 			"Follower": result_multi_list[i] = [lucky_multi, follower_glowicon]
 			"Shrink": result_multi_list[i] = [lucky_multi, shrink_glowicon]
+			"Slow": result_multi_list[i] = [lucky_multi, slow_glowicon]
+			"Grow": result_multi_list[i] = [lucky_multi, grow_glowicon]
+			"LongTeleport": result_multi_list[i] = [lucky_multi, longtele_glowicon]
+			"ShortTeleport": result_multi_list[i] = [lucky_multi, shorttele_glowicon]
+			"Cleanse": result_multi_list[i] = [lucky_multi, cleanse_glowicon]
+			"DVDBounce": result_multi_list[i] = [lucky_multi, dvdbounce_glowicon]
 			_: print("This randomly selected multi does not exist!:", lucky_multi)
 		
 		multi_chance_pool -= multi_chance_list_copy[selected_multi]
@@ -352,10 +360,10 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	#if event.is_action_pressed("dash"):
-		##Global.inc_Shrink(1)
-		##Global.inc_Follower(1)
-		#Global.cleanse_curse(9)
+	if event.is_action_pressed("dash"):
+		#Global.inc_Shrink(1)
+		#Global.inc_Follower(1)
+		Global.cleanse_curse(1)
 	if event.is_action_pressed("rope"):
 		#gamba_picker.begin_gamba()
 		#print("test")
@@ -434,6 +442,12 @@ func update_labels() -> void:
 			else:
 				hboxlabels.add_child(shorttele_icon)
 			Global.shorttelelabelon = false
+		if Global.dvdbouncelabelon:
+			if Global.dvd_mod == 0:
+				hboxlabels.remove_child(dvdbounce_icon)
+			else:
+				hboxlabels.add_child(dvdbounce_icon)
+			Global.dvdbouncelabelon = false
 		
 		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
 		glideicon.get_node("Glide").text = str(Global.glide_mod)
@@ -446,6 +460,7 @@ func update_labels() -> void:
 		grow_icon.get_node("Grow").text = str(Global.grow_mod)
 		longtele_icon.get_node("LongTeleport").text = str(Global.longtele_mod)
 		shorttele_icon.get_node("ShortTeleport").text = str(Global.shorttele_mod)
+		dvdbounce_icon.get_node("DVDBounce").text = str(Global.dvd_mod)
 
 func dash_check() -> void:
 	if Global.dash && dashpopup: 

@@ -541,6 +541,7 @@ func inc_DVD(times : int) -> void:
 			else:
 				dvd_array[0].queue_free()
 				dvd_array.remove_at(0)
+	updatelabels = true
 
 func cleanse_curse(times: int):
 	var curse_dict : Dictionary = {}
@@ -553,6 +554,8 @@ func cleanse_curse(times: int):
 		curse_dict["longtele"] = longtele_mod
 	if shorttele_mod > 0:
 		curse_dict["shorttele"] = shorttele_mod
+	if dvd_mod > 0:
+		curse_dict["DVDBounce"] = dvd_mod
 	
 	if curse_dict.is_empty():
 		return
@@ -575,6 +578,10 @@ func cleanse_curse(times: int):
 		elif chosen == "shorttele":
 			inc_ShortTele(-1)
 			if shorttele_mod == 0:
+				curse_dict.erase(chosen)
+		elif chosen == "DVDBounce":
+			inc_DVD(-1)
+			if dvd_mod == 0:
 				curse_dict.erase(chosen)
 		
 		if curse_dict.is_empty():
