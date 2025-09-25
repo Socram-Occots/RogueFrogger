@@ -24,6 +24,12 @@ func _on_body_entered(body):
 				"Shrink": Global.inc_Shrink(multi_result)
 				"Gamba": Global.inc_Gamba(multi_result)
 				"Shield": Global.follower_array[0].shield_up = true
+				"Slow": Global.inc_PlayerSlow(multi_result)
+				"LongTeleport": Global.inc_LongTele(multi_result)
+				"ShortTeleport": Global.inc_ShortTele(multi_result)
+				"DVDBounce": Global.inc_DVD(multi_result)
+				"Cleanse": Global.cleanse_curse(multi_result)
+				"Grow": Global.inc_Grow(multi_result)
 				_: print("Uknown item in the Multi:", item_pool[winner][0])
 			queue_free()
 			break

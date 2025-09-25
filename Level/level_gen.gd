@@ -27,9 +27,9 @@ const DVDBOUNCE : Resource = preload("res://DVD_bounce/DVD_bounce.tscn")
 10, 50]
 @onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", 
 "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", 
-"Gamba", "Follower", "Shrink", "Multi"]
+"Gamba", "Follower", "Shrink", "Multi", "Cleanse"]
 @onready var DEFAULT_ITEMS_CHANCE_LIST : Array[float] = [50, 50, 
-50, 50, 50, 1, 50, 5, 50, 100]
+50, 50, 50, 1, 50, 5, 50, 100, 10]
 
 @onready var BORDERS : Array = []
 @onready var TERRAIN : Array = []
@@ -100,19 +100,19 @@ var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
 "Follower", "PlayerSpeed", "GlideBoots", "Dash", "expl_B", "GrappleRope",
 "Shield", "Slow", "Grow", "LongTeleport", "ShortTeleport", "Cleanse", "DVDBounce"]
 @onready var DEFAULT_MULTI_CHANCE_LIST : Array[int] = [50, 50, 5, 50, 50, 50, 
-50, 50, 1, 10, 10, 10, 50, 10]
+50, 50, 1, 10, 10, 10, 10, 50, 10]
 
 var gamba_picker : Node
 
-@onready var multi_quantity_sum_divide_const : float = 3
-@onready var multi_quantity_sum : float = sum_multi_chances(15)
-@onready var multi_initial : float = 150
+@onready var multi_quantity_sum_divide_const : float = 3.0
+@onready var multi_initial : float = 150.0
+@onready var multi_quantity_sum : float = sum_multi_chances(15, multi_initial)
 
-func sum_multi_chances(max_items : int = 15) -> float:
-	var initial : float = multi_initial
-	var total : float = multi_initial
+func sum_multi_chances(max_items : int = 15, multi_i: float = 150) -> float:
+	var initial : float = multi_i
+	var total : float = multi_i
 	for i in range(1, max_items - 1):
-		total += initial / (multi_quantity_sum_divide_const*i)
+		total += initial / float(multi_quantity_sum_divide_const*i)
 	return total
 
 func itemSpawn(spawns : Array[Array] = DEFAULT_SPAWN_LIST, 
@@ -194,6 +194,7 @@ node_num: int = 15) -> void:
 			"Follower": i = spawnItems(dir, lucky_spawn,i)
 			"Shrink": i = spawnItems(dir,lucky_spawn, i)
 			"Multi": i = spawnItems(dir,lucky_spawn, i)
+			"Cleanse": i = spawnItems(dir,lucky_spawn, i)
 			_: print("This randomly selected item does not exist!:", lucky_spawn)
 			
 		i += 1
@@ -215,7 +216,6 @@ multi_chance_list : Array[int] = DEFAULT_MULTI_CHANCE_LIST, num_of_multi : int =
 			multi_quantity = i + 1
 			break
 		multi_quantity_sum_chance -= initial / (multi_quantity_sum_divide_const*i)
-	
 	result_multi_list.resize(multi_quantity)
 
 	for i in range(0, multi_quantity):
@@ -360,18 +360,18 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	if event.is_action_pressed("dash"):
-		#Global.inc_Shrink(1)
-		#Global.inc_Follower(1)
-		Global.cleanse_curse(1)
-	if event.is_action_pressed("rope"):
-		#gamba_picker.begin_gamba()
-		#print("test")
-		#create_follower()
-		#Global.inc_PlayerSlow(20)
-		#Global.inc_Grow(20)
-		#Global.inc_ShortTele(20)
-		Global.inc_DVD(1)
+	#if event.is_action_pressed("dash"):
+		##Global.inc_Shrink(1)
+		##Global.inc_Follower(1)
+		#Global.cleanse_curse(1)
+	#if event.is_action_pressed("rope"):
+		##gamba_picker.begin_gamba()
+		##print("test")
+		##create_follower()
+		##Global.inc_PlayerSlow(20)
+		##Global.inc_Grow(20)
+		##Global.inc_ShortTele(20)
+		#Global.inc_DVD(1)
 	pass
 
 func terrainSpawnLogic(times : int) -> void:
@@ -531,14 +531,22 @@ func spawn_high_score_line() -> void:
 
 func load_gamba_picker() -> void:
 	gamba_picker = GAMBAPICKER.instantiate()
-	var temp_array : Array[Array] = [["Shrink", shrink_icon], 
+	var temp_array_good : Array[Array] = [["Shrink", shrink_icon], 
 	["Follower", follower_icon], ["PlayerSpeed", playerspeedicon], 
 	["GlideBoots", glideicon], ["Dash", dashicon], 
-	["expl_B", expl_B_icon], ["GrappleRope", grapple_icon]]
-	var input_array : Array[Array] = []
-	for i in temp_array:
-		input_array.append([i[0], i[1].get_node("Sprite2D").texture])
-	gamba_picker.item_pool = input_array
+	["expl_B", expl_B_icon], ["GrappleRope", grapple_icon],
+	 ["Cleanse", cleanse_icon]]
+	var temp_array_bad : Array[Array] = [["Slow", slow_icon], 
+	["Grow", grow_icon], ["LongTeleport", longtele_icon], 
+	["ShortTeleport", shorttele_icon], ["DVDBounce", dvdbounce_icon]]
+	var input_array_good : Array[Array] = []
+	var input_array_bad: Array[Array] = []
+	for i in temp_array_good:
+		input_array_good.append([i[0], i[1].get_node("Sprite2D").texture])
+	for i in temp_array_bad:
+		input_array_bad.append([i[0], i[1].get_node("Sprite2D").texture])
+	gamba_picker.good_item_pool = input_array_good
+	gamba_picker.bad_item_pool = input_array_bad
 	gamba_picker.gamba_result_time_seconds = 2
 	$CanvasLayer.add_child(gamba_picker)
 

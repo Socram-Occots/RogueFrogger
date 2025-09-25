@@ -2,6 +2,10 @@ extends Node
 
 @export var item_pool : Array[Array] = []
 @export var gamba_result_time_seconds : int = 5
+@export var good_item_pool : Array[Array] = []
+@export var bad_item_pool : Array[Array] = []
+@onready var good_item_pool_size : int = good_item_pool.size()
+@onready var bad_item_pool_size : int = bad_item_pool.size()
 @onready var cycleitemcounter : int = 0
 @onready var itemcycletimer : Timer = $HBoxContainer/ItemCycleTimer
 @onready var gamba_rect: TextureRect = $HBoxContainer/GambaRect
@@ -9,7 +13,7 @@ extends Node
 @onready var label: Label = $HBoxContainer/Label
 @onready var timepercycle : float  
 @onready var timeperitemcycle : float
-@onready var len_item_pool : int = len(item_pool)
+@onready var len_item_pool : int = item_pool.size()
 @onready var total_sec : float = 0
 @onready var temp_item_pool : Array
 
@@ -19,10 +23,25 @@ func _ready() -> void:
 	set_process(false) 
 	  
 func begin_gamba() -> void:
-	if len_item_pool < 1:
+	good_item_pool_size = good_item_pool.size()
+	bad_item_pool_size = bad_item_pool.size()
+	len_item_pool = good_item_pool_size + bad_item_pool_size
+	if len_item_pool < 2:
 		return
 	set_process(true)
-	temp_item_pool = item_pool.duplicate(true)
+	good_item_pool.shuffle()
+	bad_item_pool.shuffle()
+	if good_item_pool_size < 2:
+		temp_item_pool = good_item_pool
+	else:
+		temp_item_pool = good_item_pool.slice(0, 
+		randi_range(min(3, good_item_pool_size), good_item_pool_size))
+	
+	if bad_item_pool_size > 1:
+		var bad_item_index_chance = randi_range(0, bad_item_pool_size - 1)
+		if bad_item_index_chance != 0:
+			temp_item_pool += bad_item_pool.slice(0, bad_item_index_chance)
+	
 	timepercycle = gamba_result_time_seconds / float(len_item_pool - 1)
 	timeperitemcycle = timepercycle / (len_item_pool)
 	label.text = str(Global.gamba_mod) + "x"
@@ -77,8 +96,13 @@ func present_winner() -> void:
 		"GrappleRope": Global.inc_GrappleRope(multi_result)
 		"Follower": Global.inc_Follower(Global.gamba_mod)
 		"Shrink": Global.inc_Shrink(multi_result)
+		"Slow": Global.inc_PlayerSlow(multi_result)
+		"Grow": Global.inc_Grow(multi_result)
+		"LongTeleport": Global.inc_LongTele(multi_result)
+		"Shortteleport": Global.inc_ShortTele(multi_result)
+		"Cleanse": Global.cleanse_curse(multi_result)
+		"DVDBounce": Global.inc_DVD(multi_result)
 		_: print("Uknown item in the Gamba Picker")
-		
 	
 	await get_tree().create_timer(1).timeout
 	#reset length so gamba can function again
