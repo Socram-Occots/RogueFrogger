@@ -4,16 +4,20 @@ extends Area2D
 @export var productItem : Texture2D
 @export var priceItemName : String
 @export var productItemName : String
+@export var pricenum : int
+@export var productnum : int
 @onready var polygon_2d: Polygon2D = $Polygon2D
 @onready var sprite_price_item: Sprite2D = $SpritePriceItem
 @onready var pricelabel: Label = $SpritePriceItem/MarginContainer/Label
 @onready var sprite_product_item: Sprite2D = $SpriteProductItem
 @onready var productlabel: Label = $SpriteProductItem/MarginContainer/Label
+@onready var not_entered : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite_price_item.texture = priceItem
 	sprite_product_item.texture = productItem
+	polygon_2d.color = Color(0, 0, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
@@ -23,20 +27,79 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
-	for i in ["Player", "Follower"]:
+	if not_entered:
+		for i in ["Player"]:
+			if i in metalist:
+				var bought : bool = false
+				not_entered = false
+				match priceItemName:
+					"PlayerSpeed": 
+						if pricenum <= Global.player_speed_mod:
+							Global.inc_PlayerSpeed(-1*pricenum)
+							bought = true
+					"GlideBoots":
+						if pricenum <= Global.glide_mod:
+							Global.inc_GlideBoots(-1*pricenum)
+							bought = true
+					"Dash":
+						if pricenum <= Global.dash_mod:
+							Global.inc_Dash(-1*pricenum)
+							bought = true
+					"expl_B":
+						if pricenum <= Global.expl_B_mod:
+							Global.inc_expl_B(-1*pricenum)
+							bought = true
+					"GrappleRope":
+						if pricenum <= Global.grapple_mod:
+							Global.inc_GrappleRope(-1*pricenum)
+							bought = true
+					"Follower":
+						if pricenum <= Global.follower_mod - 1:
+							Global.inc_Follower(-1*pricenum)
+							bought = true
+					"Shrink":
+						if pricenum <= Global.shrink_mod:
+							Global.inc_Shrink(-1*pricenum)
+							bought = true
+					"Slow":
+						if pricenum <= Global.playerslow_mod - 1:
+							Global.inc_PlayerSlow(-1*pricenum)
+							bought = true
+					"Grow":
+						if pricenum <= Global.grow_mod:
+							Global.inc_Grow(-1*pricenum)
+							bought = true
+					"LongTeleport":
+						if pricenum <= Global.longtele_mod:
+							Global.inc_LongTele(-1*pricenum)
+							bought = true
+					"ShortTeleport":
+						if pricenum <= Global.shorttele_mod:
+							Global.inc_ShortTele(-1*pricenum)
+							bought = true
+					"DVDBounce":
+						if pricenum <= Global.dvd_mod:
+							Global.inc_DVD(-1*pricenum)
+							bought = true
+				if bought:
+					polygon_2d.color = Color(0, 225, 0)
+					match productItemName:
+						"PlayerSpeed": Global.inc_PlayerSpeed(productnum)
+						"GlideBoots": Global.inc_GlideBoots(productnum)
+						"Dash": Global.inc_Dash(productnum)
+						"expl_B": Global.inc_expl_B(productnum)
+						"GrappleRope": Global.inc_GrappleRope(productnum)
+						"Follower": Global.inc_Follower(productnum)
+						"Shrink": Global.inc_Shrink(productnum)
+						"Gamba": Global.inc_Gamba(productnum)
+						"Cleanse" : Global.cleanse_curse(productnum)
+						"Shield": Global.follower_array[0].shield_up = true
+				else:
+					polygon_2d.color = Color(225, 0, 0)
+
+func _on_body_exited(body: Node2D) -> void:
+	var metalist : PackedStringArray = body.get_meta_list()
+	for i in ["Player"]:
 		if i in metalist:
-			var can_they_purchase : bool = false
-			match priceItemName:
-				"PlayerSpeed":pass
-				"GlideBoots":pass
-				"Dash":pass
-				"expl_B":pass
-				"GrappleRope":pass
-				"Follower":pass
-				"Shrink":pass
-				"Gamba":pass
-				"Slow":pass
-				"Grow":pass
-				"LongTeleport":pass
-				"ShortTeleport":pass
-				"DVDBounce":pass
+			not_entered = true
+			polygon_2d.color = Color(0, 0, 0)

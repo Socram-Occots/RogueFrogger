@@ -19,12 +19,13 @@ const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
 const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
 const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
 const DVDBOUNCE : Resource = preload("res://DVD_bounce/DVD_bounce.tscn")
+const SHOP : Resource = preload("res://Items/Item_Shop/ItemShop.tscn")
 
 @onready var DEFAULT_SPAWN_LIST : Array[Array] = [["None"], ["Barrel"], 
-["Dumpster"], ["ExplBarrel"], ["Items"]]
+["Dumpster"], ["ExplBarrel"], ["Items"], ["Shop"]]
 # the DEFAULT_CHANCE_LIST does not have to add up to 100
 @onready var DEFAULT_CHANCE_LIST : Array[float] = [800, 90, 50, 
-10, 50]
+10, 50, 1]
 @onready var DEFAULT_ITEMS : Array[String] = ["PlayerSpeed", 
 "GlideBoots", "Dash", "expl_B", "GrappleRope", "Shield", 
 "Gamba", "Follower", "Shrink", "Multi", "Cleanse"]
@@ -49,6 +50,7 @@ var BORDER_INST : Node2D = BORDER.instantiate()
 var EXPLBARREL_INST : RigidBody2D = EXPLBARREL.instantiate()
 var POP_INST : Control = POP.instantiate()
 var DVD_INST : Node2D = DVDBOUNCE.instantiate()
+var SHOP_INST : Area2D = SHOP.instantiate()
 
 var sidewalk : bool = false
 
@@ -102,11 +104,28 @@ var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
 @onready var DEFAULT_MULTI_CHANCE_LIST : Array[int] = [50, 50, 5, 50, 50, 50, 
 50, 50, 1, 10, 10, 10, 10, 50, 10]
 
+@onready var shoppricecurses : Array[String] = ["Slow", "Grow", 
+"LongTeleport", "ShortTeleport", "DVDBounce"]
+@onready var shoppriceitems : Array[String] = ["PlayerSpeed", 
+"GlideBoots", "Dash", "expl_B", "GrappleRope", "Gamba", "Follower", "Shrink"]
+@onready var shopproductitems : Array[String] = ["PlayerSpeed", 
+"GlideBoots", "Dash", "expl_B", "GrappleRope", "Gamba", "Shrink",
+"Gamba", "Cleanse"]
+@onready var shopproductitemsrare : Array[String] = ["Follower", "Shield"]
+
 var gamba_picker : Node
 
+# multichances
 @onready var multi_quantity_sum_divide_const : float = 3.0
 @onready var multi_initial : float = 150.0
 @onready var multi_quantity_sum : float = sum_multi_chances(15, multi_initial)
+
+# shopchances
+@onready var shop_num_sum_divide_const : float = 3
+@onready var shop_initial : float = 300
+@onready var shop_num_limit : int = 25
+@onready var shop_num_sum : float = sum_multi_chances(shop_num_limit, shop_initial)
+
 
 func sum_multi_chances(max_items : int = 15, multi_i: float = 150) -> float:
 	var initial : float = multi_i
@@ -195,6 +214,7 @@ node_num: int = 15) -> void:
 			"Shrink": i = spawnItems(dir,lucky_spawn, i)
 			"Multi": i = spawnItems(dir,lucky_spawn, i)
 			"Cleanse": i = spawnItems(dir,lucky_spawn, i)
+			"Shop" : i = spawnShop(dir, node_num, i)
 			_: print("This randomly selected item does not exist!:", lucky_spawn)
 			
 		i += 1
@@ -296,6 +316,79 @@ func spawnItems(dir : String, item_str: String, i : int) -> int:
 	item.set_meta("Item", null)
 	$Ysort.add_child(item)
 	return i
+
+func spawnShop(dir : String, node_num : int, i : int) -> int:
+	# we have to check if this is the last node to prevent clipping out of bounds
+	if i + 1 >= node_num: return i
+	var shop : Area2D = SHOP_INST.duplicate()
+	var generated : Array = chooseShopItems()
+	shop.visible = true
+	shop.position = get_node(dir).global_position
+	shop.priceItemName = generated[0]
+	shop.productItemName = generated[1]
+	shop.pricenum = generated[2]
+	shop.productnum = generated[3]
+	shop.priceItem = chooseShopTextures(generated[0])
+	shop.productItem = chooseShopTextures(generated[1])
+	$Ysort.add_child(shop)
+	# shops are two wide so we need to skip a spawn node
+	return i + 1
+
+func chooseShopItems() -> Array:
+	var chosenInput : String = ""
+	var chosenOutput : String = ""
+	var shop_cost : int = 1
+	var shop_num_sum_chance = randf_range(0, shop_num_sum) - shop_initial
+	for i in range(1, shop_num_limit):
+		if shop_num_sum_chance <= 0:
+			shop_cost = i
+			break
+		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
+	var shop_reward_num : int = 1
+	shop_num_sum_chance = randf_range(0, shop_num_sum) - shop_initial
+	for i in range(1, shop_num_limit):
+		if shop_num_sum_chance <= 0:
+			shop_reward_num = i
+			break
+		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
+	# choose to make the price a curse or an item
+	if randf_range(0, 9) < 1:
+		chosenInput = shoppricecurses.pick_random()
+	else:
+		chosenInput = shoppriceitems.pick_random()
+	# 1 in 20 chance you get a rare product
+	if randf_range(0, 19) < 1:
+		var arraytemp : Array[String] = shopproductitemsrare.duplicate(true)
+		arraytemp.erase(chosenInput)
+		chosenOutput = arraytemp.pick_random()
+	else:
+		var arraytemp : Array[String] = shopproductitems.duplicate(true)
+		arraytemp.erase(chosenInput)
+		chosenOutput = arraytemp.pick_random()
+	
+	return [chosenInput, chosenOutput, shop_cost, shop_reward_num]
+
+func chooseShopTextures(shopstr: String) -> Texture2D:
+	match shopstr:
+		"None": return null
+		"PlayerSpeed": return playerspeedglowicon
+		"GlideBoots": return glideglowicon
+		"Dash": return dashglowicon
+		"expl_B": return expl_B_glowicon
+		"GrappleRope": return grapple_glowicon
+		"Shield": return shield_glowicon
+		"Gamba": return gamba_glowicon
+		"Follower": return follower_glowicon
+		"Shrink": return shrink_glowicon
+		"Slow": return slow_glowicon
+		"Grow": return grow_glowicon
+		"LongTeleport": return longtele_glowicon
+		"ShortTeleport": return shorttele_glowicon
+		"Cleanse": return cleanse_glowicon
+		"DVDBounce": return dvdbounce_glowicon
+		_: 
+			print("This randomly selected Shop String does not exist!:", shopstr)
+			return null
 
 func carSpawn() -> void:
 	var car : Node2D = CAR_INST.duplicate()
