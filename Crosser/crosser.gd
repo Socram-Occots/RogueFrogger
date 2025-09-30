@@ -61,7 +61,7 @@ func move_player() -> void:
 	
 	var playerspeed_penalty : float = (1 - (Global.playerslow_percent *\
 	(Global.playerslow_mod_real - 1)))
-	
+
 	velocityRigid = velocityRigid.normalized() *\
 	Global.player_speed_scaling * playerspeed_penalty
 	

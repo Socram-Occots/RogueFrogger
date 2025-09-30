@@ -18,8 +18,13 @@ func _ready() -> void:
 	sprite_price_item.texture = priceItem
 	sprite_product_item.texture = productItem
 	polygon_2d.color = Color(0, 0, 0)
-
+	pricelabel.text = str(pricenum) + "x"
+	if productItemName == "Shield":
+		productlabel.text = "1x"
+	else:
+		productlabel.text = str(productnum) + "x"
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	if global_position.y - Global.player_pos_y > Global.despawn_lower:
@@ -54,7 +59,7 @@ func _on_body_entered(body):
 							Global.inc_GrappleRope(-1*pricenum)
 							bought = true
 					"Follower":
-						if pricenum <= Global.follower_mod - 1:
+						if pricenum <= Global.follower_mod - Global.follower_mod_base:
 							Global.inc_Follower(-1*pricenum)
 							bought = true
 					"Shrink":
@@ -62,7 +67,7 @@ func _on_body_entered(body):
 							Global.inc_Shrink(-1*pricenum)
 							bought = true
 					"Slow":
-						if pricenum <= Global.playerslow_mod - 1:
+						if pricenum <= Global.playerslow_mod - Global.playerslow_mod_base:
 							Global.inc_PlayerSlow(-1*pricenum)
 							bought = true
 					"Grow":

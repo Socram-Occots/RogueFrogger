@@ -9,7 +9,7 @@
 shader = ExtResource("1_0tob4")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkbcq"]
-size = Vector2(233, 73.74)
+size = Vector2(223, 73.74)
 
 [node name="ItemShop" type="Area2D"]
 collision_layer = 0
@@ -18,25 +18,18 @@ script = ExtResource("1_0fope")
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(0.999985, 1)
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(35, 16, 123, 16, 123, -37, 195, -37, 195, 35, 123, 35, 123, 16, 111, 16, 111, 47, 207, 47, 207, -49, 111, -49, 111, -18, 47, -18, 47, -49, -49, -49, -49, 47, 47, 47, 47, 16, 35, 16, 35, 35, -37, 35, -37, -37, 35, -37)
-
-[node name="arrow" type="Sprite2D" parent="."]
-texture_filter = 1
-material = SubResource("ShaderMaterial_d3wpi")
-position = Vector2(80, 0)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_wgchv")
+polygon = PackedVector2Array(45, 16, 113, 16, 113, -37, 185, -37, 185, 35, 113, 35, 113, 16, 101, 16, 101, 47, 197, 47, 197, -49, 101, -49, 101, -18, 57, -18, 57, -49, -39, -49, -39, 47, 57, 47, 57, 16, 45, 16, 45, 35, -27, 35, -27, -37, 45, -37)
 
 [node name="SpritePriceItem" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-1.70531e-13, 0)
+position = Vector2(10, 0)
 scale = Vector2(1.2075, 1.2075)
 texture = ExtResource("4_rsldd")
 region_rect = Rect2(-80, -64, 736, 680)
 
 [node name="MarginContainer" type="MarginContainer" parent="SpritePriceItem"]
 anchors_preset = -1
-anchor_left = 0.58
+anchor_left = 0.67
 anchor_top = 0.627
 anchor_right = 0.927
 anchor_bottom = 0.814
@@ -59,14 +52,14 @@ text = "x"
 
 [node name="SpriteProductItem" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(160, 0)
+position = Vector2(150, 0)
 scale = Vector2(1.2075, 1.2075)
 texture = ExtResource("4_rsldd")
 region_rect = Rect2(-80, -64, 736, 680)
 
 [node name="MarginContainer" type="MarginContainer" parent="SpriteProductItem"]
 anchors_preset = -1
-anchor_left = 0.58
+anchor_left = 0.67
 anchor_top = 0.627
 anchor_right = 0.927
 anchor_bottom = 0.814
@@ -86,6 +79,13 @@ layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 8
 text = "x"
+
+[node name="arrow" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_d3wpi")
+position = Vector2(80, 0)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_wgchv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(80, 0)

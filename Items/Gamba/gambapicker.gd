@@ -42,10 +42,13 @@ func begin_gamba() -> void:
 		if bad_item_index_chance != 0:
 			temp_item_pool += bad_item_pool.slice(0, bad_item_index_chance)
 	
+	len_item_pool = temp_item_pool.size()
+	
 	timepercycle = gamba_result_time_seconds / float(len_item_pool - 1)
 	timeperitemcycle = timepercycle / (len_item_pool)
 	label.text = str(Global.gamba_mod) + "x"
 	h_box_container.visible = true
+	
 	start_cycle()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -99,7 +102,7 @@ func present_winner() -> void:
 		"Slow": Global.inc_PlayerSlow(multi_result)
 		"Grow": Global.inc_Grow(multi_result)
 		"LongTeleport": Global.inc_LongTele(multi_result)
-		"Shortteleport": Global.inc_ShortTele(multi_result)
+		"ShortTeleport": Global.inc_ShortTele(multi_result)
 		"Cleanse": Global.cleanse_curse(multi_result)
 		"DVDBounce": Global.inc_DVD(multi_result)
 		_: print("Uknown item in the Gamba Picker")

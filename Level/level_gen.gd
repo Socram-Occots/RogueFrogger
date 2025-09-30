@@ -107,7 +107,7 @@ var item_glowlist : Array[Array] = [["Gamba", gamba_glowicon],
 @onready var shoppricecurses : Array[String] = ["Slow", "Grow", 
 "LongTeleport", "ShortTeleport", "DVDBounce"]
 @onready var shoppriceitems : Array[String] = ["PlayerSpeed", 
-"GlideBoots", "Dash", "expl_B", "GrappleRope", "Gamba", "Follower", "Shrink"]
+"GlideBoots", "Dash", "expl_B", "GrappleRope", "Follower", "Shrink"]
 @onready var shopproductitems : Array[String] = ["PlayerSpeed", 
 "GlideBoots", "Dash", "expl_B", "GrappleRope", "Gamba", "Shrink",
 "Gamba", "Cleanse"]
@@ -118,20 +118,23 @@ var gamba_picker : Node
 # multichances
 @onready var multi_quantity_sum_divide_const : float = 3.0
 @onready var multi_initial : float = 150.0
-@onready var multi_quantity_sum : float = sum_multi_chances(15, multi_initial)
+@onready var multi_quantity_sum : float = sum_multi_chances(15, multi_initial, 
+multi_quantity_sum_divide_const)
 
 # shopchances
-@onready var shop_num_sum_divide_const : float = 3
+@onready var shop_num_sum_divide_const : float = 5
 @onready var shop_initial : float = 300
-@onready var shop_num_limit : int = 25
-@onready var shop_num_sum : float = sum_multi_chances(shop_num_limit, shop_initial)
+@onready var shop_num_limit : int = 15
+@onready var shop_num_sum : float = sum_multi_chances(shop_num_limit, shop_initial,
+shop_num_sum_divide_const)
 
+@onready var high_score_reached : bool = false
 
-func sum_multi_chances(max_items : int = 15, multi_i: float = 150) -> float:
+func sum_multi_chances(max_items : int = 15, multi_i: float = 150, divide_int : float = 3) -> float:
 	var initial : float = multi_i
 	var total : float = multi_i
 	for i in range(1, max_items - 1):
-		total += initial / float(multi_quantity_sum_divide_const*i)
+		total += initial / float(divide_int*i)
 	return total
 
 func itemSpawn(spawns : Array[Array] = DEFAULT_SPAWN_LIST, 
@@ -338,12 +341,14 @@ func chooseShopItems() -> Array:
 	var chosenInput : String = ""
 	var chosenOutput : String = ""
 	var shop_cost : int = 1
+	
 	var shop_num_sum_chance = randf_range(0, shop_num_sum) - shop_initial
 	for i in range(1, shop_num_limit):
 		if shop_num_sum_chance <= 0:
 			shop_cost = i
 			break
 		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
+	
 	var shop_reward_num : int = 1
 	shop_num_sum_chance = randf_range(0, shop_num_sum) - shop_initial
 	for i in range(1, shop_num_limit):
@@ -351,6 +356,7 @@ func chooseShopItems() -> Array:
 			shop_reward_num = i
 			break
 		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
+	
 	# choose to make the price a curse or an item
 	if randf_range(0, 9) < 1:
 		chosenInput = shoppricecurses.pick_random()
@@ -453,18 +459,24 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	#if event.is_action_pressed("dash"):
-		##Global.inc_Shrink(1)
-		##Global.inc_Follower(1)
+	if event.is_action_pressed("dash"):
+		#Global.inc_Shrink(1)
+		Global.inc_Follower(5)
 		#Global.cleanse_curse(1)
-	#if event.is_action_pressed("rope"):
-		##gamba_picker.begin_gamba()
-		##print("test")
-		##create_follower()
-		##Global.inc_PlayerSlow(20)
-		##Global.inc_Grow(20)
-		##Global.inc_ShortTele(20)
-		#Global.inc_DVD(1)
+	if event.is_action_pressed("rope"):
+		#gamba_picker.begin_gamba()
+		#print("test")
+		#create_follower()
+		#Global.inc_PlayerSlow(20)
+		#Global.inc_Grow(20)
+		#Global.inc_Shrink(20)
+		#Global.inc_PlayerSpeed(20)
+		#Global.inc_ShortTele(20)
+		#Global.inc_DVD(20)
+		#Global.inc_GlideBoots(20)
+		#Global.inc_Dash(20)
+		##Global.inc_Gamba(1)
+		Global.inc_Follower(-5)
 	pass
 
 func terrainSpawnLogic(times : int) -> void:
@@ -488,28 +500,46 @@ func update_labels() -> void:
 		# In the case that 2+ items are picked up at once
 		# we need to check each one.
 		if Global.playerspeedlabelon:
-			hboxlabels.add_child(playerspeedicon)
+			if Global.player_speed_mod == 0:
+				hboxlabels.remove_child(playerspeedicon)
+			else:
+				hboxlabels.add_child(playerspeedicon)
 			Global.playerspeedlabelon = false
 		if  Global.glidelabelon:
-			hboxlabels.add_child(glideicon)
+			if Global.glide_mod == 0:
+				hboxlabels.remove_child(glideicon)
+			else:
+				hboxlabels.add_child(glideicon)
 			Global.glidelabelon = false
 		if Global.dashlabelon:
-			hboxlabels.add_child(dashicon)
+			if Global.dash_mod == 0:
+				hboxlabels.remove_child(dashicon)
+			else:
+				hboxlabels.add_child(dashicon)
 			Global.dashlabelon = false
 		if Global.expl_B_labelon:
-			hboxlabels.add_child(expl_B_icon)
+			if Global.expl_B_mod == 0:
+				hboxlabels.remove_child(expl_B_icon)
+			else:
+				hboxlabels.add_child(expl_B_icon)
 			Global.expl_B_labelon = false
 		if Global.grapplelabelon:
-			hboxlabels.add_child(grapple_icon)
+			if Global.grapple_mod == 0:
+				hboxlabels.remove_child(grapple_icon)
+			else:
+				hboxlabels.add_child(grapple_icon)
 			Global.grapplelabelon = false
 		if Global.followerlabelon:
-			if Global.follower_mod == 1:
+			if Global.follower_mod == Global.follower_mod_base:
 				hboxlabels.remove_child(follower_icon)
 			else:
 				hboxlabels.add_child(follower_icon)
 			Global.followerlabelon = false
 		if Global.shrinklabelon:
-			hboxlabels.add_child(shrink_icon)
+			if Global.shrink_mod == 0:
+				hboxlabels.remove_child(shrink_icon)
+			else:
+				hboxlabels.add_child(shrink_icon)
 			Global.shrinklabelon = false
 		if Global.playerslowlabelon:
 			if Global.playerslow_mod == Global.playerslow_mod_base:
@@ -567,10 +597,14 @@ func terrain_check() -> void:
 			return
 		
 		var max_tile_int : int = Global.race_condition_tiles.max()
+
+		Global.race_condition_tiles.clear()
 		var score_diff : int = max_tile_int - Global.score  
 		if score_diff > -1:
 			Global.score = max_tile_int
-			if max_tile_int > SettingsDataContainer.get_high_score():
+			if max_tile_int > SettingsDataContainer.get_high_score()\
+			and !high_score_reached:
+				high_score_reached = true
 				highscore_notif()
 		
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
