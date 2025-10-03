@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=7 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
+[ext_resource type="Script" path="res://Level/stopwatch.gd" id="5_moa77"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="8_3m3b3"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
 
@@ -135,3 +136,12 @@ offset_right = 72.0
 grow_vertical = 0
 script = ExtResource("8_3m3b3")
 metadata/_edit_use_anchors_ = true
+
+[node name="stopwatch" type="Label" parent="CanvasLayer"]
+offset_right = 288.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 30
+text = "stopwatch"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_moa77")

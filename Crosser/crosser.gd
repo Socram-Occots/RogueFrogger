@@ -151,7 +151,6 @@ func _process(delta : float) -> void:
 	#print(global_position)
 	Global.player_pos_x = global_position.x
 	Global.player_pos_y = global_position.y
-#	if Input.is_action_pressed("ui_copy"): print(position)
 	
 	dash_decision_tree()
 	grapple_decision_tree()

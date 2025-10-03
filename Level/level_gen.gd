@@ -459,24 +459,24 @@ func _input(event):
 	#|| event.is_action_released("right_d"):
 		#Global.input_active = false
 		
-	if event.is_action_pressed("dash"):
-		#Global.inc_Shrink(1)
-		Global.inc_Follower(5)
+	#if event.is_action_pressed("dash"):
+		##Global.inc_Shrink(1)
+		#Global.inc_Follower(5)
 		#Global.cleanse_curse(1)
-	if event.is_action_pressed("rope"):
-		#gamba_picker.begin_gamba()
-		#print("test")
-		#create_follower()
-		#Global.inc_PlayerSlow(20)
-		#Global.inc_Grow(20)
-		#Global.inc_Shrink(20)
-		#Global.inc_PlayerSpeed(20)
-		#Global.inc_ShortTele(20)
-		#Global.inc_DVD(20)
-		#Global.inc_GlideBoots(20)
-		#Global.inc_Dash(20)
-		##Global.inc_Gamba(1)
-		Global.inc_Follower(-5)
+	#if event.is_action_pressed("rope"):
+		##gamba_picker.begin_gamba()
+		##print("test")
+		##create_follower()
+		##Global.inc_PlayerSlow(20)
+		##Global.inc_Grow(20)
+		##Global.inc_Shrink(20)
+		##Global.inc_PlayerSpeed(20)
+		##Global.inc_ShortTele(20)
+		##Global.inc_DVD(20)
+		##Global.inc_GlideBoots(20)
+		##Global.inc_Dash(20)
+		###Global.inc_Gamba(1)
+		#Global.inc_Follower(-5)
 	pass
 
 func terrainSpawnLogic(times : int) -> void:
