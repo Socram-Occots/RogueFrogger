@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=52 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://cuyjr0ij47tni" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_18.png" id="44_1af04"]
 [ext_resource type="Texture2D" uid="uid://kudfyslcxv8j" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_19.png" id="45_era0l"]
 [ext_resource type="Texture2D" uid="uid://dlwpx7nyy8tdk" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_20.png" id="46_6t7lh"]
+[ext_resource type="Script" path="res://Crosser/despawn_cage.gd" id="47_mk2mw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5abg2"]
 animations = [{
@@ -216,6 +217,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekbee"]
 size = Vector2(20, 2)
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkv01"]
+
 [node name="crosser" type="RigidBody2D"]
 texture_filter = 1
 collision_mask = 4062
@@ -280,4 +283,25 @@ shape = SubResource("RectangleShape2D_ekbee")
 wait_time = 0.1
 autostart = true
 
+[node name="despawn_cage" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 3130
+script = ExtResource("47_mk2mw")
+
+[node name="right_cage" type="CollisionShape2D" parent="despawn_cage"]
+position = Vector2(3000, 0)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_gkv01")
+
+[node name="left_cage" type="CollisionShape2D" parent="despawn_cage"]
+position = Vector2(-3000, 0)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_gkv01")
+
+[node name="bottom_cage" type="CollisionShape2D" parent="despawn_cage"]
+position = Vector2(0, 2000)
+shape = SubResource("WorldBoundaryShape2D_gkv01")
+
 [connection signal="timeout" from="follower_cleanup_timer" to="." method="_on_follower_cleanup_timer_timeout"]
+[connection signal="area_entered" from="despawn_cage" to="despawn_cage" method="_on_area_entered"]
+[connection signal="body_entered" from="despawn_cage" to="despawn_cage" method="_on_body_entered"]

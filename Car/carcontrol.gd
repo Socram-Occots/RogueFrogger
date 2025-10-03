@@ -49,8 +49,7 @@ func _ready():
 
 @warning_ignore("unused_parameter")
 func _process(delta):
-	if global_position.y - Global.player_pos_y > Global.despawn_lower:
-		queue_free()
+	pass
 
 func _on_timer_timeout():
 	var auto : Area2D = $car.duplicate()
