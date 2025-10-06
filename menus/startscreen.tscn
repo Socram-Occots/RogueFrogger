@@ -25,16 +25,25 @@ grow_horizontal = 0
 theme_override_constants/separation = 0
 
 [node name="Start" type="Button" parent="Options"]
-custom_minimum_size = Vector2(250, 216)
+custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Start"
 icon_alignment = 1
 
+[node name="Sandbox" type="Button" parent="Options"]
+custom_minimum_size = Vector2(250, 180)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 60
+action_mode = 0
+text = "Sandbox"
+icon_alignment = 1
+
 [node name="Tutorial" type="Button" parent="Options"]
-custom_minimum_size = Vector2(250, 216)
+custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 70
@@ -43,7 +52,7 @@ text = "Tutorial"
 icon_alignment = 1
 
 [node name="Options" type="Button" parent="Options"]
-custom_minimum_size = Vector2(250, 216)
+custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 70
@@ -52,7 +61,7 @@ text = "Options"
 icon_alignment = 1
 
 [node name="Credits" type="Button" parent="Options"]
-custom_minimum_size = Vector2(250, 216)
+custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
 focus_mode = 0
 theme_override_font_sizes/font_size = 70
@@ -61,10 +70,10 @@ text = "Credits"
 icon_alignment = 1
 
 [node name="Quit" type="Button" parent="Options"]
-custom_minimum_size = Vector2(250, 216)
+custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
 focus_mode = 0
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Quit"
 icon_alignment = 1
@@ -95,6 +104,7 @@ autoplay = true
 bus = &"Music"
 
 [connection signal="pressed" from="Options/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Options/Sandbox" to="." method="_on_sandbox_pressed"]
 [connection signal="pressed" from="Options/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="Options/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Options/Credits" to="." method="_on_credits_pressed"]

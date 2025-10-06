@@ -47,12 +47,12 @@ func _ready():
 	$cars.add_child(auto)
 	$Timer.start(randf_range(car_spacing_timer_l, car_spacing_timer_h))
 
-@warning_ignore("unused_parameter")
-func _process(delta):
-	pass
-
 func _on_timer_timeout():
 	var auto : Area2D = $car.duplicate()
 	auto.set_meta("Car", false)
 	auto.visible = true
 	$cars.add_child(auto)
+
+@warning_ignore("unused_parameter")
+func _on_despawn_trigger_area_entered(area: Area2D) -> void:
+	queue_free()
