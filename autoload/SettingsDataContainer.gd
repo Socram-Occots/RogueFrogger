@@ -12,6 +12,12 @@ var music_volume : float = 0.0
 var sfx_volume : float = 0.0
 # game data
 var high_score : int = 0
+# sandbox data
+var general_sandbox_dict : Dictionary = {}
+var items_sandbox_dict : Dictionary = {}
+var multi_sandbox_dict : Dictionary = {}
+var gamba_sandbox_dict : Dictionary = {}
+var shop_sandbox_dict : Dictionary = {}
 
 var loaded_data : Dictionary = {}
 
@@ -28,7 +34,12 @@ func create_storage_dictionary() -> Dictionary:
 		"music_volume": music_volume,
 		"sfx_volume": sfx_volume,
 		"keybinds": create_keybind_dictionary(),
-		"high_score": high_score
+		"high_score": high_score,
+		"general_sandbox_dict": general_sandbox_dict,
+		"items_sandbox_dict": items_sandbox_dict,
+		"multi_sandbox_dict": multi_sandbox_dict,
+		"gamba_sandbox_dict": gamba_sandbox_dict,
+		"shop_sandbox_dict": shop_sandbox_dict
 	}
 
 	return settings_container_dict
@@ -109,7 +120,22 @@ func get_high_score() -> int:
 	if loaded_data == {}:
 		return DEFAULT_SETTINGS.default_high_score
 	return high_score
-
+# get sandbox data
+func on_general_sandbox_dict_set(dict : Dictionary) -> void:
+	general_sandbox_dict = dict
+	
+func on_items_sandbox_dict_set(dict : Dictionary) -> void:
+	items_sandbox_dict = dict
+	
+func on_multi_sandbox_dict_set(dict : Dictionary) -> void:
+	multi_sandbox_dict = dict
+	
+func on_gamba_sandbox_dict_set(dict : Dictionary) -> void:
+	gamba_sandbox_dict = dict
+	
+func on_shop_sandbox_dict_set(dict : Dictionary) -> void:
+	shop_sandbox_dict = dict
+	
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index
@@ -181,6 +207,12 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 	on_keybinds_loaded(loaded_data["keybinds"])
 	# game data
 	on_high_score_set(loaded_data["high_score"])
+	# soundboard data
+	on_general_sandbox_dict_set(loaded_data["general_sandbox_dict"])
+	on_items_sandbox_dict_set(loaded_data["items_sandbox_dict"])
+	on_multi_sandbox_dict_set(loaded_data["multi_sandbox_dict"])
+	on_gamba_sandbox_dict_set(loaded_data["gamba_sandbox_dict"])
+	on_shop_sandbox_dict_set(loaded_data["shop_sandbox_dict"])
 
 func handle_signals() -> void:
 	# settings
@@ -192,5 +224,11 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_sfx_sound_set.connect(on_sfx_sound_set)
 	# game data
 	SettingsSignalBus.on_high_score_set.connect(on_high_score_set)
+	# sandbox data
+	SettingsSignalBus.on_general_sandbox_dict_set.connect(on_general_sandbox_dict_set)
+	SettingsSignalBus.on_items_sandbox_dict_set.connect(on_items_sandbox_dict_set)
+	SettingsSignalBus.on_multi_sandbox_dict_set.connect(on_multi_sandbox_dict_set)
+	SettingsSignalBus.on_gamba_sandbox_dict_set.connect(on_gamba_sandbox_dict_set)
+	SettingsSignalBus.on_shop_sandbox_dict_set.connect(on_shop_sandbox_dict_set)
 	
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)
