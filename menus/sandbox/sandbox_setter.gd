@@ -12,10 +12,10 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	h_slider.value_changed.connect(on_value_changed)
 	label.visible = false
 	sprite_2d.visible = true
 	set_properties()
+	h_slider.value_changed.connect(on_value_changed)
 	
 
 func set_properties() -> void:
@@ -50,6 +50,9 @@ func set_properties() -> void:
 		"Multi" : 
 			set_sandbox_option(object, "Items", 999, 
 			"Multi")
+		"Cleanse" :
+			set_sandbox_option(object, "Items", 999, 
+			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
 		"ExplBarrel" : 
 			set_sandbox_option(object, "General", 999, 
 			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png")
@@ -200,6 +203,7 @@ func set_properties() -> void:
 		_: print("set texture string was not there: ", object)
 
 func set_sandbox_option(topic : String, type : String, maxint : int, texture : String) -> void:
+	sandbox_type = type
 	match texture:
 		"Multi": set_Multi()
 		"Shop": set_label("Shop")
@@ -207,20 +211,11 @@ func set_sandbox_option(topic : String, type : String, maxint : int, texture : S
 		"Items": set_label("Items")
 		_: set_texture(texture)
 	
-	match type:
-		"General": 
-			set_slider(
-				maxint,
-				SettingsDataContainer.get_
-		"Items":
-			set_slider(maxint,)
-		"MultiItem":
-			set_slider(maxint,)
-		"Gamba":
-			set_slider(maxint,)
-		"Shop":
-			set_slider(maxint,)
-	sandbox_type = type
+	set_slider(
+		maxint,
+		SettingsDataContainer.get_sandbox_dict(type, topic)
+		)
+		
 
 func set_texture(texture_path : String) -> void:
 	sprite_2d.texture = load(texture_path)
@@ -244,19 +239,12 @@ func set_label(label_string : String) -> void:
 func set_slider(limit : int = 999, curr : int = 0) -> void:
 	h_slider.max_value = limit
 	h_slider.value = curr
+	chance_num.text = str(curr)
 
 func on_value_changed(value: float) -> void:
-	match sandbox_type:
-		"General": 
-			SettingsSignalBus.emit
-		"Items":
-			SettingsSignalBus.emit
-		"MultiItem":
-			SettingsSignalBus.emit
-		"Gamba":
-			SettingsSignalBus.emit
-		"Shop":
-			SettingsSignalBus.emit
+	var new_val : int = int(value)
+	chance_num.text = str(new_val)
+	SettingsSignalBus.emit_on_sandbox_dict_set(sandbox_type, object, new_val)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")

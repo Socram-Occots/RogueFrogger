@@ -29,7 +29,8 @@ const default_items_sandbox_dict : Dictionary = {
 	"Gamba":50,
 	"Shield":1,
 	"Shrink":50,
-	"Multi":100
+	"Multi":100,
+	"Cleanse":10
 }
 const default_multi_sandbox_dict : Dictionary = {
 	"PlayerSpeedMulti":50,
@@ -79,4 +80,11 @@ const default_shop_sandbox_dict : Dictionary = {
 	"ShortTeleportShop":1,
 	"CleanseShop":1,
 	"DVDBounceShop":1
+}
+const default_sandbox_dict : Dictionary = {
+	"General" : default_general_sandbox_dict,
+	"Items" : default_items_sandbox_dict,
+	"Multi" : default_multi_sandbox_dict,
+	"Gamba" : default_gamba_sandbox_dict,
+	"Shop" : default_shop_sandbox_dict
 }

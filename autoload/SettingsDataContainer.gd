@@ -13,11 +13,7 @@ var sfx_volume : float = 0.0
 # game data
 var high_score : int = 0
 # sandbox data
-var general_sandbox_dict : Dictionary = {}
-var items_sandbox_dict : Dictionary = {}
-var multi_sandbox_dict : Dictionary = {}
-var gamba_sandbox_dict : Dictionary = {}
-var shop_sandbox_dict : Dictionary = {}
+var sandbox_dict : Dictionary = {}
 
 var loaded_data : Dictionary = {}
 
@@ -35,11 +31,7 @@ func create_storage_dictionary() -> Dictionary:
 		"sfx_volume": sfx_volume,
 		"keybinds": create_keybind_dictionary(),
 		"high_score": high_score,
-		"general_sandbox_dict": general_sandbox_dict,
-		"items_sandbox_dict": items_sandbox_dict,
-		"multi_sandbox_dict": multi_sandbox_dict,
-		"gamba_sandbox_dict": gamba_sandbox_dict,
-		"shop_sandbox_dict": shop_sandbox_dict
+		"sandbox_dict": sandbox_dict
 	}
 
 	return settings_container_dict
@@ -85,6 +77,7 @@ func get_sfx_volume() -> float:
 	if loaded_data == {}:
 		return DEFAULT_SETTINGS.default_sfx_volume
 	return sfx_volume
+	
 # get keybinds
 func get_keybind(action: String):
 	if !loaded_data.has("keybinds"):
@@ -115,26 +108,17 @@ func get_keybind(action: String):
 				return KEYBIND_RESOURCE.move_dash_key
 			KEYBIND_RESOURCE.MOVE_WALK:
 				return KEYBIND_RESOURCE.move_walk_key
+				
 # get game data
 func get_high_score() -> int:
 	if loaded_data == {}:
 		return DEFAULT_SETTINGS.default_high_score
 	return high_score
-# get sandbox data
-func on_general_sandbox_dict_set(dict : Dictionary) -> void:
-	general_sandbox_dict = dict
 	
-func on_items_sandbox_dict_set(dict : Dictionary) -> void:
-	items_sandbox_dict = dict
-	
-func on_multi_sandbox_dict_set(dict : Dictionary) -> void:
-	multi_sandbox_dict = dict
-	
-func on_gamba_sandbox_dict_set(dict : Dictionary) -> void:
-	gamba_sandbox_dict = dict
-	
-func on_shop_sandbox_dict_set(dict : Dictionary) -> void:
-	shop_sandbox_dict = dict
+func get_sandbox_dict(type: String, object: String) -> int:
+	if loaded_data == {}:
+		return DEFAULT_SETTINGS.default_sandbox_dict[type][object]
+	return sandbox_dict[type][object]
 	
 # set settings
 func on_window_mode_selected(index : int) -> void:
@@ -174,45 +158,99 @@ func on_high_score_set(value : int) -> void:
 	high_score = value
 
 func on_keybinds_loaded(data: Dictionary) -> void:
-	var loaded_move_up = InputEventKey.new()
-	var loaded_move_down = InputEventKey.new()
-	var loaded_move_right = InputEventKey.new()
-	var loaded_move_left = InputEventKey.new()
-	var loaded_move_dash = InputEventKey.new()
-	var loaded_move_walk = InputEventKey.new()
+	if data.has("up_w"):
+		var loaded_move_up = InputEventKey.new()
+		loaded_move_up.set_physical_keycode(int(data["up_w"]))
+		KEYBIND_RESOURCE.move_up_key = loaded_move_up
+	else:
+		KEYBIND_RESOURCE.move_up_key = KEYBIND_RESOURCE.DEFAULT_MOVE_UP_KEY
+	if data.has("down_s"):
+		var loaded_move_down = InputEventKey.new()
+		loaded_move_down.set_physical_keycode(int(data["down_s"]))
+		KEYBIND_RESOURCE.move_down_key = loaded_move_down
+	else:
+		KEYBIND_RESOURCE.move_down_key = KEYBIND_RESOURCE.DEFAULT_MOVE_DOWN_KEY
+	if data.has("right_d"):
+		var loaded_move_right = InputEventKey.new()
+		loaded_move_right.set_physical_keycode(int(data["right_d"]))
+		KEYBIND_RESOURCE.move_right_key = loaded_move_right
+	else:
+		KEYBIND_RESOURCE.move_right_key = KEYBIND_RESOURCE.DEFAULT_MOVE_RIGHT_KEY
+	if data.has("left_a"):
+		var loaded_move_left = InputEventKey.new()
+		loaded_move_left.set_physical_keycode(int(data["left_a"]))
+		KEYBIND_RESOURCE.move_left_key = loaded_move_left
+	else:
+		KEYBIND_RESOURCE.move_left_key = KEYBIND_RESOURCE.DEFAULT_MOVE_LEFT_KEY
+	if data.has("dash"):
+		var loaded_move_dash = InputEventKey.new()
+		loaded_move_dash.set_physical_keycode(int(data["dash"]))
+		KEYBIND_RESOURCE.move_dash_key = loaded_move_dash
+	else:
+		KEYBIND_RESOURCE.move_dash_key = KEYBIND_RESOURCE.DEFAULT_MOVE_DASH_KEY
+	if data.has("walk"):
+		var loaded_move_walk = InputEventKey.new()
+		loaded_move_walk.set_physical_keycode(int(data["walk"]))
+		KEYBIND_RESOURCE.move_walk_key = loaded_move_walk
+	else:
+		KEYBIND_RESOURCE.move_walk_key = KEYBIND_RESOURCE.DEFAULT_MOVE_WALK_KEY
+
+# set sandbox data
+func on_sandbox_dict_set(type: String, object: String, num: int) -> void:
+	sandbox_dict[type][object] = num
 	
-	loaded_move_up.set_physical_keycode(int(data["up_w"]))
-	loaded_move_down.set_physical_keycode(int(data["down_s"]))
-	loaded_move_right.set_physical_keycode(int(data["right_d"]))
-	loaded_move_left.set_physical_keycode(int(data["left_a"]))
-	loaded_move_dash.set_physical_keycode(int(data["dash"]))
-	loaded_move_walk.set_physical_keycode(int(data["walk"]))
-	
-	KEYBIND_RESOURCE.move_up_key = loaded_move_up
-	KEYBIND_RESOURCE.move_down_key = loaded_move_down
-	KEYBIND_RESOURCE.move_right_key = loaded_move_right
-	KEYBIND_RESOURCE.move_left_key = loaded_move_left
-	KEYBIND_RESOURCE.move_dash_key = loaded_move_dash
-	KEYBIND_RESOURCE.move_walk_key = loaded_move_walk
+func on_sandbox_dict_setAll(dict : Dictionary) -> void:
+	var default : Dictionary = DEFAULT_SETTINGS.default_sandbox_dict
+	for i in DEFAULT_SETTINGS.default_sandbox_dict.keys():
+		if dict.has(i):
+			for a in default[i].keys():
+				if !dict[i].has(a):
+					dict[i][a] = default[i][a]
+		else:
+			dict[i] = default[i]
+	sandbox_dict = dict.duplicate(true)
 
 func on_settings_data_loaded(data: Dictionary) -> void:
 	loaded_data = data
 	# settings
-	on_window_mode_selected(loaded_data["window_mode_index"])
-	on_resolution_selected(loaded_data["resolution_index"])
-	on_aspect_selected(loaded_data["aspect_selected"])
-	on_master_sound_set(loaded_data["master_volume"])
-	on_music_sound_set(loaded_data["music_volume"])
-	on_sfx_sound_set(loaded_data["sfx_volume"])
-	on_keybinds_loaded(loaded_data["keybinds"])
+	if loaded_data.has("window_mode_index"):
+		on_window_mode_selected(loaded_data["window_mode_index"])
+	else:
+		on_window_mode_selected(DEFAULT_SETTINGS.default_window_mode_index)
+	if loaded_data.has("resolution_index"):
+		on_resolution_selected(loaded_data["resolution_index"])
+	else:
+		on_resolution_selected(DEFAULT_SETTINGS.default_resolution_index)
+	if loaded_data.has(aspect_selected):
+		on_aspect_selected(loaded_data["aspect_selected"])
+	else:
+		on_aspect_selected(DEFAULT_SETTINGS.default_aspect_selected)
+	if loaded_data.has("master_volume"):
+		on_master_sound_set(loaded_data["master_volume"])
+	else:
+		on_master_sound_set(DEFAULT_SETTINGS.default_master_volume)
+	if loaded_data.has("music_volume"):
+		on_music_sound_set(loaded_data["music_volume"])
+	else:
+		on_music_sound_set(DEFAULT_SETTINGS.default_music_volume)
+	if loaded_data.has("sfx_volume"):
+		on_sfx_sound_set(loaded_data["sfx_volume"])
+	else:
+		on_sfx_sound_set(DEFAULT_SETTINGS.default_sfx_volume)
+	if loaded_data.has("keybinds"):
+		on_keybinds_loaded(loaded_data["keybinds"])
+	else:
+		on_keybinds_loaded({})
 	# game data
-	on_high_score_set(loaded_data["high_score"])
-	# soundboard data
-	on_general_sandbox_dict_set(loaded_data["general_sandbox_dict"])
-	on_items_sandbox_dict_set(loaded_data["items_sandbox_dict"])
-	on_multi_sandbox_dict_set(loaded_data["multi_sandbox_dict"])
-	on_gamba_sandbox_dict_set(loaded_data["gamba_sandbox_dict"])
-	on_shop_sandbox_dict_set(loaded_data["shop_sandbox_dict"])
+	if loaded_data.has("high_score"):
+		on_high_score_set(loaded_data["high_score"])
+	else:
+		on_high_score_set(DEFAULT_SETTINGS.default_high_score)
+	# sandbox data
+	if loaded_data.has("sandbox_dict"):
+		on_sandbox_dict_setAll(loaded_data["sandbox_dict"])
+	else:
+		on_sandbox_dict_setAll({})
 
 func handle_signals() -> void:
 	# settings
@@ -225,10 +263,7 @@ func handle_signals() -> void:
 	# game data
 	SettingsSignalBus.on_high_score_set.connect(on_high_score_set)
 	# sandbox data
-	SettingsSignalBus.on_general_sandbox_dict_set.connect(on_general_sandbox_dict_set)
-	SettingsSignalBus.on_items_sandbox_dict_set.connect(on_items_sandbox_dict_set)
-	SettingsSignalBus.on_multi_sandbox_dict_set.connect(on_multi_sandbox_dict_set)
-	SettingsSignalBus.on_gamba_sandbox_dict_set.connect(on_gamba_sandbox_dict_set)
-	SettingsSignalBus.on_shop_sandbox_dict_set.connect(on_shop_sandbox_dict_set)
-	
+	SettingsSignalBus.on_sandbox_dict_set.connect(on_sandbox_dict_set)
+	SettingsSignalBus.on_sandbox_dict_setAll.connect(on_sandbox_dict_setAll)
+	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

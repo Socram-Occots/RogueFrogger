@@ -15,7 +15,7 @@ func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://Level/level.tscn")
 
 func _on_sandbox_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://menus/sandbox/sandbox_options.tscn")
 
 func _on_tutorial_pressed() -> void:
 	get_tree().change_scene_to_file("res://tutorial/tutorial.tscn")
