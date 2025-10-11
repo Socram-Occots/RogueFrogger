@@ -44,32 +44,46 @@ layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Reset" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
-text = "Reset Sandbox
+text = "Exit"
+
+[node name="ResetTab" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+focus_mode = 0
+theme_override_font_sizes/font_size = 40
+text = "Reset Tab
 "
 
-[node name="ExitSave" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Save" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
-text = "Exit and Save
+text = "Save
 "
 
-[node name="PlaySave" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="SavePlay" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 focus_mode = 0
 theme_override_font_sizes/font_size = 40
-text = "Play and Save
+text = "Save/Play
 "
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ResetTab" to="." method="_on_reset_tab_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/SavePlay" to="." method="_on_save_play_pressed"]

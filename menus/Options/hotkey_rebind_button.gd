@@ -3,14 +3,17 @@ extends Control
 
 @onready var label = $HBoxContainer/Label as Label
 @onready var button = $HBoxContainer/Button as Button
+@onready var curr_bind = null
 
 @export var action_name : String = ""
+@export var group : String
 
 func _ready():
 	set_process_unhandled_key_input(false)
 	set_action_name()
 	set_text_for_key()
 	load_keybinds()
+	add_to_group(group)
 
 func load_keybinds() -> void:
 	rebind_action_key(SettingsDataContainer.get_keybind(action_name))
@@ -67,11 +70,10 @@ func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)
 	InputMap.action_add_event(action_name, event)
 	
-	SettingsDataContainer.set_keybind(action_name, event)
+	curr_bind = event
 	
 	set_process_unhandled_key_input(false)
 	set_text_for_key()
-	set_action_name()
 	reset_buttons()
 	
 
@@ -83,3 +85,10 @@ func reset_buttons():
 
 func _on_button_focus_exited() -> void:
 	pass
+
+func save_value() -> void:
+	SettingsDataContainer.set_keybind(action_name, curr_bind)
+
+func reset_value() -> void:
+	var reset_event = SettingsDataContainer.get_keybind(action_name, true)
+	rebind_action_key(reset_event)

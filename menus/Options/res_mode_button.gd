@@ -1,6 +1,7 @@
 extends Control
 
 @onready var option_button = $HBoxContainer/OptionButton as OptionButton
+@export var group : String
 
 var RESOLUTION_DICTIONARY : Dictionary = {
 	"480 x 234" : Vector2i(480, 234),
@@ -30,6 +31,7 @@ func _ready():
 	add_resolution_items()
 	load_data()
 	select_current_display_resolution()
+	add_to_group(group)
 
 func remove_higher_res(viewportX: int, viewportY: int):
 	var total_view_pixels : int = viewportX * viewportY
@@ -48,7 +50,6 @@ func add_resolution_items() -> void:
 		option_button.add_item(resoltion_size_text)
 		
 func on_resoltion_selected(index: int) -> void:
-	SettingsSignalBus.emit_on_resolution_selected(index)
 	# default dpi is 96
 	#var dpi = DisplayServer.screen_get_dpi() as float
 	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
@@ -64,3 +65,11 @@ func select_current_display_resolution() -> void:
 	var current_resolution_string : String = str(current_resolution.x) + " x " + str(current_resolution.y)
 	var index : int = DISPLAY_RESOLUTION_KEYS.find(current_resolution_string)
 	option_button.select(index)
+
+func save_value() -> void:
+	SettingsSignalBus.emit_on_resolution_selected(option_button.selected)
+
+func reset_value() -> void:
+	var reset_idx : int = SettingsDataContainer.get_resolution_index(true)
+	on_resoltion_selected(reset_idx) 
+	option_button.select(reset_idx)

@@ -67,14 +67,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "None"
+group = "tab0"
 
 [node name="SandboxSetter2" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Barrel"
+group = "tab0"
 
 [node name="SandboxSetter3" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Dumpster"
+group = "tab0"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -84,14 +87,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ExplBarrel"
+group = "tab0"
 
 [node name="SandboxSetter2" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Items"
+group = "tab0"
 
 [node name="SandboxSetter3" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Shop"
+group = "tab0"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -136,14 +142,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "PlayerSpeed"
+group = "tab1"
 
 [node name="SandboxSetter2" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GlideBoots"
+group = "tab1"
 
 [node name="SandboxSetter3" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Dash"
+group = "tab1"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -153,14 +162,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "expl_B"
+group = "tab1"
 
 [node name="SandboxSetter2" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Grapple"
+group = "tab1"
 
 [node name="SandboxSetter3" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Follower"
+group = "tab1"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -170,27 +182,32 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Gamba"
+group = "tab1"
 
 [node name="SandboxSetter2" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Shield"
+group = "tab1"
 
 [node name="SandboxSetter3" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Shrink"
+group = "tab1"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = 550
+theme_override_constants/separation = 650
 
 [node name="SandboxSetter" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Cleanse"
+group = "tab1"
 
 [node name="SandboxSetter2" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Multi"
+group = "tab1"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -234,14 +251,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "PlayerSpeedMulti"
+group = "tab2"
 
 [node name="SandboxSetter2" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GlideBootsMulti"
+group = "tab2"
 
 [node name="SandboxSetter3" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "DashMulti"
+group = "tab2"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -251,14 +271,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "expl_BMulti"
+group = "tab2"
 
 [node name="SandboxSetter2" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GrappleMulti"
+group = "tab2"
 
 [node name="SandboxSetter3" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "FollowerMulti"
+group = "tab2"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -268,14 +291,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GambaMulti"
+group = "tab2"
 
 [node name="SandboxSetter2" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShieldMulti"
+group = "tab2"
 
 [node name="SandboxSetter3" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShrinkMulti"
+group = "tab2"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -285,14 +311,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "SlowMulti"
+group = "tab2"
 
 [node name="SandboxSetter2" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GrowMulti"
+group = "tab2"
 
 [node name="SandboxSetter3" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "LongTeleportMulti"
+group = "tab2"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -302,14 +331,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShortTeleportMulti"
+group = "tab2"
 
 [node name="SandboxSetter2" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "CleanseMulti"
+group = "tab2"
 
 [node name="SandboxSetter3" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "DVDBounceMulti"
+group = "tab2"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -354,14 +386,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "PlayerSpeedGamba"
+group = "tab3"
 
 [node name="SandboxSetter2" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GlideBootsGamba"
+group = "tab3"
 
 [node name="SandboxSetter3" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "DashGamba"
+group = "tab3"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -371,14 +406,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "expl_BGamba"
+group = "tab3"
 
 [node name="SandboxSetter2" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GrappleGamba"
+group = "tab3"
 
 [node name="SandboxSetter3" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "FollowerGamba"
+group = "tab3"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -388,14 +426,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShrinkGamba"
+group = "tab3"
 
 [node name="SandboxSetter2" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "SlowGamba"
+group = "tab3"
 
 [node name="SandboxSetter3" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GrowGamba"
+group = "tab3"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -405,14 +446,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "LongTeleportGamba"
+group = "tab3"
 
 [node name="SandboxSetter2" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShortTeleportGamba"
+group = "tab3"
 
 [node name="SandboxSetter3" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "CleanseGamba"
+group = "tab3"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -422,6 +466,7 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "DVDBounceGamba"
+group = "tab3"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -466,14 +511,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "PlayerSpeedShop"
+group = "tab4"
 
 [node name="SandboxSetter2" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GlideBootsShop"
+group = "tab4"
 
 [node name="SandboxSetter3" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "DashShop"
+group = "tab4"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -483,14 +531,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "expl_BShop"
+group = "tab4"
 
 [node name="SandboxSetter2" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GrappleShop"
+group = "tab4"
 
 [node name="SandboxSetter3" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "FollowerShop"
+group = "tab4"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -500,14 +551,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GambaShop"
+group = "tab4"
 
 [node name="SandboxSetter2" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShieldShop"
+group = "tab4"
 
 [node name="SandboxSetter3" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShrinkShop"
+group = "tab4"
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -517,14 +571,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "SlowShop"
+group = "tab4"
 
 [node name="SandboxSetter2" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "GrowShop"
+group = "tab4"
 
 [node name="SandboxSetter3" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "LongTeleportShop"
+group = "tab4"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -534,14 +591,17 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "ShortTeleportShop"
+group = "tab4"
 
 [node name="SandboxSetter2" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "CleanseShop"
+group = "tab4"
 
 [node name="SandboxSetter3" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "DVDBounceShop"
+group = "tab4"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

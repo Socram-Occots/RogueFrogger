@@ -100,12 +100,15 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 
 [node name="window_mode_button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_fhmqv")]
 layout_mode = 2
+group = "tab1"
 
 [node name="res_mode_button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_uqdim")]
 layout_mode = 2
+group = "tab1"
 
 [node name="aspect_display_button" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("3_70ynh")]
 layout_mode = 2
+group = "tab1"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -144,26 +147,32 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 [node name="up" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "up_w"
+group = "tab2"
 
 [node name="down" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "down_s"
+group = "tab2"
 
 [node name="right" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "right_d"
+group = "tab2"
 
 [node name="left" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "left_a"
+group = "tab2"
 
 [node name="dash" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "dash"
+group = "tab2"
 
 [node name="walk" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "walk"
+group = "tab2"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -203,14 +212,17 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 [node name="audio_slider_settings" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_pp5yu")]
 layout_mode = 2
 bus_name = "Master"
+group = "tab3"
 
 [node name="audio_slider_settings2" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_pp5yu")]
 layout_mode = 2
 bus_name = "Music"
+group = "tab3"
 
 [node name="audio_slider_settings3" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_pp5yu")]
 layout_mode = 2
 bus_name = "SFX"
+group = "tab3"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

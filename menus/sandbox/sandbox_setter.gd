@@ -2,6 +2,7 @@ extends Control
 
 @export var object : String 
 @export var sandbox_type : String
+@export var group : String
 @onready var sprite_2d: TextureRect = $HBoxContainer/Sprite2D
 @onready var h_slider: HSlider = $HBoxContainer/HSlider
 @onready var chance_num: Label = $HBoxContainer/Chance_Num
@@ -16,6 +17,7 @@ func _ready() -> void:
 	sprite_2d.visible = true
 	set_properties()
 	h_slider.value_changed.connect(on_value_changed)
+	add_to_group(group)
 	
 
 func set_properties() -> void:
@@ -242,14 +244,17 @@ func set_slider(limit : int = 999, curr : int = 0) -> void:
 	chance_num.text = str(curr)
 
 func on_value_changed(value: float) -> void:
-	var new_val : int = int(value)
-	chance_num.text = str(new_val)
-	SettingsSignalBus.emit_on_sandbox_dict_set(sandbox_type, object, new_val)
+	chance_num.text = str(value)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-@warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
-	pass
+func save_value() -> void:
+	SettingsSignalBus.emit_on_sandbox_dict_set(
+		sandbox_type, object, int(h_slider.value)
+		)
+
+func reset_value() -> void:
+	h_slider.value = SettingsDataContainer.get_sandbox_dict(
+		sandbox_type, object, true
+		)
 
 func _on_timer_timeout() -> void:
 	index = (index + 1) % 3

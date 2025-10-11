@@ -1,6 +1,7 @@
 extends Control
 
 @onready var option_button = $HBoxContainer/OptionButton as OptionButton
+@export var group : String
 
 const WINDOW_MODE_ARRAY : Array[String] = [
 	"Full-Screen",
@@ -14,6 +15,7 @@ func _ready():
 	option_button.item_selected.connect(on_window_mode_selected)
 	load_data()
 	select_current_window_mode()
+	add_to_group(group)
 
 func load_data() -> void:
 	on_window_mode_selected(SettingsDataContainer.get_window_mode_index()) 
@@ -24,7 +26,6 @@ func add_window_mode_items() -> void:
 		
 	
 func on_window_mode_selected(index: int) -> void:
-	SettingsSignalBus.emit_on_window_mode_selected(index)
 	match index:
 		0: # fullscreen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -55,3 +56,11 @@ func select_current_window_mode() -> void:
 				option_button.select(1)
 		_:
 			pass
+
+func save_value() -> void:
+	SettingsSignalBus.emit_on_window_mode_selected(option_button.selected)
+
+func reset_value() -> void:
+	var reset_idx : int = SettingsDataContainer.get_window_mode_index(true)
+	on_window_mode_selected(reset_idx) 
+	option_button.select(reset_idx)

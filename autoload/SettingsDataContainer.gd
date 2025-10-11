@@ -48,39 +48,39 @@ func create_keybind_dictionary() -> Dictionary:
 	return keybinds_container_dict
 
 # get settings
-func get_window_mode_index() -> int:
-	if loaded_data == {}:
+func get_window_mode_index(default : bool = false) -> int:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_window_mode_index
 	return window_mode_index
 	
-func get_resolution_index() -> int:
-	if loaded_data == {}:
+func get_resolution_index(default : bool = false) -> int:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_resolution_index
 	return resolution_index
 	
-func get_aspect_selected() -> int:
-	if loaded_data == {}:
+func get_aspect_selected(default : bool = false) -> int:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_aspect_selected
 	return aspect_selected
 	
-func get_master_volume() -> float:
-	if loaded_data == {}:
+func get_master_volume(default : bool = false) -> float:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_master_volume
 	return master_volume
 	
-func get_music_volume() -> float:
-	if loaded_data == {}:
+func get_music_volume(default : bool = false) -> float:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_music_volume
 	return music_volume
 	
-func get_sfx_volume() -> float:
-	if loaded_data == {}:
+func get_sfx_volume(default : bool = false) -> float:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_sfx_volume
 	return sfx_volume
 	
 # get keybinds
-func get_keybind(action: String):
-	if !loaded_data.has("keybinds"):
+func get_keybind(action: String, default : bool = false):
+	if !loaded_data.has("keybinds") || default:
 		match action:
 			KEYBIND_RESOURCE.MOVE_UP:
 				return KEYBIND_RESOURCE.DEFAULT_MOVE_UP_KEY
@@ -110,13 +110,13 @@ func get_keybind(action: String):
 				return KEYBIND_RESOURCE.move_walk_key
 				
 # get game data
-func get_high_score() -> int:
-	if loaded_data == {}:
+func get_high_score(default : bool = false) -> int:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_high_score
 	return high_score
 	
-func get_sandbox_dict(type: String, object: String) -> int:
-	if loaded_data == {}:
+func get_sandbox_dict(type: String, object: String, default : bool = false) -> int:
+	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_sandbox_dict[type][object]
 	return sandbox_dict[type][object]
 	

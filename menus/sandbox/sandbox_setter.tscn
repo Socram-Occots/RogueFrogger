@@ -61,6 +61,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_vertical = 1
 max_value = 999.0
+rounded = true
 
 [node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
