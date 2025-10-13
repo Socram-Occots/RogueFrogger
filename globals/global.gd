@@ -8,6 +8,7 @@ var score : int = 0
 
 #gamestate
 var defeat_var : bool = false
+var sandbox : bool = false
 
 #input
 var input_active : bool = false

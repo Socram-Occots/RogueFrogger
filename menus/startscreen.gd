@@ -9,6 +9,7 @@ func loadOptions() -> void:
 	Global.options_pop_up = optionspopup
 
 func _ready() -> void:
+	Global.sandbox = false
 	loadOptions()
 
 func _on_start_pressed() -> void:

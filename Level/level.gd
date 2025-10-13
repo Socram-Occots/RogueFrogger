@@ -11,6 +11,11 @@ func _process(delta: float) -> void:
 	dvd_bounce_check()
 
 func _ready() -> void:
+	# load default/sandbox stats
+	multi_num_limit = MULTI_LIST.size()
+	multi_quantity_sum = sum_multi_chances(multi_num_limit, multi_initial, 
+	multi_quantity_sum_divide_const)
+	
 	#load pause and game over menu
 	loadDefeat()
 	loadPause()

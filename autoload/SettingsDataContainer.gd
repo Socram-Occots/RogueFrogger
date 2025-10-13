@@ -119,7 +119,12 @@ func get_sandbox_dict(type: String, object: String, default : bool = false) -> i
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_sandbox_dict[type][object]
 	return sandbox_dict[type][object]
-	
+
+func get_sandbox_dict_type(type: String, default : bool = false ) -> Dictionary:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_sandbox_dict[type]
+	return sandbox_dict[type]
+
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index

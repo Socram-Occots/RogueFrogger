@@ -1,15 +1,22 @@
 extends Node2D
 
+@onready var DEFAULT_SETTINGS : DefaultSettingsResource = preload("res://autoload/DefaultSettings.tres")
 
 var DEF_ARR : Array[Array] = [[["str1"]], 
 ["Str2"]]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in range(3, 2):
-		print(i)
-	for i in range(2, 3):
-		print(i)
+	print(DEFAULT_SETTINGS.default_general_sandbox_dict.keys())
+	print(DEFAULT_SETTINGS.default_general_sandbox_dict.values())
+	print(DEFAULT_SETTINGS.default_items_sandbox_dict.keys())
+	print(DEFAULT_SETTINGS.default_items_sandbox_dict.values())
+	print(DEFAULT_SETTINGS.default_multi_sandbox_dict.keys())
+	print(DEFAULT_SETTINGS.default_multi_sandbox_dict.values())
+	print(DEFAULT_SETTINGS.default_gamba_sandbox_dict.keys())
+	print(DEFAULT_SETTINGS.default_gamba_sandbox_dict.values())
+	print(DEFAULT_SETTINGS.default_shop_sandbox_dict.keys())
+	print(DEFAULT_SETTINGS.default_shop_sandbox_dict.values())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")

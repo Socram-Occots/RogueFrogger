@@ -16,6 +16,7 @@ func _on_save_pressed() -> void:
 
 func _on_save_play_pressed() -> void:
 	save_sandbox_settings()
+	Global.sandbox = true
 	get_tree().change_scene_to_file("res://Level/level.tscn")
 	
 func save_sandbox_settings() -> void:
