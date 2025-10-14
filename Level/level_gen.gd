@@ -123,7 +123,7 @@ func load_element_stats() -> void:
 
 func load_general_stats() -> void:
 	var gen_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"General", Global.sandbox)
+		"General", !Global.sandbox)
 	var gen_dict_keys : Array[String] = gen_dict.keys()
 	for i in range(0, gen_dict_keys.size()):
 		var tempstring : String = gen_dict_keys[i]
@@ -134,7 +134,7 @@ func load_general_stats() -> void:
 
 func load_items_stats() -> void:
 	var item_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Items", Global.sandbox)
+		"Items", !Global.sandbox)
 	var item_dict_keys : Array[String] = item_dict.keys()
 	for i in range(0, item_dict_keys.size()):
 		var tempstring : String =  item_dict_keys[i]
@@ -145,7 +145,7 @@ func load_items_stats() -> void:
 
 func load_multi_stats() -> void:
 	var multi_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Items", Global.sandbox)
+		"Items", !Global.sandbox)
 	var multi_dict_keys : Array[String] = multi_dict.keys()
 	for i in range(0, multi_dict_keys.size()):
 		var tempstring : String = multi_dict_keys[i]
@@ -156,20 +156,53 @@ func load_multi_stats() -> void:
 
 func load_gamba_stats() -> void:
 	var gamba_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Gamba", Global.sandbox)
+		"Gamba", !Global.sandbox)
 	var gamba_dict_keys : Array[String] = gamba_dict.keys()
 	for i in range(0, gamba_dict_keys.size()):
 		var tempstring : String = gamba_dict_keys[i]
 		var tempint : int = gamba_dict[tempstring]
 		if tempint > 0:
-			if tempstring in \
-			["PlayerSpeedGamba", "GlideBootsGamba", "DashGamba", "expl_BGamba",
-			"GrappleGamba", "FollowerGamba", "ShrinkGamba", "CleanseGamba"]:
-				gamba_array_good.append(tempstring)
-			elif tempstring in \
-			["SlowGamba", "GrowGamba", "LongTeleportGamba", "ShortTeleportGamba",
-			"DVDBounceGamba"]:
-				gamba_array_good.append(tempstring)
+			match tempstring:
+				"PlayerSpeedGamba":
+					gamba_array_good.append([tempstring, 
+					playerspeedicon.get_node("Sprite2D").texture])
+				"GlideBootsGamba":
+					gamba_array_good.append([tempstring, 
+					glideglowicon.get_node("Sprite2D").texture])
+				"DashGamba":
+					gamba_array_good.append([tempstring, 
+					dashicon.get_node("Sprite2D").texture])
+				"expl_BGamba":
+					gamba_array_good.append([tempstring, 
+					expl_B_icon.get_node("Sprite2D").texture])
+				"GrappleGamba":
+					gamba_array_good.append([tempstring, 
+					grapple_icon.get_node("Sprite2D").texture])
+				"FollowerGamba":
+					gamba_array_good.append([tempstring, 
+					follower_icon.get_node("Sprite2D").texture])
+				"ShrinkGamba":
+					gamba_array_good.append([tempstring, 
+					shrink_icon.get_node("Sprite2D").texture])
+				"CleanseGamba":
+					gamba_array_good.append([tempstring, 
+					cleanse_glowicon.get_node("Sprite2D").texture])
+				"SlowGamba":
+					gamba_array_bad.append([tempstring, 
+					slow_icon.get_node("Sprite2D").texture])
+				"GrowGamba":
+					gamba_array_bad.append([tempstring, 
+					grow_icon.get_node("Sprite2D").texture])
+				"LongTeleportGamba":
+					gamba_array_bad.append([tempstring, 
+					longtele_icon.get_node("Sprite2D").texture])
+				"ShortTeleportGamba":
+					gamba_array_bad.append([tempstring, 
+					shorttele_icon.get_node("Sprite2D").texture])
+				"DVDBounceGamba":
+					gamba_array_bad.append([tempstring, 
+					dvdbounce_icon.get_node("Sprite2D").texture])
+				_: print("Could not pre load gamba: ", tempstring)
 
 func load_shop_stats() -> void:
 	var shop_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
@@ -395,6 +428,7 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	if i + 1 >= node_num: return i
 	var shop : Area2D = SHOP_INST.duplicate()
 	var generated : Array = chooseShopItems()
+	if generated[0] == null: return i
 	shop.visible = true
 	shop.position = get_node(dir).global_position
 	shop.priceItemName = generated[0]
@@ -408,6 +442,13 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	return i + 1
 
 func chooseShopItems() -> Array:
+	var curseempty : bool = shoppricecurses.is_empty()
+	var priceempty : bool = shoppriceitems.is_empty()
+	var productempty : bool = shopproductitems.is_empty()
+	var rareproductempty : bool = shopproductitemsrare.is_empty()
+	if (curseempty && priceempty) || (productempty && rareproductempty):
+		return [null]
+	
 	var chosenInput : String = ""
 	var chosenOutput : String = ""
 	var shop_cost : int = 1
@@ -428,12 +469,12 @@ func chooseShopItems() -> Array:
 		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
 	
 	# choose to make the price a curse or an item
-	if randf_range(0, 9) < 1:
+	if !curseempty && randf_range(0, 9) < 1:
 		chosenInput = shoppricecurses.pick_random()
 	else:
 		chosenInput = shoppriceitems.pick_random()
 	# 1 in 20 chance you get a rare product
-	if randf_range(0, 19) < 1:
+	if !rareproductempty && randf_range(0, 19) < 1:
 		var arraytemp : Array[String] = shopproductitemsrare.duplicate(true)
 		arraytemp.erase(chosenInput)
 		chosenOutput = arraytemp.pick_random()
@@ -447,21 +488,21 @@ func chooseShopItems() -> Array:
 func chooseShopTextures(shopstr: String) -> Texture2D:
 	match shopstr:
 		"None": return null
-		"PlayerSpeed": return playerspeedglowicon
-		"GlideBoots": return glideglowicon
-		"Dash": return dashglowicon
-		"expl_B": return expl_B_glowicon
-		"GrappleRope": return grapple_glowicon
-		"Shield": return shield_glowicon
-		"Gamba": return gamba_glowicon
-		"Follower": return follower_glowicon
-		"Shrink": return shrink_glowicon
-		"Slow": return slow_glowicon
-		"Grow": return grow_glowicon
-		"LongTeleport": return longtele_glowicon
-		"ShortTeleport": return shorttele_glowicon
-		"Cleanse": return cleanse_glowicon
-		"DVDBounce": return dvdbounce_glowicon
+		"PlayerSpeedShop": return playerspeedglowicon
+		"GlideBootsShop": return glideglowicon
+		"DashShop": return dashglowicon
+		"expl_BShop": return expl_B_glowicon
+		"GrappleRopeShop": return grapple_glowicon
+		"ShieldShop": return shield_glowicon
+		"GambaShop": return gamba_glowicon
+		"FollowerShop": return follower_glowicon
+		"ShrinkShop": return shrink_glowicon
+		"SlowShop": return slow_glowicon
+		"GrowShop": return grow_glowicon
+		"LongTeleportShop": return longtele_glowicon
+		"ShortTeleportShop": return shorttele_glowicon
+		"CleanseShop": return cleanse_glowicon
+		"DVDBounceShop": return dvdbounce_glowicon
 		_: 
 			print("This randomly selected Shop String does not exist!:", shopstr)
 			return null
@@ -728,15 +769,9 @@ func spawn_high_score_line() -> void:
 
 func load_gamba_picker() -> void:
 	gamba_picker = GAMBAPICKER.instantiate()
-	var input_array_good : Array[Array] = []
-	var input_array_bad: Array[Array] = []
-	for i in gamba_array_good:
-		input_array_good.append([i[0], i[1].get_node("Sprite2D").texture])
-	for i in gamba_array_bad:
-		input_array_bad.append([i[0], i[1].get_node("Sprite2D").texture])
-	gamba_picker.good_item_pool = input_array_good
-	gamba_picker.bad_item_pool = input_array_bad
-	gamba_picker.gamba_result_time_seconds = 2
+	gamba_picker.good_item_pool = gamba_array_good
+	gamba_picker.bad_item_pool = gamba_array_bad
+	gamba_picker.gamba_result_time_seconds = 3
 	$CanvasLayer.add_child(gamba_picker)
 
 func gamba_check() -> void:

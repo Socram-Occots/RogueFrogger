@@ -37,67 +37,69 @@ func _on_body_entered(body):
 				var bought : bool = false
 				not_entered = false
 				match priceItemName:
-					"PlayerSpeed": 
+					"PlayerSpeedShop": 
 						if pricenum <= Global.player_speed_mod:
 							Global.inc_PlayerSpeed(-1*pricenum)
 							bought = true
-					"GlideBoots":
+					"GlideBootsShop":
 						if pricenum <= Global.glide_mod:
 							Global.inc_GlideBoots(-1*pricenum)
 							bought = true
-					"Dash":
+					"DashShop":
 						if pricenum <= Global.dash_mod:
 							Global.inc_Dash(-1*pricenum)
 							bought = true
-					"expl_B":
+					"expl_BShop":
 						if pricenum <= Global.expl_B_mod:
 							Global.inc_expl_B(-1*pricenum)
 							bought = true
-					"GrappleRope":
+					"GrappleRopeShop":
 						if pricenum <= Global.grapple_mod:
 							Global.inc_GrappleRope(-1*pricenum)
 							bought = true
-					"Follower":
+					"FollowerShop":
 						if pricenum <= Global.follower_mod - Global.follower_mod_base:
 							Global.inc_Follower(-1*pricenum)
 							bought = true
-					"Shrink":
+					"ShrinkShop":
 						if pricenum <= Global.shrink_mod:
 							Global.inc_Shrink(-1*pricenum)
 							bought = true
-					"Slow":
+					"SlowShop":
 						if pricenum <= Global.playerslow_mod - Global.playerslow_mod_base:
 							Global.inc_PlayerSlow(-1*pricenum)
 							bought = true
-					"Grow":
+					"GrowShop":
 						if pricenum <= Global.grow_mod:
 							Global.inc_Grow(-1*pricenum)
 							bought = true
-					"LongTeleport":
+					"LongTeleportShop":
 						if pricenum <= Global.longtele_mod:
 							Global.inc_LongTele(-1*pricenum)
 							bought = true
-					"ShortTeleport":
+					"ShortTeleportShop":
 						if pricenum <= Global.shorttele_mod:
 							Global.inc_ShortTele(-1*pricenum)
 							bought = true
-					"DVDBounce":
+					"DVDBounceShop":
 						if pricenum <= Global.dvd_mod:
 							Global.inc_DVD(-1*pricenum)
 							bought = true
+					_: print("Price Item not found: ", priceItemName)
 				if bought:
 					polygon_2d.color = Color(0, 225, 0)
 					match productItemName:
-						"PlayerSpeed": Global.inc_PlayerSpeed(productnum)
-						"GlideBoots": Global.inc_GlideBoots(productnum)
-						"Dash": Global.inc_Dash(productnum)
-						"expl_B": Global.inc_expl_B(productnum)
-						"GrappleRope": Global.inc_GrappleRope(productnum)
-						"Follower": Global.inc_Follower(productnum)
-						"Shrink": Global.inc_Shrink(productnum)
-						"Gamba": Global.inc_Gamba(productnum)
-						"Cleanse" : Global.cleanse_curse(productnum)
-						"Shield": Global.follower_array[0].shield_up = true
+						"PlayerSpeedShop": Global.inc_PlayerSpeed(productnum)
+						"GlideBootsShop": Global.inc_GlideBoots(productnum)
+						"DashShop": Global.inc_Dash(productnum)
+						"expl_BShop": Global.inc_expl_B(productnum)
+						"GrappleRopeShop": Global.inc_GrappleRope(productnum)
+						"FollowerShop": Global.inc_Follower(productnum)
+						"ShrinkShop": Global.inc_Shrink(productnum)
+						"GambaShop": Global.inc_Gamba(productnum)
+						"CleanseShop" : Global.cleanse_curse(productnum)
+						"ShieldShop": Global.follower_array[0].shield_up = true
+						_: print("Product item was not found: ", productItemName)
 				else:
 					polygon_2d.color = Color(225, 0, 0)
 

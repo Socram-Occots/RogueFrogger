@@ -80,7 +80,6 @@ func start_cycle() -> void:
 	if len_item_pool < 2:
 		present_winner()
 		return
-
 	itemcycletimer.start(timeperitemcycle)
 
 func present_winner() -> void:
@@ -88,26 +87,25 @@ func present_winner() -> void:
 	#print("winner!:", temp_item_pool[cycleitemcounter])
 	#print("sec: ", total_sec)
 	gamba_rect.texture = temp_item_pool[cycleitemcounter][1]
-	
 	var multi_result : int = Global.gamba_mod * Global.follower_mod
+	await get_tree().create_timer(1).timeout
 	
 	match temp_item_pool[cycleitemcounter][0]:
-		"PlayerSpeed": Global.inc_PlayerSpeed(multi_result)
-		"GlideBoots": Global.inc_GlideBoots(multi_result)
-		"Dash": Global.inc_Dash(multi_result)
-		"expl_B": Global.inc_expl_B(multi_result)
-		"GrappleRope": Global.inc_GrappleRope(multi_result)
-		"Follower": Global.inc_Follower(Global.gamba_mod)
-		"Shrink": Global.inc_Shrink(multi_result)
-		"Slow": Global.inc_PlayerSlow(multi_result)
-		"Grow": Global.inc_Grow(multi_result)
-		"LongTeleport": Global.inc_LongTele(multi_result)
-		"ShortTeleport": Global.inc_ShortTele(multi_result)
-		"Cleanse": Global.cleanse_curse(multi_result)
-		"DVDBounce": Global.inc_DVD(multi_result)
-		_: print("Uknown item in the Gamba Picker")
-	
-	await get_tree().create_timer(1).timeout
+		"PlayerSpeedShop": Global.inc_PlayerSpeed(multi_result)
+		"GlideBootsShop": Global.inc_GlideBoots(multi_result)
+		"DashShop": Global.inc_Dash(multi_result)
+		"expl_BShop": Global.inc_expl_B(multi_result)
+		"GrappleRopeShop": Global.inc_GrappleRope(multi_result)
+		"FollowerShop": Global.inc_Follower(Global.gamba_mod)
+		"ShrinkShop": Global.inc_Shrink(multi_result)
+		"SlowShop": Global.inc_PlayerSlow(multi_result)
+		"GrowShop": Global.inc_Grow(multi_result)
+		"LongTeleportShop": Global.inc_LongTele(multi_result)
+		"ShortTeleportShop": Global.inc_ShortTele(multi_result)
+		"CleanseShop": Global.cleanse_curse(multi_result)
+		"DVDBounceShop": Global.inc_DVD(multi_result)
+		_: print("Uknown item in the Gamba Picker: ", temp_item_pool[cycleitemcounter][0])
+
 	#reset length so gamba can function again
 	len_item_pool = len(item_pool)
 	Global.gamba_mod = 1

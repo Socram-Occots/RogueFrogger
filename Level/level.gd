@@ -15,7 +15,7 @@ func _ready() -> void:
 	multi_num_limit = MULTI_LIST.size()
 	multi_quantity_sum = sum_multi_chances(multi_num_limit, multi_initial, 
 	multi_quantity_sum_divide_const)
-	
+	load_element_stats()
 	#load pause and game over menu
 	loadDefeat()
 	loadPause()
