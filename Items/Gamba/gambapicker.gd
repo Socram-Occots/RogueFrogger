@@ -15,7 +15,7 @@ extends Node
 @onready var timeperitemcycle : float
 @onready var len_item_pool : int = item_pool.size()
 @onready var total_sec : float = 0
-@onready var temp_item_pool : Array
+@onready var temp_item_pool : Array[Array]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,13 +35,18 @@ func begin_gamba() -> void:
 		temp_item_pool = good_item_pool
 	else:
 		temp_item_pool = good_item_pool.slice(0, 
-		randi_range(min(3, good_item_pool_size), good_item_pool_size))
+			randi_range(min(3, good_item_pool_size), good_item_pool_size))
 	
-	if bad_item_pool_size > 1:
-		var bad_item_index_chance = randi_range(0, bad_item_pool_size - 1)
-		if bad_item_index_chance != 0:
+	if bad_item_pool_size > 0:
+		var bad_item_index_chance = randi_range(0, bad_item_pool_size)
+		if temp_item_pool.size() == 0:
+			temp_item_pool += bad_item_pool.slice(
+				0, max(2, bad_item_index_chance))
+		elif bad_item_index_chance != 0:
 			temp_item_pool += bad_item_pool.slice(0, bad_item_index_chance)
-	
+		elif temp_item_pool.size() == 1:
+			temp_item_pool.append(bad_item_pool.pick_random())
+
 	len_item_pool = temp_item_pool.size()
 	
 	timepercycle = gamba_result_time_seconds / float(len_item_pool - 1)
@@ -87,23 +92,23 @@ func present_winner() -> void:
 	#print("winner!:", temp_item_pool[cycleitemcounter])
 	#print("sec: ", total_sec)
 	gamba_rect.texture = temp_item_pool[cycleitemcounter][1]
-	var multi_result : int = Global.gamba_mod * Global.follower_mod
+	var multi_result : int = Global.gamba_mod
 	await get_tree().create_timer(1).timeout
 	
 	match temp_item_pool[cycleitemcounter][0]:
-		"PlayerSpeedShop": Global.inc_PlayerSpeed(multi_result)
-		"GlideBootsShop": Global.inc_GlideBoots(multi_result)
-		"DashShop": Global.inc_Dash(multi_result)
-		"expl_BShop": Global.inc_expl_B(multi_result)
-		"GrappleRopeShop": Global.inc_GrappleRope(multi_result)
-		"FollowerShop": Global.inc_Follower(Global.gamba_mod)
-		"ShrinkShop": Global.inc_Shrink(multi_result)
-		"SlowShop": Global.inc_PlayerSlow(multi_result)
-		"GrowShop": Global.inc_Grow(multi_result)
-		"LongTeleportShop": Global.inc_LongTele(multi_result)
-		"ShortTeleportShop": Global.inc_ShortTele(multi_result)
-		"CleanseShop": Global.cleanse_curse(multi_result)
-		"DVDBounceShop": Global.inc_DVD(multi_result)
+		"PlayerSpeedGamba": Global.inc_PlayerSpeed(multi_result)
+		"GlideBootsGamba": Global.inc_GlideBoots(multi_result)
+		"DashGamba": Global.inc_Dash(multi_result)
+		"expl_BGamba": Global.inc_expl_B(multi_result)
+		"GrappleGamba": Global.inc_GrappleRope(multi_result)
+		"FollowerGamba": Global.inc_Follower(multi_result)
+		"ShrinkGamba": Global.inc_Shrink(multi_result)
+		"SlowGamba": Global.inc_PlayerSlow(multi_result)
+		"GrowGamba": Global.inc_Grow(multi_result)
+		"LongTeleportGamba": Global.inc_LongTele(multi_result)
+		"ShortTeleportGamba": Global.inc_ShortTele(multi_result)
+		"CleanseGamba": Global.cleanse_curse(multi_result)
+		"DVDBounceGamba": Global.inc_DVD(multi_result)
 		_: print("Uknown item in the Gamba Picker: ", temp_item_pool[cycleitemcounter][0])
 
 	#reset length so gamba can function again

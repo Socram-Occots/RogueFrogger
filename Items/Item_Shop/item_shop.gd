@@ -53,7 +53,7 @@ func _on_body_entered(body):
 						if pricenum <= Global.expl_B_mod:
 							Global.inc_expl_B(-1*pricenum)
 							bought = true
-					"GrappleRopeShop":
+					"GrappleShop":
 						if pricenum <= Global.grapple_mod:
 							Global.inc_GrappleRope(-1*pricenum)
 							bought = true
@@ -93,7 +93,7 @@ func _on_body_entered(body):
 						"GlideBootsShop": Global.inc_GlideBoots(productnum)
 						"DashShop": Global.inc_Dash(productnum)
 						"expl_BShop": Global.inc_expl_B(productnum)
-						"GrappleRopeShop": Global.inc_GrappleRope(productnum)
+						"GrappleShop": Global.inc_GrappleRope(productnum)
 						"FollowerShop": Global.inc_Follower(productnum)
 						"ShrinkShop": Global.inc_Shrink(productnum)
 						"GambaShop": Global.inc_Gamba(productnum)

@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var cycletime : float = 3.0
-@export var item_pool : Array = []
+@export var item_pool : Array[Array] = []
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var item_cycle_timer: Timer = $ItemCycleTimer
 @onready var winner : int = 0
@@ -15,21 +15,21 @@ func _on_body_entered(body):
 		if i in metalist:
 			var multi_result : int = 1 * Global.follower_mod
 			match item_pool[winner][0]:
-				"PlayerSpeed": Global.inc_PlayerSpeed(multi_result)
-				"GlideBoots": Global.inc_GlideBoots(multi_result)
-				"Dash": Global.inc_Dash(multi_result)
-				"expl_B": Global.inc_expl_B(multi_result)
-				"GrappleRope": Global.inc_GrappleRope(multi_result)
-				"Follower": Global.inc_Follower(1)
-				"Shrink": Global.inc_Shrink(multi_result)
-				"Gamba": Global.inc_Gamba(multi_result)
-				"Shield": Global.follower_array[0].shield_up = true
-				"Slow": Global.inc_PlayerSlow(multi_result)
-				"LongTeleport": Global.inc_LongTele(multi_result)
-				"ShortTeleport": Global.inc_ShortTele(multi_result)
-				"DVDBounce": Global.inc_DVD(multi_result)
-				"Cleanse": Global.cleanse_curse(multi_result)
-				"Grow": Global.inc_Grow(multi_result)
+				"PlayerSpeedMulti": Global.inc_PlayerSpeed(multi_result)
+				"GlideBootsMulti": Global.inc_GlideBoots(multi_result)
+				"DashMulti": Global.inc_Dash(multi_result)
+				"expl_BMulti": Global.inc_expl_B(multi_result)
+				"GrappleMulti": Global.inc_GrappleRope(multi_result)
+				"FollowerMulti": Global.inc_Follower(1)
+				"ShrinkMulti": Global.inc_Shrink(multi_result)
+				"GambaMulti": Global.inc_Gamba(multi_result)
+				"ShieldMulti": Global.follower_array[0].shield_up = true
+				"SlowMulti": Global.inc_PlayerSlow(multi_result)
+				"LongTeleportMulti": Global.inc_LongTele(multi_result)
+				"ShortTeleportMulti": Global.inc_ShortTele(multi_result)
+				"DVDBounceMulti": Global.inc_DVD(multi_result)
+				"CleanseMulti": Global.cleanse_curse(multi_result)
+				"GrowMulti": Global.inc_Grow(multi_result)
 				_: print("Uknown item in the Multi:", item_pool[winner][0])
 			queue_free()
 			break

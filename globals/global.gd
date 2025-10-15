@@ -571,6 +571,7 @@ func inc_ShortTele(times: int) -> void:
 		shorttelelabelon = true
 	elif shorttele_mod == 0 or shorttele_mod + times == 0:
 		shorttelelabelon = true
+	shorttele_mod += times
 	shortele_cool_down = shortele_cool_down_base * ((1/1.005) ** shorttele_mod)
 	updatelabels = true
 

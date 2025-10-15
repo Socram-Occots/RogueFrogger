@@ -21,7 +21,7 @@ const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
 const DVDBOUNCE : Resource = preload("res://DVD_bounce/DVD_bounce.tscn")
 const SHOP : Resource = preload("res://Items/Item_Shop/ItemShop.tscn")
 
-@onready var SPAWN_LIST : Array[Array] = []
+@onready var SPAWN_LIST : Array[String] = []
 @onready var CHANCE_LIST : Array[float] = []
 @onready var ITEMS_LIST : Array[String] = []
 @onready var ITEMS_CHANCE_LIST : Array[float] = []
@@ -74,7 +74,7 @@ var playerspeedglowicon : Texture2D = items_instantiate.get_node("PlayerSpeed/Sp
 var glideglowicon : Texture2D = items_instantiate.get_node("GlideBoots/Sprite2D").texture
 var dashglowicon : Texture2D = items_instantiate.get_node("Dash/Sprite2D").texture
 var expl_B_glowicon : Texture2D = items_instantiate.get_node("expl_B/Sprite2D").texture
-var grapple_glowicon : Texture2D = items_instantiate.get_node("GrappleRope/Sprite2D").texture
+var grapple_glowicon : Texture2D = items_instantiate.get_node("Grapple/Sprite2D").texture
 var follower_glowicon : Texture2D = items_instantiate.get_node("Follower/Sprite2D").texture
 var shrink_glowicon : Texture2D = items_instantiate.get_node("Shrink/Sprite2D").texture
 var gamba_glowicon : Texture2D = items_instantiate.get_node("Gamba/Sprite2D").texture
@@ -106,7 +106,7 @@ var gamba_picker : Node
 @onready var multi_quantity_sum : float
 
 # shopchances
-@onready var shop_num_sum_divide_const : float = 5
+@onready var shop_num_sum_divide_const : float = 7
 @onready var shop_initial : float = 300
 @onready var shop_num_limit : int = 15
 @onready var shop_num_sum : float = sum_multi_chances(shop_num_limit, shop_initial,
@@ -124,7 +124,7 @@ func load_element_stats() -> void:
 func load_general_stats() -> void:
 	var gen_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"General", !Global.sandbox)
-	var gen_dict_keys : Array[String] = gen_dict.keys()
+	var gen_dict_keys := gen_dict.keys()
 	for i in range(0, gen_dict_keys.size()):
 		var tempstring : String = gen_dict_keys[i]
 		var tempint : int = gen_dict[tempstring]
@@ -135,7 +135,7 @@ func load_general_stats() -> void:
 func load_items_stats() -> void:
 	var item_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Items", !Global.sandbox)
-	var item_dict_keys : Array[String] = item_dict.keys()
+	var item_dict_keys := item_dict.keys()
 	for i in range(0, item_dict_keys.size()):
 		var tempstring : String =  item_dict_keys[i]
 		var tempint : int = item_dict[tempstring]
@@ -145,8 +145,8 @@ func load_items_stats() -> void:
 
 func load_multi_stats() -> void:
 	var multi_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Items", !Global.sandbox)
-	var multi_dict_keys : Array[String] = multi_dict.keys()
+		"Multi", !Global.sandbox)
+	var multi_dict_keys := multi_dict.keys()
 	for i in range(0, multi_dict_keys.size()):
 		var tempstring : String = multi_dict_keys[i]
 		var tempint : int = multi_dict[tempstring]
@@ -154,10 +154,13 @@ func load_multi_stats() -> void:
 			MULTI_LIST.append(tempstring)
 			MULTI_CHANCE_LIST.append(tempint)
 
+func get_Icon_texture2D(containter : VBoxContainer) -> Texture2D:
+	return containter.get_node("Sprite2D").texture
+
 func load_gamba_stats() -> void:
 	var gamba_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Gamba", !Global.sandbox)
-	var gamba_dict_keys : Array[String] = gamba_dict.keys()
+	var gamba_dict_keys := gamba_dict.keys()
 	for i in range(0, gamba_dict_keys.size()):
 		var tempstring : String = gamba_dict_keys[i]
 		var tempint : int = gamba_dict[tempstring]
@@ -165,49 +168,49 @@ func load_gamba_stats() -> void:
 			match tempstring:
 				"PlayerSpeedGamba":
 					gamba_array_good.append([tempstring, 
-					playerspeedicon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(playerspeedicon)])
 				"GlideBootsGamba":
 					gamba_array_good.append([tempstring, 
-					glideglowicon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(glideicon)])
 				"DashGamba":
 					gamba_array_good.append([tempstring, 
-					dashicon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(dashicon)])
 				"expl_BGamba":
 					gamba_array_good.append([tempstring, 
-					expl_B_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(expl_B_icon)])
 				"GrappleGamba":
 					gamba_array_good.append([tempstring, 
-					grapple_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(grapple_icon)])
 				"FollowerGamba":
 					gamba_array_good.append([tempstring, 
-					follower_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(follower_icon)])
 				"ShrinkGamba":
 					gamba_array_good.append([tempstring, 
-					shrink_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(shrink_icon)])
 				"CleanseGamba":
 					gamba_array_good.append([tempstring, 
-					cleanse_glowicon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(cleanse_icon)])
 				"SlowGamba":
 					gamba_array_bad.append([tempstring, 
-					slow_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(slow_icon)])
 				"GrowGamba":
 					gamba_array_bad.append([tempstring, 
-					grow_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(grow_icon)])
 				"LongTeleportGamba":
 					gamba_array_bad.append([tempstring, 
-					longtele_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(longtele_icon)])
 				"ShortTeleportGamba":
 					gamba_array_bad.append([tempstring, 
-					shorttele_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(shorttele_icon)])
 				"DVDBounceGamba":
 					gamba_array_bad.append([tempstring, 
-					dvdbounce_icon.get_node("Sprite2D").texture])
+					get_Icon_texture2D(dvdbounce_icon)])
 				_: print("Could not pre load gamba: ", tempstring)
 
 func load_shop_stats() -> void:
 	var shop_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Shop", Global.sandbox)
-	var shop_dict_keys : Array[String] = shop_dict.keys()
+	var shop_dict_keys := shop_dict.keys()
 	for i in range(0, shop_dict_keys.size()):
 		var tempstring : String = shop_dict_keys[i]
 		var tempint : int = shop_dict[tempstring]
@@ -240,7 +243,7 @@ func sum_multi_chances(max_items : int = 15, multi_i: float = 150, divide_int : 
 		total += initial / float(divide_int*i)
 	return total
 
-func itemSpawn(spawns : Array[Array] = SPAWN_LIST, 
+func itemSpawn(spawns : Array[String] = SPAWN_LIST, 
 chances : Array[float] = CHANCE_LIST, 
 items : Array[String] = ITEMS_LIST, 
 items_chances : Array[float] = ITEMS_CHANCE_LIST, 
@@ -250,8 +253,9 @@ node_num: int = 15) -> void:
 	var item_length : int = len(items)
 	var item_chances_length : int = len(items_chances)
 	
-	# both arrays need to be same length
-	if spawn_length != chances_length || item_length != item_chances_length: return
+	# both arrays need to be same length and exist
+	if item_length < 1 || spawn_length != chances_length \
+	|| item_length != item_chances_length: return
 
 	# at least one space must be open
 	var open : int  = randi_range(0, node_num - 1)
@@ -261,7 +265,7 @@ node_num: int = 15) -> void:
 	# adding ingame modified item chances
 	chance_pool += Global.expl_B_chance_mod
 	
-	var selected_array : int = -1
+	var selected : int = -1
 	while i < node_num:
 		if i == open: i += 1
 		if i == node_num: break
@@ -271,20 +275,17 @@ node_num: int = 15) -> void:
 			chance -= chances[a]
 			
 			# subtracting ingame modified item chances
-			if spawns[a].has("ExplBarrel"):
+			if spawns[a] == "ExplBarrel":
 				chance -= Global.expl_B_chance_mod
 			
 			if chance <= 0:
-				selected_array = a
+				selected = a
 				break
-		if selected_array == -1:
+		if selected == -1:
 			print("Spawn Selection Failure. Leftover chance: ", chance)
-			selected_array = chances_length - 1
-			
-		var lucky_array = spawns[selected_array] as Array[String]
-		
-		# randomly select from lucky array
-		var lucky_spawn : String = lucky_array.pick_random()
+			selected = chances_length - 1
+
+		var lucky_spawn : String = spawns[selected]
 		
 		if lucky_spawn == "Items":
 			var selected_item : int = -1
@@ -313,7 +314,7 @@ node_num: int = 15) -> void:
 			"GlideBoots": i = spawnItems(dir, lucky_spawn, i)
 			"Dash": i = spawnItems(dir, lucky_spawn, i)
 			"expl_B": i = spawnItems(dir, lucky_spawn, i)
-			"GrappleRope": i = spawnItems(dir, lucky_spawn, i)
+			"Grapple": i = spawnItems(dir, lucky_spawn, i)
 			"Shield": i = spawnItems(dir, lucky_spawn, i)
 			"Gamba": i = spawnItems(dir, lucky_spawn,i)
 			"Follower": i = spawnItems(dir, lucky_spawn,i)
@@ -369,7 +370,7 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 			"GlideBootsMulti": result_multi_list[i] = [lucky_multi, glideglowicon]
 			"DashMulti": result_multi_list[i] = [lucky_multi, dashglowicon]
 			"expl_BMulti": result_multi_list[i] = [lucky_multi, expl_B_glowicon]
-			"GrappleRopeMulti": result_multi_list[i] = [lucky_multi, grapple_glowicon]
+			"GrappleMulti": result_multi_list[i] = [lucky_multi, grapple_glowicon]
 			"ShieldMulti": result_multi_list[i] = [lucky_multi, shield_glowicon]
 			"GambaMulti": result_multi_list[i] = [lucky_multi, gamba_glowicon]
 			"FollowerMulti": result_multi_list[i] = [lucky_multi, follower_glowicon]
@@ -416,6 +417,8 @@ func spawnExplBarrel(dir : String, i : int) -> int:
 func spawnItems(dir : String, item_str: String, i : int) -> int:
 	var item : Area2D = items_instantiate.get_node(item_str).duplicate()
 	if item_str == "Multi":
+		if MULTI_LIST.is_empty():
+			return i
 		item.item_pool = multiItemPicker()
 	item.visible = true
 	item.position = get_node(dir).global_position
@@ -492,7 +495,7 @@ func chooseShopTextures(shopstr: String) -> Texture2D:
 		"GlideBootsShop": return glideglowicon
 		"DashShop": return dashglowicon
 		"expl_BShop": return expl_B_glowicon
-		"GrappleRopeShop": return grapple_glowicon
+		"GrappleShop": return grapple_glowicon
 		"ShieldShop": return shield_glowicon
 		"GambaShop": return gamba_glowicon
 		"FollowerShop": return follower_glowicon

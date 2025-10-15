@@ -15,10 +15,12 @@ func _ready() -> void:
 	set_point_position(0, crosser_global_pos)
 	set_point_position(1, crosser_global_pos)
 
-func delete_rope() -> void:
+func delete_rope(headalive : bool = true) -> void:
+	Global.grapple_cool_down_bool = true
 	crosser.grappling = false
 	crosser.grappled = false
-	grapple_head.queue_free()
+	if headalive:
+		grapple_head.queue_free()
 	queue_free()
 
 func _process(delta: float) -> void:
@@ -48,9 +50,7 @@ func _process(delta: float) -> void:
 		if crosser_global_pos.distance_to(grapple_pos) > Global.grapple_length:
 			delete_rope()
 	else:
-		crosser.grappling = false
-		crosser.grappled = false
-		queue_free()
+		delete_rope(false)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("rope"):

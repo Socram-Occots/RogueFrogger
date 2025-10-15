@@ -93,7 +93,6 @@ func dash_decision_tree() -> void:
 func grapple_decision_tree() -> void:
 	if Input.is_action_just_pressed("rope") && Global.grapple &&\
 	 !Global.grapple_cool_down_bool && !grappling:
-		Global.grapple_cool_down_bool = true
 		grappling = true
 		var grappledupe : Line2D = grapplehook.duplicate()
 		grappledupe.dir_vector = velocityRigid.normalized()

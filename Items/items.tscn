@@ -159,17 +159,17 @@ scale = Vector2(0.805, 0.805)
 texture = ExtResource("12_iin3t")
 region_rect = Rect2(75, 75, 43, 44)
 
-[node name="GrappleRope" type="Area2D" parent="."]
+[node name="Grapple" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 script = ExtResource("13_a0wwr")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GrappleRope"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grapple"]
 shape = SubResource("RectangleShape2D_wqdux")
 
-[node name="Sprite2D" type="Sprite2D" parent="GrappleRope"]
+[node name="Sprite2D" type="Sprite2D" parent="Grapple"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_df2u4")
 scale = Vector2(0.805, 0.805)
@@ -349,7 +349,7 @@ texture = ExtResource("37_g6ukk")
 [connection signal="body_entered" from="GlideBoots" to="GlideBoots" method="_on_body_entered"]
 [connection signal="body_entered" from="Dash" to="Dash" method="_on_body_entered"]
 [connection signal="body_entered" from="expl_B" to="expl_B" method="_on_body_entered"]
-[connection signal="body_entered" from="GrappleRope" to="GrappleRope" method="_on_body_entered"]
+[connection signal="body_entered" from="Grapple" to="Grapple" method="_on_body_entered"]
 [connection signal="body_entered" from="Gamba" to="Gamba" method="_on_body_entered"]
 [connection signal="body_entered" from="Shield" to="Shield" method="_on_body_entered"]
 [connection signal="body_entered" from="Follower" to="Follower" method="_on_body_entered"]
