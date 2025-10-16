@@ -93,8 +93,8 @@ shape = SubResource("RectangleShape2D_v677n")
 [node name="explosionbarrelexplosion" type="Area2D" parent="."]
 position = Vector2(-27, 1)
 scale = Vector2(1.5, 1.5)
-collision_layer = 512
-collision_mask = 671
+collision_layer = 0
+collision_mask = 1183
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="explosionbarrelexplosion"]
 position = Vector2(17.995, 0)

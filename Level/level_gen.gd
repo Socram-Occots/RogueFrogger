@@ -209,7 +209,7 @@ func load_gamba_stats() -> void:
 
 func load_shop_stats() -> void:
 	var shop_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Shop", Global.sandbox)
+		"Shop", !Global.sandbox)
 	var shop_dict_keys := shop_dict.keys()
 	for i in range(0, shop_dict_keys.size()):
 		var tempstring : String = shop_dict_keys[i]
@@ -429,9 +429,9 @@ func spawnItems(dir : String, item_str: String, i : int) -> int:
 func spawnShop(dir : String, node_num : int, i : int) -> int:
 	# we have to check if this is the last node to prevent clipping out of bounds
 	if i + 1 >= node_num: return i
-	var shop : Area2D = SHOP_INST.duplicate()
 	var generated : Array = chooseShopItems()
 	if generated[0] == null: return i
+	var shop : Area2D = SHOP_INST.duplicate()
 	shop.visible = true
 	shop.position = get_node(dir).global_position
 	shop.priceItemName = generated[0]
@@ -472,18 +472,20 @@ func chooseShopItems() -> Array:
 		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
 	
 	# choose to make the price a curse or an item
-	if !curseempty && randf_range(0, 9) < 1:
+	if priceempty || (!curseempty && randf_range(0, 9) < 1):
 		chosenInput = shoppricecurses.pick_random()
 	else:
 		chosenInput = shoppriceitems.pick_random()
 	# 1 in 20 chance you get a rare product
-	if !rareproductempty && randf_range(0, 19) < 1:
+	if productempty || (!rareproductempty && randf_range(0, 19) < 1):
 		var arraytemp : Array[String] = shopproductitemsrare.duplicate(true)
 		arraytemp.erase(chosenInput)
+		if arraytemp.is_empty(): return [null]
 		chosenOutput = arraytemp.pick_random()
 	else:
 		var arraytemp : Array[String] = shopproductitems.duplicate(true)
 		arraytemp.erase(chosenInput)
+		if arraytemp.is_empty(): return [null]
 		chosenOutput = arraytemp.pick_random()
 	
 	return [chosenInput, chosenOutput, shop_cost, shop_reward_num]

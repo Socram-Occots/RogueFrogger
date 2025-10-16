@@ -19,11 +19,10 @@ func _ready() -> void:
 	sprite_product_item.texture = productItem
 	polygon_2d.color = Color(0, 0, 0)
 	pricelabel.text = str(pricenum) + "x"
-	if productItemName == "Shield":
+	if productItemName == "ShieldShop":
 		productlabel.text = "1x"
 	else:
 		productlabel.text = str(productnum) + "x"
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
