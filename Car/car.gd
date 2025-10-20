@@ -20,16 +20,18 @@ func _ready():
 		car_speed = self.get_meta("speed")
 		direction = self.get_meta("direction")
 #	randomize()
-	var current_car : String = CAR_LIST[randi() % CAR_LIST.size()]
+	var current_car : String = CAR_LIST[GRand.maprand.randi() % CAR_LIST.size()]
 	
 	if current_car == "motorcycle":
 		$AnimatedSprite2DMotorcycle.visible = true
-		$AnimatedSprite2DMotorcycle.animation = MOTORC_COlORS[randi() % MOTORC_COlORS.size()]
+		$AnimatedSprite2DMotorcycle.animation = MOTORC_COlORS[
+			GRand.maprand.randi() % MOTORC_COlORS.size()]
 		$CollisionShape2Dmotorcycle.set_deferred("disabled", false)
 	else:
 		$AnimatedSprite2D.visible = true
 		if current_car == "colors":
-			$AnimatedSprite2D.animation = CAR_COLORS[randi() % CAR_COLORS.size()]
+			$AnimatedSprite2D.animation = CAR_COLORS[
+				GRand.maprand.randi() % CAR_COLORS.size()]
 			$CollisionShape2Dcolor.set_deferred("disabled", false)
 		else:
 			$AnimatedSprite2D.animation = current_car

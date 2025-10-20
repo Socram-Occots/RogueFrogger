@@ -41,7 +41,8 @@ func _ready() -> void:
 					qualified.append(temp_global)
 	
 	if !qualified.is_empty():
-		var winner_vect2 : Vector2 = qualified.pick_random()
+		var winner_vect2 : Vector2 = qualified[
+			GRand.maprand.randi() % qualified.size()]
 		
 		PhysicsServer2D.body_set_state(
 			temp_rigid.get_rid(),

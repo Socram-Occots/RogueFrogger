@@ -14,12 +14,16 @@ func _ready():
 	car_speed_h = (Global.car_speed_scaling*1.3)
 	
 	# this prevents the car's in each lane to be too squished
-	if randi_range(0,1) == 0:
+	if GRand.maprand.randi_range(0,1) == 0:
 		# rolled low
-		car_speed = randf_range(minf(Global.prev_car_speed*0.8, car_speed_l), maxf(Global.prev_car_speed*0.8, car_speed_l))
+		car_speed = GRand.maprand.randf_range(
+			minf(Global.prev_car_speed*0.8, car_speed_l), 
+			maxf(Global.prev_car_speed*0.8, car_speed_l))
 	else :
 		# rolled high
-		car_speed = randf_range(minf(Global.prev_car_speed*1.2, car_speed_h), maxf(Global.prev_car_speed*1.2, car_speed_h))
+		car_speed = GRand.maprand.randf_range(
+			minf(Global.prev_car_speed*1.2, car_speed_h), 
+			maxf(Global.prev_car_speed*1.2, car_speed_h))
 	
 	Global.prev_car_speed = car_speed
 	
@@ -45,7 +49,8 @@ func _ready():
 	var auto : Area2D = $car.duplicate()
 	auto.visible = true
 	$cars.add_child(auto)
-	$Timer.start(randf_range(car_spacing_timer_l, car_spacing_timer_h))
+	$Timer.start(GRand.maprand.randf_range(
+		car_spacing_timer_l, car_spacing_timer_h))
 
 func _on_timer_timeout():
 	var auto : Area2D = $car.duplicate()

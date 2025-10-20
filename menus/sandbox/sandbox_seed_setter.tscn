@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://xjifb36japo6"]
+
+[ext_resource type="Texture2D" uid="uid://biscs04ru388f" path="res://RogueFroggerAssets/RFAssets/Level/gamba.png" id="1_tbrgu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abln0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cgvfw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0fnf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wx8g7"]
+
+[node name="SandboxSeedSetter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -34.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_abln0")
+
+[node name="label" type="Label" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Empty"
+
+[node name="Sprite2D" type="TextureRect" parent="HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("1_tbrgu")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_cgvfw")
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 999.0
+rounded = true
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v0fnf")
+
+[node name="Chance_Num" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "999"
+
+[node name="VSeparator4" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_wx8g7")

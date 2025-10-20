@@ -615,8 +615,10 @@ func cleanse_curse(times: int):
 	if curse_dict.is_empty():
 		return
 	
+	var curse_size : int = curse_dict.keys().size()
+	
 	for i in range(times):
-		var chosen : String = curse_dict.keys().pick_random()
+		var chosen : String = curse_dict.keys()[GRand.maprand.randi() % curse_size]
 		
 		if chosen == "playerslow":
 			inc_PlayerSlow(-1)

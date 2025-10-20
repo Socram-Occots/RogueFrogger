@@ -29,23 +29,26 @@ func begin_gamba() -> void:
 	if len_item_pool < 2:
 		return
 	set_process(true)
-	good_item_pool.shuffle()
-	bad_item_pool.shuffle()
+	good_item_pool = GRand.shuffle_array(good_item_pool, 1)
+	bad_item_pool = GRand.shuffle_array(bad_item_pool, 1)
 	if good_item_pool_size < 2:
 		temp_item_pool = good_item_pool
 	else:
 		temp_item_pool = good_item_pool.slice(0, 
-			randi_range(min(3, good_item_pool_size), good_item_pool_size))
+			GRand.itemrand.randi_range(
+				min(3, good_item_pool_size), good_item_pool_size))
 	
 	if bad_item_pool_size > 0:
-		var bad_item_index_chance = randi_range(0, bad_item_pool_size)
+		var bad_item_index_chance = GRand.itemrand.randi_range(
+			0, bad_item_pool_size)
 		if temp_item_pool.size() == 0:
 			temp_item_pool += bad_item_pool.slice(
 				0, max(2, bad_item_index_chance))
 		elif bad_item_index_chance != 0:
 			temp_item_pool += bad_item_pool.slice(0, bad_item_index_chance)
 		elif temp_item_pool.size() == 1:
-			temp_item_pool.append(bad_item_pool.pick_random())
+			temp_item_pool.append(
+				bad_item_pool[GRand.itemrand.randi() % bad_item_pool_size])
 
 	len_item_pool = temp_item_pool.size()
 	
@@ -68,9 +71,10 @@ func _on_item_cycle_timer_timeout() -> void:
 	
 	if cycleitemcounter == len_item_pool:
 		cycleitemcounter = 0
-		temp_item_pool.remove_at(randi_range(0, len_item_pool - 1))
+		temp_item_pool.remove_at(
+			GRand.itemrand.randi_range(0, len_item_pool - 1))
 		len_item_pool -= 1
-		temp_item_pool.shuffle()
+		temp_item_pool = GRand.shuffle_array(temp_item_pool, 1)
 		if len_item_pool > 1:
 			timeperitemcycle = timepercycle / (len_item_pool)
 	
@@ -112,7 +116,7 @@ func present_winner() -> void:
 		_: print("Uknown item in the Gamba Picker: ", temp_item_pool[cycleitemcounter][0])
 
 	#reset length so gamba can function again
-	len_item_pool = len(item_pool)
+	len_item_pool = item_pool.size()
 	Global.gamba_mod = 1
 	#hidegambawheel and declare gamba not running again
 	Global.gamba_running = false

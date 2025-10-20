@@ -258,7 +258,7 @@ node_num: int = 15) -> void:
 	|| item_length != item_chances_length: return
 
 	# at least one space must be open
-	var open : int  = randi_range(0, node_num - 1)
+	var open : int  = GRand.maprand.randi_range(0, node_num - 1)
 	
 	var i : int = 0
 	var chance_pool : float = Global.float_sum_array(chances)
@@ -269,7 +269,7 @@ node_num: int = 15) -> void:
 	while i < node_num:
 		if i == open: i += 1
 		if i == node_num: break
-		var chance : float = randf_range(0, chance_pool)
+		var chance : float = GRand.maprand.randf_range(0, chance_pool)
 		var dir : String = "spawnterrain/Node" + str(i)
 		for a in range(0, chances_length):
 			chance -= chances[a]
@@ -290,7 +290,7 @@ node_num: int = 15) -> void:
 		if lucky_spawn == "Items":
 			var selected_item : int = -1
 			var item_chance_pool : float = Global.float_sum_array(items_chances)
-			chance = randf_range(0, item_chance_pool)
+			chance = GRand.maprand.randf_range(0, item_chance_pool)
 			for a in range(0, item_chances_length):
 				chance -= items_chances[a]
 				
@@ -337,7 +337,8 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 	var multi_quantity : int = 2
 	var lucky_multi : String
 	
-	var multi_quantity_sum_chance = randf_range(0, multi_quantity_sum) - initial
+	var multi_quantity_sum_chance = GRand.maprand.randf_range(
+		0, multi_quantity_sum) - initial
 	for i in range(1, num_of_multi):
 		if multi_quantity_sum_chance <= 0:
 			multi_quantity = i + 1
@@ -348,7 +349,8 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 	for i in range(0, multi_quantity):
 
 		var selected_multi : int = -1
-		var chance : float = randf_range(0, multi_chance_pool)
+		var chance : float = GRand.maprand.randf_range(
+			0, multi_chance_pool)
 		
 		for a in range(0, multi_chances_length):
 			chance -= multi_chance_list_copy[a]
@@ -456,7 +458,8 @@ func chooseShopItems() -> Array:
 	var chosenOutput : String = ""
 	var shop_cost : int = 1
 	
-	var shop_num_sum_chance = randf_range(0, shop_num_sum) - shop_initial
+	var shop_num_sum_chance = GRand.maprand.randf_range(
+		0, shop_num_sum) - shop_initial
 	for i in range(1, shop_num_limit):
 		if shop_num_sum_chance <= 0:
 			shop_cost = i
@@ -464,7 +467,7 @@ func chooseShopItems() -> Array:
 		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
 	
 	var shop_reward_num : int = 1
-	shop_num_sum_chance = randf_range(0, shop_num_sum) - shop_initial
+	shop_num_sum_chance = GRand.maprand.randf_range(0, shop_num_sum) - shop_initial
 	for i in range(1, shop_num_limit):
 		if shop_num_sum_chance <= 0:
 			shop_reward_num = i
@@ -472,21 +475,21 @@ func chooseShopItems() -> Array:
 		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
 	
 	# choose to make the price a curse or an item
-	if priceempty || (!curseempty && randf_range(0, 9) < 1):
-		chosenInput = shoppricecurses.pick_random()
+	if priceempty || (!curseempty && GRand.maprand.randf_range(0, 9) < 1):
+		chosenInput = shoppricecurses[GRand.maprand.randi() % shoppricecurses.size()]
 	else:
-		chosenInput = shoppriceitems.pick_random()
+		chosenInput = shoppriceitems[GRand.maprand.randi() % shoppriceitems.size()]
 	# 1 in 20 chance you get a rare product
-	if productempty || (!rareproductempty && randf_range(0, 19) < 1):
+	if productempty || (!rareproductempty && GRand.maprand.randf_range(0, 19) < 1):
 		var arraytemp : Array[String] = shopproductitemsrare.duplicate(true)
 		arraytemp.erase(chosenInput)
 		if arraytemp.is_empty(): return [null]
-		chosenOutput = arraytemp.pick_random()
+		chosenOutput = arraytemp[GRand.maprand.randi() % arraytemp.size()]
 	else:
 		var arraytemp : Array[String] = shopproductitems.duplicate(true)
 		arraytemp.erase(chosenInput)
 		if arraytemp.is_empty(): return [null]
-		chosenOutput = arraytemp.pick_random()
+		chosenOutput = arraytemp[GRand.maprand.randi() % arraytemp.size()]
 	
 	return [chosenInput, chosenOutput, shop_cost, shop_reward_num]
 
@@ -517,7 +520,7 @@ func carSpawn() -> void:
 	car.position.y = $spawnterrain/Node0.global_position.y - 5
 	car.visible = true
 	
-	var side : int = randi_range(0,1)
+	var side : int = GRand.maprand.randi_range(0,1)
 	if side == 0:
 		car.position.x = Global.despawn_left
 	else:
@@ -526,7 +529,6 @@ func carSpawn() -> void:
 	$Ysort.add_child(car)
 
 func firstTerrainSpawn(xpos : float, ypos : float) -> void:
-#	var tile_num = randi_range(0,1)
 	sidewalk = true
 	var tile = TILES_INST.get_node("TileMap0").duplicate()
 	tile.position.x = xpos
@@ -600,7 +602,7 @@ func terrainSpawnLogic(times : int) -> void:
 		if sidewalk:
 			terrainSpawn(1, 0, $spawnterrain.global_position.y)
 		else:
-			var tile_num = randi_range(0,1)
+			var tile_num = GRand.maprand.randi_range(0,1)
 			terrainSpawn(tile_num, 0, $spawnterrain.global_position.y)
 			
 	#	print(TERRAIN[0].global_position.y)
@@ -843,10 +845,10 @@ func dvd_bounce_check() -> void:
 			var DVDnodetemp : RigidBody2D = DVDnode.duplicate()
 			DVDnodetemp.sleeping = false
 			DVDnodetemp.visible = true
-			DVDnodetemp.position = Vector2(randf_range(100, 1820), 
-			randf_range(100, 980))
+			DVDnodetemp.position = Vector2(GRand.maprand.randf_range(100, 1820), 
+			GRand.maprand.randf_range(100, 980))
 			DVDnodetemp.velocity = Vector2(250, 250).rotated(
-				deg_to_rad(randf_range(0,360)))
+				deg_to_rad(GRand.maprand.randf_range(0,360)))
 			DVDarea.get_node("DVDnodes").add_child(DVDnodetemp)
 			Global.dvd_array.append(DVDnodetemp)
 		Global.dvd_spawn_num = 0
