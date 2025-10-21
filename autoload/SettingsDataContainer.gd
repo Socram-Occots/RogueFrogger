@@ -14,6 +14,7 @@ var sfx_volume : float = 0.0
 var high_score : int = 0
 # sandbox data
 var sandbox_dict : Dictionary = {}
+var sandbox_seed : String = ""
 
 var loaded_data : Dictionary = {}
 
@@ -31,7 +32,8 @@ func create_storage_dictionary() -> Dictionary:
 		"sfx_volume": sfx_volume,
 		"keybinds": create_keybind_dictionary(),
 		"high_score": high_score,
-		"sandbox_dict": sandbox_dict
+		"sandbox_dict": sandbox_dict,
+		"sandbox_seed": sandbox_seed
 	}
 
 	return settings_container_dict
@@ -125,6 +127,11 @@ func get_sandbox_dict_type(type: String, default : bool = false ) -> Dictionary:
 		return DEFAULT_SETTINGS.default_sandbox_dict[type]
 	return sandbox_dict[type]
 
+func get_sandbox_seed(default : bool = false) -> String:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_sandbox_seed
+	return sandbox_seed
+
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index
@@ -203,7 +210,6 @@ func on_keybinds_loaded(data: Dictionary) -> void:
 # set sandbox data
 func on_sandbox_dict_set(type: String, object: String, num: int) -> void:
 	sandbox_dict[type][object] = num
-	
 func on_sandbox_dict_setAll(dict : Dictionary) -> void:
 	var default : Dictionary = DEFAULT_SETTINGS.default_sandbox_dict
 	for i in DEFAULT_SETTINGS.default_sandbox_dict.keys():
@@ -214,7 +220,10 @@ func on_sandbox_dict_setAll(dict : Dictionary) -> void:
 		else:
 			dict[i] = default[i]
 	sandbox_dict = dict.duplicate(true)
+func on_sandbox_seed_set(value: String) -> void:
+	sandbox_seed = value
 
+#settings data set
 func on_settings_data_loaded(data: Dictionary) -> void:
 	loaded_data = data
 	# settings
@@ -256,6 +265,10 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_sandbox_dict_setAll(loaded_data["sandbox_dict"])
 	else:
 		on_sandbox_dict_setAll({})
+	if loaded_data.has("sandbox_seed"):
+		on_sandbox_seed_set(loaded_data["sandbox_seed"])
+	else:
+		on_sandbox_seed_set(DEFAULT_SETTINGS.default_sandbox_seed)
 
 func handle_signals() -> void:
 	# settings
@@ -270,5 +283,6 @@ func handle_signals() -> void:
 	# sandbox data
 	SettingsSignalBus.on_sandbox_dict_set.connect(on_sandbox_dict_set)
 	SettingsSignalBus.on_sandbox_dict_setAll.connect(on_sandbox_dict_setAll)
+	SettingsSignalBus.on_sandbox_seed_set.connect(on_sandbox_seed_set)
 	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

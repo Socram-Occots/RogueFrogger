@@ -120,6 +120,7 @@ func load_element_stats() -> void:
 	load_multi_stats()
 	load_gamba_stats()
 	load_shop_stats()
+	load_seed()
 
 func load_general_stats() -> void:
 	var gen_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
@@ -235,6 +236,18 @@ func load_shop_stats() -> void:
 			["ShieldShop"]:
 				shopproductitemsrare.append(tempstring)
 
+func load_seed() -> void:
+	var seedy : String = SettingsDataContainer.get_sandbox_seed(
+		!Global.sandbox)
+	if seedy:
+		var converted_seed : int = seedy.to_int()
+		if converted_seed == 0:
+			converted_seed = hash(seedy)
+		GRand.maprand.set_seed(converted_seed)
+		GRand.itemrand.set_seed(converted_seed)
+	else:
+		GRand.maprand.randomize()
+		GRand.itemrand.randomize()
 
 func sum_multi_chances(max_items : int = 15, multi_i: float = 150, divide_int : float = 3) -> float:
 	var initial : float = multi_i

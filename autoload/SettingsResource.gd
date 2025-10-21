@@ -88,3 +88,5 @@ const default_sandbox_dict : Dictionary = {
 	"Gamba" : default_gamba_sandbox_dict,
 	"Shop" : default_shop_sandbox_dict
 }
+
+const default_sandbox_seed : String = ""

@@ -12,6 +12,7 @@ signal on_high_score_set(value: int)
 # sandbox data
 signal on_sandbox_dict_set(type: String, object: String, num: int)
 signal on_sandbox_dict_setAll(dict: Dictionary)
+signal on_sandbox_seed_set(value: String)
 
 signal set_settings_dictionary(settings_dict : Dictionary)
 
@@ -44,3 +45,5 @@ func emit_on_sandbox_dict_set(type: String, object: String, num: int) -> void:
 	on_sandbox_dict_set.emit(type, object, num)
 func emit_on_sandbox_dict_setAll(dict : Dictionary) -> void:
 	on_sandbox_dict_setAll.emit(dict)
+func emit_on_sandbox_seed_set(value: String) -> void:
+	on_sandbox_seed_set.emit(value)

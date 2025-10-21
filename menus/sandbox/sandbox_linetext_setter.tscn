@@ -1,22 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://xjifb36japo6"]
+[gd_scene load_steps=5 format=3 uid="uid://xjifb36japo6"]
 
-[ext_resource type="Texture2D" uid="uid://biscs04ru388f" path="res://RogueFroggerAssets/RFAssets/Level/gamba.png" id="1_tbrgu"]
+[ext_resource type="Script" path="res://menus/sandbox/sandbox_linetext.gd" id="1_vev3q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abln0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cgvfw"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0fnf"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wx8g7"]
 
-[node name="SandboxSeedSetter" type="Control"]
+[node name="SandboxLineTextSetter" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vev3q")
+object = "Seed"
+max_len = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 125)
@@ -37,42 +38,25 @@ theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_abln0")
 
 [node name="label" type="Label" parent="HBoxContainer"]
-visible = false
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Empty"
-
-[node name="Sprite2D" type="TextureRect" parent="HBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-texture = ExtResource("1_tbrgu")
-expand_mode = 2
-stretch_mode = 5
+theme_override_font_sizes/font_size = 100
+text = "Seed:"
 
 [node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_cgvfw")
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_vertical = 1
-max_value = 999.0
-rounded = true
-
-[node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-theme_override_styles/separator = SubResource("StyleBoxEmpty_v0fnf")
-
-[node name="Chance_Num" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(100, 0)
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "999"
+alignment = 1
+context_menu_enabled = false
+clear_button_enabled = true
+select_all_on_focus = true
 
-[node name="VSeparator4" type="VSeparator" parent="HBoxContainer"]
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_wx8g7")

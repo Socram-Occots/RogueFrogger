@@ -2,14 +2,21 @@ extends Control
 
 
 #@onready paused = false
+@onready var seedy: Label = $CenterContainer/ColorRect/VBoxContainer/Seed
+@onready var score: Label = $CenterContainer/ColorRect/VBoxContainer/Score
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	pass
 
+func show_seed() -> void:
+	seedy.set_text("Seed: " + str(GRand.maprand.get_seed()))
+
 func _on_visibility_changed():
 	if visible:
-		$CenterContainer/ColorRect/VBoxContainer/Score.text = "Score: " + str(Global.score)
-		$AnimationPlayer.play("startpause")
+		score.text = "Score: " + str(Global.score)
+		animation_player.play("startpause")
+		show_seed()
 
 func _on_retry_pressed():
 	Global.reset()
