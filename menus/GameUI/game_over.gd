@@ -4,12 +4,16 @@ extends Control
 @onready var score: Label = $CenterContainer/ColorRect/VBoxContainer/Score
 @onready var seedy: Label = $CenterContainer/ColorRect/VBoxContainer/Seed
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sandbox_seed : String = SettingsDataContainer.get_sandbox_seed(!Global.sandbox)
 
 func _ready():
 	pass
 
 func show_seed() -> void:
-	seedy.set_text("Seed: " + str(GRand.maprand.get_seed()))
+	if Global.sandbox && sandbox_seed:
+		seedy.set_text("Seed: " + sandbox_seed)
+	else:
+		seedy.set_text("Seed: " + str(GRand.maprand.get_seed()))
 
 func _on_visibility_changed():
 	if visible:

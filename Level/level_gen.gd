@@ -100,17 +100,12 @@ var dvdbounce_glowicon : Texture2D = items_instantiate.get_node("DVDBounce/Sprit
 var gamba_picker : Node
 
 # multichances
-@onready var multi_quantity_sum_divide_const : float = 3
-@onready var multi_initial : float = 150
 @onready var multi_num_limit : int
-@onready var multi_quantity_sum : float
 
 # shopchances
-@onready var shop_num_sum_divide_const : float = 7
-@onready var shop_initial : float = 300
 @onready var shop_num_limit : int = 15
-@onready var shop_num_sum : float = sum_multi_chances(shop_num_limit, shop_initial,
-shop_num_sum_divide_const)
+
+@onready var expl_Bidx : int = -1
 
 @onready var high_score_reached : bool = false
 
@@ -132,6 +127,7 @@ func load_general_stats() -> void:
 		if tempint > 0:
 			SPAWN_LIST.append(tempstring)
 			CHANCE_LIST.append(tempint)
+	expl_Bidx = SPAWN_LIST.find("expl_B")
 
 func load_items_stats() -> void:
 	var item_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
@@ -154,6 +150,7 @@ func load_multi_stats() -> void:
 		if tempint > 0:
 			MULTI_LIST.append(tempstring)
 			MULTI_CHANCE_LIST.append(tempint)
+	multi_num_limit = MULTI_LIST.size()
 
 func get_Icon_texture2D(containter : VBoxContainer) -> Texture2D:
 	return containter.get_node("Sprite2D").texture
@@ -249,22 +246,15 @@ func load_seed() -> void:
 		GRand.maprand.randomize()
 		GRand.itemrand.randomize()
 
-func sum_multi_chances(max_items : int = 15, multi_i: float = 150, divide_int : float = 3) -> float:
-	var initial : float = multi_i
-	var total : float = multi_i
-	for i in range(1, max_items - 1):
-		total += initial / float(divide_int*i)
-	return total
-
 func itemSpawn(spawns : Array[String] = SPAWN_LIST, 
 chances : Array[float] = CHANCE_LIST, 
 items : Array[String] = ITEMS_LIST, 
 items_chances : Array[float] = ITEMS_CHANCE_LIST, 
 node_num: int = 15) -> void:
-	var spawn_length : int = len(spawns)
-	var chances_length : int = len(chances)
-	var item_length : int = len(items)
-	var item_chances_length : int = len(items_chances)
+	var spawn_length : int = spawns.size()
+	var chances_length : int = chances.size()
+	var item_length : int = items.size()
+	var item_chances_length : int = items_chances.size()
 	
 	# both arrays need to be same length and exist
 	if item_length < 1 || spawn_length != chances_length \
@@ -274,47 +264,21 @@ node_num: int = 15) -> void:
 	var open : int  = GRand.maprand.randi_range(0, node_num - 1)
 	
 	var i : int = 0
-	var chance_pool : float = Global.float_sum_array(chances)
 	# adding ingame modified item chances
-	chance_pool += Global.expl_B_chance_mod
+	if expl_Bidx != -1:
+		chances[expl_Bidx] += Global.expl_B_chance_mod
 	
 	var selected : int = -1
 	while i < node_num:
 		if i == open: i += 1
 		if i == node_num: break
-		var chance : float = GRand.maprand.randf_range(0, chance_pool)
 		var dir : String = "spawnterrain/Node" + str(i)
-		for a in range(0, chances_length):
-			chance -= chances[a]
-			
-			# subtracting ingame modified item chances
-			if spawns[a] == "ExplBarrel":
-				chance -= Global.expl_B_chance_mod
-			
-			if chance <= 0:
-				selected = a
-				break
-		if selected == -1:
-			print("Spawn Selection Failure. Leftover chance: ", chance)
-			selected = chances_length - 1
-
+		
+		selected = GRand.maprand.rand_weighted(chances)
 		var lucky_spawn : String = spawns[selected]
 		
 		if lucky_spawn == "Items":
-			var selected_item : int = -1
-			var item_chance_pool : float = Global.float_sum_array(items_chances)
-			chance = GRand.maprand.randf_range(0, item_chance_pool)
-			for a in range(0, item_chances_length):
-				chance -= items_chances[a]
-				
-				if chance <= 0:
-					selected_item = a
-					break
-					
-			if selected_item == -1:
-				print("Item Selection Failure. Leftover chance: ", chance)
-				selected_item = chances_length - 1
-				
+			var selected_item : int = GRand.maprand.rand_weighted(items_chances)
 			lucky_spawn = items[selected_item]
 		
 		# spawn the lucky item
@@ -344,40 +308,18 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 	var result_multi_list : Array[Array] = []
 	var mulit_list_copy = mulit_list.duplicate(true)
 	var multi_chance_list_copy = multi_chance_list.duplicate(true)
-	var multi_chance_pool : float = Global.float_sum_array(multi_chance_list_copy)
-	var multi_chances_length : int = multi_chance_list_copy.size()
-	var initial : float = multi_initial
-	var multi_quantity : int = 2
 	var lucky_multi : String
 	
-	var multi_quantity_sum_chance = GRand.maprand.randf_range(
-		0, multi_quantity_sum) - initial
-	for i in range(1, num_of_multi):
-		if multi_quantity_sum_chance <= 0:
-			multi_quantity = i + 1
-			break
-		multi_quantity_sum_chance -= initial / (multi_quantity_sum_divide_const*i)
+	var multi_quantity : int = floor(abs(GRand.maprand.randfn(0, 3)) + 2)
+
+	if multi_quantity > num_of_multi: 
+		multi_quantity = num_of_multi
+
 	result_multi_list.resize(multi_quantity)
-
 	for i in range(0, multi_quantity):
-
-		var selected_multi : int = -1
-		var chance : float = GRand.maprand.randf_range(
-			0, multi_chance_pool)
 		
-		for a in range(0, multi_chances_length):
-			chance -= multi_chance_list_copy[a]
-			
-			if chance <= 0:
-				selected_multi = a
-				break
-				
-		if selected_multi == -1:
-			print("Multi Selection Failure. Leftover chance: ", chance)
-			selected_multi = multi_chances_length - 1
-		
+		var selected_multi : int = GRand.maprand.rand_weighted(multi_chance_list_copy)
 		lucky_multi = mulit_list_copy[selected_multi]
-
 		# spawn the lucky item
 		match lucky_multi:
 			"None": pass
@@ -398,11 +340,8 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 			"DVDBounceMulti": result_multi_list[i] = [lucky_multi, dvdbounce_glowicon]
 			_: print("This randomly selected multi does not exist!:", lucky_multi)
 		
-		multi_chance_pool -= multi_chance_list_copy[selected_multi]
 		multi_chance_list_copy.remove_at(selected_multi)
 		mulit_list_copy.remove_at(selected_multi)
-		multi_chances_length -= 1
-
 	return result_multi_list
 
 func spawnBarrel(dir : String, i : int) -> int:
@@ -469,23 +408,11 @@ func chooseShopItems() -> Array:
 	
 	var chosenInput : String = ""
 	var chosenOutput : String = ""
-	var shop_cost : int = 1
-	
-	var shop_num_sum_chance = GRand.maprand.randf_range(
-		0, shop_num_sum) - shop_initial
-	for i in range(1, shop_num_limit):
-		if shop_num_sum_chance <= 0:
-			shop_cost = i
-			break
-		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
-	
-	var shop_reward_num : int = 1
-	shop_num_sum_chance = GRand.maprand.randf_range(0, shop_num_sum) - shop_initial
-	for i in range(1, shop_num_limit):
-		if shop_num_sum_chance <= 0:
-			shop_reward_num = i
-			break
-		shop_num_sum_chance -= shop_initial / (shop_num_sum_divide_const*i)
+
+	var shop_cost : int = floor(abs(GRand.maprand.randfn(0, 4)) + 1)
+	if shop_cost > 99: shop_cost = 99
+	var shop_reward_num : int = floor(abs(GRand.maprand.randfn(0, 3)) + 1)
+	if shop_reward_num > 99: shop_reward_num = 99
 	
 	# choose to make the price a curse or an item
 	if priceempty || (!curseempty && GRand.maprand.randf_range(0, 9) < 1):
