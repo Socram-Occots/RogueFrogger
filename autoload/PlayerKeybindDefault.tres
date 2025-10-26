@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=8 format=3 uid="uid://gko0na7yltfq"]
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=10 format=3 uid="uid://gko0na7yltfq"]
 
 [ext_resource type="Script" path="res://autoload/PlayerKeybindResource.gd" id="1_ibwj6"]
 
@@ -12,6 +12,11 @@ device = -1
 physical_keycode = 83
 unicode = 83
 
+[sub_resource type="InputEventKey" id="InputEventKey_po1kw"]
+device = -1
+physical_keycode = 71
+unicode = 103
+
 [sub_resource type="InputEventKey" id="InputEventKey_op4a0"]
 device = -1
 physical_keycode = 65
@@ -21,6 +26,9 @@ unicode = 97
 device = -1
 physical_keycode = 68
 unicode = 100
+
+[sub_resource type="InputEventKey" id="InputEventKey_0doxi"]
+physical_keycode = 82
 
 [sub_resource type="InputEventKey" id="InputEventKey_sqax4"]
 device = -1
@@ -39,3 +47,5 @@ DEFAULT_MOVE_RIGHT_KEY = SubResource("InputEventKey_6285q")
 DEFAULT_MOVE_LEFT_KEY = SubResource("InputEventKey_op4a0")
 DEFAULT_MOVE_DASH_KEY = SubResource("InputEventKey_dlwue")
 DEFAULT_MOVE_WALK_KEY = SubResource("InputEventKey_yfkmm")
+DEFAULT_MOVE_ROPE_KEY = SubResource("InputEventKey_0doxi")
+DEFAULT_MOVE_GLIDE_KEY = SubResource("InputEventKey_po1kw")

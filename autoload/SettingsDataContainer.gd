@@ -45,7 +45,17 @@ func create_keybind_dictionary() -> Dictionary:
 		KEYBIND_RESOURCE.MOVE_RIGHT : KEYBIND_RESOURCE.move_right_key,
 		KEYBIND_RESOURCE.MOVE_LEFT : KEYBIND_RESOURCE.move_left_key,
 		KEYBIND_RESOURCE.MOVE_DASH : KEYBIND_RESOURCE.move_dash_key,
-		KEYBIND_RESOURCE.MOVE_WALK : KEYBIND_RESOURCE.move_walk_key
+		KEYBIND_RESOURCE.MOVE_WALK : KEYBIND_RESOURCE.move_walk_key,
+		KEYBIND_RESOURCE.MOVE_ROPE : KEYBIND_RESOURCE.move_rope_key,
+		KEYBIND_RESOURCE.MOVE_GLIDE : KEYBIND_RESOURCE.move_glide_key,
+		KEYBIND_RESOURCE.CONTROLLER_UP : KEYBIND_RESOURCE.controller_up,
+		KEYBIND_RESOURCE.CONTROLLER_DOWN : KEYBIND_RESOURCE.controller_down,
+		KEYBIND_RESOURCE.CONTROLLER_RIGHT : KEYBIND_RESOURCE.controller_right,
+		KEYBIND_RESOURCE.CONTROLLER_LEFT : KEYBIND_RESOURCE.controller_left,
+		KEYBIND_RESOURCE.CONTROLLER_DASH : KEYBIND_RESOURCE.controller_dash,
+		KEYBIND_RESOURCE.CONTROLLER_WALK : KEYBIND_RESOURCE.controller_walk,
+		KEYBIND_RESOURCE.CONTROLLER_ROPE : KEYBIND_RESOURCE.controller_rope,
+		KEYBIND_RESOURCE.CONTROLLER_GLIDE : KEYBIND_RESOURCE.controller_glide
 	}
 	return keybinds_container_dict
 
@@ -96,6 +106,27 @@ func get_keybind(action: String, default : bool = false):
 				return KEYBIND_RESOURCE.DEFAULT_MOVE_DASH_KEY
 			KEYBIND_RESOURCE.MOVE_WALK:
 				return KEYBIND_RESOURCE.DEFAULT_MOVE_WALK_KEY
+			KEYBIND_RESOURCE.MOVE_ROPE:
+				return KEYBIND_RESOURCE.DEFAULT_MOVE_ROPE_KEY
+			KEYBIND_RESOURCE.MOVE_GLIDE:
+				return KEYBIND_RESOURCE.DEFAULT_MOVE_GLIDE_KEY
+			KEYBIND_RESOURCE.CONTROLLER_UP:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_UP
+			KEYBIND_RESOURCE.CONTROLLER_DOWN:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_DOWN
+			KEYBIND_RESOURCE.CONTROLLER_RIGHT:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_RIGHT
+			KEYBIND_RESOURCE.CONTROLLER_LEFT:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_LEFT
+			KEYBIND_RESOURCE.CONTROLLER_DASH:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_DASH
+			KEYBIND_RESOURCE.CONTROLLER_WALK:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_WALK
+			KEYBIND_RESOURCE.CONTROLLER_ROPE:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_ROPE
+			KEYBIND_RESOURCE.CONTROLLER_GLIDE:
+				return KEYBIND_RESOURCE.DEFAULT_CONTROLLER_GLIDE
+			_: print("Failed to get default keybind: ", action)
 	else:
 		match action:
 			KEYBIND_RESOURCE.MOVE_UP:
@@ -110,7 +141,27 @@ func get_keybind(action: String, default : bool = false):
 				return KEYBIND_RESOURCE.move_dash_key
 			KEYBIND_RESOURCE.MOVE_WALK:
 				return KEYBIND_RESOURCE.move_walk_key
-				
+			KEYBIND_RESOURCE.MOVE_ROPE:
+				return KEYBIND_RESOURCE.move_rope_key
+			KEYBIND_RESOURCE.MOVE_GLIDE:
+				return KEYBIND_RESOURCE.move_glide_key
+			KEYBIND_RESOURCE.CONTROLLER_UP:
+				return KEYBIND_RESOURCE.controller_up
+			KEYBIND_RESOURCE.CONTROLLER_DOWN:
+				return KEYBIND_RESOURCE.controller_down
+			KEYBIND_RESOURCE.CONTROLLER_RIGHT:
+				return KEYBIND_RESOURCE.controller_right
+			KEYBIND_RESOURCE.CONTROLLER_LEFT:
+				return KEYBIND_RESOURCE.controller_left
+			KEYBIND_RESOURCE.CONTROLLER_DASH:
+				return KEYBIND_RESOURCE.controller_dash
+			KEYBIND_RESOURCE.CONTROLLER_WALK:
+				return KEYBIND_RESOURCE.controller_walk
+			KEYBIND_RESOURCE.CONTROLLER_ROPE:
+				return KEYBIND_RESOURCE.controller_rope
+			KEYBIND_RESOURCE.CONTROLLER_GLIDE:
+				return KEYBIND_RESOURCE.controller_glide
+			_: print("Failed to get keybind: ", action)
 # get game data
 func get_high_score(default : bool = false) -> int:
 	if loaded_data.is_empty() || default:
@@ -165,48 +216,45 @@ func set_keybind(action: String, event) -> void:
 			KEYBIND_RESOURCE.move_dash_key = event
 		KEYBIND_RESOURCE.MOVE_WALK:
 			KEYBIND_RESOURCE.move_walk_key = event
+		KEYBIND_RESOURCE.MOVE_ROPE:
+			KEYBIND_RESOURCE.move_rope_key = event
+		KEYBIND_RESOURCE.MOVE_GLIDE:
+			KEYBIND_RESOURCE.move_glide_key = event
+		KEYBIND_RESOURCE.CONTROLLER_UP:
+			KEYBIND_RESOURCE.controller_up = event
+		KEYBIND_RESOURCE.CONTROLLER_DOWN:
+			KEYBIND_RESOURCE.controller_down = event
+		KEYBIND_RESOURCE.CONTROLLER_RIGHT:
+			KEYBIND_RESOURCE.controller_right = event
+		KEYBIND_RESOURCE.CONTROLLER_LEFT:
+			KEYBIND_RESOURCE.controller_left = event
+		KEYBIND_RESOURCE.CONTROLLER_DASH:
+			KEYBIND_RESOURCE.controller_dash = event
+		KEYBIND_RESOURCE.CONTROLLER_WALK:
+			KEYBIND_RESOURCE.controller_walk = event
+		KEYBIND_RESOURCE.CONTROLLER_ROPE:
+			KEYBIND_RESOURCE.controller_rope = event
+		KEYBIND_RESOURCE.CONTROLLER_GLIDE:
+			KEYBIND_RESOURCE.controller_glide = event
+		_: print("Unable to find and set KEYBIND_RESOURCE: ", action)
 # set game data
 func on_high_score_set(value : int) -> void:
 	high_score = value
 
 func on_keybinds_loaded(data: Dictionary) -> void:
-	if data.has("up_w"):
-		var loaded_move_up = InputEventKey.new()
-		loaded_move_up.set_physical_keycode(int(data["up_w"]))
-		KEYBIND_RESOURCE.move_up_key = loaded_move_up
-	else:
-		KEYBIND_RESOURCE.move_up_key = KEYBIND_RESOURCE.DEFAULT_MOVE_UP_KEY
-	if data.has("down_s"):
-		var loaded_move_down = InputEventKey.new()
-		loaded_move_down.set_physical_keycode(int(data["down_s"]))
-		KEYBIND_RESOURCE.move_down_key = loaded_move_down
-	else:
-		KEYBIND_RESOURCE.move_down_key = KEYBIND_RESOURCE.DEFAULT_MOVE_DOWN_KEY
-	if data.has("right_d"):
-		var loaded_move_right = InputEventKey.new()
-		loaded_move_right.set_physical_keycode(int(data["right_d"]))
-		KEYBIND_RESOURCE.move_right_key = loaded_move_right
-	else:
-		KEYBIND_RESOURCE.move_right_key = KEYBIND_RESOURCE.DEFAULT_MOVE_RIGHT_KEY
-	if data.has("left_a"):
-		var loaded_move_left = InputEventKey.new()
-		loaded_move_left.set_physical_keycode(int(data["left_a"]))
-		KEYBIND_RESOURCE.move_left_key = loaded_move_left
-	else:
-		KEYBIND_RESOURCE.move_left_key = KEYBIND_RESOURCE.DEFAULT_MOVE_LEFT_KEY
-	if data.has("dash"):
-		var loaded_move_dash = InputEventKey.new()
-		loaded_move_dash.set_physical_keycode(int(data["dash"]))
-		KEYBIND_RESOURCE.move_dash_key = loaded_move_dash
-	else:
-		KEYBIND_RESOURCE.move_dash_key = KEYBIND_RESOURCE.DEFAULT_MOVE_DASH_KEY
-	if data.has("walk"):
-		var loaded_move_walk = InputEventKey.new()
-		loaded_move_walk.set_physical_keycode(int(data["walk"]))
-		KEYBIND_RESOURCE.move_walk_key = loaded_move_walk
-	else:
-		KEYBIND_RESOURCE.move_walk_key = KEYBIND_RESOURCE.DEFAULT_MOVE_WALK_KEY
-
+	var keybind_array : Array[String] = [KEYBIND_RESOURCE.MOVE_UP, KEYBIND_RESOURCE.MOVE_DOWN,
+	KEYBIND_RESOURCE.MOVE_RIGHT, KEYBIND_RESOURCE.MOVE_LEFT, KEYBIND_RESOURCE.MOVE_DASH,
+	KEYBIND_RESOURCE.MOVE_WALK, KEYBIND_RESOURCE.MOVE_ROPE, KEYBIND_RESOURCE.MOVE_GLIDE,
+	KEYBIND_RESOURCE.CONTROLLER_UP, KEYBIND_RESOURCE.CONTROLLER_DOWN, KEYBIND_RESOURCE.CONTROLLER_RIGHT,
+	KEYBIND_RESOURCE.CONTROLLER_LEFT, KEYBIND_RESOURCE.CONTROLLER_DASH, KEYBIND_RESOURCE.CONTROLLER_WALK,
+	KEYBIND_RESOURCE.CONTROLLER_ROPE, KEYBIND_RESOURCE.CONTROLLER_GLIDE]
+	for i in keybind_array:
+		if data.has(i):
+			var loaded_key_up = InputEventKey.new()
+			loaded_key_up.set_physical_keycode(int(data[i]))
+			set_keybind(i, loaded_key_up)
+		else:
+			set_keybind(i, get_keybind(i, true))
 # set sandbox data
 func on_sandbox_dict_set(type: String, object: String, num: int) -> void:
 	sandbox_dict[type][object] = num

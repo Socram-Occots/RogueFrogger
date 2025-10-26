@@ -12,42 +12,42 @@ const default_sfx_volume : float = 0.5
 const default_high_score : int = 0
 # sandbox data
 const default_general_sandbox_dict : Dictionary = {
-	"ExplBarrel":10,
+	"ExplBarrel":50,
 	"Dumpster":50,
-	"Barrel":90,
-	"Shop":1,
+	"Barrel":200,
+	"Shop":5,
 	"Items":50,
 	"None":800
 }
 const default_items_sandbox_dict : Dictionary = {
-	"PlayerSpeed":50,
-	"GlideBoots":50,
-	"Dash":50,
-	"expl_B":50,
-	"Grapple":50,
-	"Follower":5,
-	"Gamba":50,
-	"Shield":1,
-	"Shrink":50,
-	"Multi":100,
-	"Cleanse":10
+	"PlayerSpeed":500,
+	"GlideBoots":500,
+	"Dash":500,
+	"expl_B":500,
+	"Grapple":500,
+	"Follower":50,
+	"Gamba":500,
+	"Shield":10,
+	"Shrink":500,
+	"Multi":800,
+	"Cleanse":100
 }
 const default_multi_sandbox_dict : Dictionary = {
-	"PlayerSpeedMulti":50,
-	"GlideBootsMulti":50,
-	"DashMulti":50,
-	"expl_BMulti":50,
-	"GrappleMulti":50,
-	"FollowerMulti":5,
-	"GambaMulti":50,
-	"ShieldMulti":1,
-	"ShrinkMulti":50,
-	"SlowMulti":10,
-	"GrowMulti":10,
-	"LongTeleportMulti":10,
-	"ShortTeleportMulti":10,
-	"CleanseMulti":50,
-	"DVDBounceMulti":10
+	"PlayerSpeedMulti":500,
+	"GlideBootsMulti":500,
+	"DashMulti":500,
+	"expl_BMulti":500,
+	"GrappleMulti":500,
+	"FollowerMulti":50,
+	"GambaMulti":500,
+	"ShieldMulti":10,
+	"ShrinkMulti":500,
+	"SlowMulti":100,
+	"GrowMulti":100,
+	"LongTeleportMulti":100,
+	"ShortTeleportMulti":100,
+	"CleanseMulti":500,
+	"DVDBounceMulti":100
 }
 const default_gamba_sandbox_dict : Dictionary = {
 	"PlayerSpeedGamba":1,

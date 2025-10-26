@@ -34,6 +34,10 @@ func set_action_name() -> void:
 			label.text = "Dash"
 		"walk":
 			label.text = "Slow Down"
+		"rope":
+			label.text = "Grapple"
+		"glide":
+			label.text = "Glide"
 
 func set_text_for_key() -> void:
 	var action_events = InputMap.action_get_events(action_name)
