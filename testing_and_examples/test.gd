@@ -7,11 +7,7 @@ var DEF_ARR : Array[Array] = [[["str1"]],
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	@warning_ignore("unused_variable")
-	var avg = []
-	@warning_ignore("unused_variable")
-	var sum = 0
-	print(floor(abs(GRand.maprand.randfn(0, 3)) + 2))
+	print(InputMap.get_actions())
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:

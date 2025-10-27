@@ -1,38 +1,76 @@
-[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=10 format=3 uid="uid://gko0na7yltfq"]
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=22 format=3 uid="uid://gko0na7yltfq"]
 
 [ext_resource type="Script" path="res://autoload/PlayerKeybindResource.gd" id="1_ibwj6"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_vxcxt"]
+button_index = 1
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_fnbk7"]
+button_index = 12
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_64f0s"]
+axis = 1
+axis_value = 1.0
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_8m10y"]
+button_index = 3
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_io8rp"]
+button_index = 13
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_mjlq3"]
+axis_value = -1.0
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_7ghhq"]
+button_index = 14
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_aqfd3"]
+axis_value = 1.0
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_gr371"]
+button_index = 10
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ntb1s"]
+button_index = 11
+
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_a5g2p"]
+axis = 1
+axis_value = -1.0
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_j4kim"]
+button_index = 9
 
 [sub_resource type="InputEventKey" id="InputEventKey_dlwue"]
 device = -1
 physical_keycode = 32
 unicode = 32
 
-[sub_resource type="InputEventKey" id="InputEventKey_3sd2q"]
+[sub_resource type="InputEventKey" id="InputEventKey_ewynj"]
 device = -1
-physical_keycode = 83
-unicode = 83
+keycode = 83
+unicode = 115
 
 [sub_resource type="InputEventKey" id="InputEventKey_po1kw"]
 device = -1
 physical_keycode = 71
 unicode = 103
 
-[sub_resource type="InputEventKey" id="InputEventKey_op4a0"]
+[sub_resource type="InputEventKey" id="InputEventKey_7su0h"]
 device = -1
-physical_keycode = 65
+keycode = 65
 unicode = 97
 
-[sub_resource type="InputEventKey" id="InputEventKey_6285q"]
+[sub_resource type="InputEventKey" id="InputEventKey_kvpxw"]
 device = -1
-physical_keycode = 68
+keycode = 68
 unicode = 100
 
 [sub_resource type="InputEventKey" id="InputEventKey_0doxi"]
 physical_keycode = 82
 
-[sub_resource type="InputEventKey" id="InputEventKey_sqax4"]
+[sub_resource type="InputEventKey" id="InputEventKey_o6cnt"]
 device = -1
-physical_keycode = 87
+keycode = 87
 unicode = 119
 
 [sub_resource type="InputEventKey" id="InputEventKey_yfkmm"]
@@ -41,11 +79,23 @@ physical_keycode = 4194325
 
 [resource]
 script = ExtResource("1_ibwj6")
-DEFAULT_MOVE_UP_KEY = SubResource("InputEventKey_sqax4")
-DEFAULT_MOVE_DOWN_KEY = SubResource("InputEventKey_3sd2q")
-DEFAULT_MOVE_RIGHT_KEY = SubResource("InputEventKey_6285q")
-DEFAULT_MOVE_LEFT_KEY = SubResource("InputEventKey_op4a0")
+DEFAULT_MOVE_UP_KEY = SubResource("InputEventKey_o6cnt")
+DEFAULT_MOVE_DOWN_KEY = SubResource("InputEventKey_ewynj")
+DEFAULT_MOVE_RIGHT_KEY = SubResource("InputEventKey_kvpxw")
+DEFAULT_MOVE_LEFT_KEY = SubResource("InputEventKey_7su0h")
 DEFAULT_MOVE_DASH_KEY = SubResource("InputEventKey_dlwue")
 DEFAULT_MOVE_WALK_KEY = SubResource("InputEventKey_yfkmm")
 DEFAULT_MOVE_ROPE_KEY = SubResource("InputEventKey_0doxi")
 DEFAULT_MOVE_GLIDE_KEY = SubResource("InputEventKey_po1kw")
+DEFAULT_CONTROLLER_UP_STICK = SubResource("InputEventJoypadMotion_a5g2p")
+DEFAULT_CONTROLLER_DOWN_STICK = SubResource("InputEventJoypadMotion_64f0s")
+DEFAULT_CONTROLLER_RIGHT_STICK = SubResource("InputEventJoypadMotion_aqfd3")
+DEFAULT_CONTROLLER_LEFT_STICK = SubResource("InputEventJoypadMotion_mjlq3")
+DEFAULT_CONTROLLER_UP_BUTTON = SubResource("InputEventJoypadButton_ntb1s")
+DEFAULT_CONTROLLER_DOWN_BUTTON = SubResource("InputEventJoypadButton_fnbk7")
+DEFAULT_CONTROLLER_RIGHT_BUTTON = SubResource("InputEventJoypadButton_7ghhq")
+DEFAULT_CONTROLLER_LEFT_BUTTON = SubResource("InputEventJoypadButton_io8rp")
+DEFAULT_CONTROLLER_DASH = SubResource("InputEventJoypadButton_vxcxt")
+DEFAULT_CONTROLLER_WALK = SubResource("InputEventJoypadButton_j4kim")
+DEFAULT_CONTROLLER_ROPE = SubResource("InputEventJoypadButton_gr371")
+DEFAULT_CONTROLLER_GLIDE = SubResource("InputEventJoypadButton_8m10y")
