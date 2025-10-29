@@ -114,13 +114,13 @@ group = "tab1"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 
-[node name="Controls" type="TabBar" parent="TabContainer"]
+[node name="Keyboard" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
 focus_mode = 0
 metadata/_tab_index = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Keyboard"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,59 +132,173 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controls/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Keyboard/MarginContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 128
 
-[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 
-[node name="up" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="up" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "up_w"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="down" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="down" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "down_s"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="right" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="right" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "right_d"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="left" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="left" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "left_a"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="dash" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="dash" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "dash"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="walk" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="walk" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "walk"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="rope" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="rope" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "rope"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="glide" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+[node name="glide" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "glide"
 group = "tab2"
+input_type = "keyboard"
 
-[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
+
+[node name="Controller" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+focus_mode = 0
+metadata/_tab_index = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controller"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controller/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controller/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 128
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
+
+[node name="up_stick" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "up_cont_stick"
+group = "tab3"
+input_type = "analog"
+
+[node name="down_stick" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "down_cont_stick"
+group = "tab3"
+input_type = "analog"
+
+[node name="right_stick" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "right_cont_stick"
+group = "tab3"
+input_type = "analog"
+
+[node name="left_stick" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "left_cont_stick"
+group = "tab3"
+input_type = "analog"
+
+[node name="up_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "up_cont_button"
+group = "tab3"
+input_type = "analog"
+
+[node name="down_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "down_cont_button"
+group = "tab3"
+input_type = "analog"
+
+[node name="right_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "right_cont_button"
+group = "tab3"
+input_type = "analog"
+
+[node name="left_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "left_cont_button"
+group = "tab3"
+input_type = "analog"
+
+[node name="dash" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "dash_cont"
+group = "tab3"
+input_type = "analog"
+
+[node name="walk" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "walk_cont"
+group = "tab3"
+input_type = "analog"
+
+[node name="rope" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "rope_cont"
+group = "tab3"
+input_type = "analog"
+
+[node name="glide" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "glide_cont"
+group = "tab3"
+input_type = "analog"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 
@@ -192,7 +306,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 visible = false
 layout_mode = 2
 focus_mode = 0
-metadata/_tab_index = 3
+metadata/_tab_index = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sound"]
 layout_mode = 1
@@ -222,17 +336,17 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 [node name="audio_slider_settings" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_pp5yu")]
 layout_mode = 2
 bus_name = "Master"
-group = "tab3"
+group = "tab4"
 
 [node name="audio_slider_settings2" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_pp5yu")]
 layout_mode = 2
 bus_name = "Music"
-group = "tab3"
+group = "tab4"
 
 [node name="audio_slider_settings3" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_pp5yu")]
 layout_mode = 2
 bus_name = "SFX"
-group = "tab3"
+group = "tab4"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -242,7 +356,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 visible = false
 layout_mode = 2
 focus_mode = 0
-metadata/_tab_index = 4
+metadata/_tab_index = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Accessibility"]
 layout_mode = 1

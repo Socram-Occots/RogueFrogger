@@ -55,10 +55,10 @@ var move_walk_key = InputEventKey.new()
 var move_rope_key = InputEventKey.new()
 var move_glide_key = InputEventKey.new()
 
-var controller_up_stick = InputEventJoypadMotion.new()
-var controller_down_stick = InputEventJoypadMotion.new()
-var controller_right_stick = InputEventJoypadMotion.new()
-var controller_left_stick = InputEventJoypadMotion.new()
+var controller_up_stick
+var controller_down_stick
+var controller_right_stick
+var controller_left_stick
 var controller_up_button
 var controller_down_button
 var controller_right_button

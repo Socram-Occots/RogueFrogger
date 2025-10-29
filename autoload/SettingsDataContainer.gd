@@ -183,7 +183,6 @@ func on_sfx_sound_set(value : float) -> void:
 	sfx_volume = value
 # set keybind 
 func set_keybind(action: String, event) -> void:
-	print(event)
 	match action:
 		KEYBIND_RESOURCE.MOVE_UP: KEYBIND_RESOURCE.move_up_key = event
 		KEYBIND_RESOURCE.MOVE_DOWN: KEYBIND_RESOURCE.move_down_key = event
@@ -214,40 +213,17 @@ func on_keybinds_loaded(data: Dictionary) -> void:
 	var keybind_array : Array[String] = \
 	[KEYBIND_RESOURCE.MOVE_UP, KEYBIND_RESOURCE.MOVE_DOWN,
 	KEYBIND_RESOURCE.MOVE_RIGHT, KEYBIND_RESOURCE.MOVE_LEFT, KEYBIND_RESOURCE.MOVE_DASH,
-	KEYBIND_RESOURCE.MOVE_WALK, KEYBIND_RESOURCE.MOVE_ROPE, KEYBIND_RESOURCE.MOVE_GLIDE]
-	var stick_array : Array[String] = \
-	[KEYBIND_RESOURCE.CONTROLLER_UP_STICK, KEYBIND_RESOURCE.CONTROLLER_DOWN_STICK, 
-	KEYBIND_RESOURCE.CONTROLLER_RIGHT_STICK, KEYBIND_RESOURCE.CONTROLLER_LEFT_STICK]
-	var button_array : Array[String] = \
-	[KEYBIND_RESOURCE.CONTROLLER_UP_BUTTON, KEYBIND_RESOURCE.CONTROLLER_DOWN_BUTTON, 
+	KEYBIND_RESOURCE.MOVE_WALK, KEYBIND_RESOURCE.MOVE_ROPE, KEYBIND_RESOURCE.MOVE_GLIDE,
+	KEYBIND_RESOURCE.CONTROLLER_UP_STICK, KEYBIND_RESOURCE.CONTROLLER_DOWN_STICK, 
+	KEYBIND_RESOURCE.CONTROLLER_RIGHT_STICK, KEYBIND_RESOURCE.CONTROLLER_LEFT_STICK,
+	KEYBIND_RESOURCE.CONTROLLER_UP_BUTTON, KEYBIND_RESOURCE.CONTROLLER_DOWN_BUTTON, 
 	KEYBIND_RESOURCE.CONTROLLER_RIGHT_BUTTON, KEYBIND_RESOURCE.CONTROLLER_LEFT_BUTTON,
 	KEYBIND_RESOURCE.CONTROLLER_DASH, KEYBIND_RESOURCE.CONTROLLER_WALK,
 	KEYBIND_RESOURCE.CONTROLLER_ROPE, KEYBIND_RESOURCE.CONTROLLER_GLIDE]
 	for i in keybind_array:
-		if data.has(i):
-			print(data[i])
-			var loaded_key_up = InputEventKey.new()
-			print(int(data[i]))
-			print(typeof(data[i]))
-			loaded_key_up.set_physical_keycode(int(data[i]))
-			set_keybind(i, loaded_key_up)
+		if data.has(i): set_keybind(i, data[i])
 		else: set_keybind(i, get_keybind(i, true))
-	for i in stick_array:
-		if data.has(i): 
-			print(data[i])
-			print(get_keybind(i, true))
-			print(int(data[i]))
-			print(typeof(data[i]))
-			set_keybind(i, data[i])
-		else: set_keybind(i, get_keybind(i, true))
-	for i in button_array:
-		if data.has(i): 
-			print(data[i])
-			print(get_keybind(i, true))
-			print(int(KEYBIND_RESOURCE.DEFAULT_CONTROLLER_DOWN_BUTTON.to_string()))
-			print(typeof(data[i]))
-			set_keybind(i, data[i])
-		else: set_keybind(i, get_keybind(i, true))
+
 # set sandbox data
 func on_sandbox_dict_set(type: String, object: String, num: int) -> void:
 	sandbox_dict[type][object] = num

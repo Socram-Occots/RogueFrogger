@@ -7,6 +7,7 @@ extends Control
 
 @export var action_name : String = ""
 @export var group : String
+@export var input_type : String
 
 func _ready():
 	set_process_unhandled_key_input(false)
@@ -38,15 +39,48 @@ func set_action_name() -> void:
 			label.text = "Grapple"
 		"glide":
 			label.text = "Glide"
+		"up_cont_stick":
+			label.text = "Go Up (Stick)"
+		"down_cont_stick":
+			label.text = "Go Down (Stick)"
+		"right_cont_stick":
+			label.text = "Go Right (Stick)"
+		"left_cont_stick":
+			label.text = "Go Left (Stick)"
+		"up_cont_button":
+			label.text = "Go Up (Button)"
+		"down_cont_button":
+			label.text = "Go Down (Button)"
+		"right_cont_button":
+			label.text = "Go Right (Button)"
+		"left_cont_button":
+			label.text = "Go Left (Button)"
+		"dash_cont":
+			label.text = "Dash"
+		"walk_cont":
+			label.text = "Slow Down"
+		"rope_cont":
+			label.text = "Grapple"
+		"glide_cont":
+			label.text = "Glide"
 
 func set_text_for_key() -> void:
 	var action_events = InputMap.action_get_events(action_name)
 	if action_events.size() > 0:
 		var action_event = action_events[0]
-		var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
-		button.text = "%s" % action_keycode
+		var action_keycode : String 
+		match input_type:
+			"keyboard":
+				action_keycode = str(OS.get_keycode_string(action_event.physical_keycode))
+			"analog":
+				action_keycode = str(action_events)
+			"button":
+				action_keycode = str(action_events)
+			"cont_flex":
+				action_keycode = str(action_events)
+		button.text = action_keycode
 	else:
-		button.text = "No key assigned"
+		button.text = "Not assigned"
 
 func _on_button_toggled(toggled_on):
 	if toggled_on:
@@ -66,9 +100,20 @@ func _on_button_toggled(toggled_on):
 		set_text_for_key()
 
 func _unhandled_key_input(event):
-	if event is InputEventKey and event.pressed and not event.echo:
-		rebind_action_key(event)
-		button.set_pressed_no_signal(false)
+	if event.pressed and not event.echo:
+		var welcome_key : bool = false
+		match input_type:
+			"keyboard":
+				welcome_key = event is InputEventKey
+			"analog":
+				welcome_key = event is InputEventJoypadMotion
+			"button":
+				welcome_key = event is InputEventJoypadButton
+			"cont_flex":
+				welcome_key = event is InputEventJoypadButton || InputEventJoypadMotion
+		if welcome_key:
+			rebind_action_key(event)
+			button.set_pressed_no_signal(false)
 	
 func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)

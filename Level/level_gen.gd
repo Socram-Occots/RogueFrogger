@@ -660,7 +660,8 @@ func terrain_check() -> void:
 		var score_diff : int = max_tile_int - Global.score  
 		if score_diff > -1:
 			Global.score = max_tile_int
-			if max_tile_int > SettingsDataContainer.get_high_score()\
+			if Global.finish_line_tile and \
+			max_tile_int > SettingsDataContainer.get_high_score() \
 			and !high_score_reached:
 				high_score_reached = true
 				highscore_notif()
@@ -704,8 +705,8 @@ func loadPause() -> void:
 
 func spawn_high_score_line() -> void:
 	var high_score : int = SettingsDataContainer.get_high_score()
-	# don't spawn line at score 0
-	if high_score < 1: return
+	# don't spawn line too close
+	if high_score < 10: return
 	
 	var high_score_dist : int = (high_score * -144) + 936
 	var high_score_line : Node2D = CHECKERDLINE.instantiate()

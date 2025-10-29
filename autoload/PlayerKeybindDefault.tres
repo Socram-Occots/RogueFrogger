@@ -47,7 +47,7 @@ unicode = 32
 
 [sub_resource type="InputEventKey" id="InputEventKey_ewynj"]
 device = -1
-keycode = 83
+physical_keycode = 83
 unicode = 115
 
 [sub_resource type="InputEventKey" id="InputEventKey_po1kw"]
@@ -57,12 +57,12 @@ unicode = 103
 
 [sub_resource type="InputEventKey" id="InputEventKey_7su0h"]
 device = -1
-keycode = 65
+physical_keycode = 65
 unicode = 97
 
 [sub_resource type="InputEventKey" id="InputEventKey_kvpxw"]
 device = -1
-keycode = 68
+physical_keycode = 68
 unicode = 100
 
 [sub_resource type="InputEventKey" id="InputEventKey_0doxi"]
@@ -70,7 +70,7 @@ physical_keycode = 82
 
 [sub_resource type="InputEventKey" id="InputEventKey_o6cnt"]
 device = -1
-keycode = 87
+physical_keycode = 87
 unicode = 119
 
 [sub_resource type="InputEventKey" id="InputEventKey_yfkmm"]

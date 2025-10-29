@@ -1,6 +1,7 @@
 extends Node
 
 const SETTINGS_SAVE_PATH : String = "user://SettingData.save"
+const SECTION : String = "SettingData"
 
 var settings_data_dict : Dictionary = {}
 
@@ -9,22 +10,26 @@ func _ready():
 	load_settings_data()
 
 func on_settings_save(data: Dictionary) -> void:
-	var save_settings_data_file = FileAccess.open_encrypted_with_pass(SETTINGS_SAVE_PATH, FileAccess.WRITE, "Sugma")
-
-	var json_data_string = JSON.stringify(data)
-	
-	save_settings_data_file.store_line(json_data_string)
+	var config_file : ConfigFile = ConfigFile.new()
+	# all keys should be a String value
+	for k in data:
+		config_file.set_value(SECTION, k, data[k])
+		
+	var error = config_file.save_encrypted_pass(SETTINGS_SAVE_PATH, "Sugma")
+	if error != OK:
+		print("SettingData has failed on save: ", error)
 
 func load_settings_data() -> void:
 	if not FileAccess.file_exists(SETTINGS_SAVE_PATH):
 		return
-	var save_settings_data_file = FileAccess.open_encrypted_with_pass(SETTINGS_SAVE_PATH, FileAccess.READ, "Sugma")
+	var config_file = ConfigFile.new()
 	var loaded_data : Dictionary = {}
-	
-	while save_settings_data_file.get_position() < save_settings_data_file.get_length():
-		var json_string = save_settings_data_file.get_line()
-		var json = JSON.new()
-		var _parsed_result = json.parse(json_string)
-		loaded_data = json.get_data()
+	var error = config_file.load_encrypted_pass(SETTINGS_SAVE_PATH, "Sugma")
+	if error != OK:
+		print("SettingData has failed on load: ", error)
+		return
 		
-		SettingsSignalBus.emit_load_settings_data(loaded_data)
+	for k in config_file.get_section_keys(SECTION):
+		loaded_data[k] = config_file.get_value(SECTION, k)
+	
+	SettingsSignalBus.emit_load_settings_data(loaded_data)
