@@ -203,10 +203,13 @@ var dvdbouncelabelon = false
 #endregion
 
 func reset() -> void:
+	# prevent memory leaks
+	Globalpreload.delete_stray_nodes()
 	#tiles
 	tiles_spawned = 0
 	race_condition_tiles.clear()
-	finish_line_tile = null
+	if is_instance_valid(finish_line_tile):
+		finish_line_tile.free()
 	
 	#input
 	input_active = false
@@ -317,7 +320,8 @@ func reset() -> void:
 	grow_mod_limit = grow_mod_limit_base
 	
 	#line
-	game_line = null
+	if is_instance_valid(game_line):
+		game_line.free()
 	
 	# tele
 	longtele_mod = 0

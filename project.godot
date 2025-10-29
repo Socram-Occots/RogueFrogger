@@ -23,6 +23,7 @@ SettingsSignalBus="*res://autoload/SettingsSignalBus.gd"
 SettingsDataContainer="*res://autoload/SettingsDataContainer.gd"
 SaveManager="*res://autoload/SaveManager.gd"
 GRand="*res://globals/GRand.gd"
+Globalpreload="*res://globals/globalpreload.gd"
 
 [dialogue_manager]
 

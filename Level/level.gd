@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 	dvd_bounce_check()
 
 func _ready() -> void:
+	Globalpreload.delete_array = arr_to_del
 	# load default/sandbox stats
 	load_element_stats()
 	#load pause and game over menu
@@ -19,7 +20,7 @@ func _ready() -> void:
 	# load gamba picker
 	load_gamba_picker()
 	#player
-	var player : RigidBody2D = CROSSER.instantiate()
+	var player : RigidBody2D = Globalpreload.CROSSER.instantiate()
 	Global.follower_array.append(player)
 	player.position.x = $PlayerStart.global_position.x
 	player.position.y = $PlayerStart.global_position.y

@@ -1,26 +1,6 @@
 # level_gen.gd
 extends Node
 
-# importing
-const CAR : Resource = preload("res://Car/car.tscn")
-const ITEM : Resource = preload("res://Items/items.tscn")
-const BARREL : Resource = preload("res://Barrel/barrel.tscn")
-const TILES : Resource = preload("res://tilemaps/tilemaps.tscn")
-const CROSSER : Resource = preload("res://Crosser/crosser.tscn")
-const DUMP : Resource = preload("res://Dumpster/dumpster.tscn")
-const BORDER : Resource = preload("res://Level/border.tscn")
-const LINE : Resource = preload("res://lineofdeath/lineofdeath.tscn")
-const POP : Resource = preload("res://menus/GameUI/popups.tscn")
-const EXPLBARREL : Resource = preload("res://Barrel/exploding_barrel.tscn")
-const ITEMLABELS : Resource = preload("res://Items/itemlabels.tscn")
-const DEFEAT : Resource = preload("res://menus/GameUI/game_over.tscn")
-const PAUSE : Resource = preload("res://menus/GameUI/pause_panel.tscn")
-const CHECKERDLINE : Resource  = preload("res://finishline/finish_line.tscn")
-const GAMBAPICKER : Resource  = preload("res://Items/Gamba/Gamba.tscn")
-const FOLLOWERSCRIPT : Script = preload("res://Follower/followerLogic.gd")
-const DVDBOUNCE : Resource = preload("res://DVD_bounce/DVD_bounce.tscn")
-const SHOP : Resource = preload("res://Items/Item_Shop/ItemShop.tscn")
-
 @onready var SPAWN_LIST : Array[String] = []
 @onready var CHANCE_LIST : Array[float] = []
 @onready var ITEMS_LIST : Array[String] = []
@@ -36,55 +16,7 @@ const SHOP : Resource = preload("res://Items/Item_Shop/ItemShop.tscn")
 
 @onready var curr_follower_id : int = 1
 
-var CAR_INST : Node2D = CAR.instantiate()
-var BARREL_INST : StaticBody2D = BARREL.instantiate()
-var TILES_INST : Node2D = TILES.instantiate()
-var DUMP_INST : StaticBody2D = DUMP.instantiate()
-var BORDER_INST : Node2D = BORDER.instantiate()
-var EXPLBARREL_INST : RigidBody2D = EXPLBARREL.instantiate()
-var POP_INST : Control = POP.instantiate()
-var DVD_INST : Node2D = DVDBOUNCE.instantiate()
-var SHOP_INST : Area2D = SHOP.instantiate()
-
-var sidewalk : bool = false
-
-# DVD Bounce
-var DVDarea : Node2D = DVDBOUNCE.instantiate()
-var DVDnode : RigidBody2D = DVDarea.get_node("DVDnode")
-
-# icons
-var iconlabels : Node = ITEMLABELS.instantiate()
-var playerspeedicon : VBoxContainer = iconlabels.get_node("PlayerSpeedVbox").duplicate()
-var glideicon : VBoxContainer = iconlabels.get_node("GlideVbox").duplicate()
-var dashicon : VBoxContainer = iconlabels.get_node("DashVbox").duplicate()
-var expl_B_icon : VBoxContainer = iconlabels.get_node("expl_B_Vbox").duplicate()
-var grapple_icon : VBoxContainer = iconlabels.get_node("GrappleVbox").duplicate()
-var follower_icon : VBoxContainer = iconlabels.get_node("FollowerVbox").duplicate()
-var shrink_icon : VBoxContainer = iconlabels.get_node("ShrinkVbox").duplicate()
-var slow_icon : VBoxContainer = iconlabels.get_node("SlowVbox").duplicate()
-var grow_icon : VBoxContainer = iconlabels.get_node("GrowVbox").duplicate()
-var longtele_icon : VBoxContainer = iconlabels.get_node("LongTeleportVbox").duplicate()
-var shorttele_icon : VBoxContainer = iconlabels.get_node("ShortTeleportVbox").duplicate()
-var cleanse_icon : VBoxContainer = iconlabels.get_node("CleanseVbox").duplicate()
-var dvdbounce_icon : VBoxContainer = iconlabels.get_node("DVDBounceVbox").duplicate()
-
-# glowicons
-var items_instantiate : Node = ITEM.instantiate()
-var playerspeedglowicon : Texture2D = items_instantiate.get_node("PlayerSpeed/Sprite2D").texture
-var glideglowicon : Texture2D = items_instantiate.get_node("GlideBoots/Sprite2D").texture
-var dashglowicon : Texture2D = items_instantiate.get_node("Dash/Sprite2D").texture
-var expl_B_glowicon : Texture2D = items_instantiate.get_node("expl_B/Sprite2D").texture
-var grapple_glowicon : Texture2D = items_instantiate.get_node("Grapple/Sprite2D").texture
-var follower_glowicon : Texture2D = items_instantiate.get_node("Follower/Sprite2D").texture
-var shrink_glowicon : Texture2D = items_instantiate.get_node("Shrink/Sprite2D").texture
-var gamba_glowicon : Texture2D = items_instantiate.get_node("Gamba/Sprite2D").texture
-var shield_glowicon : Texture2D = items_instantiate.get_node("Shield/Sprite2D").texture
-var slow_glowicon : Texture2D = items_instantiate.get_node("Slow/Sprite2D").texture
-var grow_glowicon : Texture2D = items_instantiate.get_node("Grow/Sprite2D").texture
-var longtele_glowicon : Texture2D = items_instantiate.get_node("LongTeleport/Sprite2D").texture
-var shorttele_glowicon : Texture2D = items_instantiate.get_node("ShortTeleport/Sprite2D").texture
-var cleanse_glowicon : Texture2D = items_instantiate.get_node("Cleanse/Sprite2D").texture
-var dvdbounce_glowicon : Texture2D = items_instantiate.get_node("DVDBounce/Sprite2D").texture
+@onready var sidewalk : bool = false
 
 @onready var MULTI_LIST : Array[String] = []
 @onready var MULTI_CHANCE_LIST : Array[int] = []
@@ -97,7 +29,47 @@ var dvdbounce_glowicon : Texture2D = items_instantiate.get_node("DVDBounce/Sprit
 @onready var gamba_array_good : Array[Array] = []
 @onready var gamba_array_bad : Array[Array] = []
 
-var gamba_picker : Node
+@onready var gamba_picker : Node
+
+# icons
+@onready var playerspeedicon : VBoxContainer = Globalpreload.playerspeedicon.duplicate()
+@onready var glideicon : VBoxContainer = Globalpreload.glideicon.duplicate()
+@onready var dashicon : VBoxContainer = Globalpreload.dashicon.duplicate()
+@onready var expl_B_icon : VBoxContainer = Globalpreload.expl_B_icon.duplicate()
+@onready var grapple_icon : VBoxContainer = Globalpreload.grapple_icon.duplicate()
+@onready var follower_icon : VBoxContainer = Globalpreload.follower_icon.duplicate()
+@onready var shrink_icon : VBoxContainer = Globalpreload.shrink_icon.duplicate()
+@onready var slow_icon : VBoxContainer = Globalpreload.slow_icon.duplicate()
+@onready var grow_icon : VBoxContainer = Globalpreload.grow_icon.duplicate()
+@onready var longtele_icon : VBoxContainer = Globalpreload.longtele_icon.duplicate()
+@onready var shorttele_icon : VBoxContainer = Globalpreload.shorttele_icon.duplicate()
+@onready var cleanse_icon : VBoxContainer = Globalpreload.cleanse_icon.duplicate()
+@onready var dvdbounce_icon : VBoxContainer = Globalpreload.dvdbounce_icon.duplicate()
+# textures
+@onready var playerspeedglowicon : Texture2D = Globalpreload.playerspeedglowicon.duplicate()
+@onready var glideglowicon : Texture2D = Globalpreload.glideglowicon.duplicate()
+@onready var dashglowicon : Texture2D =  Globalpreload.dashglowicon.duplicate()
+@onready var expl_B_glowicon : Texture2D =  Globalpreload.expl_B_glowicon.duplicate()
+@onready var grapple_glowicon : Texture2D =  Globalpreload.grapple_glowicon.duplicate()
+@onready var follower_glowicon : Texture2D =  Globalpreload.follower_glowicon.duplicate()
+@onready var shrink_glowicon : Texture2D =  Globalpreload.shrink_glowicon.duplicate()
+@onready var gamba_glowicon : Texture2D =  Globalpreload.gamba_glowicon.duplicate()
+@onready var shield_glowicon : Texture2D =  Globalpreload.shield_glowicon.duplicate()
+@onready var slow_glowicon : Texture2D =  Globalpreload.slow_glowicon.duplicate()
+@onready var grow_glowicon : Texture2D =  Globalpreload.grow_glowicon.duplicate()
+@onready var longtele_glowicon : Texture2D =  Globalpreload.longtele_glowicon.duplicate()
+@onready var shorttele_glowicon : Texture2D =  Globalpreload.shorttele_glowicon.duplicate()
+@onready var cleanse_glowicon : Texture2D =  Globalpreload.cleanse_glowicon.duplicate()
+@onready var dvdbounce_glowicon : Texture2D =  Globalpreload.dvdbounce_glowicon.duplicate()
+# dvd area
+@onready var DVDarea : Node2D = Globalpreload.DVDarea.duplicate()
+
+@onready var losepopup : Control
+@onready var pausepopup : Control 
+
+@onready var arr_to_del : Array = [playerspeedicon, glideicon, dashicon,expl_B_icon,grapple_icon,
+follower_icon,shrink_icon,slow_icon,grow_icon,longtele_icon,shorttele_icon,cleanse_icon,
+dvdbounce_icon,DVDarea,losepopup,pausepopup]
 
 # multichances
 @onready var multi_num_limit : int
@@ -324,7 +296,7 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 		match lucky_multi:
 			"None": pass
 			"PlayerSpeedMulti": result_multi_list[i] = [lucky_multi, playerspeedglowicon]
-			"GlideBootsMulti": result_multi_list[i] = [lucky_multi, glideglowicon]
+			"GlideBootsMulti": result_multi_list[i] = [lucky_multi,glideglowicon]
 			"DashMulti": result_multi_list[i] = [lucky_multi, dashglowicon]
 			"expl_BMulti": result_multi_list[i] = [lucky_multi, expl_B_glowicon]
 			"GrappleMulti": result_multi_list[i] = [lucky_multi, grapple_glowicon]
@@ -345,7 +317,7 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 	return result_multi_list
 
 func spawnBarrel(dir : String, i : int) -> int:
-	var barrel : StaticBody2D = BARREL_INST.duplicate()
+	var barrel : StaticBody2D = Globalpreload.BARREL_INST.duplicate()
 	barrel.visible = true
 	barrel.position = get_node(dir).global_position
 	$Ysort.add_child(barrel)
@@ -354,7 +326,7 @@ func spawnBarrel(dir : String, i : int) -> int:
 func spawnDumpster(dir : String, node_num : int, i : int) -> int:
 	# we have to check if this is the last node to prevent clipping out of bounds
 	if i + 1 >= node_num: return i
-	var dump : StaticBody2D = DUMP_INST.duplicate()
+	var dump : StaticBody2D = Globalpreload.DUMP_INST.duplicate()
 	dump.visible = true
 	dump.position = get_node(dir).global_position
 	$Ysort.add_child(dump)
@@ -362,14 +334,14 @@ func spawnDumpster(dir : String, node_num : int, i : int) -> int:
 	return i + 1
 
 func spawnExplBarrel(dir : String, i : int) -> int:
-	var explbarrel : RigidBody2D = EXPLBARREL_INST.duplicate()
+	var explbarrel : RigidBody2D = Globalpreload.EXPLBARREL_INST.duplicate()
 	explbarrel.visible = true
 	explbarrel.position = get_node(dir).global_position
 	$Ysort.add_child(explbarrel)
 	return i
 
 func spawnItems(dir : String, item_str: String, i : int) -> int:
-	var item : Area2D = items_instantiate.get_node(item_str).duplicate()
+	var item : Area2D = Globalpreload.items_instantiate.get_node(item_str).duplicate()
 	if item_str == "Multi":
 		if MULTI_LIST.is_empty():
 			return i
@@ -385,7 +357,7 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	if i + 1 >= node_num: return i
 	var generated : Array = chooseShopItems()
 	if generated[0] == null: return i
-	var shop : Area2D = SHOP_INST.duplicate()
+	var shop : Area2D = Globalpreload.SHOP_INST.duplicate()
 	shop.visible = true
 	shop.position = get_node(dir).global_position
 	shop.priceItemName = generated[0]
@@ -456,7 +428,7 @@ func chooseShopTextures(shopstr: String) -> Texture2D:
 			return null
 
 func carSpawn() -> void:
-	var car : Node2D = CAR_INST.duplicate()
+	var car : Node2D = Globalpreload.CAR_INST.duplicate()
 	car.position.y = $spawnterrain/Node0.global_position.y - 5
 	car.visible = true
 	
@@ -470,7 +442,7 @@ func carSpawn() -> void:
 
 func firstTerrainSpawn(xpos : float, ypos : float) -> void:
 	sidewalk = true
-	var tile = TILES_INST.get_node("TileMap0").duplicate()
+	var tile = Globalpreload.TILES_INST.get_node("TileMap0").duplicate()
 	tile.position.x = xpos
 	tile.position.y = ypos
 	tile.visible = true
@@ -487,7 +459,7 @@ func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
 	else:
 		sidewalk = false
 		
-	var tile = TILES_INST.get_node("TileMap" + str(type)).duplicate()
+	var tile = Globalpreload.TILES_INST.get_node("TileMap" + str(type)).duplicate()
 	tile.position.x = xpos
 	tile.position.y = ypos
 	tile.visible = true
@@ -646,7 +618,7 @@ func update_labels() -> void:
 func dash_check() -> void:
 	if Global.dash && dashpopup: 
 		dashpopup = false
-		var dash_pop_up : Control = POP_INST.duplicate()
+		var dash_pop_up : Control = Globalpreload.POP_INST.duplicate()
 		$CanvasLayer.add_child(dash_pop_up)
 
 func terrain_check() -> void:
@@ -674,7 +646,7 @@ func terrain_check() -> void:
 			spawnBorder(960, Global.player_pos_y)
 
 func spawnBorder(x : float, y : float) -> void:
-	var border : Node2D = BORDER_INST.duplicate()
+	var border : Node2D = Globalpreload.BORDER_INST.duplicate()
 	border.position.x = x
 	border.position.y = y
 #	print(border.global_position)
@@ -685,20 +657,20 @@ func spawnBorder(x : float, y : float) -> void:
 		BORDERS.remove_at(0)
 
 func spawnLineOfDeath() -> void:
-	line = LINE.instantiate()
+	line = Globalpreload.DEATHLINE_INST.duplicate()
 	line.position.x = 0
 	line.position.y = 1500
 	$lineofdeath.add_child(line)
 	Global.game_line = line
 
 func loadDefeat() -> void:
-	var losepopup : Control = DEFEAT.instantiate().duplicate()
+	losepopup = Globalpreload.DEFEAT_INST.duplicate()
 	losepopup.visible = false
 	$CanvasLayer.add_child(losepopup)
 	Global.game_over_pop_up = losepopup
 
 func loadPause() -> void:
-	var pausepopup : Control = PAUSE.instantiate().duplicate()
+	pausepopup = Globalpreload.PAUSE_INST.duplicate()
 	pausepopup.visible = false
 	$CanvasLayer.add_child(pausepopup)
 	Global.pause_popup = pausepopup
@@ -709,14 +681,14 @@ func spawn_high_score_line() -> void:
 	if high_score < 10: return
 	
 	var high_score_dist : int = (high_score * -144) + 936
-	var high_score_line : Node2D = CHECKERDLINE.instantiate()
+	var high_score_line : Node2D = Globalpreload.CHECKERDLINE.instantiate()
 	high_score_line.position.x = 0
 	high_score_line.position.y = high_score_dist
 	Global.finish_line_tile = high_score_line
 	$lineofdeath.add_child(high_score_line)
 
 func load_gamba_picker() -> void:
-	gamba_picker = GAMBAPICKER.instantiate()
+	gamba_picker = Globalpreload.GAMBAPICKER.instantiate()
 	gamba_picker.good_item_pool = gamba_array_good
 	gamba_picker.bad_item_pool = gamba_array_bad
 	gamba_picker.gamba_result_time_seconds = 3
@@ -729,12 +701,11 @@ func gamba_check() -> void:
 		gamba_picker.begin_gamba()
 
 func create_follower() -> void:
-	var follower_basic = CROSSER.instantiate()
 	for i in range(Global.follower_spawn_multi):
-		var follower : RigidBody2D = follower_basic.duplicate()
+		var follower : RigidBody2D = Globalpreload.follower_basic.duplicate()
 		var follower_in_front : RigidBody2D = Global.follower_array[-1]
 		
-		follower.set_script(FOLLOWERSCRIPT)
+		follower.set_script(Globalpreload.FOLLOWERSCRIPT)
 		follower.get_node("Camera2D").queue_free()
 		follower.get_node("follower_cleanup_timer").queue_free()
 		#follower.get_node("shield").queue_free()
@@ -771,7 +742,7 @@ func follower_check() ->void:
 		create_follower()
 
 func highscore_notif() -> void:
-	var high_score_pop_up : Control = POP_INST.duplicate()
+	var high_score_pop_up : Control = Globalpreload.POP_INST.duplicate()
 	high_score_pop_up.get_node("dashpopup/Label").text = "New High Score!"
 	canvas_layer.add_child(high_score_pop_up)
 	Global.finish_line_tile.queue_free()
@@ -783,7 +754,7 @@ func dvd_bounce_check() -> void:
 	if Global.dvd_spawn:
 		Global.dvd_spawn = false
 		for i in range(Global.dvd_spawn_num):
-			var DVDnodetemp : RigidBody2D = DVDnode.duplicate()
+			var DVDnodetemp : RigidBody2D = Globalpreload.DVDnode.duplicate()
 			DVDnodetemp.sleeping = false
 			DVDnodetemp.visible = true
 			DVDnodetemp.position = Vector2(GRand.maprand.randf_range(100, 1820), 

@@ -1,8 +1,5 @@
 extends RigidBody2D
 
-const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
-const TELE : Resource = preload("res://Items/Teleport/teleportoutline.tscn")
-
 @onready var candash : bool = true
 @onready var dashing : bool = false
 @onready var dashcooldown : bool = true
@@ -18,13 +15,15 @@ const TELE : Resource = preload("res://Items/Teleport/teleportoutline.tscn")
 @onready var glideBoots : ColorRect = $GlideBoots
 @onready var velocityRigid : Vector2 = Vector2(0.0, 0.0)
 @onready var velocityRigidDelta : Vector2 = Vector2(0.0, 0.0)
-@onready var grapplehook : Line2D = GRAPPLE.instantiate()
 @onready var vLength : float = 0
 @onready var velocityGrapple : Vector2 = Vector2(0.0, 0.0)
 @onready var grappled : bool = false
-@onready var tele : Area2D = TELE.instantiate()
+
+@onready var grapplehook : Line2D = Globalpreload.grapplehook.duplicate()
+@onready var tele : Area2D = Globalpreload.tele.duplicate()
 
 func _ready() -> void:
+	Globalpreload.delete_array.append_array([grapplehook,tele])
 	# stop camera from being weird initially
 	$Camera2D.reset_smoothing()
 	

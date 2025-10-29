@@ -31,7 +31,7 @@ func _on_menu_pressed():
 	Global.reset()
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://menus/startscreen.tscn")
-
+	
 func _on_quit_pressed():
 	get_tree().quit()
 
