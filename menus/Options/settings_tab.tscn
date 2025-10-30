@@ -254,43 +254,43 @@ input_type = "analog"
 layout_mode = 2
 action_name = "up_cont_button"
 group = "tab3"
-input_type = "analog"
+input_type = "button"
 
 [node name="down_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "down_cont_button"
 group = "tab3"
-input_type = "analog"
+input_type = "button"
 
 [node name="right_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "right_cont_button"
 group = "tab3"
-input_type = "analog"
+input_type = "button"
 
 [node name="left_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "left_cont_button"
 group = "tab3"
-input_type = "analog"
+input_type = "button"
 
 [node name="dash" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "dash_cont"
 group = "tab3"
-input_type = "analog"
+input_type = "cont_flex"
 
 [node name="walk" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "walk_cont"
 group = "tab3"
-input_type = "analog"
+input_type = "cont_flex"
 
 [node name="rope" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "rope_cont"
 group = "tab3"
-input_type = "analog"
+input_type = "cont_flex"
 
 [node name="glide" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2

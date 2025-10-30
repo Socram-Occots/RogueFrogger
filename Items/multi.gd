@@ -35,7 +35,7 @@ func _on_body_entered(body):
 			break
 
 @warning_ignore("unused_parameter")
-func _process(delta):
+func _physics_process(delta):
 	pass
 
 func _ready() -> void:

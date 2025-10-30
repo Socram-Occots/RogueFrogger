@@ -106,7 +106,7 @@ func dialog_check() -> void:
 		tutorial_index += 1
 
 @warning_ignore("unused_parameter")
-func _process(delta):
+func _physics_process(delta):
 	update_labels()
 	dash_check()
 	terrain_tutorial_check()

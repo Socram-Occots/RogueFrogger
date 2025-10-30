@@ -1,6 +1,6 @@
 extends StaticBody2D
 
 @warning_ignore("unused_parameter")
-func _process(delta):
+func _physics_process(delta):
 	if global_position.y - Global.player_pos_y > 888:
 		queue_free()

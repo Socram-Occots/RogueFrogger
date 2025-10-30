@@ -16,7 +16,7 @@ func delete_rope() -> void:
 	area_body.queue_free()
 	queue_free()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	crosser_global_pos.x = Global.player_pos_x
 	crosser_global_pos.y = Global.player_pos_y
 	

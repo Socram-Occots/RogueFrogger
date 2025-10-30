@@ -2,7 +2,7 @@
 extends "res://Level/level_gen.gd"
 
 @warning_ignore("unused_parameter")
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	update_labels()
 	dash_check()
 	terrain_check()

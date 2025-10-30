@@ -49,14 +49,33 @@ func _ready() -> void:
 		#apply_central_force(velocityRigid)
 
 func move_player() -> void:
-	if Input.is_action_pressed("left_a"):
-		velocityRigid.x -= 1
-	if Input.is_action_pressed("right_d"):
-		velocityRigid.x += 1
-	if Input.is_action_pressed("down_s"):
-		velocityRigid.y += 1
-	if Input.is_action_pressed("up_w"):
-		velocityRigid.y -= 1
+	var walking : bool = false
+	velocityRigid = Input.get_vector(
+		"left_cont_stick", "right_cont_stick", "up_cont_stick", "down_cont_stick"
+		)
+		
+	if velocityRigid.is_equal_approx(Vector2.ZERO):
+		if Input.is_action_pressed("left_cont_button"):
+			velocityRigid.x -= 1
+		if Input.is_action_pressed("right_cont_button"):
+			velocityRigid.x += 1
+		if Input.is_action_pressed("down_cont_button"):
+			velocityRigid.y += 1
+		if Input.is_action_pressed("up_cont_button"):
+			velocityRigid.y -= 1
+			
+	if velocityRigid.is_equal_approx(Vector2.ZERO):
+		if Input.is_action_pressed("left_a"):
+			velocityRigid.x -= 1
+		if Input.is_action_pressed("right_d"):
+			velocityRigid.x += 1
+		if Input.is_action_pressed("down_s"):
+			velocityRigid.y += 1
+		if Input.is_action_pressed("up_w"):
+			velocityRigid.y -= 1
+		walking = Input.is_action_pressed("walk")
+	else:
+		walking = Input.is_action_pressed("walk_cont")
 	
 	var playerspeed_penalty : float = (1 - (Global.playerslow_percent *\
 	(Global.playerslow_mod_real - 1)))
@@ -64,15 +83,17 @@ func move_player() -> void:
 	velocityRigid = velocityRigid.normalized() *\
 	Global.player_speed_scaling * playerspeed_penalty
 	
-	if Input.is_action_pressed("walk"):
+	if walking:
 		velocityRigid /= 2
 		vLength = (Global.player_speed_scaling * playerspeed_penalty) / 2
 	else:
 		vLength = Global.player_speed_scaling * playerspeed_penalty
 
 func dash_decision_tree() -> void:
-	if Input.is_action_just_pressed("dash") && Global.dash &&\
-	 !Global.dash_cool_down_bool && velocityRigid != Vector2.ZERO && candash:
+	var dash_input_pressed : bool = Input.is_action_just_pressed("dash_cont") || \
+	Input.is_action_just_pressed("dash")
+	if dash_input_pressed && Global.dash &&\
+	!Global.dash_cool_down_bool && velocityRigid != Vector2.ZERO && candash:
 #		print(Global.dash_scaling)
 		Global.dash_cool_down_bool = true
 		velocityRigid *= Global.dash_scaling
@@ -90,7 +111,9 @@ func dash_decision_tree() -> void:
 		glidethendashbonus = false
 
 func grapple_decision_tree() -> void:
-	if Input.is_action_just_pressed("rope") && Global.grapple &&\
+	var grapple_input_pressed : bool = Input.is_action_just_pressed("rope_cont") || \
+	Input.is_action_just_pressed("rope")
+	if grapple_input_pressed && Global.grapple &&\
 	 !Global.grapple_cool_down_bool && !grappling:
 		grappling = true
 		var grappledupe : Line2D = grapplehook.duplicate()
@@ -100,7 +123,9 @@ func grapple_decision_tree() -> void:
 		get_parent().add_child(grappledupe)
 
 func glide_decision_tree() -> void:
-	if Input.is_action_just_pressed("glide") && Global.glide:
+	var glide_input_pressed : bool = Input.is_action_just_pressed("glide_cont") || \
+	Input.is_action_just_pressed("glide")
+	if glide_input_pressed && Global.glide:
 		#Global.glide && !Global.glide_cool_down_bool &&
 		if  !(Global.glide_cool_down_bool || gliding):
 			Global.glide_cool_down_bool = true
@@ -117,7 +142,6 @@ func glide_decision_tree() -> void:
 			glideBoots.visible = false
 			
 func movement_logic(delta : float) -> void:
-	
 	# this must go first because this what is updating velocityRigid
 	if !(dashing || gliding):
 		velocityRigid = Vector2.ZERO
@@ -144,8 +168,7 @@ func movement_logic(delta : float) -> void:
 		glidethendashbonus = false
 		apply_central_force(velocityRigidDelta)
 
-@warning_ignore("unused_parameter")
-func _process(delta : float) -> void:
+func _physics_process(delta: float) -> void:
 	#print(global_position)
 	Global.player_pos_x = global_position.x
 	Global.player_pos_y = global_position.y

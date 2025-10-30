@@ -10,7 +10,7 @@ extends Control
 @export var input_type : String
 
 func _ready():
-	set_process_unhandled_key_input(false)
+	set_process_unhandled_input(false)
 	set_action_name()
 	set_text_for_key()
 	load_keybinds()
@@ -85,35 +85,36 @@ func set_text_for_key() -> void:
 func _on_button_toggled(toggled_on):
 	if toggled_on:
 		button.text = "Press any key..."
-		set_process_unhandled_key_input(true)
+		set_process_unhandled_input(true)
 		
 		for i in get_tree().get_nodes_in_group("hotkey_button"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = false
-				i.set_process_unhandled_key_input(false)
+				i.set_process_unhandled_input(false)
 	else:
 		for i in get_tree().get_nodes_in_group("hotkey_button"):
 			if i.action_name != self.action_name:
 				i.button.toggle_mode = true
-				i.set_process_unhandled_key_input(false)
+				i.set_process_unhandled_input(false)
 				
 		set_text_for_key()
 
-func _unhandled_key_input(event):
-	if event.pressed and not event.echo:
-		var welcome_key : bool = false
-		match input_type:
-			"keyboard":
-				welcome_key = event is InputEventKey
-			"analog":
-				welcome_key = event is InputEventJoypadMotion
-			"button":
-				welcome_key = event is InputEventJoypadButton
-			"cont_flex":
-				welcome_key = event is InputEventJoypadButton || InputEventJoypadMotion
-		if welcome_key:
-			rebind_action_key(event)
-			button.set_pressed_no_signal(false)
+func _unhandled_input(event: InputEvent) -> void:
+	var welcome_key : bool = false
+	match input_type:
+		"keyboard":
+			welcome_key = event is InputEventKey && event.pressed && not event.echo
+		"analog":
+			welcome_key = event is InputEventJoypadMotion && \
+			abs(event.axis_value) > 0.3
+		"button":
+			welcome_key = event is InputEventJoypadButton && event.pressed
+		"cont_flex":
+			welcome_key = (event is InputEventJoypadMotion && abs(event.axis_value) > 0.3) \
+			|| (event is InputEventJoypadButton && event.pressed)
+	if welcome_key:
+		rebind_action_key(event)
+		button.set_pressed_no_signal(false)
 	
 func rebind_action_key(event) -> void:
 	InputMap.action_erase_events(action_name)
@@ -121,7 +122,7 @@ func rebind_action_key(event) -> void:
 	
 	curr_bind = event
 	
-	set_process_unhandled_key_input(false)
+	set_process_unhandled_input(false)
 	set_text_for_key()
 	reset_buttons()
 	
@@ -130,7 +131,7 @@ func reset_buttons():
 	for i in get_tree().get_nodes_in_group("hotkey_button"):
 		if i.button:
 			i.button.toggle_mode = true
-			i.set_process_unhandled_key_input(false)
+			i.set_process_unhandled_input(false)
 
 func _on_button_focus_exited() -> void:
 	pass

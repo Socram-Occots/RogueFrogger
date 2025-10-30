@@ -23,7 +23,7 @@ func delete_rope(headalive : bool = true) -> void:
 		grapple_head.queue_free()
 	queue_free()
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	
 	if is_instance_valid(grapple_head):
 		crosser_global_pos.x = Global.player_pos_x
@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 		delete_rope(false)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("rope"):
+	if event.is_action_pressed("rope_cont") || event.is_action_pressed("rope"):
 		delete_rope()
 		
 func end_seeking_and_attach(subject) -> void:

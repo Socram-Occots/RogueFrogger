@@ -221,7 +221,8 @@ func on_keybinds_loaded(data: Dictionary) -> void:
 	KEYBIND_RESOURCE.CONTROLLER_DASH, KEYBIND_RESOURCE.CONTROLLER_WALK,
 	KEYBIND_RESOURCE.CONTROLLER_ROPE, KEYBIND_RESOURCE.CONTROLLER_GLIDE]
 	for i in keybind_array:
-		if data.has(i): set_keybind(i, data[i])
+		if data.has(i) && data[i] != null:
+			set_keybind(i, data[i])
 		else: set_keybind(i, get_keybind(i, true))
 
 # set sandbox data

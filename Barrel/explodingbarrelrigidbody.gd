@@ -6,7 +6,7 @@ extends RigidBody2D
 @onready var explosionCol : CollisionShape2D = $explosionbarrelexplosion/CollisionShape2D
 
 @warning_ignore("unused_parameter")
-func _process(delta):
+func _physics_process(delta):
 	if animationExplo.frame == 3:
 		explosionCol.set_deferred("disabled", true)
 	elif animationExplo.frame == 8:

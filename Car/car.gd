@@ -41,7 +41,7 @@ func _ready():
 			$CollisionShapeGrey.set_deferred("disabled", false)
 
 @warning_ignore("unused_parameter")
-func _process(delta):
+func _physics_process(delta) -> void:
 	if no_ignore:
 		position.x -= car_speed * delta * direction
 

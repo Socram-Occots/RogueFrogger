@@ -46,14 +46,14 @@ const CONTROLLER_GLIDE : String = "glide_cont"
 @export var DEFAULT_CONTROLLER_ROPE = InputEventJoypadButton.new()
 @export var DEFAULT_CONTROLLER_GLIDE = InputEventJoypadButton.new()
 
-var move_up_key = InputEventKey.new()
-var move_down_key = InputEventKey.new()
-var move_right_key = InputEventKey.new()
-var move_left_key = InputEventKey.new()
-var move_dash_key = InputEventKey.new()
-var move_walk_key = InputEventKey.new()
-var move_rope_key = InputEventKey.new()
-var move_glide_key = InputEventKey.new()
+var move_up_key
+var move_down_key
+var move_right_key
+var move_left_key
+var move_dash_key
+var move_walk_key
+var move_rope_key
+var move_glide_key
 
 var controller_up_stick
 var controller_down_stick

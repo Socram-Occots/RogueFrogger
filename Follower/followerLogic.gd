@@ -34,9 +34,9 @@ func find_prev_follower() -> void:
 func _ready() -> void:
 	find_prev_follower()
 	velocity_Logic()
-	apply_central_force(velocityRigid * get_process_delta_time())
+	apply_central_force(velocityRigid * get_physics_process_delta_time())
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if !gliding:
 		sleeping = true
 		apply_central_force(velocityRigid * delta)
