@@ -17,6 +17,9 @@ var sandbox_dict : Dictionary = {}
 var sandbox_seed : String = ""
 
 var loaded_data : Dictionary = {}
+# aim toggle
+var mouse_aim_toggle : bool = false
+var controller_aim_toggle : bool = false
 
 func _ready():
 	handle_signals()
@@ -33,7 +36,9 @@ func create_storage_dictionary() -> Dictionary:
 		"keybinds": create_keybind_dictionary(),
 		"high_score": high_score,
 		"sandbox_dict": sandbox_dict,
-		"sandbox_seed": sandbox_seed
+		"sandbox_seed": sandbox_seed,
+		"mouse_aim_toggle": mouse_aim_toggle,
+		"controller_aim_toggle": controller_aim_toggle
 	}
 
 	return settings_container_dict
@@ -163,6 +168,17 @@ func get_sandbox_seed(default : bool = false) -> String:
 		return DEFAULT_SETTINGS.default_sandbox_seed
 	return sandbox_seed
 
+# get aim toggle 
+func get_mouse_aim_toggle(default: bool = false) -> bool:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_mouse_aim_toggle
+	return mouse_aim_toggle
+
+func get_controller_aim_toggle(default: bool = false) -> bool:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_controller_aim_toggle
+	return controller_aim_toggle
+
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index
@@ -238,8 +254,15 @@ func on_sandbox_dict_setAll(dict : Dictionary) -> void:
 		else:
 			dict[i] = default[i]
 	sandbox_dict = dict.duplicate(true)
+
 func on_sandbox_seed_set(value: String) -> void:
 	sandbox_seed = value
+
+# set aim toggle
+func on_mouse_aim_toggle_set(value : bool) -> void:
+	mouse_aim_toggle = value
+func on_controller_aim_toggle_set(value : bool) -> void:
+	controller_aim_toggle = value
 
 #settings data set
 func on_settings_data_loaded(data: Dictionary) -> void:
@@ -287,6 +310,14 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_sandbox_seed_set(loaded_data["sandbox_seed"])
 	else:
 		on_sandbox_seed_set(DEFAULT_SETTINGS.default_sandbox_seed)
+	if loaded_data.has("mouse_aim_toggle"):
+		on_mouse_aim_toggle_set(loaded_data["mouse_aim_toggle"])
+	else:
+		on_mouse_aim_toggle_set(DEFAULT_SETTINGS.default_mouse_aim_toggle)
+	if loaded_data.has("controller_aim_toggle"):
+		on_controller_aim_toggle_set(loaded_data["controller_aim_toggle"])
+	else:
+		on_controller_aim_toggle_set(DEFAULT_SETTINGS.default_controller_aim_toggle)
 
 func handle_signals() -> void:
 	# settings
@@ -302,5 +333,9 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_sandbox_dict_set.connect(on_sandbox_dict_set)
 	SettingsSignalBus.on_sandbox_dict_setAll.connect(on_sandbox_dict_setAll)
 	SettingsSignalBus.on_sandbox_seed_set.connect(on_sandbox_seed_set)
+	# aim toggle
+	SettingsSignalBus.on_mouse_aim_toggle_set.connect(on_mouse_aim_toggle_set)
+	SettingsSignalBus.on_controller_aim_toggle_set.connect(on_controller_aim_toggle_set)
+
 	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

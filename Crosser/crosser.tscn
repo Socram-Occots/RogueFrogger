@@ -231,9 +231,6 @@ script = ExtResource("1_5p142")
 metadata/Player = false
 metadata/Follower = 0
 
-[node name="TopCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-7, -37, -17, -28, -23, -1, 23, -1, 17, -28, 7, -37)
-
 [node name="BotCollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-18, 37, 18, 37, 23, 16, 23, -1, 10, -1, 10, 1, -10, 1, -10, -1, -23, -1, -23, 16)
 
@@ -250,6 +247,9 @@ visible = false
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_oqimd")
 animation = &"shield"
+
+[node name="TopCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, -37, -17, -28, -23, -1, 23, -1, 17, -28, 7, -37)
 
 [node name="GlideBoots" type="ColorRect" parent="."]
 visible = false

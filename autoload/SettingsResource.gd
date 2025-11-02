@@ -90,3 +90,6 @@ const default_sandbox_dict : Dictionary = {
 }
 
 const default_sandbox_seed : String = ""
+# aim toggle
+const default_mouse_aim_toggle : bool = false
+const default_controller_aim_toggle : bool = false

@@ -13,6 +13,9 @@ signal on_high_score_set(value: int)
 signal on_sandbox_dict_set(type: String, object: String, num: int)
 signal on_sandbox_dict_setAll(dict: Dictionary)
 signal on_sandbox_seed_set(value: String)
+# aim toggle
+signal on_mouse_aim_toggle_set(value: bool)
+signal on_controller_aim_toggle_set(value: bool)
 
 signal set_settings_dictionary(settings_dict : Dictionary)
 
@@ -47,3 +50,7 @@ func emit_on_sandbox_dict_setAll(dict : Dictionary) -> void:
 	on_sandbox_dict_setAll.emit(dict)
 func emit_on_sandbox_seed_set(value: String) -> void:
 	on_sandbox_seed_set.emit(value)
+func emit_on_mouse_aim_toggle_set(value: bool) -> void:
+	on_mouse_aim_toggle_set.emit(value)
+func emit_on_controller_aim_toggle_set(value: bool) -> void:
+	on_controller_aim_toggle_set.emit(value)
