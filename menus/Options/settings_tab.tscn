@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dnm3jpqa7k30c"]
+[gd_scene load_steps=8 format=3 uid="uid://dnm3jpqa7k30c"]
 
 [ext_resource type="PackedScene" uid="uid://0n7qpykp378" path="res://menus/Options/window_mode_button.tscn" id="1_fhmqv"]
 [ext_resource type="PackedScene" uid="uid://bohs6v2xxurxh" path="res://menus/Options/hotkey_rebind_button.tscn" id="1_xuhdp"]
 [ext_resource type="PackedScene" uid="uid://dsqj583l5o030" path="res://menus/Options/res_mode_button.tscn" id="2_uqdim"]
 [ext_resource type="PackedScene" uid="uid://dvsoqe4amh0by" path="res://menus/Options/aspect_display_button.tscn" id="3_70ynh"]
+[ext_resource type="PackedScene" uid="uid://ddsuytwutbfm4" path="res://menus/Options/toggle_mode_button.tscn" id="5_8evcb"]
 [ext_resource type="PackedScene" uid="uid://djbepejsb6dtm" path="res://menus/Options/audio_slider_settings.tscn" id="5_pp5yu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvlmq"]
@@ -192,6 +193,11 @@ action_name = "glide"
 group = "tab2"
 input_type = "keyboard"
 
+[node name="mouse_aim" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_8evcb")]
+layout_mode = 2
+t_name = "mouse_aim"
+group = "tab2"
+
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
@@ -297,6 +303,11 @@ layout_mode = 2
 action_name = "glide_cont"
 group = "tab3"
 input_type = "analog"
+
+[node name="controller_aim" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_8evcb")]
+layout_mode = 2
+t_name = "controller_aim"
+group = "tab3"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

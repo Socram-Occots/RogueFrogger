@@ -22,6 +22,8 @@ extends RigidBody2D
 @onready var grapplehook : Line2D = Globalpreload.grapplehook.duplicate()
 @onready var tele : Area2D = Globalpreload.tele.duplicate()
 
+@onready var using_cont : bool = false
+
 func _ready() -> void:
 	Globalpreload.delete_array.append_array([grapplehook,tele])
 	# stop camera from being weird initially
@@ -89,6 +91,9 @@ func move_player() -> void:
 	else:
 		vLength = Global.player_speed_scaling * playerspeed_penalty
 
+func _input(event: InputEvent) -> void:
+	using_cont = event is InputEventJoypadMotion || event is InputEventJoypadButton
+
 func dash_decision_tree() -> void:
 	var dash_input_pressed : bool = Input.is_action_just_pressed("dash_cont") || \
 	Input.is_action_just_pressed("dash")
@@ -117,7 +122,10 @@ func grapple_decision_tree() -> void:
 	 !Global.grapple_cool_down_bool && !grappling:
 		grappling = true
 		var grappledupe : Line2D = grapplehook.duplicate()
-		grappledupe.dir_vector = velocityRigid.normalized()
+		if using_cont:
+			grappledupe.dir_vector = 
+		else:
+			grappledupe.dir_vector = velocityRigid.normalized()
 		grappledupe.global_position = global_position
 		grappledupe.crosser = $"."
 		get_parent().add_child(grappledupe)
@@ -194,20 +202,21 @@ func player_animation() -> void:
 	if velocityRigid == Vector2.ZERO: 
 		animated.play("stand")
 		animated.flip_h = false
-	elif velocityRigid.y > 0: 
-		animated.play("walk_down")
-		animated.flip_h = false
-	elif velocityRigid.y < 0: 
-		animated.play("walk_up")
-		animated.flip_h = false
-	elif velocityRigid.x < 0: 
-		animated.play("walk_side")
-		animated.flip_h = false
-	else: 
-		animated.play("walk_side")
-		animated.flip_h = true
-#	elif velocity.x > 0:
-#		$"AnimatedSprite2D".play("walk_side")
+	else:
+		if abs(velocityRigid.y) > abs(velocityRigid.x):
+			if velocityRigid.y > 0: 
+				animated.play("walk_down")
+				animated.flip_h = false
+			else:
+				animated.play("walk_up")
+				animated.flip_h = false
+		else:
+			if velocityRigid.x < 0:
+				animated.play("walk_side")
+				animated.flip_h = false
+			else:
+				animated.play("walk_side")
+				animated.flip_h = true
 		
 func player_shield() -> void:
 	if shield_ready && shield_up:

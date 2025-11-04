@@ -93,9 +93,9 @@ func _on_button_toggled(toggled_on):
 				i.set_process_unhandled_input(false)
 	else:
 		for i in get_tree().get_nodes_in_group("hotkey_button"):
-			if i.action_name != self.action_name:
-				i.button.toggle_mode = true
-				i.set_process_unhandled_input(false)
+			#if i.action_name != self.action_name:
+			i.button.toggle_mode = true
+			i.set_process_unhandled_input(false)
 				
 		set_text_for_key()
 
