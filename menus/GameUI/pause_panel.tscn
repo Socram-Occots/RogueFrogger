@@ -113,6 +113,14 @@ autowrap_mode = 3
 layout_mode = 2
 size_flags_vertical = 10
 
+[node name="resume" type="Button" parent="CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 101.655)
+layout_mode = 2
+size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../quit")
+theme_override_font_sizes/font_size = 34
+text = "Resume"
+
 [node name="retry" type="Button" parent="CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(0, 101.655)
 layout_mode = 2
@@ -131,15 +139,9 @@ text = "Menu"
 custom_minimum_size = Vector2(0, 101.655)
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../resume")
 theme_override_font_sizes/font_size = 34
 text = "Quit"
-
-[node name="resume" type="Button" parent="CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(0, 101.655)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 34
-text = "Resume"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -147,7 +149,7 @@ libraries = {
 }
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/resume" to="." method="_on_resume_pressed"]

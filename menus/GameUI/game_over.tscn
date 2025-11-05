@@ -118,6 +118,7 @@ size_flags_vertical = 10
 custom_minimum_size = Vector2(164, 164)
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_left = NodePath("../quit")
 theme_override_font_sizes/font_size = 50
 text = "Retry"
 
@@ -132,6 +133,7 @@ text = "Menu"
 custom_minimum_size = Vector2(164, 164)
 layout_mode = 2
 size_flags_horizontal = 3
+focus_neighbor_right = NodePath("../retry")
 theme_override_font_sizes/font_size = 50
 text = "Quit"
 
