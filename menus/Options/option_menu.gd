@@ -1,12 +1,19 @@
 extends Control
 
 @onready var tab_path = $MarginContainer/VBoxContainer/Settings_Tabs/TabContainer
+@onready var exit: Button = $MarginContainer/VBoxContainer/HBoxContainer/Exit
 
 func _on_visibility_changed():
 	if visible:
 		$AnimationPlayer.play("startpause")
+		begin_focus()
+
+func begin_focus() -> void:
+	if visible:
+		tab_path.get_tab_bar().grab_focus()
 
 func _ready():
+	add_to_group("UI_FOCUS", true)
 	tab_path.current_tab = 0
 
 func _on_exit_pressed():

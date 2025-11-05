@@ -13,6 +13,7 @@ func _physics_process(delta):
 		queue_free()
 
 func _ready():
+	set_meta("ExplodingBarrel", false)
 	explosionCol.set_deferred("disabled", true)
 	animationExplo.animation = "explosion"
 	animationExplo.frame = 0

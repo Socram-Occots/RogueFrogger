@@ -16,7 +16,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -32,7 +31,6 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 tab_alignment = 1
 current_tab = 0
-tab_focus_mode = 0
 
 [node name="Gameplay" type="TabBar" parent="TabContainer"]
 layout_mode = 2
@@ -53,6 +51,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Gameplay/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -88,6 +87,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Graphics/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Graphics/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -135,6 +135,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Keyboard/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -151,11 +152,18 @@ action_name = "up_w"
 group = "tab2"
 input_type = "keyboard"
 
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/up/HBoxContainer" index="3"]
+focus_neighbor_bottom = NodePath("../../../down/HBoxContainer/Button")
+
 [node name="down" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "down_s"
 group = "tab2"
 input_type = "keyboard"
+
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/down/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../up/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../right/HBoxContainer/Button")
 
 [node name="right" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -163,11 +171,19 @@ action_name = "right_d"
 group = "tab2"
 input_type = "keyboard"
 
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/right/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../down/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../left/HBoxContainer/Button")
+
 [node name="left" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "left_a"
 group = "tab2"
 input_type = "keyboard"
+
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/left/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../right/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../dash/HBoxContainer/Button")
 
 [node name="dash" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -175,11 +191,19 @@ action_name = "dash"
 group = "tab2"
 input_type = "keyboard"
 
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/dash/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../left/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../walk/HBoxContainer/Button")
+
 [node name="walk" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "walk"
 group = "tab2"
 input_type = "keyboard"
+
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/walk/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../dash/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../rope/HBoxContainer/Button")
 
 [node name="rope" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -187,16 +211,27 @@ action_name = "rope"
 group = "tab2"
 input_type = "keyboard"
 
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/rope/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../walk/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../glide/HBoxContainer/Button")
+
 [node name="glide" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "glide"
 group = "tab2"
 input_type = "keyboard"
 
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/glide/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../rope/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../mouse_aim/HBoxContainer/CheckButton")
+
 [node name="mouse_aim" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_8evcb")]
 layout_mode = 2
 t_name = "mouse_aim"
 group = "tab2"
+
+[node name="CheckButton" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/mouse_aim/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../glide/HBoxContainer/Button")
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -222,6 +257,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Controller/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controller/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -238,11 +274,18 @@ action_name = "up_cont_stick"
 group = "tab3"
 input_type = "analog"
 
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_stick/HBoxContainer" index="3"]
+focus_neighbor_bottom = NodePath("../../../down_stick/HBoxContainer/Button")
+
 [node name="down_stick" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "down_cont_stick"
 group = "tab3"
 input_type = "analog"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_stick/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../up_stick/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../right_stick/HBoxContainer/Button")
 
 [node name="right_stick" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -250,11 +293,19 @@ action_name = "right_cont_stick"
 group = "tab3"
 input_type = "analog"
 
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/right_stick/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../down_stick/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../left_stick/HBoxContainer/Button")
+
 [node name="left_stick" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "left_cont_stick"
 group = "tab3"
 input_type = "analog"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/left_stick/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../right_stick/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../up_button/HBoxContainer/Button")
 
 [node name="up_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -262,11 +313,19 @@ action_name = "up_cont_button"
 group = "tab3"
 input_type = "button"
 
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_button/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../left_stick/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../down_button/HBoxContainer/Button")
+
 [node name="down_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "down_cont_button"
 group = "tab3"
 input_type = "button"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_button/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../up_button/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../right_button/HBoxContainer/Button")
 
 [node name="right_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -274,11 +333,19 @@ action_name = "right_cont_button"
 group = "tab3"
 input_type = "button"
 
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/right_button/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../down_button/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../left_button/HBoxContainer/Button")
+
 [node name="left_button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "left_cont_button"
 group = "tab3"
 input_type = "button"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/left_button/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../right_button/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../dash/HBoxContainer/Button")
 
 [node name="dash" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -286,11 +353,19 @@ action_name = "dash_cont"
 group = "tab3"
 input_type = "cont_flex"
 
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/dash/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../left_button/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../walk/HBoxContainer/Button")
+
 [node name="walk" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "walk_cont"
 group = "tab3"
 input_type = "cont_flex"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/walk/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../dash/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../rope/HBoxContainer/Button")
 
 [node name="rope" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
@@ -298,16 +373,67 @@ action_name = "rope_cont"
 group = "tab3"
 input_type = "cont_flex"
 
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/rope/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../walk/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../glide/HBoxContainer/Button")
+
 [node name="glide" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "glide_cont"
 group = "tab3"
 input_type = "analog"
 
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/glide/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../rope/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../aim_up/HBoxContainer/Button")
+
+[node name="aim_up" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "up_cont_aim"
+group = "tab3"
+input_type = "cont_flex"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_up/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../glide/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../aim_down/HBoxContainer/Button")
+
+[node name="aim_down" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "down_cont_aim"
+group = "tab3"
+input_type = "cont_flex"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_down/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../aim_up/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../aim_right/HBoxContainer/Button")
+
+[node name="aim_right" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "right_cont_aim"
+group = "tab3"
+input_type = "cont_flex"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_right/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../aim_down/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../aim_left/HBoxContainer/Button")
+
+[node name="aim_left" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "left_cont_aim"
+group = "tab3"
+input_type = "cont_flex"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_left/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../aim_right/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../controller_aim/HBoxContainer/CheckButton")
+
 [node name="controller_aim" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_8evcb")]
 layout_mode = 2
 t_name = "controller_aim"
 group = "tab3"
+
+[node name="CheckButton" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/controller_aim/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../aim_left/HBoxContainer/Button")
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -333,6 +459,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Sound/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sound/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -383,6 +510,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Accessibility/MarginContainer"]
 layout_mode = 2
+follow_focus = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Accessibility/MarginContainer/ScrollContainer"]
 layout_mode = 2
@@ -397,3 +525,30 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
+
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/up"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/down"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/right"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/left"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/dash"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/walk"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/rope"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/mouse_aim"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_stick"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_stick"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/right_stick"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/left_stick"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_button"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_button"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/right_button"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/left_button"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/dash"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/walk"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/rope"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_up"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_down"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_right"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_left"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/controller_aim"]

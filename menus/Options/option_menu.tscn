@@ -96,7 +96,7 @@ custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-focus_mode = 0
+focus_neighbor_right = NodePath("../ResetTab")
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 
@@ -105,7 +105,8 @@ custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-focus_mode = 0
+focus_neighbor_left = NodePath("../Exit")
+focus_neighbor_right = NodePath("../Save")
 theme_override_font_sizes/font_size = 40
 text = "Reset Tab
 "
@@ -115,7 +116,7 @@ custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-focus_mode = 0
+focus_neighbor_left = NodePath("../ResetTab")
 theme_override_font_sizes/font_size = 40
 text = "Save
 "
@@ -129,3 +130,37 @@ libraries = {
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ResetTab" to="." method="_on_reset_tab_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
+
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer/window_mode_button"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer/res_mode_button"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Graphics/MarginContainer/ScrollContainer/VBoxContainer/aspect_display_button"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/up"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/down"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/right"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/left"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/dash"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/walk"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/rope"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/mouse_aim"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_stick"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_stick"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/right_stick"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/left_stick"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_button"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_button"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/right_button"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/left_button"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/dash"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/walk"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/rope"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_up"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_down"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_right"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_left"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/controller_aim"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings2"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings3"]

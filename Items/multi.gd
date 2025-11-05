@@ -34,11 +34,8 @@ func _on_body_entered(body):
 			queue_free()
 			break
 
-@warning_ignore("unused_parameter")
-func _physics_process(delta):
-	pass
-
 func _ready() -> void:
+	set_meta("Item", false)
 	if item_pool.is_empty():
 		queue_free()
 	item_pool_len = item_pool.size()

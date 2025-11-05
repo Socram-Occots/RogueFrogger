@@ -27,7 +27,6 @@ theme_override_constants/separation = 0
 [node name="Start" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
-focus_mode = 0
 theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Start"
@@ -36,7 +35,6 @@ icon_alignment = 1
 [node name="Sandbox" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
-focus_mode = 0
 theme_override_font_sizes/font_size = 60
 action_mode = 0
 text = "Sandbox"
@@ -45,7 +43,6 @@ icon_alignment = 1
 [node name="Tutorial" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
-focus_mode = 0
 theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Tutorial"
@@ -54,7 +51,6 @@ icon_alignment = 1
 [node name="Options" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
-focus_mode = 0
 theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Options"
@@ -63,7 +59,6 @@ icon_alignment = 1
 [node name="Credits" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
-focus_mode = 0
 theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Credits"
@@ -72,7 +67,6 @@ icon_alignment = 1
 [node name="Quit" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
-focus_mode = 0
 theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Quit"

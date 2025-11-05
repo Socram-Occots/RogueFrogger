@@ -8,7 +8,3 @@ func _on_body_entered(body):
 			Global.inc_Follower(1)
 			queue_free()
 			break
-
-@warning_ignore("unused_parameter")
-func _process(delta):
-	pass

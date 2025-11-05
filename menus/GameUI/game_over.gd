@@ -5,9 +5,14 @@ extends Control
 @onready var seedy: Label = $CenterContainer/ColorRect/VBoxContainer/Seed
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sandbox_seed : String = SettingsDataContainer.get_sandbox_seed(!Global.sandbox)
+@onready var retry: Button = $CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry
 
 func _ready():
-	pass
+	add_to_group("UI_FOCUS", true)
+
+func begin_focus() -> void:
+	if visible:
+		retry.grab_focus.call_deferred()
 
 func show_seed() -> void:
 	if Global.sandbox && sandbox_seed:
@@ -23,6 +28,7 @@ func _on_visibility_changed():
 		score.text = "Score: " + str(Global.score)
 		animation_player.play("startpause")
 		show_seed()
+		begin_focus()
 
 func _on_retry_pressed():
 	Global.reset()

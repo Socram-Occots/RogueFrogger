@@ -22,8 +22,6 @@ extends RigidBody2D
 @onready var grapplehook : Line2D = Globalpreload.grapplehook.duplicate()
 @onready var tele : Area2D = Globalpreload.tele.duplicate()
 
-@onready var using_cont : bool = false
-
 func _ready() -> void:
 	Globalpreload.delete_array.append_array([grapplehook,tele])
 	# stop camera from being weird initially
@@ -91,9 +89,6 @@ func move_player() -> void:
 	else:
 		vLength = Global.player_speed_scaling * playerspeed_penalty
 
-func _input(event: InputEvent) -> void:
-	using_cont = event is InputEventJoypadMotion || event is InputEventJoypadButton
-
 func dash_decision_tree() -> void:
 	var dash_input_pressed : bool = Input.is_action_just_pressed("dash_cont") || \
 	Input.is_action_just_pressed("dash")
@@ -122,8 +117,15 @@ func grapple_decision_tree() -> void:
 	 !Global.grapple_cool_down_bool && !grappling:
 		grappling = true
 		var grappledupe : Line2D = grapplehook.duplicate()
-		if using_cont:
-			grappledupe.dir_vector = 
+		if Global.using_cont && SettingsDataContainer.get_controller_aim_toggle():
+			var contr_dir : Vector2 = Vector2.ZERO
+			contr_dir.y += -1 * Input.get_action_raw_strength("up_cont_aim")
+			contr_dir.y += Input.get_action_raw_strength("down_cont_aim")
+			contr_dir.x += Input.get_action_raw_strength("right_cont_aim")
+			contr_dir.x += -1 * Input.get_action_raw_strength("left_cont_aim")
+			grappledupe.dir_vector = contr_dir.normalized()
+		elif !Global.using_cont && SettingsDataContainer.get_mouse_aim_toggle():
+			grappledupe.dir_vector = (get_global_mouse_position() - global_position).normalized()
 		else:
 			grappledupe.dir_vector = velocityRigid.normalized()
 		grappledupe.global_position = global_position

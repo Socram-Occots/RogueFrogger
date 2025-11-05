@@ -114,25 +114,32 @@ layout_mode = 2
 size_flags_vertical = 10
 
 [node name="retry" type="Button" parent="CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(164, 164)
+custom_minimum_size = Vector2(0, 101.655)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 34
 text = "Retry"
 
 [node name="menu" type="Button" parent="CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(164, 164)
+custom_minimum_size = Vector2(0, 101.655)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 34
 text = "Menu"
 
 [node name="quit" type="Button" parent="CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(164, 164)
+custom_minimum_size = Vector2(0, 101.655)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 34
 text = "Quit"
+
+[node name="resume" type="Button" parent="CenterContainer/ColorRect/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 101.655)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 34
+text = "Resume"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -143,3 +150,4 @@ libraries = {
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/menu" to="." method="_on_menu_pressed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/resume" to="." method="_on_resume_pressed"]

@@ -63,6 +63,14 @@ func set_action_name() -> void:
 			label.text = "Grapple"
 		"glide_cont":
 			label.text = "Glide"
+		"up_cont_aim":
+			label.text = "Aim Up"
+		"down_cont_aim":
+			label.text = "Aim Down"
+		"right_cont_aim":
+			label.text = "Aim Right"
+		"left_cont_aim":
+			label.text = "Aim Left"
 
 func set_text_for_key() -> void:
 	var action_events = InputMap.action_get_events(action_name)
@@ -96,7 +104,7 @@ func _on_button_toggled(toggled_on):
 			#if i.action_name != self.action_name:
 			i.button.toggle_mode = true
 			i.set_process_unhandled_input(false)
-				
+		
 		set_text_for_key()
 
 func _unhandled_input(event: InputEvent) -> void:

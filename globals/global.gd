@@ -14,6 +14,18 @@ var sandbox : bool = false
 var input_active : bool = false
 #var paused = false
 
+var using_cont : bool = false
+
+func _input(event: InputEvent) -> void:
+	var prev_using_cont : bool = using_cont
+	using_cont = event is InputEventJoypadMotion || event is InputEventJoypadButton
+	if using_cont:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		if !prev_using_cont:
+			get_tree().call_group("UI_FOCUS", "begin_focus")
+	else: 
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
 #region Base Values
 #player
 const player_base_speed : float = 750
@@ -377,6 +389,7 @@ func options_down() -> void:
 	elif score == -1:
 		get_tree().paused = false
 	options_pop_up.set_visible(false)
+	get_tree().call_group("UI_FOCUS", "begin_focus_options")
 
 func float_sum_array(array : Array) -> float:
 	var sum : float = 0.0

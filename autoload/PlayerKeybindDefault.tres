@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" path="res://autoload/PlayerKeybindResource.gd" id="1_ibwj6"]
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_xeo3f"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_k4wyq"]
 axis = 3
 axis_value = 1.0
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_g2mml"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_0tdas"]
 axis = 2
 axis_value = -1.0
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_j503j"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_1rksl"]
 axis = 2
 axis_value = 1.0
 
-[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_6dtus"]
+[sub_resource type="InputEventJoypadMotion" id="InputEventJoypadMotion_8dtte"]
 axis = 3
 axis_value = -1.0
 
@@ -115,7 +115,7 @@ DEFAULT_CONTROLLER_DASH = SubResource("InputEventJoypadButton_vxcxt")
 DEFAULT_CONTROLLER_WALK = SubResource("InputEventJoypadButton_j4kim")
 DEFAULT_CONTROLLER_ROPE = SubResource("InputEventJoypadButton_gr371")
 DEFAULT_CONTROLLER_GLIDE = SubResource("InputEventJoypadButton_8m10y")
-DEFAULT_CONTROLLER_AIM_UP_STICK = SubResource("InputEventJoypadMotion_6dtus")
-DEFAULT_CONTROLLER_AIM_DOWN_STICK = SubResource("InputEventJoypadMotion_xeo3f")
-DEFAULT_CONTROLLER_AIM_RIGHT_STICK = SubResource("InputEventJoypadMotion_j503j")
-DEFAULT_CONTROLLER_AIM_LEFT_STICK = SubResource("InputEventJoypadMotion_g2mml")
+DEFAULT_CONTROLLER_AIM_UP = SubResource("InputEventJoypadMotion_8dtte")
+DEFAULT_CONTROLLER_AIM_DOWN = SubResource("InputEventJoypadMotion_k4wyq")
+DEFAULT_CONTROLLER_AIM_RIGHT = SubResource("InputEventJoypadMotion_1rksl")
+DEFAULT_CONTROLLER_AIM_LEFT = SubResource("InputEventJoypadMotion_0tdas")

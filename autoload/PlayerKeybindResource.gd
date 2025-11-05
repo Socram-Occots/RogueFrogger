@@ -22,10 +22,10 @@ const CONTROLLER_DASH : String = "dash_cont"
 const CONTROLLER_WALK : String = "walk_cont"
 const CONTROLLER_ROPE : String = "rope_cont"
 const CONTROLLER_GLIDE : String = "glide_cont"
-const CONTROLLER_AIM_UP_STICK : String = "up_cont_aim_stick"
-const CONTROLLER_AIM_DOWN_STICK : String = "down_cont_aim_stick"
-const CONTROLLER_AIM_RIGHT_STICK : String = "right_cont_aim_stick"
-const CONTROLLER_AIM_LEFT_STICK : String = "left_cont_aim_stick"
+const CONTROLLER_AIM_UP : String = "up_cont_aim"
+const CONTROLLER_AIM_DOWN : String = "down_cont_aim"
+const CONTROLLER_AIM_RIGHT : String = "right_cont_aim"
+const CONTROLLER_AIM_LEFT : String = "left_cont_aim"
 
 
 @export var DEFAULT_MOVE_UP_KEY = InputEventKey.new()
@@ -49,10 +49,10 @@ const CONTROLLER_AIM_LEFT_STICK : String = "left_cont_aim_stick"
 @export var DEFAULT_CONTROLLER_WALK = InputEventJoypadButton.new()
 @export var DEFAULT_CONTROLLER_ROPE = InputEventJoypadButton.new()
 @export var DEFAULT_CONTROLLER_GLIDE = InputEventJoypadButton.new()
-@export var DEFAULT_CONTROLLER_AIM_UP_STICK = InputEventJoypadMotion.new()
-@export var DEFAULT_CONTROLLER_AIM_DOWN_STICK = InputEventJoypadMotion.new()
-@export var DEFAULT_CONTROLLER_AIM_RIGHT_STICK = InputEventJoypadMotion.new()
-@export var DEFAULT_CONTROLLER_AIM_LEFT_STICK = InputEventJoypadMotion.new()
+@export var DEFAULT_CONTROLLER_AIM_UP = InputEventJoypadMotion.new()
+@export var DEFAULT_CONTROLLER_AIM_DOWN = InputEventJoypadMotion.new()
+@export var DEFAULT_CONTROLLER_AIM_RIGHT = InputEventJoypadMotion.new()
+@export var DEFAULT_CONTROLLER_AIM_LEFT = InputEventJoypadMotion.new()
 
 var move_up_key
 var move_down_key
@@ -75,7 +75,7 @@ var controller_dash
 var controller_walk 
 var controller_rope
 var controller_glide
-var controller_aim_up_stick
-var controller_aim_down_stick
-var controller_aim_right_stick
-var controller_aim_left_stick
+var controller_aim_up
+var controller_aim_down
+var controller_aim_right
+var controller_aim_left
