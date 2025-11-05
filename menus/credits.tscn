@@ -39,22 +39,22 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Game Design: Marcos Stocco"
+text = "Game Design: "
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Programming: Marcos Stocco"
+text = "Programming: "
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Art Direction: Marcos Stocco"
+text = "Art Direction: "
 
 [node name="Label4" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Art Design: Fiona Seo"
+text = "Art Design: "
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -382,6 +382,7 @@ func options_up() -> void:
 	elif score == -1:
 		get_tree().paused = true
 	options_pop_up.set_visible(true)
+	get_tree().call_group("UI_FOCUS_STARTSCREEN", "become_background")
 	
 func options_down() -> void:
 	if pause_popup != null && pause_popup.visible == true:
@@ -389,6 +390,7 @@ func options_down() -> void:
 	elif score == -1:
 		get_tree().paused = false
 	options_pop_up.set_visible(false)
+	get_tree().call_group("UI_FOCUS_STARTSCREEN", "become_foreground")
 	get_tree().call_group("UI_FOCUS", "begin_focus_options")
 
 func float_sum_array(array : Array) -> float:

@@ -2,9 +2,11 @@ extends Control
 
 const OPTIONS : Resource = preload("res://menus/Options/option_menu.tscn")
 @onready var start: Button = $Options/Start
-@onready var options: Button = $Options/Options
 @onready var sandbox: Button = $Options/Sandbox
+@onready var tutorial: Button = $Options/Tutorial
+@onready var options: Button = $Options/Options
 @onready var credits: Button = $Options/Credits
+@onready var quit: Button = $Options/Quit
 
 func loadOptions() -> void:
 	var optionspopup : Control = OPTIONS.instantiate()
@@ -19,7 +21,26 @@ func _ready() -> void:
 	add_to_group("UI_FOCUS_OPTIONS", true)
 	add_to_group("UI_FOCUS_SANDBOX", true)
 	add_to_group("UI_FOCUS_CREDITS", true)
+	add_to_group("UI_FOCUS_STARTSCREEN")
 	begin_focus() 
+
+func become_background():
+	if visible:
+		start.set_focus_mode(FOCUS_NONE)
+		sandbox.set_focus_mode(FOCUS_NONE)
+		tutorial.set_focus_mode(FOCUS_NONE)
+		options.set_focus_mode(FOCUS_NONE)
+		credits.set_focus_mode(FOCUS_NONE)
+		quit.set_focus_mode(FOCUS_NONE)
+
+func become_foreground():
+	if visible:
+		start.set_focus_mode(FOCUS_ALL)
+		sandbox.set_focus_mode(FOCUS_ALL)
+		tutorial.set_focus_mode(FOCUS_ALL)
+		options.set_focus_mode(FOCUS_ALL)
+		credits.set_focus_mode(FOCUS_ALL)
+		quit.set_focus_mode(FOCUS_ALL)
 
 func begin_focus() -> void:
 	if visible:
@@ -41,13 +62,15 @@ func _on_sandbox_pressed() -> void:
 	get_tree().change_scene_to_file("res://menus/sandbox/sandbox_options.tscn")
 
 func _on_tutorial_pressed() -> void:
-	get_tree().change_scene_to_file("res://tutorial/tutorial.tscn")
+	pass
+	#get_tree().change_scene_to_file("res://tutorial/tutorial.tscn")
 
 func _on_options_pressed() -> void:
 	Global.options_up()
 
 func _on_credits_pressed() -> void:
-	get_tree().change_scene_to_file("res://menus/credits.tscn")
+	pass
+	#get_tree().change_scene_to_file("res://menus/credits.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

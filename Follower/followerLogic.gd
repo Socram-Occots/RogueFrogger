@@ -70,18 +70,17 @@ func velocity_Logic() -> void:
 	if temp_rigid.gliding:
 		gliding = true
 		animated.pause()
-		
 		if temp_rigid.dashing && dash_check:
 			dash_check = false
 			dashing = true
-			apply_central_force(velocityRigid * get_process_delta_time())
+			apply_central_force(velocityRigid * get_physics_process_delta_time())
 			await get_tree().create_timer(Global.dash_time).timeout
 			dash_check = true
 			dashing = false
 			
 		if grappled && grapple_check:
 			grapple_check = false
-			apply_central_force(velocityRigid * get_process_delta_time())
+			apply_central_force(velocityRigid * get_physics_process_delta_time())
 		
 	else:
 		gliding = false
@@ -91,24 +90,24 @@ func _on_timer_timeout() -> void:
 	velocity_Logic()
 
 func player_animation() -> void:
-#	$"AnimatedSprite2D".flip_h = false
 	if velocityRigid == Vector2.ZERO: 
 		animated.play("stand")
 		animated.flip_h = false
-	elif velocityRigid.y > 0: 
-		animated.play("walk_down")
-		animated.flip_h = false
-	elif velocityRigid.y < 0: 
-		animated.play("walk_up")
-		animated.flip_h = false
-	elif velocityRigid.x < 0: 
-		animated.play("walk_side")
-		animated.flip_h = false
-	else: 
-		animated.play("walk_side")
-		animated.flip_h = true
-#	elif velocity.x > 0:
-#		$"AnimatedSprite2D".play("walk_side")
+	else:
+		if abs(velocityRigid.y) > abs(velocityRigid.x):
+			if velocityRigid.y > 0: 
+				animated.play("walk_down")
+				animated.flip_h = false
+			else:
+				animated.play("walk_up")
+				animated.flip_h = false
+		else:
+			if velocityRigid.x < 0:
+				animated.play("walk_side")
+				animated.flip_h = false
+			else:
+				animated.play("walk_side")
+				animated.flip_h = true
 
 func remove_follower(update_f_mod : bool = true) -> void:
 	var self_index : int = Global.follower_array.find(self, 1)

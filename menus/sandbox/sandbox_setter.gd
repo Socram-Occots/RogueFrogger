@@ -3,13 +3,14 @@ extends Control
 @export var object : String 
 @export var sandbox_type : String
 @export var group : String
-@onready var sprite_2d: TextureRect = $HBoxContainer/Sprite2D
-@onready var h_slider: HSlider = $HBoxContainer/HSlider
-@onready var chance_num: Label = $HBoxContainer/Chance_Num
 @onready var timer: Timer = $Timer
 @onready var texture_array : Array[Texture2D] = []
 @onready var index : int = 0
-@onready var label: Label = $HBoxContainer/label
+@onready var label: Label = $HBoxContainer/Button/HBoxContainer/label
+@onready var sprite_2d: TextureRect = $HBoxContainer/Button/HBoxContainer/Sprite2D
+@onready var h_slider: HSlider = $HBoxContainer/Button/HBoxContainer/HSlider
+@onready var chance_num: Label = $HBoxContainer/Button/HBoxContainer/Chance_Num
+@onready var button: Button = $HBoxContainer/Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +19,14 @@ func _ready() -> void:
 	set_properties()
 	h_slider.value_changed.connect(on_value_changed)
 	add_to_group(group)
-	
+
+func _on_button_pressed() -> void:
+	if button.has_focus():
+		h_slider.grab_focus.call_deferred()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") && h_slider.has_focus():
+		button.grab_focus.call_deferred()
 
 func set_properties() -> void:
 	match object:

@@ -96,6 +96,7 @@ custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
+focus_neighbor_left = NodePath("../Save")
 focus_neighbor_right = NodePath("../ResetTab")
 theme_override_font_sizes/font_size = 40
 text = "Exit"
@@ -117,6 +118,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 focus_neighbor_left = NodePath("../ResetTab")
+focus_neighbor_right = NodePath("../Exit")
 theme_override_font_sizes/font_size = 40
 text = "Save
 "
