@@ -66,7 +66,7 @@ func _ready() -> void:
 					Global.follower_array[i].get_rid(),
 					PhysicsServer2D.BODY_STATE_TRANSFORM,
 					Transform2D.IDENTITY.translated(new_dist)
-			)
+					)
 	
 	queue_free()
 

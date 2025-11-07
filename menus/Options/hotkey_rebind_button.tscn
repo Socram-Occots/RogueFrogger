@@ -1,10 +1,25 @@
-[gd_scene load_steps=5 format=3 uid="uid://bohs6v2xxurxh"]
+[gd_scene load_steps=8 format=3 uid="uid://bohs6v2xxurxh"]
 
 [ext_resource type="Script" path="res://menus/Options/hotkey_rebind_button.gd" id="1_8gu3d"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="2_7fk7i"]
+
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_pf6x7"]
+button_index = 3
+pressed = true
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wer5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vmw6d"]
+
+[sub_resource type="Texture2D" id="Texture2D_ol6rx"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("2_7fk7i")
+path = "xbox360/l_stick"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mhria"]
 
@@ -16,6 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8gu3d")
+temp = SubResource("InputEventJoypadButton_pf6x7")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -50,7 +66,8 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 toggle_mode = true
-text = "key_rebind"
+text = "key_bind"
+icon = SubResource("Texture2D_ol6rx")
 
 [node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2

@@ -4,6 +4,10 @@ extends Control
 @onready var label = $HBoxContainer/Label as Label
 @onready var button = $HBoxContainer/Button as Button
 @onready var curr_bind = null
+@onready var cont_icon : ControllerIconTexture = ControllerIconTexture.new()
+
+@export var temp : InputEventJoypadButton
+@export var temp2 : InputEventJoypadMotion
 
 @export var action_name : String = ""
 @export var group : String
@@ -18,6 +22,48 @@ func _ready():
 
 func load_keybinds() -> void:
 	rebind_action_key(SettingsDataContainer.get_keybind(action_name))
+
+func map_inputevent_cont_icon(event: InputEvent) -> Array[String]:
+	var def : String = ""
+	var return_arr : Array[String] = [def, def]
+	if event is InputEventKey:
+		return return_arr
+	elif event is InputEventJoypadButton:
+		match event.button_index:
+			0: return_arr[0] = "positional/south"
+			1: return_arr[0] = "positional/east"
+			2: return_arr[0] = "positional/west"
+			3: return_arr[0] = "positional/north"
+			4: return_arr[0] = "joypad/select"
+			5: return_arr[0] = "joypad/home"
+			6: return_arr[0] = "joypad/start"
+			7: return_arr[0] = "joypad/l_stick_click"
+			8: return_arr[0] = "joypad/r_stick_click"
+			9: return_arr[0] = "joypad/lb"
+			10: return_arr[0] = "joypad/rb"
+			11: return_arr[0] = "joypad/dpad_up"
+			12: return_arr[0] = "joypad/dpad_down"
+			13: return_arr[0] = "joypad/dpad_left"
+			14: return_arr[0] = "joypad/dpad_right"
+			15: return_arr[0] = "joypad/share"
+			_: return_arr[0] = def
+	elif event is InputEventJoypadMotion:
+		match event.axis:
+			0, 1: return_arr[0] = "joypad/l_stick"
+			2, 3: return_arr[0] = "joypad/r_stick"
+			_: return_arr[0] = def
+		if event.axis == 1 || event.axis == 3:
+			if event.axis_value < 0: return_arr[1] = "Up"
+			elif event.axis_value > 0: return_arr[1] = "Down"
+			else: return_arr[1] = "Undef"
+		elif event.axis == 0 || event.axis == 2:
+			if event.axis_value < 0: return_arr[1] = "left"
+			elif event.axis_value > 0: return_arr[1] = "Right"
+			else: return_arr[1] = "Undef"
+		else: return_arr[1] = "Undef"
+	else: return_arr[0] = def
+	
+	return return_arr
 
 func set_action_name() -> void:
 	label.text = "Unassigned"
@@ -71,21 +117,21 @@ func set_action_name() -> void:
 			label.text = "Aim Right"
 		"left_cont_aim":
 			label.text = "Aim Left"
+		_: print("Falied to find the action_name: ", action_name)
 
 func set_text_for_key() -> void:
-	var action_events = InputMap.action_get_events(action_name)
+	var action_events : Array[InputEvent] = InputMap.action_get_events(action_name)
 	if action_events.size() > 0:
-		var action_event = action_events[0]
-		var action_keycode : String 
-		match input_type:
-			"keyboard":
-				action_keycode = str(OS.get_keycode_string(action_event.physical_keycode))
-			"analog":
-				action_keycode = str(action_events)
-			"button":
-				action_keycode = str(action_events)
-			"cont_flex":
-				action_keycode = str(action_events)
+		var action_event : InputEvent = action_events[0]
+		var action_keycode : String
+		if input_type == "keyboard":
+			action_keycode = str(OS.get_keycode_string(action_event.physical_keycode))
+			button.icon = null
+		else:
+			var icon_str_arr : Array[String] = map_inputevent_cont_icon(action_event)
+			cont_icon.path = icon_str_arr[0]
+			action_keycode = icon_str_arr[1]
+			button.icon = cont_icon
 		button.text = action_keycode
 	else:
 		button.text = "Not assigned"

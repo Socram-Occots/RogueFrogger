@@ -25,6 +25,7 @@ SettingsDataContainer="*res://autoload/SettingsDataContainer.gd"
 SaveManager="*res://autoload/SaveManager.gd"
 GRand="*res://globals/GRand.gd"
 Globalpreload="*res://globals/globalpreload.gd"
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
 
 [debug]
 
@@ -46,7 +47,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 
