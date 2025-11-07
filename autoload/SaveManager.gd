@@ -21,6 +21,8 @@ func on_settings_save(data: Dictionary) -> void:
 
 func load_settings_data() -> void:
 	if not FileAccess.file_exists(SETTINGS_SAVE_PATH):
+		SettingsSignalBus.emit_load_settings_data({})
+		SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
 		return
 	var config_file = ConfigFile.new()
 	var loaded_data : Dictionary = {}

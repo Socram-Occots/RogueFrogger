@@ -22,7 +22,7 @@ func show_seed() -> void:
 
 func _on_visibility_changed():
 	if visible:
-		if Global.score > SettingsDataContainer.get_high_score():
+		if Global.score > SettingsDataContainer.get_high_score() && !Global.sandbox:
 			SettingsSignalBus.emit_on_high_score_set(Global.score)
 			SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
 		score.text = "Score: " + str(Global.score)

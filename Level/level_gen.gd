@@ -676,6 +676,8 @@ func loadPause() -> void:
 	Global.pause_popup = pausepopup
 
 func spawn_high_score_line() -> void:
+	if Global.sandbox:
+		return
 	var high_score : int = SettingsDataContainer.get_high_score()
 	# don't spawn line too close
 	if high_score < 10: return
@@ -742,6 +744,8 @@ func follower_check() ->void:
 		create_follower()
 
 func highscore_notif() -> void:
+	if Global.sandbox:
+		return
 	var high_score_pop_up : Control = Globalpreload.POP_INST.duplicate()
 	high_score_pop_up.get_node("dashpopup/Label").text = "New High Score!"
 	canvas_layer.add_child(high_score_pop_up)

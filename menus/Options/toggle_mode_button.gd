@@ -11,6 +11,7 @@ func _ready() -> void:
 	check_button.toggled.connect(on_toggle_selected)
 	add_to_group(group)
 	load_data()
+	set_toggle_text()
 
 func on_toggle_selected(toggled_on : bool) -> void:
 	if toggled_on:
@@ -46,6 +47,7 @@ func load_data(default : bool = false) -> void:
 		"mouse_aim":
 			on_toggle_selected(
 				SettingsDataContainer.get_mouse_aim_toggle(default))
+			
 		"controller_aim":
 			on_toggle_selected(
 				SettingsDataContainer.get_controller_aim_toggle(default))

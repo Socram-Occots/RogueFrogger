@@ -23,7 +23,6 @@ var controller_aim_toggle : bool = false
 
 func _ready():
 	handle_signals()
-	create_storage_dictionary()
 	
 func create_storage_dictionary() -> Dictionary:
 	var settings_container_dict : Dictionary = {
@@ -171,6 +170,7 @@ func get_sandbox_dict(type: String, object: String, default : bool = false) -> i
 	return sandbox_dict[type][object]
 
 func get_sandbox_dict_type(type: String, default : bool = false ) -> Dictionary:
+	print(loaded_data.is_empty())
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_sandbox_dict[type]
 	return sandbox_dict[type]
@@ -262,6 +262,7 @@ func on_keybinds_loaded(data: Dictionary) -> void:
 # set sandbox data
 func on_sandbox_dict_set(type: String, object: String, num: int) -> void:
 	sandbox_dict[type][object] = num
+
 func on_sandbox_dict_setAll(dict : Dictionary) -> void:
 	var default : Dictionary = DEFAULT_SETTINGS.default_sandbox_dict
 	for i in DEFAULT_SETTINGS.default_sandbox_dict.keys():
@@ -336,6 +337,8 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_controller_aim_toggle_set(loaded_data["controller_aim_toggle"])
 	else:
 		on_controller_aim_toggle_set(DEFAULT_SETTINGS.default_controller_aim_toggle)
+	
+	loaded_data = create_storage_dictionary()
 
 func handle_signals() -> void:
 	# settings

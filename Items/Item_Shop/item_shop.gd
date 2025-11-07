@@ -15,6 +15,7 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	set_meta("Item", false)
 	sprite_price_item.texture = priceItem
 	sprite_product_item.texture = productItem
 	polygon_2d.color = Color(0, 0, 0)

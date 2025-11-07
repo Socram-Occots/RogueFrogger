@@ -7,13 +7,14 @@ extends Control
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sandbox_seed : String = SettingsDataContainer.get_sandbox_seed(!Global.sandbox)
 @onready var retry: Button = $CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry
+@onready var resume: Button = $CenterContainer/ColorRect/VBoxContainer/HBoxContainer/resume
 
 func _ready():
 	add_to_group("UI_FOCUS", true)
 
 func begin_focus() -> void:
 	if visible:
-		retry.grab_focus.call_deferred()
+		resume.grab_focus.call_deferred()
 
 func show_seed() -> void:
 	if Global.sandbox && sandbox_seed:
