@@ -6,9 +6,6 @@ extends Control
 @onready var curr_bind = null
 @onready var cont_icon : ControllerIconTexture = ControllerIconTexture.new()
 
-@export var temp : InputEventJoypadButton
-@export var temp2 : InputEventJoypadMotion
-
 @export var action_name : String = ""
 @export var group : String
 @export var input_type : String

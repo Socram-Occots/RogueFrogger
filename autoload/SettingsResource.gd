@@ -17,7 +17,8 @@ const default_general_sandbox_dict : Dictionary = {
 	"Barrel":200,
 	"Shop":5,
 	"Items":50,
-	"None":800
+	"None_Sidewalk":800,
+	"None_Street":800
 }
 const default_items_sandbox_dict : Dictionary = {
 	"PlayerSpeed":500,
@@ -30,7 +31,8 @@ const default_items_sandbox_dict : Dictionary = {
 	"Shield":10,
 	"Shrink":500,
 	"Multi":800,
-	"Cleanse":100
+	"Cleanse":100,
+	"Hole":500
 }
 const default_multi_sandbox_dict : Dictionary = {
 	"PlayerSpeedMulti":500,
@@ -47,7 +49,8 @@ const default_multi_sandbox_dict : Dictionary = {
 	"LongTeleportMulti":100,
 	"ShortTeleportMulti":100,
 	"CleanseMulti":500,
-	"DVDBounceMulti":100
+	"DVDBounceMulti":100,
+	"HoleMulti":500
 }
 const default_gamba_sandbox_dict : Dictionary = {
 	"PlayerSpeedGamba":1,
@@ -62,7 +65,8 @@ const default_gamba_sandbox_dict : Dictionary = {
 	"LongTeleportGamba":1,
 	"ShortTeleportGamba":1,
 	"CleanseGamba":1,
-	"DVDBounceGamba":1
+	"DVDBounceGamba":1,
+	"HoleGamba":1
 }
 const default_shop_sandbox_dict : Dictionary = {
 	"PlayerSpeedShop":1,
@@ -79,7 +83,8 @@ const default_shop_sandbox_dict : Dictionary = {
 	"LongTeleportShop":1,
 	"ShortTeleportShop":1,
 	"CleanseShop":1,
-	"DVDBounceShop":1
+	"DVDBounceShop":1,
+	"HoleShop":1
 }
 const default_sandbox_dict : Dictionary = {
 	"General" : default_general_sandbox_dict,

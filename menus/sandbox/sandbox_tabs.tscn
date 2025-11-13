@@ -54,11 +54,17 @@ follow_focus = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 170
+theme_override_constants/separation = 140
 
-[node name="HSeparator" type="HSeparator" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
+size_flags_horizontal = 6
+
+[node name="Sidewalk" type="Label" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Sidewalk"
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -67,7 +73,7 @@ theme_override_constants/separation = 550
 
 [node name="SandboxSetter" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
 layout_mode = 2
-object = "None"
+object = "None_Sidewalk"
 group = "tab0"
 
 [node name="SandboxSetter2" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
@@ -100,9 +106,31 @@ layout_mode = 2
 object = "Shop"
 group = "tab0"
 
-[node name="HSeparator2" type="HSeparator" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
+size_flags_horizontal = 6
+
+[node name="Street" type="Label" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "Street
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "None_Street"
+group = "tab0"
+
+[node name="SandboxSetter2" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "Hole"
+group = "tab0"
 
 [node name="Items" type="TabBar" parent="TabContainer"]
 visible = false
@@ -209,6 +237,11 @@ group = "tab1"
 [node name="SandboxSetter2" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Multi"
+group = "tab1"
+
+[node name="SandboxSetter3" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "Hole"
 group = "tab1"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer"]
@@ -350,6 +383,16 @@ group = "tab2"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 
+[node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "HoleMulti"
+group = "tab2"
+
 [node name="Gamba" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
@@ -470,6 +513,11 @@ theme_override_constants/separation = 550
 [node name="SandboxSetter" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "DVDBounceGamba"
+group = "tab3"
+
+[node name="SandboxSetter2" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "HoleGamba"
 group = "tab3"
 
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer"]
@@ -608,6 +656,16 @@ layout_mode = 2
 object = "DVDBounceShop"
 group = "tab4"
 
+[node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "HoleShop"
+group = "tab4"
+
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
@@ -658,6 +716,8 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter"]
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter2"]
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter3"]
+[editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
+[editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3"]
@@ -669,6 +729,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter3"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter2"]
+[editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter3"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3"]
@@ -684,6 +745,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
+[editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
 [editable path="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
 [editable path="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2"]
 [editable path="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3"]
@@ -697,6 +759,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter2"]
 [editable path="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter3"]
 [editable path="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
+[editable path="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2"]
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3"]
@@ -712,4 +775,5 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
+[editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
 [editable path="TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]

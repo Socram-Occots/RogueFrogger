@@ -19,7 +19,7 @@ func delete_rope(headalive : bool = true) -> void:
 	Global.grapple_cool_down_bool = true
 	crosser.grappling = false
 	crosser.grappled = false
-	if headalive:
+	if headalive && is_instance_valid(grapple_head):
 		grapple_head.queue_free()
 	queue_free()
 
