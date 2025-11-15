@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=53 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -219,6 +219,9 @@ size = Vector2(20, 2)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkv01"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ldtew"]
+size = Vector2(36, 9)
+
 [node name="crosser" type="RigidBody2D"]
 texture_filter = 1
 collision_mask = 4062
@@ -301,6 +304,14 @@ shape = SubResource("WorldBoundaryShape2D_gkv01")
 [node name="bottom_cage" type="CollisionShape2D" parent="despawn_cage"]
 position = Vector2(0, 2000)
 shape = SubResource("WorldBoundaryShape2D_gkv01")
+
+[node name="feet" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 16384
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="feet"]
+position = Vector2(0, 31.5)
+shape = SubResource("RectangleShape2D_ldtew")
 
 [connection signal="timeout" from="follower_cleanup_timer" to="." method="_on_follower_cleanup_timer_timeout"]
 [connection signal="area_entered" from="despawn_cage" to="despawn_cage" method="_on_area_entered"]

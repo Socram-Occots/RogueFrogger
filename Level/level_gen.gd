@@ -81,8 +81,12 @@ dvdbounce_icon,DVDarea,losepopup,pausepopup]
 
 @onready var high_score_reached : bool = false
 
+@onready var STREET_SPAWN_LIST : Array[String] = []
+@onready var STREET_CHANCE_LIST : Array[float] = []
+
 func load_element_stats() -> void:
 	load_general_stats()
+	load_street_stats()
 	load_items_stats()
 	load_multi_stats()
 	load_gamba_stats()
@@ -101,6 +105,18 @@ func load_general_stats() -> void:
 			CHANCE_LIST.append(tempint)
 	expl_Bidx = SPAWN_LIST.find("expl_B")
 
+func load_street_stats() -> void:
+	var str_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
+		"Street", !Global.sandbox)
+	var str_dict_keys := str_dict.keys()
+	for i in range(0, str_dict_keys.size()):
+		var tempstring : String = str_dict_keys[i]
+		var tempint : int = str_dict[tempstring]
+		if tempint > 0:
+			STREET_SPAWN_LIST.append(tempstring)
+			STREET_CHANCE_LIST.append(tempint)
+
+		
 func load_items_stats() -> void:
 	var item_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Items", !Global.sandbox)
@@ -439,6 +455,9 @@ func carSpawn() -> void:
 		car.position.x = Global.despawn_right
 		
 	$Ysort.add_child(car)
+
+func holeSpawn() -> void:
+	pass
 
 func firstTerrainSpawn(xpos : float, ypos : float) -> void:
 	sidewalk = true

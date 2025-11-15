@@ -18,8 +18,14 @@ const default_general_sandbox_dict : Dictionary = {
 	"Shop":5,
 	"Items":50,
 	"None_Sidewalk":800,
-	"None_Street":800
+	"Hole_Sidewalk":10
 }
+
+const default_street_sandbox_dict : Dictionary = {
+	"None_Street":800,
+	"Hole_Street":25
+}
+
 const default_items_sandbox_dict : Dictionary = {
 	"PlayerSpeed":500,
 	"GlideBoots":500,
@@ -91,7 +97,8 @@ const default_sandbox_dict : Dictionary = {
 	"Items" : default_items_sandbox_dict,
 	"Multi" : default_multi_sandbox_dict,
 	"Gamba" : default_gamba_sandbox_dict,
-	"Shop" : default_shop_sandbox_dict
+	"Shop" : default_shop_sandbox_dict,
+	"Street" : default_street_sandbox_dict
 }
 
 const default_sandbox_seed : String = ""

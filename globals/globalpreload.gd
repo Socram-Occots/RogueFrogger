@@ -21,6 +21,7 @@ const DVDBOUNCE : Resource = preload("res://DVD_bounce/DVD_bounce.tscn")
 const SHOP : Resource = preload("res://Items/Item_Shop/ItemShop.tscn")
 const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 const TELE : Resource = preload("res://Items/Teleport/teleportoutline.tscn")
+const HOLE : Resource = preload("res://Hole/hole.tscn")
 
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("dash"):
@@ -77,6 +78,7 @@ var POP_INST : Control = POP.instantiate()
 var DVD_INST : Node2D = DVDBOUNCE.instantiate()
 var SHOP_INST : Area2D = SHOP.instantiate()
 var DEATHLINE_INST : Area2D = LINE.instantiate()
+var HOLE_INST : Area2D = HOLE.instantiate()
 
 # DVD Bounce
 var DVDarea : Node2D = DVDBOUNCE.instantiate()

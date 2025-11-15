@@ -84,9 +84,15 @@ func set_properties() -> void:
 		"None_Sidewalk" : 
 			set_sandbox_option(object, "General", 999, 
 			"None")
-		"None_Street" : 
+		"Hole_Sidewalk" : 
 			set_sandbox_option(object, "General", 999, 
+			"???")
+		"None_Street" : 
+			set_sandbox_option(object, "Street", 999, 
 			"None")
+		"Hole_Street" : 
+			set_sandbox_option(object, "Street", 999, 
+			"???")
 		"PlayerSpeedShop" : 
 			set_sandbox_option(object, "Shop", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")

@@ -43,7 +43,7 @@ func _on_impulse_body_entered(body):
 #	if not_moving && "Player" in metalist:
 	for i in ["Player", "Follower"]:
 		if i in metalist:
-			apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod * get_process_delta_time())
+			apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod * get_physics_process_delta_time())
 			#body.dashing = false
 			break
 	for i in ["Element", "ExplodingBarrel"]:
@@ -88,3 +88,9 @@ func _on_explosionbarrelexplosion_area_entered(area):
 			area.queue_free()
 	if "ExplodingBarrel" in metalist:
 		area.explosion()
+
+func _on_feet_area_entered(area: Area2D) -> void:
+	var metalist : PackedStringArray = area.get_meta_list()
+	for i in ["Hole"]:
+		if i in metalist:
+			explosion()
