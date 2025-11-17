@@ -96,48 +96,62 @@ func load_element_stats() -> void:
 func load_general_stats() -> void:
 	var gen_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"General", !Global.sandbox)
+	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
+		"General", true).keys()
 	var gen_dict_keys := gen_dict.keys()
 	for i in range(0, gen_dict_keys.size()):
 		var tempstring : String = gen_dict_keys[i]
-		var tempint : int = gen_dict[tempstring]
-		if tempint > 0:
-			SPAWN_LIST.append(tempstring)
-			CHANCE_LIST.append(tempint)
+		# this check is a fail safe so left over keys dont mess things up before
+		# the game is saved
+		if tempstring in default_keys:
+			var tempint : int = gen_dict[tempstring]
+			if tempint > 0:
+				SPAWN_LIST.append(tempstring)
+				CHANCE_LIST.append(tempint)
 	expl_Bidx = SPAWN_LIST.find("expl_B")
 
 func load_street_stats() -> void:
 	var str_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Street", !Global.sandbox)
+	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
+		"Street", true).keys()
 	var str_dict_keys := str_dict.keys()
 	for i in range(0, str_dict_keys.size()):
 		var tempstring : String = str_dict_keys[i]
-		var tempint : int = str_dict[tempstring]
-		if tempint > 0:
-			STREET_SPAWN_LIST.append(tempstring)
-			STREET_CHANCE_LIST.append(tempint)
+		if tempstring in default_keys:
+			var tempint : int = str_dict[tempstring]
+			if tempint > 0:
+				STREET_SPAWN_LIST.append(tempstring)
+				STREET_CHANCE_LIST.append(tempint)
 
 		
 func load_items_stats() -> void:
 	var item_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Items", !Global.sandbox)
+	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
+		"Items", true).keys()
 	var item_dict_keys := item_dict.keys()
 	for i in range(0, item_dict_keys.size()):
 		var tempstring : String =  item_dict_keys[i]
-		var tempint : int = item_dict[tempstring]
-		if tempint > 0:
-			ITEMS_LIST.append(tempstring)
-			ITEMS_CHANCE_LIST.append(tempint)
+		if tempstring in default_keys:
+			var tempint : int = item_dict[tempstring]
+			if tempint > 0:
+				ITEMS_LIST.append(tempstring)
+				ITEMS_CHANCE_LIST.append(tempint)
 
 func load_multi_stats() -> void:
 	var multi_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Multi", !Global.sandbox)
+	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
+		"Multi", true).keys()
 	var multi_dict_keys := multi_dict.keys()
 	for i in range(0, multi_dict_keys.size()):
 		var tempstring : String = multi_dict_keys[i]
-		var tempint : int = multi_dict[tempstring]
-		if tempint > 0:
-			MULTI_LIST.append(tempstring)
-			MULTI_CHANCE_LIST.append(tempint)
+		if tempstring in default_keys:
+			var tempint : int = multi_dict[tempstring]
+			if tempint > 0:
+				MULTI_LIST.append(tempstring)
+				MULTI_CHANCE_LIST.append(tempint)
 	multi_num_limit = MULTI_LIST.size()
 
 func get_Icon_texture2D(containter : VBoxContainer) -> Texture2D:
@@ -146,80 +160,86 @@ func get_Icon_texture2D(containter : VBoxContainer) -> Texture2D:
 func load_gamba_stats() -> void:
 	var gamba_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Gamba", !Global.sandbox)
+	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
+		"Gamba", true).keys()
 	var gamba_dict_keys := gamba_dict.keys()
 	for i in range(0, gamba_dict_keys.size()):
 		var tempstring : String = gamba_dict_keys[i]
-		var tempint : int = gamba_dict[tempstring]
-		if tempint > 0:
-			match tempstring:
-				"PlayerSpeedGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(playerspeedicon)])
-				"GlideBootsGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(glideicon)])
-				"DashGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(dashicon)])
-				"expl_BGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(expl_B_icon)])
-				"GrappleGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(grapple_icon)])
-				"FollowerGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(follower_icon)])
-				"ShrinkGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(shrink_icon)])
-				"CleanseGamba":
-					gamba_array_good.append([tempstring, 
-					get_Icon_texture2D(cleanse_icon)])
-				"SlowGamba":
-					gamba_array_bad.append([tempstring, 
-					get_Icon_texture2D(slow_icon)])
-				"GrowGamba":
-					gamba_array_bad.append([tempstring, 
-					get_Icon_texture2D(grow_icon)])
-				"LongTeleportGamba":
-					gamba_array_bad.append([tempstring, 
-					get_Icon_texture2D(longtele_icon)])
-				"ShortTeleportGamba":
-					gamba_array_bad.append([tempstring, 
-					get_Icon_texture2D(shorttele_icon)])
-				"DVDBounceGamba":
-					gamba_array_bad.append([tempstring, 
-					get_Icon_texture2D(dvdbounce_icon)])
-				_: print("Could not pre load gamba: ", tempstring)
+		if tempstring in default_keys:
+			var tempint : int = gamba_dict[tempstring]
+			if tempint > 0:
+				match tempstring:
+					"PlayerSpeedGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(playerspeedicon)])
+					"GlideBootsGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(glideicon)])
+					"DashGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(dashicon)])
+					"expl_BGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(expl_B_icon)])
+					"GrappleGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(grapple_icon)])
+					"FollowerGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(follower_icon)])
+					"ShrinkGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(shrink_icon)])
+					"CleanseGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(cleanse_icon)])
+					"SlowGamba":
+						gamba_array_bad.append([tempstring, 
+						get_Icon_texture2D(slow_icon)])
+					"GrowGamba":
+						gamba_array_bad.append([tempstring, 
+						get_Icon_texture2D(grow_icon)])
+					"LongTeleportGamba":
+						gamba_array_bad.append([tempstring, 
+						get_Icon_texture2D(longtele_icon)])
+					"ShortTeleportGamba":
+						gamba_array_bad.append([tempstring, 
+						get_Icon_texture2D(shorttele_icon)])
+					"DVDBounceGamba":
+						gamba_array_bad.append([tempstring, 
+						get_Icon_texture2D(dvdbounce_icon)])
+					_: print("Could not pre load gamba: ", tempstring)
 
 func load_shop_stats() -> void:
 	var shop_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Shop", !Global.sandbox)
+	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
+		"Shop", true).keys()
 	var shop_dict_keys := shop_dict.keys()
 	for i in range(0, shop_dict_keys.size()):
 		var tempstring : String = shop_dict_keys[i]
-		var tempint : int = shop_dict[tempstring]
-		if tempint > 0:
-			if tempstring in \
-			["DVDBounceShop", "ShortTeleportShop", "LongTeleportShop",
-			"GrowShop", "SlowShop"]:
-				shoppricecurses.append(tempstring)
-			elif tempstring in \
-			["PlayerSpeedShop","GlideBootsShop","DashShop","expl_BShop",
-			"GrappleShop", "ShrinkShop"]:
-				shoppriceitems.append(tempstring)
-				shopproductitems.append(tempstring)
-			elif  tempstring in \
-			["GambaShop", "CleanseShop"]:
-				shopproductitems.append(tempstring)
-			elif tempstring in \
-			["FollowerShop"]:
-				shoppriceitems.append(tempstring)
-				shopproductitemsrare.append(tempstring)
-			elif tempstring in \
-			["ShieldShop"]:
-				shopproductitemsrare.append(tempstring)
+		if tempstring in default_keys:
+			var tempint : int = shop_dict[tempstring]
+			if tempint > 0:
+				if tempstring in \
+				["DVDBounceShop", "ShortTeleportShop", "LongTeleportShop",
+				"GrowShop", "SlowShop"]:
+					shoppricecurses.append(tempstring)
+				elif tempstring in \
+				["PlayerSpeedShop","GlideBootsShop","DashShop","expl_BShop",
+				"GrappleShop", "ShrinkShop"]:
+					shoppriceitems.append(tempstring)
+					shopproductitems.append(tempstring)
+				elif  tempstring in \
+				["GambaShop", "CleanseShop"]:
+					shopproductitems.append(tempstring)
+				elif tempstring in \
+				["FollowerShop"]:
+					shoppriceitems.append(tempstring)
+					shopproductitemsrare.append(tempstring)
+				elif tempstring in \
+				["ShieldShop"]:
+					shopproductitemsrare.append(tempstring)
 
 func load_seed() -> void:
 	var seedy : String = SettingsDataContainer.get_sandbox_seed(
@@ -245,7 +265,7 @@ node_num: int = 15) -> void:
 	var item_chances_length : int = items_chances.size()
 	
 	# both arrays need to be same length and exist
-	if item_length < 1 || spawn_length != chances_length \
+	if spawn_length != chances_length \
 	|| item_length != item_chances_length: return
 
 	# at least one space must be open
@@ -287,7 +307,44 @@ node_num: int = 15) -> void:
 			"Multi": i = spawnItems(dir,lucky_spawn, i)
 			"Cleanse": i = spawnItems(dir,lucky_spawn, i)
 			"Shop" : i = spawnShop(dir, node_num, i)
+			"Hole_Sidewalk" : i = spawnHole(dir, i)
 			_: print("This randomly selected item does not exist!:", lucky_spawn)
+			
+		i += 1
+
+func spawnStreetItems(spawns : Array[String] = STREET_SPAWN_LIST, 
+chances : Array[float] = STREET_CHANCE_LIST, 
+items : Array[String] = [], 
+items_chances : Array[float] = [], 
+node_num: int = 15) -> void:
+	var spawn_length : int = spawns.size()
+	var chances_length : int = chances.size()
+	var item_length : int = items.size()
+	var item_chances_length : int = items_chances.size()
+
+	# both arrays need to be same length and exist
+	if spawn_length != chances_length \
+	|| item_length != item_chances_length: return
+
+	# at least one space must be open
+	var open : int  = GRand.maprand.randi_range(0, node_num - 1)
+	
+	var i : int = 0
+	# adding ingame modified item chances
+	
+	var selected : int = -1
+	while i < node_num:
+		if i == open: i += 1
+		if i == node_num: break
+		var dir : String = "spawnterrain/Node" + str(i)
+		
+		selected = GRand.maprand.rand_weighted(chances)
+		var lucky_spawn : String = spawns[selected]
+		# spawn the lucky item
+		match lucky_spawn:
+			"None_Street": pass
+			"Hole_Street" : i = spawnHole(dir, i)
+			_: print("This randomly selected street item does not exist!:", lucky_spawn)
 			
 		i += 1
 
@@ -456,8 +513,13 @@ func carSpawn() -> void:
 		
 	$Ysort.add_child(car)
 
-func holeSpawn() -> void:
-	pass
+func spawnHole(dir : String, i : int) -> int:
+	var hole : Area2D = Globalpreload.HOLE_INST.duplicate()
+	hole.visible = true
+	hole.position = get_node(dir).global_position
+	hole.position.y -= Global.player_height_px
+	$Ysort.add_child(hole)
+	return i
 
 func firstTerrainSpawn(xpos : float, ypos : float) -> void:
 	sidewalk = true
@@ -492,6 +554,7 @@ func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
 		itemSpawn()
 	elif type == 1:
 		carSpawn()
+		spawnStreetItems()
 	
 	$spawnterrain.global_position.y -= 144
 

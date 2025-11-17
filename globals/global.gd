@@ -117,6 +117,7 @@ var player_pos_y : float = 0.0
 
 # player attributes
 const player_width_px : int = 48
+const player_height_px : int = 74
 
 # shield
 #var shield_enabled = false

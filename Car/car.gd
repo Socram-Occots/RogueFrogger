@@ -9,6 +9,7 @@ var direction : int = 0
 #var current_car = ""
 
 func _ready():
+	set_meta("Car", false)
 	$CollisionShapeGrey.set_deferred("disabled", true)
 	$CollisionShape2DYellow.set_deferred("disabled", true)
 	$CollisionShape2Dmotorcycle.set_deferred("disabled", true)
@@ -58,7 +59,7 @@ func _on_body_entered(body):
 			body.shield_comp = true
 	elif "Follower" in metalist:
 		body.remove_follower()
-
+	
 func _on_body_exited(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist && body.shield_up:

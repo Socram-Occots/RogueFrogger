@@ -88,6 +88,14 @@ func _on_explosionbarrelexplosion_area_entered(area):
 			area.queue_free()
 	if "ExplodingBarrel" in metalist:
 		area.explosion()
+	elif "Hole" in metalist:
+		if !area.crater:
+			area.crater = true
+			area.global_position.y -= 50
+			area.get_node("Sprite2D").scale *= 3
+			area.get_node("Sprite2D").position.y += 50
+			area.get_node("CollisionShape2D").scale *= 4
+			area.get_node("CollisionShape2D").position.y += 50
 
 func _on_feet_area_entered(area: Area2D) -> void:
 	var metalist : PackedStringArray = area.get_meta_list()

@@ -170,7 +170,6 @@ func get_sandbox_dict(type: String, object: String, default : bool = false) -> i
 	return sandbox_dict[type][object]
 
 func get_sandbox_dict_type(type: String, default : bool = false ) -> Dictionary:
-	print(loaded_data.is_empty())
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_sandbox_dict[type]
 	return sandbox_dict[type]
@@ -272,6 +271,14 @@ func on_sandbox_dict_setAll(dict : Dictionary) -> void:
 					dict[i][a] = default[i][a]
 		else:
 			dict[i] = default[i]
+	# getting rid of any unknown keys from other versions
+	for i in dict.keys():
+		if default.has(i):
+			for a in dict[i].keys():
+				if !default[i].has(a):
+					dict[i].erase(a)
+		else:
+			dict.erase(i)
 	sandbox_dict = dict.duplicate(true)
 
 func on_sandbox_seed_set(value: String) -> void:

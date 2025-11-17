@@ -288,7 +288,7 @@ autostart = true
 
 [node name="despawn_cage" type="Area2D" parent="."]
 collision_layer = 8192
-collision_mask = 3130
+collision_mask = 19514
 script = ExtResource("47_mk2mw")
 
 [node name="right_cage" type="CollisionShape2D" parent="despawn_cage"]
@@ -308,6 +308,7 @@ shape = SubResource("WorldBoundaryShape2D_gkv01")
 [node name="feet" type="Area2D" parent="."]
 collision_layer = 32768
 collision_mask = 16384
+metadata/Feet = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="feet"]
 position = Vector2(0, 31.5)

@@ -17,7 +17,7 @@ const default_general_sandbox_dict : Dictionary = {
 	"Barrel":200,
 	"Shop":5,
 	"Items":50,
-	"None_Sidewalk":800,
+	"None":800,
 	"Hole_Sidewalk":10
 }
 
@@ -92,6 +92,7 @@ const default_shop_sandbox_dict : Dictionary = {
 	"DVDBounceShop":1,
 	"HoleShop":1
 }
+
 const default_sandbox_dict : Dictionary = {
 	"General" : default_general_sandbox_dict,
 	"Items" : default_items_sandbox_dict,

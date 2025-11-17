@@ -5,7 +5,7 @@
 [node name="finish_line" type="Node2D"]
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-modulate = Color(1, 1, 1, 0.498039)
+modulate = Color(1, 1, 1, 0.254902)
 texture_repeat = 2
 scale = Vector2(1.5, 2.25)
 antialiased = true
