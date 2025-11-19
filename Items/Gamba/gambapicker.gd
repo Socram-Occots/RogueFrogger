@@ -113,6 +113,7 @@ func present_winner() -> void:
 		"ShortTeleportGamba": Global.inc_ShortTele(multi_result)
 		"CleanseGamba": Global.cleanse_curse(multi_result)
 		"DVDBounceGamba": Global.inc_DVD(multi_result)
+		"HoleGamba": Global.inc_Hole(multi_result)
 		_: print("Uknown item in the Gamba Picker: ", temp_item_pool[cycleitemcounter][0])
 
 	#reset length so gamba can function again

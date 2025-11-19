@@ -73,6 +73,9 @@ const dvd_vel_base : float = 250
 const expl_B_impulse_mod_base : float = 1.0
 const expl_B_size_mod_base : float = 1.0
 const expl_B_chance_mod_base : int = 0
+#hole
+const hole_coyote_time_base : float = 0.1
+const hole_cool_down_base : float = 60
 #endregion
 
 #region Values
@@ -213,6 +216,13 @@ var dvd_vel : float = 250
 var dvd_array : Array[RigidBody2D] = []
 var dvd_spawn_num : int = 0
 var dvdbouncelabelon = false
+
+#hole
+var hole_coyote_time : float = hole_coyote_time_base
+var hole_cool_down : float = hole_cool_down_base
+var hole_mod : int = 0
+var hole_cool_down_bool : bool = false
+var holelabelon = false
 #endregion
 
 func reset() -> void:
@@ -282,6 +292,7 @@ func reset() -> void:
 	longtelelabelon = false
 	shorttelelabelon = false
 	dvdbouncelabelon = false
+	holelabelon = false
 	updatelabels = false
 	
 	#grapplerope
@@ -348,6 +359,12 @@ func reset() -> void:
 	dvd_vel = dvd_vel_base
 	dvd_spawn_num = 0
 	dvd_array.clear()
+	
+	#hole
+	hole_coyote_time = hole_coyote_time_base
+	hole_cool_down = hole_cool_down_base
+	hole_mod = 0
+	hole_cool_down_bool = false
 
 func incrementDifficulty(x : int = 2, int_multiple : int = 1) -> void:
 	if score != 0 && score % x == 0:
@@ -410,11 +427,9 @@ func inc_PlayerSpeed(times : int) -> void:
 	if player_speed_mod + times < 0:
 		player_speed_mod = 0
 		times = 0
-		playerspeedlabelon = true
-	elif player_speed_mod == 0 or player_speed_mod + times == 0:
-		playerspeedlabelon = true
 	player_speed_mod += times
 	player_speed_scaling = player_base_speed + 20 * player_speed_mod
+	playerspeedlabelon = true
 	updatelabels = true
 
 func inc_GlideBoots(times : int) -> void:
@@ -422,16 +437,14 @@ func inc_GlideBoots(times : int) -> void:
 		glide_mod = 0
 		times = 0
 		glide = false
-		glidelabelon = true
 	elif glide_mod == 0:
 		glide = true
-		glidelabelon = true
 	elif glide_mod + times == 0:
 		glide = false
-		glidelabelon = true
 	glide_mod += times
 	glide_cool_down = glide_cool_down_base * ((1/1.005) ** glide_mod)
 	glide_time = glide_base_time + 0.025 * glide_mod
+	glidelabelon = true
 	updatelabels = true
 	
 func inc_Dash(times : int) -> void:
@@ -439,60 +452,55 @@ func inc_Dash(times : int) -> void:
 		dash_mod = 0
 		times = 0
 		dash = false
-		dashlabelon = true
 	elif dash_mod == 0:
 		dash = true
-		dashlabelon = true
 	elif dash_mod + times == 0:
 		dash = false
-		dashlabelon = true
+
 	dash_mod += times
 	dash_scaling = dash_base + 0.02 * dash_mod
 	dash_time = dash_base_time/(dash_scaling/dash_base)
 	dash_cool_down = dash_cool_down_base * ((1/1.005) ** dash_mod)
+	dashlabelon = true
 	updatelabels = true
 	
 func inc_expl_B(times : int) -> void:
 	if expl_B_mod + times < 0:
 		expl_B_mod = 0
 		times = 0
-		expl_B_labelon = true
-	elif expl_B_mod == 0 or expl_B_mod + times == 0:
-		expl_B_labelon = true
+
 	expl_B_mod += times
 	expl_B_impulse_mod = expl_B_impulse_mod_base + 0.02 * expl_B_mod
 	expl_B_size_mod = expl_B_size_mod_base + 0.02 * expl_B_mod
 	expl_B_chance_mod = expl_B_mod * 2
+	expl_B_labelon = true
 	updatelabels = true
 
 func inc_GrappleRope(times : int) -> void:
 	if grapple_mod + times < 0:
 		grapple_mod = 0
 		times = 0
-		grapplelabelon = true
+
 	elif grapple_mod == 0:
 		grapple = true
-		grapplelabelon = true
+
 	elif grapple_mod + times == 0:
 		grapple = false
-		grapplelabelon = true
+
 	grapple_mod += times
 	grapple_speed = grapple_speed_base + 5 * grapple_mod
 	grapple_strength = grapple_strength_base + 25 * grapple_mod
 	grapple_length = grapple_length_base + 5 * grapple_mod
 	grapple_cool_down = grapple_cool_down_base * ((1/1.005) ** grapple_mod)
+	grapplelabelon = true
 	updatelabels = true
 
 func inc_Follower(times : int) -> void:
 	if follower_mod + times < follower_mod_base:
 		times = 0
 		follower_mod = follower_mod_base
-		followerlabelon = true
 		for i in range(follower_array.size() - 1, 0, -1):
 			follower_array[i].remove_follower(false)
-	elif follower_mod == follower_mod_base or \
-	follower_mod + times == follower_mod_base:
-		followerlabelon = true
 	follower_mod += times
 	if times > 0:
 		spawn_follower_bool = true
@@ -505,15 +513,14 @@ func inc_Follower(times : int) -> void:
 			follower_array[f_count_idx].remove_follower(false)
 			f_count_idx -= 1
 			f_count += 1
+	
+	followerlabelon = true
 	updatelabels = true
 
 func inc_Shrink(times : int) -> void:
 	if shrink_mod + times < 0:
 		shrink_mod = 0
 		times = 0
-		shrinklabelon = true
-	elif shrink_mod == 0 or shrink_mod + times == 0:
-		shrinklabelon = true
 	shrink_mod += times
 	if shrink_mod < shrink_mod_limit:
 		shrink_mod_real = shrink_mod
@@ -522,7 +529,8 @@ func inc_Shrink(times : int) -> void:
 		
 	if !follower_array.is_empty():
 		change_player_follower_size()
-		
+	
+	shrinklabelon = true
 	updatelabels = true
 
 func inc_Gamba(times : int) -> void:
@@ -544,25 +552,21 @@ func inc_PlayerSlow(times: int) -> void:
 	if playerslow_mod + times < playerslow_mod_base:
 		playerslow_mod = playerslow_mod_base
 		times = 0
-		playerslowlabelon = true
-	elif playerslow_mod == playerslow_mod_base or \
-	playerslow_mod + times == playerslow_mod_base:
-		playerslowlabelon = true
+	
 	playerslow_mod += times
 
 	if playerslow_mod < playerslow_mod_limit:
 		playerslow_mod_real = playerslow_mod
 	else:
 		playerslow_mod_real = playerslow_mod_limit
+	
+	playerslowlabelon = true
 	updatelabels = true
 
 func inc_Grow(times : int) -> void:
 	if grow_mod + times < 0:
 		grow_mod = 0
 		times = 0
-		growlabelon = true
-	elif grow_mod == 0 or grow_mod + times == 0:
-		growlabelon = true
 	grow_mod += times
 	if grow_mod < grow_mod_limit:
 		grow_mod_real = grow_mod
@@ -571,40 +575,34 @@ func inc_Grow(times : int) -> void:
 		
 	if !follower_array.is_empty():
 		change_player_follower_size()
-		
+	
+	growlabelon = true
 	updatelabels = true
 
 func inc_LongTele(times: int) -> void:
 	if longtele_mod + times < 0:
 		longtele_mod = 0
 		times = 0
-		longtelelabelon = true
-	elif longtele_mod == 0 or longtele_mod + times == 0:
-		longtelelabelon = true
 	longtele_mod += times
+	longtelelabelon = true
 	updatelabels = true
 
 func inc_ShortTele(times: int) -> void:
 	if shorttele_mod + times < 0:
 		shorttele_mod = 0
 		times = 0
-		shorttelelabelon = true
-	elif shorttele_mod == 0 or shorttele_mod + times == 0:
-		shorttelelabelon = true
 	shorttele_mod += times
 	shortele_cool_down = shortele_cool_down_base * ((1/1.005) ** shorttele_mod)
+	shorttelelabelon = true
 	updatelabels = true
 
 func inc_DVD(times : int) -> void:
 	if dvd_mod + times < 0:
 		dvd_mod = 0
 		times = 0
-		dvdbouncelabelon = true
 		for i in range(0, dvd_array.size()):
 			dvd_array[i].queue_free()
 			dvd_array.remove_at(i)
-	elif dvd_mod == 0 or dvd_mod + times == 0:
-		dvdbouncelabelon = true
 	dvd_mod += times
 	dvd_spawn_num = times
 	if times > 0:
@@ -616,6 +614,7 @@ func inc_DVD(times : int) -> void:
 			else:
 				dvd_array[0].queue_free()
 				dvd_array.remove_at(0)
+	dvdbouncelabelon = true
 	updatelabels = true
 
 func cleanse_curse(times: int):
@@ -664,6 +663,16 @@ func cleanse_curse(times: int):
 		
 		if curse_dict.is_empty():
 			return
+
+func inc_Hole(times : int) -> void:
+	if hole_mod + times < 0:
+		hole_mod = 0
+		times = 0
+	hole_mod += times
+	hole_coyote_time = hole_coyote_time_base * hole_mod
+	hole_cool_down = hole_cool_down_base * ((1/1.005) ** hole_mod)
+	holelabelon = true
+	updatelabels = true
 
 func change_player_follower_size() -> void:
 		wipe_null_followers()

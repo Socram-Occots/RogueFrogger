@@ -45,6 +45,8 @@ extends Node
 @onready var shorttele_icon : VBoxContainer = Globalpreload.shorttele_icon.duplicate()
 @onready var cleanse_icon : VBoxContainer = Globalpreload.cleanse_icon.duplicate()
 @onready var dvdbounce_icon : VBoxContainer = Globalpreload.dvdbounce_icon.duplicate()
+@onready var hole_icon : VBoxContainer = Globalpreload.hole_icon.duplicate()
+
 # textures
 @onready var playerspeedglowicon : Texture2D = Globalpreload.playerspeedglowicon.duplicate()
 @onready var glideglowicon : Texture2D = Globalpreload.glideglowicon.duplicate()
@@ -61,6 +63,8 @@ extends Node
 @onready var shorttele_glowicon : Texture2D =  Globalpreload.shorttele_glowicon.duplicate()
 @onready var cleanse_glowicon : Texture2D =  Globalpreload.cleanse_glowicon.duplicate()
 @onready var dvdbounce_glowicon : Texture2D =  Globalpreload.dvdbounce_glowicon.duplicate()
+@onready var hole_glowicon : Texture2D =  Globalpreload.hole_glowicon.duplicate()
+
 # dvd area
 @onready var DVDarea : Node2D = Globalpreload.DVDarea.duplicate()
 
@@ -69,7 +73,7 @@ extends Node
 
 @onready var arr_to_del : Array = [playerspeedicon, glideicon, dashicon,expl_B_icon,grapple_icon,
 follower_icon,shrink_icon,slow_icon,grow_icon,longtele_icon,shorttele_icon,cleanse_icon,
-dvdbounce_icon,DVDarea,losepopup,pausepopup]
+dvdbounce_icon,DVDarea,losepopup,pausepopup,hole_icon,hole_glowicon]
 
 # multichances
 @onready var multi_num_limit : int
@@ -208,6 +212,9 @@ func load_gamba_stats() -> void:
 					"DVDBounceGamba":
 						gamba_array_bad.append([tempstring, 
 						get_Icon_texture2D(dvdbounce_icon)])
+					"HoleGamba":
+						gamba_array_good.append([tempstring, 
+						get_Icon_texture2D(hole_icon)])
 					_: print("Could not pre load gamba: ", tempstring)
 
 func load_shop_stats() -> void:
@@ -227,7 +234,7 @@ func load_shop_stats() -> void:
 					shoppricecurses.append(tempstring)
 				elif tempstring in \
 				["PlayerSpeedShop","GlideBootsShop","DashShop","expl_BShop",
-				"GrappleShop", "ShrinkShop"]:
+				"GrappleShop", "ShrinkShop", "HoleShop"]:
 					shoppriceitems.append(tempstring)
 					shopproductitems.append(tempstring)
 				elif  tempstring in \
@@ -308,6 +315,7 @@ node_num: int = 15) -> void:
 			"Cleanse": i = spawnItems(dir,lucky_spawn, i)
 			"Shop" : i = spawnShop(dir, node_num, i)
 			"Hole_Sidewalk" : i = spawnHole(dir, i)
+			"Hole" : i = spawnItems(dir,lucky_spawn, i)
 			_: print("This randomly selected item does not exist!:", lucky_spawn)
 			
 		i += 1
@@ -383,6 +391,7 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 			"ShortTeleportMulti": result_multi_list[i] = [lucky_multi, shorttele_glowicon]
 			"CleanseMulti": result_multi_list[i] = [lucky_multi, cleanse_glowicon]
 			"DVDBounceMulti": result_multi_list[i] = [lucky_multi, dvdbounce_glowicon]
+			"HoleMulti": result_multi_list[i] = [lucky_multi, hole_glowicon]
 			_: print("This randomly selected multi does not exist!:", lucky_multi)
 		
 		multi_chance_list_copy.remove_at(selected_multi)
@@ -496,6 +505,7 @@ func chooseShopTextures(shopstr: String) -> Texture2D:
 		"ShortTeleportShop": return shorttele_glowicon
 		"CleanseShop": return cleanse_glowicon
 		"DVDBounceShop": return dvdbounce_glowicon
+		"HoleShop": return hole_glowicon
 		_: 
 			print("This randomly selected Shop String does not exist!:", shopstr)
 			return null
@@ -617,85 +627,91 @@ func update_labels() -> void:
 			else:
 				hboxlabels.add_child(playerspeedicon)
 			Global.playerspeedlabelon = false
+			playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
 		if  Global.glidelabelon:
 			if Global.glide_mod == 0:
 				hboxlabels.remove_child(glideicon)
 			else:
 				hboxlabels.add_child(glideicon)
 			Global.glidelabelon = false
+			glideicon.get_node("Glide").text = str(Global.glide_mod)
 		if Global.dashlabelon:
 			if Global.dash_mod == 0:
 				hboxlabels.remove_child(dashicon)
 			else:
 				hboxlabels.add_child(dashicon)
 			Global.dashlabelon = false
+			dashicon.get_node("Dash").text = str(Global.dash_mod)
 		if Global.expl_B_labelon:
 			if Global.expl_B_mod == 0:
 				hboxlabels.remove_child(expl_B_icon)
 			else:
 				hboxlabels.add_child(expl_B_icon)
 			Global.expl_B_labelon = false
+			expl_B_icon.get_node("expl_B").text = str(Global.expl_B_mod)
 		if Global.grapplelabelon:
 			if Global.grapple_mod == 0:
 				hboxlabels.remove_child(grapple_icon)
 			else:
 				hboxlabels.add_child(grapple_icon)
 			Global.grapplelabelon = false
+			grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)
 		if Global.followerlabelon:
 			if Global.follower_mod == Global.follower_mod_base:
 				hboxlabels.remove_child(follower_icon)
 			else:
 				hboxlabels.add_child(follower_icon)
 			Global.followerlabelon = false
+			follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
 		if Global.shrinklabelon:
 			if Global.shrink_mod == 0:
 				hboxlabels.remove_child(shrink_icon)
 			else:
 				hboxlabels.add_child(shrink_icon)
 			Global.shrinklabelon = false
+			shrink_icon.get_node("Shrink").text = str(Global.shrink_mod)
 		if Global.playerslowlabelon:
 			if Global.playerslow_mod == Global.playerslow_mod_base:
 				hboxlabels.remove_child(slow_icon)
 			else:
 				hboxlabels.add_child(slow_icon)
 			Global.playerslowlabelon = false
+			slow_icon.get_node("Slow").text = str(Global.playerslow_mod - 1)
 		if Global.growlabelon:
 			if Global.grow_mod == 0:
 				hboxlabels.remove_child(grow_icon)
 			else:
 				hboxlabels.add_child(grow_icon)
 			Global.growlabelon = false
+			grow_icon.get_node("Grow").text = str(Global.grow_mod)
 		if Global.longtelelabelon:
 			if Global.longtele_mod == 0:
 				hboxlabels.remove_child(longtele_icon)
 			else:
 				hboxlabels.add_child(longtele_icon)
 			Global.longtelelabelon = false
+			longtele_icon.get_node("LongTeleport").text = str(Global.longtele_mod)
 		if Global.shorttelelabelon:
 			if Global.shorttele_mod == 0:
 				hboxlabels.remove_child(shorttele_icon)
 			else:
 				hboxlabels.add_child(shorttele_icon)
 			Global.shorttelelabelon = false
+			shorttele_icon.get_node("ShortTeleport").text = str(Global.shorttele_mod)
 		if Global.dvdbouncelabelon:
 			if Global.dvd_mod == 0:
 				hboxlabels.remove_child(dvdbounce_icon)
 			else:
 				hboxlabels.add_child(dvdbounce_icon)
 			Global.dvdbouncelabelon = false
-		
-		playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
-		glideicon.get_node("Glide").text = str(Global.glide_mod)
-		dashicon.get_node("Dash").text = str(Global.dash_mod)
-		expl_B_icon.get_node("expl_B").text = str(Global.expl_B_mod)
-		grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)
-		follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
-		shrink_icon.get_node("Shrink").text = str(Global.shrink_mod)
-		slow_icon.get_node("Slow").text = str(Global.playerslow_mod - 1)
-		grow_icon.get_node("Grow").text = str(Global.grow_mod)
-		longtele_icon.get_node("LongTeleport").text = str(Global.longtele_mod)
-		shorttele_icon.get_node("ShortTeleport").text = str(Global.shorttele_mod)
-		dvdbounce_icon.get_node("DVDBounce").text = str(Global.dvd_mod)
+			dvdbounce_icon.get_node("DVDBounce").text = str(Global.dvd_mod)
+		if Global.holelabelon:
+			if Global.hole_mod == 0:
+				hboxlabels.remove_child(hole_icon)
+			else:
+				hboxlabels.add_child(hole_icon)
+			Global.holelabelon = false
+			hole_icon.get_node("Hole").text = str(Global.hole_mod)
 
 func dash_check() -> void:
 	if Global.dash && dashpopup: 

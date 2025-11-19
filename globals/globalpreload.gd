@@ -99,6 +99,7 @@ var longtele_icon : VBoxContainer = iconlabels.get_node("LongTeleportVbox")
 var shorttele_icon : VBoxContainer = iconlabels.get_node("ShortTeleportVbox")
 var cleanse_icon : VBoxContainer = iconlabels.get_node("CleanseVbox")
 var dvdbounce_icon : VBoxContainer = iconlabels.get_node("DVDBounceVbox")
+var hole_icon : VBoxContainer = iconlabels.get_node("HoleVbox")
 
 # glowicons
 var items_instantiate : Node = ITEM.instantiate()
@@ -117,6 +118,7 @@ var longtele_glowicon : Texture2D = items_instantiate.get_node("LongTeleport/Spr
 var shorttele_glowicon : Texture2D = items_instantiate.get_node("ShortTeleport/Sprite2D").texture
 var cleanse_glowicon : Texture2D = items_instantiate.get_node("Cleanse/Sprite2D").texture
 var dvdbounce_glowicon : Texture2D = items_instantiate.get_node("DVDBounce/Sprite2D").texture
+var hole_glowicon : Texture2D = items_instantiate.get_node("Hole/Sprite2D").texture
 
 # Crosser
 var follower_basic : RigidBody2D = CROSSER.instantiate()

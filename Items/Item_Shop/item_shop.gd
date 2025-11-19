@@ -85,6 +85,10 @@ func _on_body_entered(body):
 						if pricenum <= Global.dvd_mod:
 							Global.inc_DVD(-1*pricenum)
 							bought = true
+					"HoleShop":
+						if pricenum <= Global.hole_mod:
+							Global.inc_Hole(-1*pricenum)
+							bought = true
 					_: print("Price Item not found: ", priceItemName)
 				if bought:
 					polygon_2d.color = Color(0, 225, 0)
@@ -99,6 +103,7 @@ func _on_body_entered(body):
 						"GambaShop": Global.inc_Gamba(productnum)
 						"CleanseShop" : Global.cleanse_curse(productnum)
 						"ShieldShop": Global.follower_array[0].shield_up = true
+						"HoleShop": Global.inc_Hole(productnum)
 						_: print("Product item was not found: ", productItemName)
 				else:
 					polygon_2d.color = Color(225, 0, 0)
