@@ -137,10 +137,18 @@ layout_mode = 2
 object = "None_Street"
 group = "tab0"
 
+[node name="Button" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter/HBoxContainer" index="0"]
+focus_neighbor_top = NodePath("../../../../HBoxContainer5/SandboxSetter/HBoxContainer/Button")
+focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
+
 [node name="SandboxSetter2" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Hole_Street"
 group = "tab0"
+
+[node name="Button" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter2/HBoxContainer" index="0"]
+focus_neighbor_left = NodePath("../../../SandboxSetter/HBoxContainer/Button")
+focus_neighbor_top = NodePath("../../../../HBoxContainer5/SandboxSetter/HBoxContainer/Button")
 
 [node name="HSeparator" type="HSeparator" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2

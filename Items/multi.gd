@@ -30,6 +30,7 @@ func _on_body_entered(body):
 				"DVDBounceMulti": Global.inc_DVD(multi_result)
 				"CleanseMulti": Global.cleanse_curse(multi_result)
 				"GrowMulti": Global.inc_Grow(multi_result)
+				"HoleMulti": Global.inc_Hole(multi_result)
 				_: print("Uknown item in the Multi:", item_pool[winner][0])
 			queue_free()
 			break

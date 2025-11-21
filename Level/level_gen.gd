@@ -448,6 +448,7 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	shop.productnum = generated[3]
 	shop.priceItem = chooseShopTextures(generated[0])
 	shop.productItem = chooseShopTextures(generated[1])
+	shop.position.y -= Global.player_height_px
 	$Ysort.add_child(shop)
 	# shops are two wide so we need to skip a spawn node
 	return i + 1

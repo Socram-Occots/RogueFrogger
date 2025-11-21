@@ -6,11 +6,12 @@ extends Area2D
 @export var productItemName : String
 @export var pricenum : int
 @export var productnum : int
-@onready var polygon_2d: Polygon2D = $Polygon2D
-@onready var sprite_price_item: Sprite2D = $SpritePriceItem
-@onready var pricelabel: Label = $SpritePriceItem/MarginContainer/Label
-@onready var sprite_product_item: Sprite2D = $SpriteProductItem
-@onready var productlabel: Label = $SpriteProductItem/MarginContainer/Label
+
+@onready var polygon_2d: Polygon2D = $Node2D/Polygon2D
+@onready var sprite_price_item: Sprite2D = $Node2D/SpritePriceItem
+@onready var pricelabel: Label = $Node2D/SpritePriceItem/MarginContainer/Label
+@onready var sprite_product_item: Sprite2D = $Node2D/SpriteProductItem
+@onready var productlabel: Label = $Node2D/SpriteProductItem/MarginContainer/Label
 @onready var not_entered : bool = true
 
 # Called when the node enters the scene tree for the first time.

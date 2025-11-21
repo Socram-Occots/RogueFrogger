@@ -5,7 +5,7 @@ func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	for i in ["Player", "Follower"]:
 		if i in metalist: 
-			Global.inc_Hole(90 * Global.follower_mod)
+			Global.inc_Hole(1 * Global.follower_mod)
 			queue_free()
 			break
 
