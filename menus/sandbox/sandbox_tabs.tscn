@@ -253,7 +253,12 @@ layout_mode = 2
 object = "Multi"
 group = "tab1"
 
-[node name="SandboxSetter3" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
+[node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 650
+
+[node name="SandboxSetter" parent="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
 object = "Hole"
 group = "tab1"
@@ -393,10 +398,6 @@ layout_mode = 2
 object = "DVDBounceMulti"
 group = "tab2"
 
-[node name="HSeparator2" type="HSeparator" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
-
 [node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -406,6 +407,10 @@ theme_override_constants/separation = 550
 layout_mode = 2
 object = "HoleMulti"
 group = "tab2"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 
 [node name="Gamba" type="TabBar" parent="TabContainer"]
 visible = false
@@ -744,7 +749,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter3"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter2"]
-[editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter3"]
+[editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2"]
 [editable path="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3"]

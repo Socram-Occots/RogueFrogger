@@ -73,7 +73,7 @@ extends Node
 
 @onready var arr_to_del : Array = [playerspeedicon, glideicon, dashicon,expl_B_icon,grapple_icon,
 follower_icon,shrink_icon,slow_icon,grow_icon,longtele_icon,shorttele_icon,cleanse_icon,
-dvdbounce_icon,DVDarea,losepopup,pausepopup,hole_icon,hole_glowicon]
+dvdbounce_icon,DVDarea,losepopup,pausepopup,hole_icon]
 
 # multichances
 @onready var multi_num_limit : int
@@ -621,94 +621,95 @@ func update_labels() -> void:
 		# unfortunately this cannot be elif anymore
 		# In the case that 2+ items are picked up at once
 		# we need to check each one.
+		var label_children : Array[Node] = hboxlabels.get_children()
 		if Global.playerspeedlabelon:
 			if Global.player_speed_mod == 0:
 				hboxlabels.remove_child(playerspeedicon)
-			else:
+			elif playerspeedicon not in label_children:
 				hboxlabels.add_child(playerspeedicon)
 			Global.playerspeedlabelon = false
 			playerspeedicon.get_node("PlayerSpeed").text = str(Global.player_speed_mod)
 		if  Global.glidelabelon:
 			if Global.glide_mod == 0:
 				hboxlabels.remove_child(glideicon)
-			else:
+			elif glideicon not in label_children:
 				hboxlabels.add_child(glideicon)
 			Global.glidelabelon = false
 			glideicon.get_node("Glide").text = str(Global.glide_mod)
 		if Global.dashlabelon:
 			if Global.dash_mod == 0:
 				hboxlabels.remove_child(dashicon)
-			else:
+			elif dashicon not in label_children:
 				hboxlabels.add_child(dashicon)
 			Global.dashlabelon = false
 			dashicon.get_node("Dash").text = str(Global.dash_mod)
 		if Global.expl_B_labelon:
 			if Global.expl_B_mod == 0:
 				hboxlabels.remove_child(expl_B_icon)
-			else:
+			elif expl_B_icon not in label_children:
 				hboxlabels.add_child(expl_B_icon)
 			Global.expl_B_labelon = false
 			expl_B_icon.get_node("expl_B").text = str(Global.expl_B_mod)
 		if Global.grapplelabelon:
 			if Global.grapple_mod == 0:
 				hboxlabels.remove_child(grapple_icon)
-			else:
+			elif grapple_icon not in label_children:
 				hboxlabels.add_child(grapple_icon)
 			Global.grapplelabelon = false
 			grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)
 		if Global.followerlabelon:
 			if Global.follower_mod == Global.follower_mod_base:
 				hboxlabels.remove_child(follower_icon)
-			else:
+			elif follower_icon not in label_children:
 				hboxlabels.add_child(follower_icon)
 			Global.followerlabelon = false
 			follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
 		if Global.shrinklabelon:
 			if Global.shrink_mod == 0:
 				hboxlabels.remove_child(shrink_icon)
-			else:
+			elif shrink_icon not in label_children:
 				hboxlabels.add_child(shrink_icon)
 			Global.shrinklabelon = false
 			shrink_icon.get_node("Shrink").text = str(Global.shrink_mod)
 		if Global.playerslowlabelon:
 			if Global.playerslow_mod == Global.playerslow_mod_base:
 				hboxlabels.remove_child(slow_icon)
-			else:
+			elif slow_icon not in label_children:
 				hboxlabels.add_child(slow_icon)
 			Global.playerslowlabelon = false
 			slow_icon.get_node("Slow").text = str(Global.playerslow_mod - 1)
 		if Global.growlabelon:
 			if Global.grow_mod == 0:
 				hboxlabels.remove_child(grow_icon)
-			else:
+			elif grow_icon not in label_children:
 				hboxlabels.add_child(grow_icon)
 			Global.growlabelon = false
 			grow_icon.get_node("Grow").text = str(Global.grow_mod)
 		if Global.longtelelabelon:
 			if Global.longtele_mod == 0:
 				hboxlabels.remove_child(longtele_icon)
-			else:
+			elif longtele_icon not in label_children:
 				hboxlabels.add_child(longtele_icon)
 			Global.longtelelabelon = false
 			longtele_icon.get_node("LongTeleport").text = str(Global.longtele_mod)
 		if Global.shorttelelabelon:
 			if Global.shorttele_mod == 0:
 				hboxlabels.remove_child(shorttele_icon)
-			else:
+			elif shorttele_icon not in label_children:
 				hboxlabels.add_child(shorttele_icon)
 			Global.shorttelelabelon = false
 			shorttele_icon.get_node("ShortTeleport").text = str(Global.shorttele_mod)
 		if Global.dvdbouncelabelon:
 			if Global.dvd_mod == 0:
 				hboxlabels.remove_child(dvdbounce_icon)
-			else:
+			elif dvdbounce_icon not in label_children:
 				hboxlabels.add_child(dvdbounce_icon)
 			Global.dvdbouncelabelon = false
 			dvdbounce_icon.get_node("DVDBounce").text = str(Global.dvd_mod)
 		if Global.holelabelon:
 			if Global.hole_mod == 0:
 				hboxlabels.remove_child(hole_icon)
-			else:
+			elif hole_icon not in label_children:
 				hboxlabels.add_child(hole_icon)
 			Global.holelabelon = false
 			hole_icon.get_node("Hole").text = str(Global.hole_mod)

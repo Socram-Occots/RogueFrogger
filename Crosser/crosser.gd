@@ -230,7 +230,6 @@ func shield_compromised() -> void:
 	if shield_comp:
 #		print("shield_comp true")
 		shieldAnimation.modulate = "ff0000"
-		
 	elif !shield_comp && shield_gone:
 		shieldAnimation.visible = false
 		shieldAnimation.modulate = "ffffff"

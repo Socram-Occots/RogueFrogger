@@ -223,6 +223,7 @@ var hole_cool_down : float = hole_cool_down_base
 var hole_mod : int = 0
 var hole_cool_down_bool : bool = false
 var holelabelon = false
+var coyote_status_cool_down_bool : bool = false
 #endregion
 
 func reset() -> void:
@@ -365,6 +366,7 @@ func reset() -> void:
 	hole_cool_down = hole_cool_down_base
 	hole_mod = 0
 	hole_cool_down_bool = false
+	coyote_status_cool_down_bool = false
 
 func incrementDifficulty(x : int = 2, int_multiple : int = 1) -> void:
 	if score != 0 && score % x == 0:

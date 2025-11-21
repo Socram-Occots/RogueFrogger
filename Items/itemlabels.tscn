@@ -454,7 +454,7 @@ anchors_preset = -1
 offset_right = 512.0
 offset_bottom = 512.0
 fill_mode = 5
-texture_progress = ExtResource("3_vma1t")
+texture_progress = ExtResource("20_ws4q5")
 
 [node name="Timer" type="Timer" parent="HoleVbox/Sprite2D/TextureProgressBar"]
 one_shot = true

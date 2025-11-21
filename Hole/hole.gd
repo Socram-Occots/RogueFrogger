@@ -2,10 +2,11 @@ extends Area2D
 @onready var crater : bool = false
 @onready var coyote : bool = false
 @onready var entered : bool = false
+@onready var timer: Timer = $Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	timer.one_shot = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")
@@ -14,10 +15,14 @@ func _process(delta: float) -> void:
 
 func coyote_time() -> void:
 	Global.hole_cool_down_bool = true
+	Global.coyote_status_cool_down_bool = true
 	coyote = true
-	await get_tree().create_timer(Global.hole_coyote_time).timeout
+	timer.start(Global.hole_coyote_time)
+
+func _on_timer_timeout() -> void:
 	if entered:
 		Global.defeat()
+	coyote = false
 
 func _on_area_entered(area: Area2D) -> void:
 	var metalist : PackedStringArray = area.get_meta_list()
@@ -28,7 +33,7 @@ func _on_area_entered(area: Area2D) -> void:
 			entered = true
 			if !body.shield_up && coyote:
 				Global.defeat()
-			elif body.shield_up && (coyote || Global.hole_mod < 1):
+			elif body.shield_up:
 				body.shield_comp = true
 			elif Global.hole_mod > 0 && !Global.hole_cool_down_bool:
 				coyote_time()
@@ -46,6 +51,9 @@ func _on_area_exited(area: Area2D) -> void:
 		metalist = body.get_meta_list()
 		if "Player" in metalist:
 			entered = false
+			timer.stop()
+			coyote = false
+			Global.coyote_status_cool_down_bool = false
 			if body.shield_up:
 				body.shield_gone = true
 				body.shield_comp = false

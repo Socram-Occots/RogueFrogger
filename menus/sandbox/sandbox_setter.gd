@@ -65,7 +65,7 @@ func set_properties() -> void:
 			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
 		"Hole" :
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
+			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
 		"ExplBarrel" : 
 			set_sandbox_option(object, "General", 999, 
 			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png")
@@ -140,7 +140,7 @@ func set_properties() -> void:
 			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
 		"HoleShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
+			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
 		"PlayerSpeedGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
@@ -182,7 +182,7 @@ func set_properties() -> void:
 			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
 		"HoleGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
+			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
 		"PlayerSpeedMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
 			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
@@ -230,7 +230,7 @@ func set_properties() -> void:
 			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
 		"HoleMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
+			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
 		_: print("set texture string was not there: ", object)
 
 func set_sandbox_option(topic : String, type : String, maxint : int, texture : String) -> void:

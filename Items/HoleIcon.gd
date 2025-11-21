@@ -21,7 +21,7 @@ func _process(delta):
 		bar.value = int((timer.time_left / cool_down_time) * 100)
 	
 func icon_activated():
-	cool_down_time = Global.dash_cool_down
+	cool_down_time = Global.hole_cool_down
 	timer.start(cool_down_time)
 	time_label.show()
 	bar.show()
