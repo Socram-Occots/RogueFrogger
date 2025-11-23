@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://e7ohgba71xgm"]
+[gd_scene load_steps=16 format=3 uid="uid://e7ohgba71xgm"]
 
 [ext_resource type="Texture2D" uid="uid://r03cvcpomnbf" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png" id="1_ntsr0"]
 [ext_resource type="Script" path="res://Barrel/explodingbarrelrigidbody.gd" id="1_wmlc5"]
@@ -49,9 +49,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0j4y"]
-size = Vector2(30, 8)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v677n"]
 size = Vector2(13.1842, 3.75087)
 
@@ -79,15 +76,11 @@ sprite_frames = SubResource("SpriteFrames_23q0i")
 animation = &"explosion"
 offset = Vector2(0, -31)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5.035)
-scale = Vector2(1.5, 1.5)
-shape = SubResource("RectangleShape2D_a0j4y")
-
 [node name="impulse" type="Area2D" parent="."]
 scale = Vector2(1.5, 1.5)
 collision_layer = 256
 collision_mask = 1439
+metadata/ExplodingBarrelImpulse = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="impulse"]
 position = Vector2(0, -3.295)

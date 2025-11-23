@@ -9,7 +9,7 @@
 shader = ExtResource("1_0tob4")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkbcq"]
-size = Vector2(223, 73.74)
+size = Vector2(223, 74)
 
 [node name="ItemShop" type="Area2D"]
 collision_layer = 8

@@ -18,6 +18,7 @@ extends RigidBody2D
 @onready var vLength : float = 0
 @onready var velocityGrapple : Vector2 = Vector2(0.0, 0.0)
 @onready var grappled : bool = false
+@onready var carrying : bool = false
 
 @onready var grapplehook : Line2D = Globalpreload.grapplehook.duplicate()
 @onready var tele : Area2D = Globalpreload.tele.duplicate()

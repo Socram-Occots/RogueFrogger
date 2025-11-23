@@ -4,6 +4,8 @@ extends RigidBody2D
 @onready var exploding : bool = false
 @onready var animationExplo : AnimatedSprite2D = $AnimatedSprite2D
 @onready var explosionCol : CollisionShape2D = $explosionbarrelexplosion/CollisionShape2D
+@onready var carry : bool = false
+@onready var explodingbarrelbody: RigidBody2D = $"."
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta):
@@ -11,6 +13,10 @@ func _physics_process(delta):
 		explosionCol.set_deferred("disabled", true)
 	elif animationExplo.frame == 8:
 		queue_free()
+	if carry:
+		print("a")
+		position.x = Global.player_pos_x
+		position.y = Global.player_pos_y
 
 func _ready():
 	set_meta("ExplodingBarrel", false)
@@ -29,7 +35,6 @@ func explosion() -> void:
 	sleeping = true
 	exploding = true
 	$impulse/CollisionShape2D.set_deferred("disabled", true)
-	$CollisionShape2D.set_deferred("disabled", true)
 	explosionCol.set_deferred("disabled", false)
 	animationExplo.play("explosion")
 
@@ -41,19 +46,27 @@ func _on_impulse_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if exploding: return
 #	if not_moving && "Player" in metalist:
-	for i in ["Player", "Follower"]:
-		if i in metalist:
-			apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod * get_physics_process_delta_time())
-			#body.dashing = false
-			break
-	for i in ["Element", "ExplodingBarrel"]:
+	if "Player" in metalist and !carry and !Global.follower_array[0].carrying:
+		Global.follower_array[0].carrying = true
+		var nodeanchor : Node2D = Global.follower_array[0].get_node(
+			"TopCollisionPolygon2D/CarryingNode")
+		queue_free()
+		var new_expl_barrel : RigidBody2D = Globalpreload.EXPLBARREL_INST.duplicate()
+		new_expl_barrel.carry = true
+		new_expl_barrel.freeze = true
+		new_expl_barrel.sleeping = true
+		nodeanchor.call_deferred("add_child", new_expl_barrel)
+		#apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod * get_physics_process_delta_time())
+	for i in ["Element"]:
 		if i in metalist:
 			explosion()
-		
+
+
+
 func _on_impulse_area_entered(area):
 	var metalist : PackedStringArray = area.get_meta_list()
 	if exploding: return
-	for i in ["Car", "Item"]:
+	for i in ["Car", "Item", "ExplodingBarrelImpulse"]:
 		if i in metalist:
 			explosion()
 	

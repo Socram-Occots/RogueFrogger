@@ -288,6 +288,9 @@ tint_progress = Color(100, 100, 100, 1)
 [node name="Timer" type="Timer" parent="TopCollisionPolygon2D/StatusBar/HBoxContainer/HoleCoyoteStatus/TextureProgressBar"]
 one_shot = true
 
+[node name="CarryingNode" type="Node2D" parent="TopCollisionPolygon2D"]
+position = Vector2(0, -14.575)
+
 [node name="playermove" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_5abg2")
