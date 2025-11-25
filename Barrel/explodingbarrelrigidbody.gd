@@ -4,8 +4,14 @@ extends RigidBody2D
 @onready var exploding : bool = false
 @onready var animationExplo : AnimatedSprite2D = $AnimatedSprite2D
 @onready var explosionCol : CollisionShape2D = $explosionbarrelexplosion/CollisionShape2D
-@onready var carry : bool = false
 @onready var explodingbarrelbody: RigidBody2D = $"."
+@onready var impulse_collision_shape_2d: CollisionShape2D = $impulse/CollisionShape2D
+@onready var expl_collision_shape_2d: CollisionShape2D = $explosionbarrelexplosion/CollisionShape2D
+@onready var feet_collision_shape_2d: CollisionShape2D = $feet/CollisionShape2D
+
+var carry : bool = false
+var thrown : bool = false
+var settled : bool = false
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta):
@@ -13,40 +19,74 @@ func _physics_process(delta):
 		explosionCol.set_deferred("disabled", true)
 	elif animationExplo.frame == 8:
 		queue_free()
-	if carry:
-		print("a")
-		position.x = Global.player_pos_x
-		position.y = Global.player_pos_y
+
+func _on_timer_timeout() -> void:
+	thrown = false
 
 func _ready():
 	set_meta("ExplodingBarrel", false)
 	explosionCol.set_deferred("disabled", true)
 	animationExplo.animation = "explosion"
 	animationExplo.frame = 0
+	if carry:
+		impulse_collision_shape_2d.set_deferred("disabled", true)
 	
 func explosion() -> void:
 	if exploding: return
-	$explosionbarrelexplosion/CollisionShape2D.scale.x = Global.expl_B_size_mod
-	$explosionbarrelexplosion/CollisionShape2D.scale.y = Global.expl_B_size_mod
+	if carry: Global.follower_array[0].carrying = false
+	call_deferred("set_freeze_enabled", true)
+	expl_collision_shape_2d.scale.x = Global.expl_B_size_mod
+	expl_collision_shape_2d.scale.y = Global.expl_B_size_mod
 	$AnimatedSprite2D.scale.x = Global.expl_B_size_mod + 0.5
 	$AnimatedSprite2D.scale.y = Global.expl_B_size_mod + 0.5
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0
 	sleeping = true
 	exploding = true
-	$impulse/CollisionShape2D.set_deferred("disabled", true)
+	impulse_collision_shape_2d.set_deferred("disabled", true)
 	explosionCol.set_deferred("disabled", false)
 	animationExplo.play("explosion")
+
+@warning_ignore("unused_parameter")
+func _input(event: InputEvent) -> void:
+	if carry:
+		var grapple_input_pressed : bool = Input.is_action_just_pressed("rope_cont") || \
+		Input.is_action_just_pressed("rope")
+		if grapple_input_pressed:
+			var contr_dir : Vector2 = Vector2.ZERO
+			if Global.using_cont && SettingsDataContainer.get_controller_aim_toggle():
+				contr_dir.y += -1 * Input.get_action_raw_strength("up_cont_aim")
+				contr_dir.y += Input.get_action_raw_strength("down_cont_aim")
+				contr_dir.x += Input.get_action_raw_strength("right_cont_aim")
+				contr_dir.x += -1 * Input.get_action_raw_strength("left_cont_aim")
+				contr_dir = contr_dir.normalized()
+			elif !Global.using_cont && SettingsDataContainer.get_mouse_aim_toggle():
+				contr_dir = (get_global_mouse_position() - global_position).normalized()
+			else:
+				contr_dir = Global.follower_array[0].velocityRigid.normalized()
+				if contr_dir == Vector2.ZERO:
+					contr_dir.y = -1
+			if contr_dir != Vector2.ZERO:
+				queue_free()
+				Global.follower_array[0].carrying = false
+				var new_expl_barrel : RigidBody2D = Globalpreload.EXPLBARREL_INST.duplicate()
+				var nodeanchor : Node2D = Global.follower_array[0].get_node(
+					"TopCollisionPolygon2D/CarryingNode")
+				new_expl_barrel.global_position = nodeanchor.global_position
+				new_expl_barrel.thrown = true
+				new_expl_barrel.apply_central_impulse(
+					contr_dir*Global.expl_B_impulse_mod)
+				get_tree().root.get_node("Level/Ysort").call_deferred(
+					"add_child", new_expl_barrel)
 
 # impulse
 @warning_ignore("unused_parameter")
 func _on_impulse_body_entered(body):
 	if body == self: return
-#	print("impact")
 	var metalist : PackedStringArray = body.get_meta_list()
 	if exploding: return
 #	if not_moving && "Player" in metalist:
-	if "Player" in metalist and !carry and !Global.follower_array[0].carrying:
+	if "Player" in metalist and !carry and !thrown and !Global.follower_array[0].carrying:
 		Global.follower_array[0].carrying = true
 		var nodeanchor : Node2D = Global.follower_array[0].get_node(
 			"TopCollisionPolygon2D/CarryingNode")
@@ -56,12 +96,9 @@ func _on_impulse_body_entered(body):
 		new_expl_barrel.freeze = true
 		new_expl_barrel.sleeping = true
 		nodeanchor.call_deferred("add_child", new_expl_barrel)
-		#apply_impulse(Global.player_prev_vel * Global.expl_B_impulse_mod * get_physics_process_delta_time())
-	for i in ["Element"]:
+	for i in ["Element", "Border"]:
 		if i in metalist:
 			explosion()
-
-
 
 func _on_impulse_area_entered(area):
 	var metalist : PackedStringArray = area.get_meta_list()

@@ -288,9 +288,12 @@ node_num: int = 15) -> void:
 		if i == open: i += 1
 		if i == node_num: break
 		var dir : String = "spawnterrain/Node" + str(i)
-		
-		selected = GRand.maprand.rand_weighted(chances)
-		var lucky_spawn : String = spawns[selected]
+		var lucky_spawn : String
+		if chances.is_empty():
+			lucky_spawn = "None"
+		else:
+			selected = GRand.maprand.rand_weighted(chances)
+			lucky_spawn = spawns[selected]
 		
 		if lucky_spawn == "Items":
 			var selected_item : int = GRand.maprand.rand_weighted(items_chances)
@@ -345,9 +348,12 @@ node_num: int = 15) -> void:
 		if i == open: i += 1
 		if i == node_num: break
 		var dir : String = "spawnterrain/Node" + str(i)
-		
-		selected = GRand.maprand.rand_weighted(chances)
-		var lucky_spawn : String = spawns[selected]
+		var lucky_spawn : String
+		if chances.is_empty():
+			lucky_spawn = "None_Street"
+		else:
+			selected = GRand.maprand.rand_weighted(chances)
+			lucky_spawn = spawns[selected]
 		# spawn the lucky item
 		match lucky_spawn:
 			"None_Street": pass

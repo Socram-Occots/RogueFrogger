@@ -163,7 +163,6 @@ func movement_logic(delta : float) -> void:
 		
 	# tracking velocity for rigidbodies
 	if velocityRigid != Vector2.ZERO:
-		Global.player_prev_vel = velocityRigid
 		animated.speed_scale = vLength/Global.player_base_speed
 
 	if !gliding:
@@ -193,12 +192,6 @@ func _physics_process(delta: float) -> void:
 	# checking player shield
 	player_shield()
 	shield_compromised()
-	
-	# tracking velocity for rigidbodies
-	if velocityRigidDelta == Vector2.ZERO && Global.player_prev_vel\
-	 != Vector2.ZERO:
-		await get_tree().create_timer(0.075).timeout
-		Global.player_prev_vel = Vector2.ZERO
 
 func player_animation() -> void:
 #	$"AnimatedSprite2D".flip_h = false

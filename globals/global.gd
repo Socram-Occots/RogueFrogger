@@ -29,7 +29,6 @@ func _input(event: InputEvent) -> void:
 #region Base Values
 #player
 const player_base_speed : float = 750
-var player_prev_vel : Vector2 = Vector2(0,0)
 
 #car
 const car_base_speed : float = 125.0
@@ -244,7 +243,6 @@ func reset() -> void:
 	# gamestate
 	defeat_var = false
 	# playerspeed
-	player_prev_vel = Vector2(0,0)
 	player_speed_mod = 0
 	player_speed_scaling = player_base_speed
 	#car speed
@@ -472,7 +470,7 @@ func inc_expl_B(times : int) -> void:
 		times = 0
 
 	expl_B_mod += times
-	expl_B_impulse_mod = expl_B_impulse_mod_base + 0.02 * expl_B_mod
+	expl_B_impulse_mod = expl_B_impulse_mod_base + 0.1 * expl_B_mod
 	expl_B_size_mod = expl_B_size_mod_base + 0.02 * expl_B_mod
 	expl_B_chance_mod = expl_B_mod * 2
 	expl_B_labelon = true
