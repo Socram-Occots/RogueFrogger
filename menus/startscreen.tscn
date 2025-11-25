@@ -27,6 +27,7 @@ theme_override_constants/separation = 0
 [node name="Start" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
+focus_neighbor_top = NodePath("../Quit")
 theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Start"
@@ -67,6 +68,7 @@ icon_alignment = 1
 [node name="Quit" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 180)
 layout_mode = 2
+focus_neighbor_bottom = NodePath("../Start")
 theme_override_font_sizes/font_size = 70
 action_mode = 0
 text = "Quit"

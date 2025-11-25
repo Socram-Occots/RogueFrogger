@@ -86,6 +86,21 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Button" parent="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/glide/HBoxContainer" index="3"]
+focus_neighbor_bottom = NodePath("../../../throw/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/throw/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../glide/HBoxContainer/Button")
+
+[node name="CheckButton" parent="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/mouse_aim/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../throw/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/glide/HBoxContainer" index="3"]
+focus_neighbor_bottom = NodePath("../../../throw/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/throw/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../glide/HBoxContainer/Button")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -145,6 +160,7 @@ libraries = {
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/walk"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/rope"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/throw"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/mouse_aim"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_stick"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_stick"]
@@ -158,6 +174,7 @@ libraries = {
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/walk"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/rope"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/throw"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_up"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_down"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_right"]

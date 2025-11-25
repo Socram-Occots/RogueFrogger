@@ -11,7 +11,7 @@ script = ExtResource("1_x8yr7")
 
 [node name="grappleHead" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 1310
+collision_mask = 286
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="grappleHead"]
 scale = Vector2(0.3, 0.3)

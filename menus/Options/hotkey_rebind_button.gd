@@ -80,6 +80,8 @@ func set_action_name() -> void:
 			label.text = "Slow Down"
 		"rope":
 			label.text = "Grapple"
+		"throw":
+			label.text = "Throw"
 		"glide":
 			label.text = "Glide"
 		"up_cont_stick":
@@ -106,6 +108,8 @@ func set_action_name() -> void:
 			label.text = "Grapple"
 		"glide_cont":
 			label.text = "Glide"
+		"throw_cont":
+			label.text = "Throw"
 		"up_cont_aim":
 			label.text = "Aim Up"
 		"down_cont_aim":

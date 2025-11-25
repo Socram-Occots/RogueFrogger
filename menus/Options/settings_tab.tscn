@@ -225,6 +225,16 @@ input_type = "keyboard"
 focus_neighbor_top = NodePath("../../../rope/HBoxContainer/Button")
 focus_neighbor_bottom = NodePath("../../../mouse_aim/HBoxContainer/CheckButton")
 
+[node name="throw" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "throw"
+group = "tab2"
+input_type = "keyboard"
+
+[node name="Button" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/throw/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../rope/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../mouse_aim/HBoxContainer/CheckButton")
+
 [node name="mouse_aim" parent="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_8evcb")]
 layout_mode = 2
 t_name = "mouse_aim"
@@ -387,6 +397,16 @@ input_type = "analog"
 focus_neighbor_top = NodePath("../../../rope/HBoxContainer/Button")
 focus_neighbor_bottom = NodePath("../../../aim_up/HBoxContainer/Button")
 
+[node name="throw" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
+layout_mode = 2
+action_name = "throw_cont"
+group = "tab3"
+input_type = "cont_flex"
+
+[node name="Button" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/throw/HBoxContainer" index="3"]
+focus_neighbor_top = NodePath("../../../rope/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../aim_up/HBoxContainer/Button")
+
 [node name="aim_up" parent="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_xuhdp")]
 layout_mode = 2
 action_name = "up_cont_aim"
@@ -534,6 +554,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 [editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/walk"]
 [editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/rope"]
 [editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/throw"]
 [editable path="TabContainer/Keyboard/MarginContainer/ScrollContainer/VBoxContainer/mouse_aim"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/up_stick"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/down_stick"]
@@ -547,6 +568,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/walk"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/rope"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/glide"]
+[editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/throw"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_up"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_down"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_right"]

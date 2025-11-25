@@ -50,9 +50,10 @@ func explosion() -> void:
 @warning_ignore("unused_parameter")
 func _input(event: InputEvent) -> void:
 	if carry:
-		var grapple_input_pressed : bool = Input.is_action_just_pressed("rope_cont") || \
-		Input.is_action_just_pressed("rope")
+		var grapple_input_pressed : bool = Input.is_action_just_pressed("throw_cont") || \
+		Input.is_action_just_pressed("throw")
 		if grapple_input_pressed:
+			carry = false
 			var contr_dir : Vector2 = Vector2.ZERO
 			if Global.using_cont && SettingsDataContainer.get_controller_aim_toggle():
 				contr_dir.y += -1 * Input.get_action_raw_strength("up_cont_aim")
@@ -64,20 +65,19 @@ func _input(event: InputEvent) -> void:
 				contr_dir = (get_global_mouse_position() - global_position).normalized()
 			else:
 				contr_dir = Global.follower_array[0].velocityRigid.normalized()
-				if contr_dir == Vector2.ZERO:
-					contr_dir.y = -1
-			if contr_dir != Vector2.ZERO:
-				queue_free()
-				Global.follower_array[0].carrying = false
-				var new_expl_barrel : RigidBody2D = Globalpreload.EXPLBARREL_INST.duplicate()
-				var nodeanchor : Node2D = Global.follower_array[0].get_node(
-					"TopCollisionPolygon2D/CarryingNode")
-				new_expl_barrel.global_position = nodeanchor.global_position
-				new_expl_barrel.thrown = true
-				new_expl_barrel.apply_central_impulse(
-					contr_dir*Global.expl_B_impulse_mod)
-				get_tree().root.get_node("Level/Ysort").call_deferred(
-					"add_child", new_expl_barrel)
+			if contr_dir == Vector2.ZERO:
+				contr_dir.y = -1
+			queue_free()
+			Global.follower_array[0].carrying = false
+			var new_expl_barrel : RigidBody2D = Globalpreload.EXPLBARREL_INST.duplicate()
+			var nodeanchor : Node2D = Global.follower_array[0].get_node(
+				"TopCollisionPolygon2D/CarryingNode")
+			new_expl_barrel.global_position = nodeanchor.global_position
+			new_expl_barrel.thrown = true
+			new_expl_barrel.apply_central_impulse(
+				contr_dir*Global.expl_B_impulse_mod)
+			get_tree().root.get_node("Level/Ysort").call_deferred(
+				"add_child", new_expl_barrel)
 
 # impulse
 @warning_ignore("unused_parameter")
@@ -116,8 +116,6 @@ func _on_explosionbarrelexplosion_body_entered(body):
 			Global.defeat()
 		else:
 			body.shield_comp = true
-	elif "ExplodingBarrel" in metalist:
-		body.explosion()
 	elif "Follower" in metalist:
 		body.remove_follower()
 	for i in ["Element"]:
@@ -133,10 +131,10 @@ func _on_explosionbarrelexplosion_body_exited(body):
 # areas
 func _on_explosionbarrelexplosion_area_entered(area):
 	var metalist : PackedStringArray = area.get_meta_list()
-	for i in ["Car", "Item", "ExplodingBarrel", "Grapplehead"]:
+	for i in ["Car", "Item", "Grapplehead"]:
 		if i in metalist:
 			area.queue_free()
-	if "ExplodingBarrel" in metalist:
+	if "ExplodingBarrelImpulse" in metalist:
 		area.explosion()
 	elif "Hole" in metalist:
 		if !area.crater:

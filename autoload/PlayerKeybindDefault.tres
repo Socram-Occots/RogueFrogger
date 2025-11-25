@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=26 format=3 uid="uid://gko0na7yltfq"]
+[gd_resource type="Resource" script_class="PlayerKeybindResource" load_steps=28 format=3 uid="uid://gko0na7yltfq"]
 
 [ext_resource type="Script" path="res://autoload/PlayerKeybindResource.gd" id="1_ibwj6"]
 
@@ -47,6 +47,10 @@ axis_value = 1.0
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_gr371"]
 button_index = 10
 
+[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ea1g4"]
+button_index = 3
+pressed = true
+
 [sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_ntb1s"]
 button_index = 11
 
@@ -85,6 +89,11 @@ unicode = 100
 [sub_resource type="InputEventKey" id="InputEventKey_0doxi"]
 physical_keycode = 82
 
+[sub_resource type="InputEventKey" id="InputEventKey_se251"]
+device = -1
+physical_keycode = 69
+unicode = 101
+
 [sub_resource type="InputEventKey" id="InputEventKey_o6cnt"]
 device = -1
 physical_keycode = 87
@@ -104,6 +113,7 @@ DEFAULT_MOVE_DASH_KEY = SubResource("InputEventKey_dlwue")
 DEFAULT_MOVE_WALK_KEY = SubResource("InputEventKey_yfkmm")
 DEFAULT_MOVE_ROPE_KEY = SubResource("InputEventKey_0doxi")
 DEFAULT_MOVE_GLIDE_KEY = SubResource("InputEventKey_po1kw")
+DEFAULT_MOVE_THROW_KEY = SubResource("InputEventKey_se251")
 DEFAULT_CONTROLLER_UP_STICK = SubResource("InputEventJoypadMotion_a5g2p")
 DEFAULT_CONTROLLER_DOWN_STICK = SubResource("InputEventJoypadMotion_64f0s")
 DEFAULT_CONTROLLER_RIGHT_STICK = SubResource("InputEventJoypadMotion_aqfd3")
@@ -116,6 +126,7 @@ DEFAULT_CONTROLLER_DASH = SubResource("InputEventJoypadButton_vxcxt")
 DEFAULT_CONTROLLER_WALK = SubResource("InputEventJoypadButton_j4kim")
 DEFAULT_CONTROLLER_ROPE = SubResource("InputEventJoypadButton_gr371")
 DEFAULT_CONTROLLER_GLIDE = SubResource("InputEventJoypadButton_8m10y")
+DEFAULT_CONTROLLER_THROW = SubResource("InputEventJoypadButton_ea1g4")
 DEFAULT_CONTROLLER_AIM_UP = SubResource("InputEventJoypadMotion_8dtte")
 DEFAULT_CONTROLLER_AIM_DOWN = SubResource("InputEventJoypadMotion_k4wyq")
 DEFAULT_CONTROLLER_AIM_RIGHT = SubResource("InputEventJoypadMotion_1rksl")

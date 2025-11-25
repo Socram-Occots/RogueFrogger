@@ -9,6 +9,7 @@ const MOVE_DASH : String = "dash"
 const MOVE_WALK : String = "walk"
 const MOVE_ROPE : String = "rope"
 const MOVE_GLIDE : String = "glide"
+const MOVE_THROW : String = "throw"
 
 const CONTROLLER_UP_STICK : String = "up_cont_stick"
 const CONTROLLER_DOWN_STICK : String = "down_cont_stick"
@@ -22,6 +23,7 @@ const CONTROLLER_DASH : String = "dash_cont"
 const CONTROLLER_WALK : String = "walk_cont"
 const CONTROLLER_ROPE : String = "rope_cont"
 const CONTROLLER_GLIDE : String = "glide_cont"
+const CONTROLLER_THROW : String = "throw_cont"
 const CONTROLLER_AIM_UP : String = "up_cont_aim"
 const CONTROLLER_AIM_DOWN : String = "down_cont_aim"
 const CONTROLLER_AIM_RIGHT : String = "right_cont_aim"
@@ -36,6 +38,7 @@ const CONTROLLER_AIM_LEFT : String = "left_cont_aim"
 @export var DEFAULT_MOVE_WALK_KEY = InputEventKey.new()
 @export var DEFAULT_MOVE_ROPE_KEY = InputEventKey.new()
 @export var DEFAULT_MOVE_GLIDE_KEY = InputEventKey.new()
+@export var DEFAULT_MOVE_THROW_KEY = InputEventKey.new()
 
 @export var DEFAULT_CONTROLLER_UP_STICK = InputEventJoypadMotion.new()
 @export var DEFAULT_CONTROLLER_DOWN_STICK = InputEventJoypadMotion.new()
@@ -49,6 +52,7 @@ const CONTROLLER_AIM_LEFT : String = "left_cont_aim"
 @export var DEFAULT_CONTROLLER_WALK = InputEventJoypadButton.new()
 @export var DEFAULT_CONTROLLER_ROPE = InputEventJoypadButton.new()
 @export var DEFAULT_CONTROLLER_GLIDE = InputEventJoypadButton.new()
+@export var DEFAULT_CONTROLLER_THROW = InputEventJoypadButton.new()
 @export var DEFAULT_CONTROLLER_AIM_UP = InputEventJoypadMotion.new()
 @export var DEFAULT_CONTROLLER_AIM_DOWN = InputEventJoypadMotion.new()
 @export var DEFAULT_CONTROLLER_AIM_RIGHT = InputEventJoypadMotion.new()
@@ -62,6 +66,7 @@ var move_dash_key
 var move_walk_key
 var move_rope_key
 var move_glide_key
+var move_throw_key
 
 var controller_up_stick
 var controller_down_stick
@@ -74,6 +79,7 @@ var controller_left_button
 var controller_dash 
 var controller_walk 
 var controller_rope
+var controller_throw
 var controller_glide
 var controller_aim_up
 var controller_aim_down
