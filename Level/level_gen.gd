@@ -660,8 +660,10 @@ func update_labels() -> void:
 		if Global.grapplelabelon:
 			if Global.grapple_mod == 0:
 				hboxlabels.remove_child(grapple_icon)
+				Global.follower_array[0].disable_itemgrapple()
 			elif grapple_icon not in label_children:
 				hboxlabels.add_child(grapple_icon)
+				Global.follower_array[0].enable_itemgrapple()
 			Global.grapplelabelon = false
 			grapple_icon.get_node("Grapple").text = str(Global.grapple_mod)
 		if Global.followerlabelon:
@@ -669,6 +671,7 @@ func update_labels() -> void:
 				hboxlabels.remove_child(follower_icon)
 			elif follower_icon not in label_children:
 				hboxlabels.add_child(follower_icon)
+				
 			Global.followerlabelon = false
 			follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
 		if Global.shrinklabelon:
@@ -812,24 +815,19 @@ func create_follower() -> void:
 	for i in range(Global.follower_spawn_multi):
 		var follower : RigidBody2D = Globalpreload.follower_basic.duplicate()
 		var follower_in_front : RigidBody2D = Global.follower_array[-1]
-		
-		follower.set_script(Globalpreload.FOLLOWERSCRIPT)
-		follower.get_node("Camera2D").queue_free()
-		follower.get_node("follower_cleanup_timer").queue_free()
-		#follower.get_node("shield").queue_free()
-		follower.remove_meta("Player")
 		follower.set_meta("Follower", curr_follower_id)
 		
 		curr_follower_id += 1
 		#follower.set_collision_layer_value(1, false)
 		
-		var timer = Timer.new()
+		var timer : Timer = Timer.new()
 		timer.autostart = true
 		timer.wait_time = 0.05
 		timer.timeout.connect(follower._on_timer_timeout)
 		follower.add_child(timer)
 		
-		var follower_in_front_pos : Vector2 = follower_in_front.get_node("BotCollisionPolygon2D2/followerspawn").global_position
+		var follower_in_front_pos : Vector2 = follower_in_front.get_node(
+			"BotCollisionPolygon2D2/followerspawn").global_position
 		follower.position = follower_in_front_pos
 		
 		follower.get_node("TopCollisionPolygon2D").scale = follower_in_front.get_node("TopCollisionPolygon2D").scale

@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=56 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -49,6 +49,9 @@
 [ext_resource type="Texture2D" uid="uid://kudfyslcxv8j" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_19.png" id="45_era0l"]
 [ext_resource type="Texture2D" uid="uid://dlwpx7nyy8tdk" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_20.png" id="46_6t7lh"]
 [ext_resource type="Script" path="res://Crosser/despawn_cage.gd" id="47_mk2mw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhf1i"]
+size = Vector2(3840, 950)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5abg2"]
 animations = [{
@@ -236,6 +239,14 @@ script = ExtResource("1_5p142")
 metadata/Player = false
 metadata/Follower = 0
 
+[node name="AutoItemGrapple" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AutoItemGrapple"]
+shape = SubResource("RectangleShape2D_vhf1i")
+
 [node name="BotCollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-18, 37, 18, 37, 23, 16, 23, -1, 10, -1, 10, 1, -10, 1, -10, -1, -23, -1, -23, 16)
 
@@ -362,6 +373,7 @@ metadata/Feet = false
 position = Vector2(0, 31.5)
 shape = SubResource("RectangleShape2D_ldtew")
 
+[connection signal="area_entered" from="AutoItemGrapple" to="." method="_on_auto_item_grapple_area_entered"]
 [connection signal="timeout" from="follower_cleanup_timer" to="." method="_on_follower_cleanup_timer_timeout"]
 [connection signal="area_entered" from="despawn_cage" to="despawn_cage" method="_on_area_entered"]
 [connection signal="body_entered" from="despawn_cage" to="despawn_cage" method="_on_body_entered"]

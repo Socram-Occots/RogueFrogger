@@ -22,9 +22,14 @@ extends RigidBody2D
 
 @onready var grapplehook : Line2D = Globalpreload.grapplehook.duplicate()
 @onready var tele : Area2D = Globalpreload.tele.duplicate()
+@onready var itemgrapplehook : Line2D = Globalpreload.itemgrapplehook.duplicate()
+
+@onready var arr_of_items_to_grapple : Array[Array] = []
+@onready var auto_item_grapple: Area2D = $AutoItemGrapple
+@onready var grappleitem_collision_shape_2d: CollisionShape2D = $AutoItemGrapple/CollisionShape2D
 
 func _ready() -> void:
-	Globalpreload.delete_array.append_array([grapplehook,tele])
+	Globalpreload.delete_array.append_array([grapplehook,tele,itemgrapplehook])
 	# stop camera from being weird initially
 	$Camera2D.reset_smoothing()
 	
@@ -48,6 +53,9 @@ func _ready() -> void:
 #func move_and_slide_rigidbody() -> void:
 	#if !gliding:
 		#apply_central_force(velocityRigid)
+	
+	disable_itemgrapple()
+
 
 func move_player() -> void:
 	var walking : bool = false
@@ -124,6 +132,9 @@ func grapple_decision_tree() -> void:
 			contr_dir.y += Input.get_action_raw_strength("down_cont_aim")
 			contr_dir.x += Input.get_action_raw_strength("right_cont_aim")
 			contr_dir.x += -1 * Input.get_action_raw_strength("left_cont_aim")
+			# if the joystick is not being used just shoot in the crosser direction anyways
+			if contr_dir.length() < 0.1:
+				contr_dir = velocityRigid
 			grappledupe.dir_vector = contr_dir.normalized()
 		elif !Global.using_cont && SettingsDataContainer.get_mouse_aim_toggle():
 			grappledupe.dir_vector = (get_global_mouse_position() - global_position).normalized()
@@ -247,3 +258,43 @@ func _on_follower_cleanup_timer_timeout() -> void:
 				Global.follower_array[a].global_position).length() < 5:
 					Global.follower_array[i].remove_follower()
 					break
+
+@warning_ignore("unused_parameter")
+func _on_auto_item_grapple_area_entered(area: Area2D) -> void:
+	if Global.grapple_item_chosen:
+		return
+	var metalist : PackedStringArray = area.get_meta_list()
+	if  !("Mult" in metalist || "marked_for_grapple" in  metalist) && "Item" in metalist:
+		arr_of_items_to_grapple.append([area, (area.global_position - global_position).length()])
+	await get_tree().physics_frame
+	choose_furthest_item()
+
+func max_item_pos_from_arr(arr1 : Array, arr2: Array) -> bool:
+	return arr1[1] > arr2[1]
+
+func enable_itemgrapple() -> void:
+	grappleitem_collision_shape_2d.set_deferred("disabled", false)
+func disable_itemgrapple() -> void:
+	grappleitem_collision_shape_2d.set_deferred("disabled", true)
+
+func choose_furthest_item() -> void:
+	if !Global.grapple_item_chosen && !arr_of_items_to_grapple.is_empty():
+		var chosen_item : Array
+		if arr_of_items_to_grapple.size() > 1:
+			chosen_item = arr_of_items_to_grapple.reduce(
+				func(max_arr, item): return item if max_item_pos_from_arr(item, max_arr) else max_arr)
+		else:
+			chosen_item = arr_of_items_to_grapple[0]
+		if !chosen_item.is_empty():
+			Global.grapple_item_chosen = true
+			var itemgrapple : Line2D = itemgrapplehook.duplicate()
+			itemgrapple.item = chosen_item[0]
+			chosen_item[0].set_meta("marked_for_grapple", false)
+			auto_item_grapple.add_child(itemgrapple)
+			chosen_item.clear()
+			arr_of_items_to_grapple.clear()
+			disable_itemgrapple()
+			await get_tree().create_timer(Global.grapple_item_cool_down).timeout
+			Global.grapple_item_chosen = false
+			if Global.grapple_mod > 0:
+				enable_itemgrapple()

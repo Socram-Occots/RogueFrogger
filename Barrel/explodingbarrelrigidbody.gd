@@ -60,6 +60,8 @@ func _input(event: InputEvent) -> void:
 				contr_dir.y += Input.get_action_raw_strength("down_cont_aim")
 				contr_dir.x += Input.get_action_raw_strength("right_cont_aim")
 				contr_dir.x += -1 * Input.get_action_raw_strength("left_cont_aim")
+				if contr_dir.length() < 0.1:
+					contr_dir = Global.follower_array[0].velocityRigid
 				contr_dir = contr_dir.normalized()
 			elif !Global.using_cont && SettingsDataContainer.get_mouse_aim_toggle():
 				contr_dir = (get_global_mouse_position() - global_position).normalized()

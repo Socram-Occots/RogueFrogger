@@ -37,6 +37,7 @@ func _on_body_entered(body):
 
 func _ready() -> void:
 	set_meta("Item", false)
+	set_meta("Multi", false)
 	if item_pool.is_empty():
 		queue_free()
 	item_pool_len = item_pool.size()

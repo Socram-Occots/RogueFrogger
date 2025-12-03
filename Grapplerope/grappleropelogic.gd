@@ -76,4 +76,3 @@ func _on_grapple_head_body_entered(body: Node2D) -> void:
 
 func _on_timer_timeout() -> void:
 	direction *= -1
-	

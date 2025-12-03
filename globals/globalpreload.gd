@@ -22,6 +22,7 @@ const SHOP : Resource = preload("res://Items/Item_Shop/ItemShop.tscn")
 const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 const TELE : Resource = preload("res://Items/Teleport/teleportoutline.tscn")
 const HOLE : Resource = preload("res://Hole/hole.tscn")
+const ITEMGRAPPLESCRIPT : Script = preload("res://Grapplerope/itemgrapplelogic.gd")
 
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("dash"):
@@ -123,6 +124,7 @@ var hole_glowicon : Texture2D = items_instantiate.get_node("Hole/Sprite2D").text
 # Crosser
 var follower_basic : RigidBody2D = CROSSER.instantiate()
 var grapplehook : Line2D = GRAPPLE.instantiate()
+var itemgrapplehook : Line2D = grapplehook.duplicate()
 var tele : Area2D = TELE.instantiate()
 var delete_array : Array = []
 
@@ -135,3 +137,13 @@ func delete_stray_nodes() -> void:
 		if is_instance_valid(i):
 			i.queue_free()
 	delete_array.clear()
+
+func _ready() -> void:
+	follower_basic.set_script(FOLLOWERSCRIPT)
+	itemgrapplehook.set_script(ITEMGRAPPLESCRIPT)
+	itemgrapplehook.get_node("grappleHead/CollisionShape2D").set_deferred("disabled", true)
+	itemgrapplehook.remove_meta("grapplehead")
+	follower_basic.get_node("Camera2D").queue_free()
+	follower_basic.get_node("follower_cleanup_timer").queue_free()
+	follower_basic.get_node("AutoItemGrapple").queue_free()
+	follower_basic.remove_meta("Player")

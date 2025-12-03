@@ -33,19 +33,20 @@ const player_base_speed : float = 750
 #car
 const car_base_speed : float = 125.0
 #dash
-const dash_base : float = 1.5 - 0.03
+const dash_base : float = 1.5
 const dash_base_time : float = 0.3
-const dash_cool_down_base : float = 2.0
+const dash_cool_down_base : float = 5.0
 #timer
 const timer_base_l : float = 4.2
 const timer_base_h : float = 5.4
 #grapple
 const grapple_cool_down_base : float = 2.0
 const grapple_speed_base : float = 500
-const grapple_strength_base : float = 500
+const grapple_strength_base : float = 725
 const grapple_length_base : float = 250
+const grapple_item_cool_down_base : float = 60
 #glide
-const glide_cool_down_base : float = 2.0
+const glide_cool_down_base : float = 5.0
 const glide_base_time : float = 0.5
 #gamba
 const gamba_result_sec_base : float = 2.0
@@ -153,6 +154,9 @@ var grapple_mod : int = 0
 var grapple_speed : float = grapple_speed_base
 var grapple_strength : float = grapple_strength_base
 var grapple_length : float = grapple_length_base
+var grapple_item_chosen : bool = false
+var grapple_item_cool_down : float = grapple_item_cool_down_base
+
 
 #glide
 var glide : bool = false
@@ -302,6 +306,8 @@ func reset() -> void:
 	grapple_speed = grapple_speed_base
 	grapple_strength = grapple_strength_base
 	grapple_length = grapple_length_base
+	grapple_item_chosen = false
+	grapple_item_cool_down = grapple_item_cool_down_base
 	
 	#glide
 	glide = false
@@ -492,6 +498,7 @@ func inc_GrappleRope(times : int) -> void:
 	grapple_strength = grapple_strength_base + 25 * grapple_mod
 	grapple_length = grapple_length_base + 5 * grapple_mod
 	grapple_cool_down = grapple_cool_down_base * ((1/1.005) ** grapple_mod)
+	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.01) ** grapple_mod)
 	grapplelabelon = true
 	updatelabels = true
 
@@ -690,3 +697,4 @@ func change_player_follower_size() -> void:
 			follower_array[i].get_node("shield").scale = temp_shrink
 			follower_array[i].get_node("GlideBoots").scale = temp_shrink
 			follower_array[i].get_node("FollowerCollision").scale = temp_shrink
+			follower_array[i].get_node("feet").scale = temp_shrink
