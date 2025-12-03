@@ -11,6 +11,7 @@ var crosser : RigidBody2D
 var dir_vector : Vector2
 
 func _ready() -> void:
+	grapple_head.set_meta("Grapplehead", false)
 	grapple_head.global_position = crosser_global_pos
 	set_point_position(0, crosser_global_pos)
 	set_point_position(1, crosser_global_pos)

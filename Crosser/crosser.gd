@@ -264,7 +264,8 @@ func _on_auto_item_grapple_area_entered(area: Area2D) -> void:
 	if Global.grapple_item_chosen:
 		return
 	var metalist : PackedStringArray = area.get_meta_list()
-	if  !("Mult" in metalist || "marked_for_grapple" in  metalist) && "Item" in metalist:
+	if  !("Multi" in metalist || "Shop" in metalist || "marked_for_grapple" in metalist) && \
+	"Item" in metalist:
 		arr_of_items_to_grapple.append([area, (area.global_position - global_position).length()])
 	await get_tree().physics_frame
 	choose_furthest_item()
@@ -290,6 +291,7 @@ func choose_furthest_item() -> void:
 			var itemgrapple : Line2D = itemgrapplehook.duplicate()
 			itemgrapple.item = chosen_item[0]
 			chosen_item[0].set_meta("marked_for_grapple", false)
+			chosen_item[0].remove_meta("Item")
 			auto_item_grapple.add_child(itemgrapple)
 			chosen_item.clear()
 			arr_of_items_to_grapple.clear()

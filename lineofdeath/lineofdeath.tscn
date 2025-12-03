@@ -13,7 +13,7 @@ script = ExtResource("1_meatc")
 metadata/LineOfDeath = false
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 0, 0, 0.831373)
+color = Color(1, 0, 0, 0.784314)
 antialiased = true
 polygon = PackedVector2Array(0, 0, 1280, 0, 1280, 64, 0, 64)
 

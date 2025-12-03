@@ -139,11 +139,5 @@ func delete_stray_nodes() -> void:
 	delete_array.clear()
 
 func _ready() -> void:
-	follower_basic.set_script(FOLLOWERSCRIPT)
 	itemgrapplehook.set_script(ITEMGRAPPLESCRIPT)
 	itemgrapplehook.get_node("grappleHead/CollisionShape2D").set_deferred("disabled", true)
-	itemgrapplehook.remove_meta("grapplehead")
-	follower_basic.get_node("Camera2D").queue_free()
-	follower_basic.get_node("follower_cleanup_timer").queue_free()
-	follower_basic.get_node("AutoItemGrapple").queue_free()
-	follower_basic.remove_meta("Player")

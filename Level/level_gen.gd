@@ -671,7 +671,6 @@ func update_labels() -> void:
 				hboxlabels.remove_child(follower_icon)
 			elif follower_icon not in label_children:
 				hboxlabels.add_child(follower_icon)
-				
 			Global.followerlabelon = false
 			follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
 		if Global.shrinklabelon:
@@ -815,8 +814,12 @@ func create_follower() -> void:
 	for i in range(Global.follower_spawn_multi):
 		var follower : RigidBody2D = Globalpreload.follower_basic.duplicate()
 		var follower_in_front : RigidBody2D = Global.follower_array[-1]
+		follower.set_script(Globalpreload.FOLLOWERSCRIPT)
 		follower.set_meta("Follower", curr_follower_id)
-		
+		follower.get_node("Camera2D").queue_free()
+		follower.get_node("follower_cleanup_timer").queue_free()
+		follower.get_node("AutoItemGrapple").queue_free()
+		follower.remove_meta("Player")
 		curr_follower_id += 1
 		#follower.set_collision_layer_value(1, false)
 		

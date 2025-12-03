@@ -8,7 +8,7 @@ extends Line2D
 @onready var collision_shape_2d: CollisionShape2D = $grappleHead/CollisionShape2D
 var item : Area2D
 
-func _ready() -> void: 
+func _ready() -> void:
 	grapple_head.global_position = crosser_global_pos
 	set_point_position(0, crosser_global_pos)
 	set_point_position(1, crosser_global_pos)
