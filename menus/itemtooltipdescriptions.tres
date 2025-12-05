@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b5jsp8dyeegne"]
+
+[ext_resource type="Script" path="res://menus/itemtooltipdescriptionsscript.gd" id="1_spus5"]
+
+[resource]
+script = ExtResource("1_spus5")

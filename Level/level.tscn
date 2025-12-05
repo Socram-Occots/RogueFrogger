@@ -104,9 +104,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1914.0
+offset_left = -1920.0
 offset_top = -199.0
-offset_right = 5741.0
+offset_right = 5760.0
 offset_bottom = 596.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -127,16 +127,6 @@ text = "Score"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Version" type="Label" parent="CanvasLayer"]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -26.0
-offset_right = 72.0
-grow_vertical = 0
-script = ExtResource("8_3m3b3")
-metadata/_edit_use_anchors_ = true
-
 [node name="stopwatch" type="Label" parent="CanvasLayer"]
 offset_right = 288.0
 offset_bottom = 104.0
@@ -145,3 +135,14 @@ text = "stopwatch"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_moa77")
+
+[node name="Version" type="Label" parent="CanvasLayer"]
+z_index = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+offset_right = 72.0
+grow_vertical = 0
+script = ExtResource("8_3m3b3")
+metadata/_edit_use_anchors_ = true

@@ -8,9 +8,28 @@ extends Control
 @onready var sandbox_seed : String = SettingsDataContainer.get_sandbox_seed(!Global.sandbox)
 @onready var retry: Button = $CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry
 @onready var resume: Button = $CenterContainer/ColorRect/VBoxContainer/HBoxContainer/resume
+@onready var label: Label = $VBoxContainer/HBoxContainer/Label
+@onready var tooltiptexturerect : TextureRect = $VBoxContainer/VBoxContainer2/HBoxContainer/TextureRect
+@onready var tooltipcontainer : HBoxContainer = $VBoxContainer/VBoxContainer2/HBoxContainer
+@onready var label_tooltip: Label = $VBoxContainer/VBoxContainer2/Label
+const TOOLTIPS : ItemToolTipDict = preload("res://menus/itemtooltipdescriptions.tres")
+
 
 func _ready():
 	add_to_group("UI_FOCUS", true)
+	label.visible = false
+	label_tooltip.visible = false
+
+func load_itemtooltips() -> void:
+	var items : Array[Node] = get_tree().root.get_node(
+		"Level/CanvasLayer/HBoxContainer").get_children()
+	for i in items:
+		label_tooltip.visible = true
+		var temp : TextureRect = tooltiptexturerect.duplicate()
+		temp.visible = true
+		temp.itemtip = TOOLTIPS.ITEMTOOLTIPDICTIONARY[i.get_meta("ItemType")]
+		temp.texture = i.get_node("Sprite2D").texture
+		tooltipcontainer.add_child(temp)
 
 func begin_focus() -> void:
 	if visible:
@@ -28,6 +47,11 @@ func _on_visibility_changed():
 		animation_player.play("startpause")
 		show_seed()
 		begin_focus()
+		load_itemtooltips()
+	elif tooltipcontainer:
+		for i in tooltipcontainer.get_children():
+			if i.visible:
+				i.queue_free()
 
 func _on_retry_pressed():
 	Global.reset()
@@ -52,3 +76,6 @@ func _input(event):
 			Global.unpause()
 		elif !visible:
 			Global.pause()
+
+func _on_resume_focus_entered() -> void:
+	label.visible = false

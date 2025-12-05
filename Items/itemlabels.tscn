@@ -29,6 +29,7 @@ offset_right = 513.305
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "PlayerSpeed"
 
 [node name="PlayerSpeed" type="Label" parent="PlayerSpeedVbox"]
 layout_mode = 2
@@ -48,6 +49,7 @@ offset_right = 513.305
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "GlideBoots"
 
 [node name="Glide" type="Label" parent="GlideVbox"]
 layout_mode = 2
@@ -98,6 +100,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Dash"
 
 [node name="Dash" type="Label" parent="DashVbox"]
 layout_mode = 2
@@ -148,6 +151,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "expl_B"
 
 [node name="expl_B" type="Label" parent="expl_B_Vbox"]
 layout_mode = 2
@@ -167,6 +171,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Grapple"
 
 [node name="Grapple" type="Label" parent="GrappleVbox"]
 layout_mode = 2
@@ -217,6 +222,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Follower"
 
 [node name="Follower" type="Label" parent="FollowerVbox"]
 layout_mode = 2
@@ -236,6 +242,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Shrink"
 
 [node name="Shrink" type="Label" parent="ShrinkVbox"]
 layout_mode = 2
@@ -255,6 +262,7 @@ offset_right = 515.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Slow"
 
 [node name="Slow" type="Label" parent="SlowVbox"]
 layout_mode = 2
@@ -274,6 +282,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Grow"
 
 [node name="Grow" type="Label" parent="GrowVbox"]
 layout_mode = 2
@@ -293,6 +302,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "LongTeleport"
 
 [node name="LongTeleport" type="Label" parent="LongTeleportVbox"]
 layout_mode = 2
@@ -343,6 +353,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "ShortTeleport"
 
 [node name="ShortTeleport" type="Label" parent="ShortTeleportVbox"]
 layout_mode = 2
@@ -393,6 +404,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Cleanse"
 
 [node name="Cleanse" type="Label" parent="CleanseVbox"]
 layout_mode = 2
@@ -412,6 +424,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "DVDBounce"
 
 [node name="DVDBounce" type="Label" parent="DVDBounceVbox"]
 layout_mode = 2
@@ -431,6 +444,7 @@ offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
+metadata/ItemType = "Hole"
 
 [node name="Hole" type="Label" parent="HoleVbox"]
 layout_mode = 2

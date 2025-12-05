@@ -1,7 +1,7 @@
 extends Node
 
 #verison
-var version : String = "V 0.0.0.6"
+var version : String = "V 0.0.0.7"
 
 #score
 var score : int = 0
