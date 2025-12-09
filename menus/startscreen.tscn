@@ -49,6 +49,16 @@ action_mode = 0
 text = "Logbook"
 icon_alignment = 1
 
+[node name="Polygon2D" type="Polygon2D" parent="Options/Logbook"]
+position = Vector2(120, 5)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(112, -1, 112, 48, 139, 48, 139, -1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Options/Logbook/Polygon2D"]
+position = Vector2(-11, 57)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(123, -1, 123, 23, 150, 23, 150, -1)
+
 [node name="Tutorial" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 154)
 layout_mode = 2

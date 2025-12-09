@@ -152,3 +152,8 @@ func _on_feet_area_entered(area: Area2D) -> void:
 	for i in ["Hole"]:
 		if i in metalist:
 			explosion()
+
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	if !SettingsDataContainer.get_logbook_dict("Objects", "ExplBarrel")[0]:
+		SettingsSignalBus.emit_on_logbook_dict_set("Objects", "ExplBarrel", true, 0)

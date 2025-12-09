@@ -13,7 +13,6 @@ func _ready() -> void:
 	set_properties()
 	add_to_group(group)
 	
-	
 func set_properties() -> void:
 	match object:
 		"Seed":

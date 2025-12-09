@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0leoibyd8yrj"]
+[gd_scene load_steps=3 format=3 uid="uid://d0leoibyd8yrj"]
 
 [ext_resource type="Script" path="res://menus/Logbook/logbook.gd" id="1_k5r8i"]
+[ext_resource type="PackedScene" uid="uid://blaciwut42wag" path="res://menus/Logbook/logbook_tabs.tscn" id="2_8i2oe"]
 
 [node name="Logbook" type="Control"]
 layout_mode = 3
@@ -34,15 +35,23 @@ text = "Logbook"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LogbookTabs" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_8i2oe")]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Exit and Save" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 75)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 40
-text = "Exit"
+text = "Exit and Save"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit and Save" to="." method="_on_exit_and_save_pressed"]
+
+[editable path="MarginContainer/VBoxContainer/LogbookTabs"]

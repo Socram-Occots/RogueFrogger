@@ -437,6 +437,7 @@ func inc_PlayerSpeed(times : int) -> void:
 	player_speed_scaling = player_base_speed + 20 * player_speed_mod
 	playerspeedlabelon = true
 	updatelabels = true
+	logbook_tracking("Items", "PlayerSpeed")
 
 func inc_GlideBoots(times : int) -> void:
 	if glide_mod + times < 0:
@@ -452,6 +453,7 @@ func inc_GlideBoots(times : int) -> void:
 	glide_time = glide_base_time + 0.025 * glide_mod
 	glidelabelon = true
 	updatelabels = true
+	logbook_tracking("Items", "GlideBoots")
 	
 func inc_Dash(times : int) -> void:
 	if dash_mod + times < 0:
@@ -469,6 +471,7 @@ func inc_Dash(times : int) -> void:
 	dash_cool_down = dash_cool_down_base * ((1/1.005) ** dash_mod)
 	dashlabelon = true
 	updatelabels = true
+	logbook_tracking("Items", "Dash")
 	
 func inc_expl_B(times : int) -> void:
 	if expl_B_mod + times < 0:
@@ -481,6 +484,7 @@ func inc_expl_B(times : int) -> void:
 	expl_B_chance_mod = expl_B_mod * 2
 	expl_B_labelon = true
 	updatelabels = true
+	logbook_tracking("Items", "expl_B")
 
 func inc_GrappleRope(times : int) -> void:
 	if grapple_mod + times < 0:
@@ -501,6 +505,7 @@ func inc_GrappleRope(times : int) -> void:
 	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.01) ** grapple_mod)
 	grapplelabelon = true
 	updatelabels = true
+	logbook_tracking("Items", "Grapple")
 
 func inc_Follower(times : int) -> void:
 	if follower_mod + times < follower_mod_base:
@@ -523,6 +528,7 @@ func inc_Follower(times : int) -> void:
 	
 	followerlabelon = true
 	updatelabels = true
+	logbook_tracking("Items", "Follower")
 
 func inc_Shrink(times : int) -> void:
 	if shrink_mod + times < 0:
@@ -539,6 +545,7 @@ func inc_Shrink(times : int) -> void:
 	
 	shrinklabelon = true
 	updatelabels = true
+	logbook_tracking("Items", "Shrink")
 
 func inc_Gamba(times : int) -> void:
 	if gamba_running:
@@ -546,6 +553,7 @@ func inc_Gamba(times : int) -> void:
 	elif !(gamba_update || gamba_done):
 		gamba_mod += times - 1
 		gamba_update = true
+	logbook_tracking("Items", "Gamba")
 
 func wipe_null_followers() -> void:
 	var temp_array : Array[int] = []
@@ -569,6 +577,7 @@ func inc_PlayerSlow(times: int) -> void:
 	
 	playerslowlabelon = true
 	updatelabels = true
+	logbook_tracking("Curses", "Slow")
 
 func inc_Grow(times : int) -> void:
 	if grow_mod + times < 0:
@@ -585,6 +594,7 @@ func inc_Grow(times : int) -> void:
 	
 	growlabelon = true
 	updatelabels = true
+	logbook_tracking("Curses", "Grow")
 
 func inc_LongTele(times: int) -> void:
 	if longtele_mod + times < 0:
@@ -593,6 +603,7 @@ func inc_LongTele(times: int) -> void:
 	longtele_mod += times
 	longtelelabelon = true
 	updatelabels = true
+	logbook_tracking("Curses", "LongTeleport")
 
 func inc_ShortTele(times: int) -> void:
 	if shorttele_mod + times < 0:
@@ -602,6 +613,7 @@ func inc_ShortTele(times: int) -> void:
 	shortele_cool_down = shortele_cool_down_base * ((1/1.005) ** shorttele_mod)
 	shorttelelabelon = true
 	updatelabels = true
+	logbook_tracking("Curses", "ShortTeleport")
 
 func inc_DVD(times : int) -> void:
 	if dvd_mod + times < 0:
@@ -623,6 +635,7 @@ func inc_DVD(times : int) -> void:
 				dvd_array.remove_at(0)
 	dvdbouncelabelon = true
 	updatelabels = true
+	logbook_tracking("Curses", "DVDBounce")
 
 func cleanse_curse(times: int):
 	var curse_dict : Dictionary = {}
@@ -640,6 +653,7 @@ func cleanse_curse(times: int):
 	
 	if curse_dict.is_empty():
 		return
+		
 	
 	var curse_size : int = curse_dict.keys().size()
 	
@@ -670,6 +684,8 @@ func cleanse_curse(times: int):
 		
 		if curse_dict.is_empty():
 			return
+	
+	logbook_tracking("Items", "Cleanse")
 
 func inc_Hole(times : int) -> void:
 	if hole_mod + times < 0:
@@ -680,6 +696,7 @@ func inc_Hole(times : int) -> void:
 	hole_cool_down = hole_cool_down_base * ((1/1.005) ** hole_mod)
 	holelabelon = true
 	updatelabels = true
+	logbook_tracking("Items", "Hole")
 
 func change_player_follower_size() -> void:
 		wipe_null_followers()
@@ -698,3 +715,6 @@ func change_player_follower_size() -> void:
 			follower_array[i].get_node("GlideBoots").scale = temp_shrink
 			follower_array[i].get_node("FollowerCollision").scale = temp_shrink
 			follower_array[i].get_node("feet").scale = temp_shrink
+
+func logbook_tracking(type : String, object : String) -> void:
+	SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 0)

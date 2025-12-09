@@ -230,6 +230,7 @@ func player_shield() -> void:
 		shieldAnimation.visible = true
 		shieldAnimation.play("shield")
 		shield_ready = false
+		Global.logbook_tracking("Items", "Shield")
 		
 func shield_compromised() -> void:
 	if shield_comp:

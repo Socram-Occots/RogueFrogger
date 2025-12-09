@@ -7,6 +7,8 @@ const OPTIONS : Resource = preload("res://menus/Options/option_menu.tscn")
 @onready var options: Button = $Options/Options
 @onready var credits: Button = $Options/Credits
 @onready var quit: Button = $Options/Quit
+@onready var logbook: Button = $Options/Logbook
+@onready var logbook_notif: Polygon2D = $Options/Logbook/Polygon2D
 
 func loadOptions() -> void:
 	var optionspopup : Control = OPTIONS.instantiate()
@@ -20,14 +22,17 @@ func _ready() -> void:
 	add_to_group("UI_FOCUS", true)
 	add_to_group("UI_FOCUS_OPTIONS", true)
 	add_to_group("UI_FOCUS_SANDBOX", true)
+	add_to_group("UI_FOCUS_LOGBOOK", true)
 	add_to_group("UI_FOCUS_CREDITS", true)
 	add_to_group("UI_FOCUS_STARTSCREEN")
-	begin_focus() 
+	begin_focus()
+	scan_for_logbook()
 
 func become_background():
 	if visible:
 		start.set_focus_mode(FOCUS_NONE)
 		sandbox.set_focus_mode(FOCUS_NONE)
+		logbook.set_focus_mode(FOCUS_NONE)
 		tutorial.set_focus_mode(FOCUS_NONE)
 		options.set_focus_mode(FOCUS_NONE)
 		credits.set_focus_mode(FOCUS_NONE)
@@ -37,6 +42,7 @@ func become_foreground():
 	if visible:
 		start.set_focus_mode(FOCUS_ALL)
 		sandbox.set_focus_mode(FOCUS_ALL)
+		logbook.set_focus_mode(FOCUS_ALL)
 		tutorial.set_focus_mode(FOCUS_ALL)
 		options.set_focus_mode(FOCUS_ALL)
 		credits.set_focus_mode(FOCUS_ALL)
@@ -54,6 +60,9 @@ func begin_focus_sandbox() -> void:
 func begin_focus_credits() -> void:
 	if visible:
 		credits.grab_focus.call_deferred()
+func begin_focus_logbook() -> void:
+	if visible:
+		logbook.grab_focus.call_deferred()
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://Level/level.tscn")
@@ -77,3 +86,15 @@ func _on_credits_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+
+func scan_for_logbook() -> void:
+	var temp : Dictionary = SettingsDataContainer.loaded_data.get("logbook_dict")
+	var tempbool : bool = false
+	for i in temp.keys():
+		for a in temp[i].keys():
+			if temp[i][a][0] != temp[i][a][1]:
+				tempbool = true
+				break
+		if tempbool:
+			break
+	logbook_notif.visible = tempbool

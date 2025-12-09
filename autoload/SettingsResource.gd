@@ -106,3 +106,39 @@ const default_sandbox_seed : String = ""
 # aim toggle
 const default_mouse_aim_toggle : bool = false
 const default_controller_aim_toggle : bool = false
+
+# tooltip data
+const default_logbook_objects_dict : Dictionary = {
+	"ExplBarrel":[false, false],
+	"Dumpster":[false, false],
+	"Barrel":[false, false],
+	"Hole_Sidewalk_Street":[false, false]
+}
+
+const default_logbook_items_dict : Dictionary = {
+	"PlayerSpeed":[false, false],
+	"GlideBoots":[false, false],
+	"Dash":[false, false],
+	"expl_B":[false, false],
+	"Grapple":[false, false],
+	"Follower":[false, false],
+	"Gamba":[false, false],
+	"Shield":[false, false],
+	"Shrink":[false, false],
+	"Cleanse":[false, false],
+	"Hole":[false, false]
+}
+
+const default_logbook_curses_dict : Dictionary = {
+	"Slow":[false, false],
+	"Grow":[false, false],
+	"LongTeleport":[false, false],
+	"ShortTeleport":[false, false],
+	"DVDBounce":[false, false]
+}
+
+const default_logbook_dict : Dictionary = {
+	"Objects":default_logbook_objects_dict,
+	"Items":default_logbook_items_dict,
+	"Curses":default_logbook_curses_dict
+}

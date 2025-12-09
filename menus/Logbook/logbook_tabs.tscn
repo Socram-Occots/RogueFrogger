@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://blaciwut42wag"]
+[gd_scene load_steps=3 format=3 uid="uid://blaciwut42wag"]
 
+[ext_resource type="Script" path="res://menus/Logbook/logbook_tabs.gd" id="1_rkw1h"]
 [ext_resource type="PackedScene" uid="uid://cbbwwa0sxmctm" path="res://menus/Logbook/logbook_setter.tscn" id="1_tdavq"]
 
 [node name="LogbookTabs" type="Control"]
@@ -9,6 +10,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rkw1h")
+
+[node name="LogbookSetter" parent="." instance=ExtResource("1_tdavq")]
+visible = false
+layout_mode = 1
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -65,32 +71,82 @@ theme_override_constants/h_separation = 164
 theme_override_constants/v_separation = 164
 columns = 10
 
-[node name="LogbookSetter" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="Items" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
+focus_mode = 0
+metadata/_tab_index = 1
 
-[node name="LogbookSetter2" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Items"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
-[node name="LogbookSetter3" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Items/MarginContainer"]
 layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
 
-[node name="LogbookSetter4" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="Margincontainer" type="MarginContainer" parent="TabContainer/Items/MarginContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
 
-[node name="LogbookSetter5" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Items/MarginContainer/ScrollContainer/Margincontainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 164
+theme_override_constants/v_separation = 164
+columns = 10
 
-[node name="LogbookSetter6" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="Curses" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
+focus_mode = 0
+metadata/_tab_index = 2
 
-[node name="LogbookSetter7" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Curses"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
-[node name="LogbookSetter8" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Curses/MarginContainer"]
 layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
 
-[node name="LogbookSetter9" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="Margincontainer" type="MarginContainer" parent="TabContainer/Curses/MarginContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
 
-[node name="LogbookSetter10" parent="TabContainer/Objects/MarginContainer/ScrollContainer/Margincontainer/GridContainer" instance=ExtResource("1_tdavq")]
+[node name="GridContainer" type="GridContainer" parent="TabContainer/Curses/MarginContainer/ScrollContainer/Margincontainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 164
+theme_override_constants/v_separation = 164
+columns = 10

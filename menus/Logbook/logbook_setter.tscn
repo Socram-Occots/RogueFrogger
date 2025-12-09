@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbbwwa0sxmctm"]
+[gd_scene load_steps=6 format=3 uid="uid://cbbwwa0sxmctm"]
 
 [ext_resource type="Texture2D" uid="uid://biscs04ru388f" path="res://RogueFroggerAssets/RFAssets/Level/gamba.png" id="1_gbqpq"]
+[ext_resource type="Script" path="res://menus/Logbook/logbook_setter.gd" id="1_h1nho"]
 [ext_resource type="Texture2D" uid="uid://cvltbdf4w1x4p" path="res://addons/controller_icons/assets/key/question.png" id="2_31ao8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c47a4"]
@@ -14,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_h1nho")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 custom_minimum_size = Vector2(0, 125)
@@ -37,7 +39,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_c47a4")
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Button"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HBoxContainer/Button"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,23 +47,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="TextureRect" parent="HBoxContainer/Button/HBoxContainer"]
+[node name="Sprite2D" type="TextureRect" parent="HBoxContainer/Button/AspectRatioContainer"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("1_gbqpq")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Mystery" type="TextureRect" parent="HBoxContainer/Button/HBoxContainer/Sprite2D"]
+[node name="Mystery" type="TextureRect" parent="HBoxContainer/Button/AspectRatioContainer"]
 texture_filter = 1
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 150.0
+layout_mode = 2
 texture = ExtResource("2_31ao8")
 expand_mode = 2
 stretch_mode = 5
+
+[node name="Polygon2D" type="Polygon2D" parent="HBoxContainer/Button/AspectRatioContainer"]
+position = Vector2(0, 5)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(112, -1, 112, 48, 139, 48, 139, -1)
+
+[node name="Polygon2D2" type="Polygon2D" parent="HBoxContainer/Button/AspectRatioContainer/Polygon2D"]
+position = Vector2(-11, 57)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(123, -1, 123, 23, 150, 23, 150, -1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="HBoxContainer/Button/AspectRatioContainer"]
+rect = Rect2(0, 0, 150, 150)
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ubusy")
+
+[connection signal="screen_entered" from="HBoxContainer/Button/AspectRatioContainer/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

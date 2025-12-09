@@ -57,3 +57,7 @@ func _on_area_exited(area: Area2D) -> void:
 			if body.shield_up:
 				body.shield_gone = true
 				body.shield_comp = false
+
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	if !SettingsDataContainer.get_logbook_dict("Objects", "Hole_Sidewalk_Street")[0]:
+		SettingsSignalBus.emit_on_logbook_dict_set("Objects", "Hole_Sidewalk_Street", true, 0)

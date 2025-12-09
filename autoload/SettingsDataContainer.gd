@@ -20,6 +20,8 @@ var loaded_data : Dictionary = {}
 # aim toggle
 var mouse_aim_toggle : bool = false
 var controller_aim_toggle : bool = false
+# logbook data
+var logbook_dict : Dictionary = {}
 
 func _ready():
 	handle_signals()
@@ -37,7 +39,8 @@ func create_storage_dictionary() -> Dictionary:
 		"sandbox_dict": sandbox_dict,
 		"sandbox_seed": sandbox_seed,
 		"mouse_aim_toggle": mouse_aim_toggle,
-		"controller_aim_toggle": controller_aim_toggle
+		"controller_aim_toggle": controller_aim_toggle,
+		"logbook_dict": logbook_dict
 	}
 
 	return settings_container_dict
@@ -196,6 +199,17 @@ func get_controller_aim_toggle(default: bool = false) -> bool:
 		return DEFAULT_SETTINGS.default_controller_aim_toggle
 	return controller_aim_toggle
 
+# get logbook dict
+func get_logbook_dict(type: String, object: String, default: bool = false) -> Array:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_logbook_dict[type][object]
+	return logbook_dict[type][object]
+
+func get_logbook_dict_type(type: String, default : bool = false ) -> Dictionary:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_sandbox_dict[type]
+	return logbook_dict[type]
+
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index
@@ -273,7 +287,7 @@ func on_sandbox_dict_set(type: String, object: String, num: int) -> void:
 
 func on_sandbox_dict_setAll(dict : Dictionary) -> void:
 	var default : Dictionary = DEFAULT_SETTINGS.default_sandbox_dict
-	for i in DEFAULT_SETTINGS.default_sandbox_dict.keys():
+	for i in default.keys():
 		if dict.has(i):
 			for a in default[i].keys():
 				if !dict[i].has(a):
@@ -298,6 +312,29 @@ func on_mouse_aim_toggle_set(value : bool) -> void:
 	mouse_aim_toggle = value
 func on_controller_aim_toggle_set(value : bool) -> void:
 	controller_aim_toggle = value
+
+# set logbook dict
+func on_logbook_dict_set(type : String, object : String, value : bool, index : int) -> void:
+	logbook_dict[type][object][index] = value
+
+func on_logbook_dict_setAll(dict : Dictionary) -> void:
+	var default : Dictionary = DEFAULT_SETTINGS.default_logbook_dict
+	for i in default.keys():
+		if dict.has(i):
+			for a in default[i].keys():
+				if !dict[i].has(a):
+					dict[i][a] = default[i][a]
+		else:
+			dict[i] = default[i]
+	# getting rid of any unknown keys from other versions
+	for i in dict.keys():
+		if default.has(i):
+			for a in dict[i].keys():
+				if !default[i].has(a):
+					dict[i].erase(a)
+		else:
+			dict.erase(i)
+	logbook_dict = dict.duplicate(true)
 
 #settings data set
 func on_settings_data_loaded(data: Dictionary) -> void:
@@ -353,6 +390,10 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_controller_aim_toggle_set(loaded_data["controller_aim_toggle"])
 	else:
 		on_controller_aim_toggle_set(DEFAULT_SETTINGS.default_controller_aim_toggle)
+	if loaded_data.has("logbook_dict"):
+		on_logbook_dict_setAll(loaded_data["logbook_dict"])
+	else:
+		on_logbook_dict_setAll({})
 	
 	loaded_data = create_storage_dictionary()
 
@@ -373,6 +414,9 @@ func handle_signals() -> void:
 	# aim toggle
 	SettingsSignalBus.on_mouse_aim_toggle_set.connect(on_mouse_aim_toggle_set)
 	SettingsSignalBus.on_controller_aim_toggle_set.connect(on_controller_aim_toggle_set)
-
+	# logbook data
+	SettingsSignalBus.on_logbook_dict_set.connect(on_logbook_dict_set)
+	SettingsSignalBus.on_logbook_dict_setAll.connect(on_logbook_dict_setAll)
+	
 	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

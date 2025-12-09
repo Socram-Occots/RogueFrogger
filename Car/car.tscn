@@ -189,7 +189,7 @@ script = ExtResource("1_nm587")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
 sprite_frames = SubResource("SpriteFrames_m6aqc")
-animation = &"Yellow1"
+animation = &"Grey2"
 
 [node name="CollisionShapeGrey" type="CollisionShape2D" parent="car"]
 y_sort_enabled = true

@@ -231,7 +231,7 @@ func set_properties() -> void:
 		"HoleMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
 			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
-		_: print("set texture string was not there: ", object)
+		_: print("set texture string was not there for sandbox: ", object)
 
 func set_sandbox_option(topic : String, type : String, maxint : int, texture : String) -> void:
 	sandbox_type = type
