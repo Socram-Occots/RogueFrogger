@@ -79,4 +79,5 @@ layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_ubusy")
 
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="screen_entered" from="HBoxContainer/Button/AspectRatioContainer/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

@@ -88,10 +88,23 @@ var ITEMTOOLTIPDICTIONARY : Dictionary = {
 		-Stacking cap: Infinite",
 	"Cleanse":
 		"Cleanse:
-		-Removes one stack of a randome curse.",
+		-Removes one stack of a random curse.",
 	"Gamba":
 		"Random:
 		-Grants you a random item/curse.
 		-Stacking increases the stack of the random item/curse you receive.
-		-Stacking cap: Infinite"
+		-Stacking cap: Infinite",
+	"ExplBarrel":
+		"Exploding Barrel:
+		-You can pick it up, throw it, and explode things! Omg wow that's crazy.",
+	"Dumpster":
+		"Dumpster:
+			-It's a dumpster. Go around it. Please. 
+			I don't know why the neighbors insist on keeping it there.",
+	"Barrel":
+		"Barrel:
+		It's a barrel. Kinda just for decoration, can block you though.",
+	"Hole_Sidewalk_Street":
+		"Hole:
+	Dont walk over it! The city really needs to do something about this pothole problem..."
 }

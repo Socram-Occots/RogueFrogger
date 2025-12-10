@@ -109,32 +109,137 @@ const default_controller_aim_toggle : bool = false
 
 # tooltip data
 const default_logbook_objects_dict : Dictionary = {
-	"ExplBarrel":[false, false],
-	"Dumpster":[false, false],
-	"Barrel":[false, false],
-	"Hole_Sidewalk_Street":[false, false]
+	"ExplBarrel":{"bools":[false, false], 
+	"tooltip":
+		"Exploding Barrel:
+		-You can pick it up, throw it, and explode things! Omg wow that's crazy."},
+	"Dumpster":{"bools":[false, false], 
+	"tooltip":
+		"Dumpster:
+			-It's a dumpster. Go around it. Please. 
+			I don't know why the neighbors insist on keeping it there."},
+	"Barrel":{"bools":[false, false], 
+	"tooltip":
+		"Barrel:
+		It's a barrel. Kinda just for decoration, can block you though."},
+	"Hole_Sidewalk_Street":{"bools":[false, false], 
+	"tooltip":
+		"Hole:
+	Dont walk over it! The city really needs to do something about this pothole problem..."}
 }
 
 const default_logbook_items_dict : Dictionary = {
-	"PlayerSpeed":[false, false],
-	"GlideBoots":[false, false],
-	"Dash":[false, false],
-	"expl_B":[false, false],
-	"Grapple":[false, false],
-	"Follower":[false, false],
-	"Gamba":[false, false],
-	"Shield":[false, false],
-	"Shrink":[false, false],
-	"Cleanse":[false, false],
-	"Hole":[false, false]
+	"PlayerSpeed":{"bools":[false, false], 
+	"tooltip":
+		"Player Speed:
+		-Stacking increases the player's speed.
+		-Stacking cap: Infinite"},
+	"GlideBoots":{"bools":[false, false], 
+	"tooltip":
+		"Glide:
+		-Activate: Glide without friction. You can not move normally, 
+		but you can boost youself using othe special items.
+		-Activate while active: Cancel the glide early.
+		-Stacking increases gliding time.
+		-Stacking decreases cooldown.
+		-Stacking cap: Infinite"},
+	"Dash":{"bools":[false, false], 
+	"tooltip":
+		"Dash:
+		-Activate: Gain a quick boost in speed, but you cannot change direction.
+		-Stacking increases dashing speed.
+		-Stacking decreases cooldown.
+		-Stacking cap: Infinite"},
+	"expl_B":{"bools":[false, false], 
+	"tooltip":
+		"Exploding Barrel (Expl-B.):
+		-Stacking increases:
+			Chances of finding Expl-B
+			Distance when throwing Expl-B
+			Expl-B explosion radius
+		-Stacking decreases:
+			Speed penalty when carrying Expl-B 
+		-Stacking cap: Infinite"},
+	"Grapple":{"bools":[false, false], 
+	"tooltip":
+		"Grapple: 
+		-Activate: Shoot a grappling rope that pulls you once it hits a target.
+		-Passive: A rope will occasionally grab the farthest item on screen for you.
+		-Stacking increases:
+			Grapple speed
+			Grapple pulling power
+			Grapple distance
+		-Stacking decreases:
+			Active Grapple cooldown
+			Passive Grapple cooldown
+		-Stacking cap: Infinite"},
+	"Follower":{"bools":[false, false], 
+	"tooltip":
+		"Follower:
+		-Produce a clone of yourself. Almost every item you recieve is
+		muliplied by the number of followers you have.
+		-Stacking increases: Number of followers.
+		-Stacking cap: Infinite"},
+	"Gamba":{"bools":[false, false], 
+	"tooltip":
+		"Random:
+		-Grants you a random item/curse.
+		-Stacking increases the stack of the random item/curse you receive.
+		-Stacking cap: Infinite"},
+	"Shield":{"bools":[false, false], 
+	"tooltip":
+		"Shield:
+		-Provides a one time protection against cars and explosions.
+		-Does not stack."},
+	"Shrink":{"bools":[false, false], 
+	"tooltip":
+		"Shrink:
+		-Makes your character smaller.
+		-Stacking decreases your size.
+		-Stacking cap: 100"},
+	"Cleanse":{"bools":[false, false], 
+	"tooltip":
+		"Cleanse:
+		-Removes one stack of a random curse."},
+	"Hole":{"bools":[false, false], 
+	"tooltip":
+		"Coyote Time:
+		-Prevents you from falling down a hole momentarily.
+		-Stacking increases the protection time.
+		-Stacking decreases Coyote Time cooldown.
+		-Stacking cap: Infinite"}
 }
 
 const default_logbook_curses_dict : Dictionary = {
-	"Slow":[false, false],
-	"Grow":[false, false],
-	"LongTeleport":[false, false],
-	"ShortTeleport":[false, false],
-	"DVDBounce":[false, false]
+	"Slow":{"bools":[false, false], 
+	"tooltip":
+		"Slow:
+		-Makes your character slower.
+		-Stacking decreases your speed
+		-Stacking cap: 99"},
+	"Grow":{"bools":[false, false], 
+	"tooltip":
+		"Grow:
+		-Makes your character larger.
+		-Stacking increases your size.
+		-Stacking cap: 100"},
+	"LongTeleport":{"bools":[false, false], 
+	"tooltip":
+		"Long Teleport:
+		-Has the capability to teleport you over a random large distance on screen once.
+		-Stacking cap: Infinite"},
+	"ShortTeleport":{"bools":[false, false], 
+	"tooltip":
+		"Short Teleport:
+		-Has the capability to teleport you over a random short distance on screen periodically.
+		-Stacking decreases the teleport cooldown.
+		-Stacking cap: Infinite"},
+	"DVDBounce":{"bools":[false, false], 
+	"tooltip":
+		"DVD Bounce:
+		-Blocks your vision with a bouncing rectangle.
+		-Stacking increases the number of rectangles.
+		-Stacking cap: Infinite"}
 }
 
 const default_logbook_dict : Dictionary = {

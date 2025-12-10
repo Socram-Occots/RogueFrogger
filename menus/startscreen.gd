@@ -92,7 +92,7 @@ func scan_for_logbook() -> void:
 	var tempbool : bool = false
 	for i in temp.keys():
 		for a in temp[i].keys():
-			if temp[i][a][0] != temp[i][a][1]:
+			if temp[i][a]["bools"][0] != temp[i][a]["bools"][1]:
 				tempbool = true
 				break
 		if tempbool:

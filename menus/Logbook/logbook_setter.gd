@@ -94,3 +94,9 @@ func set_properties() -> void:
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	if unlocked and !SettingsDataContainer.get_logbook_dict(type ,object)[1]:
 		SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 1)
+
+func _on_button_pressed() -> void:
+	if unlocked:
+		get_tree().root.get_node("Logbook").set_text_tecture(
+			SettingsDataContainer.get_logbook_dict_tooltip(type, object),
+			sprite_2d.texture)

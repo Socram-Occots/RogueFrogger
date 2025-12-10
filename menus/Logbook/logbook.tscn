@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0leoibyd8yrj"]
+[gd_scene load_steps=5 format=3 uid="uid://d0leoibyd8yrj"]
 
 [ext_resource type="Script" path="res://menus/Logbook/logbook.gd" id="1_k5r8i"]
 [ext_resource type="PackedScene" uid="uid://blaciwut42wag" path="res://menus/Logbook/logbook_tabs.tscn" id="2_8i2oe"]
+[ext_resource type="Texture2D" uid="uid://dylgqx8tcrhdh" path="res://RogueFroggerAssets/RFAssets/Level/fire-dash.png" id="3_jebtc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a07ir"]
 
 [node name="Logbook" type="Control"]
 layout_mode = 3
@@ -13,11 +16,14 @@ grow_vertical = 2
 script = ExtResource("1_k5r8i")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1500, 0)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_left = -324.0
+grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/margin_left = 12
 theme_override_constants/margin_top = 12
@@ -51,6 +57,57 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 40
 text = "Exit and Save"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -291.0
+offset_right = 532.0
+offset_bottom = 291.0
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_jebtc")
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+size_flags_stretch_ratio = 23.15
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_a07ir")
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(464, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Test"
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_a07ir")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit and Save" to="." method="_on_exit_and_save_pressed"]
 

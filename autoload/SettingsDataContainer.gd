@@ -202,8 +202,13 @@ func get_controller_aim_toggle(default: bool = false) -> bool:
 # get logbook dict
 func get_logbook_dict(type: String, object: String, default: bool = false) -> Array:
 	if loaded_data.is_empty() || default:
-		return DEFAULT_SETTINGS.default_logbook_dict[type][object]
-	return logbook_dict[type][object]
+		return DEFAULT_SETTINGS.default_logbook_dict[type][object]["bools"]
+	return logbook_dict[type][object]["bools"]
+
+func get_logbook_dict_tooltip(type: String, object: String, default: bool = false) -> String:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_logbook_dict[type][object]["tooltip"]
+	return logbook_dict[type][object]["tooltip"]
 
 func get_logbook_dict_type(type: String, default : bool = false ) -> Dictionary:
 	if loaded_data.is_empty() || default:
@@ -315,7 +320,7 @@ func on_controller_aim_toggle_set(value : bool) -> void:
 
 # set logbook dict
 func on_logbook_dict_set(type : String, object : String, value : bool, index : int) -> void:
-	logbook_dict[type][object][index] = value
+	logbook_dict[type][object]["bools"][index] = value
 
 func on_logbook_dict_setAll(dict : Dictionary) -> void:
 	var default : Dictionary = DEFAULT_SETTINGS.default_logbook_dict

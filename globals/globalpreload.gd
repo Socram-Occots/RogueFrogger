@@ -23,6 +23,7 @@ const GRAPPLE : Resource = preload("res://Grapplerope/grapplerope.tscn")
 const TELE : Resource = preload("res://Items/Teleport/teleportoutline.tscn")
 const HOLE : Resource = preload("res://Hole/hole.tscn")
 const ITEMGRAPPLESCRIPT : Script = preload("res://Grapplerope/itemgrapplelogic.gd")
+const TOOLTIPS : ItemToolTipDict = preload("res://menus/itemtooltipdescriptions.tres")
 
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("dash"):

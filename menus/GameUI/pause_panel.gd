@@ -12,8 +12,6 @@ extends Control
 @onready var tooltiptexturerect : TextureRect = $VBoxContainer/VBoxContainer2/HBoxContainer/TextureRect
 @onready var tooltipcontainer : HBoxContainer = $VBoxContainer/VBoxContainer2/HBoxContainer
 @onready var label_tooltip: Label = $VBoxContainer/VBoxContainer2/Label
-const TOOLTIPS : ItemToolTipDict = preload("res://menus/itemtooltipdescriptions.tres")
-
 
 func _ready():
 	add_to_group("UI_FOCUS", true)
@@ -27,7 +25,8 @@ func load_itemtooltips() -> void:
 		label_tooltip.visible = true
 		var temp : TextureRect = tooltiptexturerect.duplicate()
 		temp.visible = true
-		temp.itemtip = TOOLTIPS.ITEMTOOLTIPDICTIONARY[i.get_meta("ItemType")]
+		temp.itemtip = SettingsDataContainer.get_logbook_dict_tooltip("Items", i.get_meta("ItemType"))
+		#Global.TOOLTIPS.ITEMTOOLTIPDICTIONARY[i.get_meta("ItemType")]
 		temp.texture = i.get_node("Sprite2D").texture
 		tooltipcontainer.add_child(temp)
 

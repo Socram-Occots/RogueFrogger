@@ -69,7 +69,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 164
 theme_override_constants/v_separation = 164
-columns = 10
+columns = 7
 
 [node name="Items" type="TabBar" parent="TabContainer"]
 visible = false
@@ -109,7 +109,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 164
 theme_override_constants/v_separation = 164
-columns = 10
+columns = 7
 
 [node name="Curses" type="TabBar" parent="TabContainer"]
 visible = false
@@ -149,4 +149,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/h_separation = 164
 theme_override_constants/v_separation = 164
-columns = 10
+columns = 7
