@@ -1,5 +1,9 @@
 extends StaticBody2D
+@onready var polygon_2d: Polygon2D = $CollisionShape2D/Polygon2D
 
+func _ready() -> void:
+	pass
+	
 @warning_ignore("unused_parameter")
 func _physics_process(delta):
 	pass

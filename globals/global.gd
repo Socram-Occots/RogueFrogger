@@ -20,11 +20,15 @@ func _input(event: InputEvent) -> void:
 	var prev_using_cont : bool = using_cont
 	using_cont = event is InputEventJoypadMotion || event is InputEventJoypadButton
 	if using_cont:
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
+			Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		if !prev_using_cont:
 			get_tree().call_group("UI_FOCUS", "begin_focus")
 	else: 
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if prev_using_cont != using_cont:
+		updatelabels = true
 
 #region Base Values
 #player
@@ -70,9 +74,10 @@ const shortele_cool_down_base : float = 120
 #dvdbounce
 const dvd_vel_base : float = 250
 #expl_b
-const expl_B_impulse_mod_base : float = 1.0
+const expl_B_impulse_mod_base : float = 2.0
 const expl_B_size_mod_base : float = 1.0
 const expl_B_chance_mod_base : int = 0
+const expl_B_speed_penalty_base : float = 0.85
 #hole
 const hole_coyote_time_base : float = 0.1
 const hole_cool_down_base : float = 60
@@ -110,6 +115,8 @@ var expl_B_mod : int = 0
 var expl_B_impulse_mod : float = expl_B_impulse_mod_base
 var expl_B_size_mod : float = expl_B_size_mod_base
 var expl_B_chance_mod : int = expl_B_chance_mod_base
+var expl_B_speed_penalty : float = expl_B_speed_penalty_base
+var expl_B_speed_penalty_curr : float = 1
 
 #Terrain
 var spawnTerrain : bool = false
@@ -280,6 +287,8 @@ func reset() -> void:
 	expl_B_impulse_mod = expl_B_impulse_mod_base
 	expl_B_size_mod = expl_B_size_mod_base
 	expl_B_chance_mod = expl_B_chance_mod_base
+	expl_B_speed_penalty = expl_B_speed_penalty_base
+	expl_B_speed_penalty_curr = 1
 
 	#itemlabels
 	playerspeedlabelon = false
@@ -372,7 +381,7 @@ func reset() -> void:
 	hole_cool_down_bool = false
 	coyote_status_cool_down_bool = false
 
-func incrementDifficulty(x : int = 2, int_multiple : int = 1) -> void:
+func incrementDifficulty(x : int = 2, int_multiple : float = 1) -> void:
 	if score != 0 && score % x == 0:
 		car_speed_scaling += 1 * int_multiple
 		timer_l -= 0.01
@@ -481,7 +490,7 @@ func inc_expl_B(times : int) -> void:
 	expl_B_mod += times
 	expl_B_impulse_mod = expl_B_impulse_mod_base + 0.1 * expl_B_mod
 	expl_B_size_mod = expl_B_size_mod_base + 0.02 * expl_B_mod
-	expl_B_chance_mod = expl_B_mod * 2
+	expl_B_chance_mod = expl_B_mod * 3
 	expl_B_labelon = true
 	updatelabels = true
 	logbook_tracking("Items", "expl_B")

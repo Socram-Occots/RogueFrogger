@@ -47,7 +47,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 

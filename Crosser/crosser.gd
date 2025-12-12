@@ -87,7 +87,7 @@ func move_player() -> void:
 		walking = Input.is_action_pressed("walk_cont")
 	
 	var playerspeed_penalty : float = (1 - (Global.playerslow_percent *\
-	(Global.playerslow_mod_real - 1)))
+	(Global.playerslow_mod_real - 1))) * Global.expl_B_speed_penalty_curr
 
 	velocityRigid = velocityRigid.normalized() *\
 	Global.player_speed_scaling * playerspeed_penalty

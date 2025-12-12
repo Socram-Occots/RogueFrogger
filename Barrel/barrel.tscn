@@ -23,6 +23,11 @@ region_rect = Rect2(130, 21.682, 28, 36.643)
 position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_yp018")
 
+[node name="Polygon2D" type="Polygon2D" parent="CollisionShape2D"]
+position = Vector2(0, 5.5)
+color = Color(0, 1, 1, 0.196078)
+polygon = PackedVector2Array(13.0104, -6.97917, -12.9896, -6.99479, -13.0125, -4.01561, 12.9896, -4.01042)
+
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

@@ -80,6 +80,8 @@ func _input(event: InputEvent) -> void:
 				contr_dir*Global.expl_B_impulse_mod)
 			get_tree().root.get_node("Level/Ysort").call_deferred(
 				"add_child", new_expl_barrel)
+			Global.expl_B_speed_penalty_curr = 1
+			Global.updatelabels = true
 
 # impulse
 @warning_ignore("unused_parameter")
@@ -90,6 +92,7 @@ func _on_impulse_body_entered(body):
 #	if not_moving && "Player" in metalist:
 	if "Player" in metalist and !carry and !thrown and !Global.follower_array[0].carrying:
 		Global.follower_array[0].carrying = true
+		Global.updatelabels = true
 		var nodeanchor : Node2D = Global.follower_array[0].get_node(
 			"TopCollisionPolygon2D/CarryingNode")
 		queue_free()
@@ -98,6 +101,7 @@ func _on_impulse_body_entered(body):
 		new_expl_barrel.freeze = true
 		new_expl_barrel.sleeping = true
 		nodeanchor.call_deferred("add_child", new_expl_barrel)
+		Global.expl_B_speed_penalty_curr = Global.expl_B_speed_penalty
 	for i in ["Element", "Border"]:
 		if i in metalist:
 			explosion()

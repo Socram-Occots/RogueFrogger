@@ -88,6 +88,9 @@ dvdbounce_icon,DVDarea,losepopup,pausepopup,hole_icon]
 @onready var STREET_SPAWN_LIST : Array[String] = []
 @onready var STREET_CHANCE_LIST : Array[float] = []
 
+# tooltips
+@onready var controls_tooltip: VBoxContainer = $CanvasLayer/ControlsTooltip
+
 func load_element_stats() -> void:
 	load_general_stats()
 	load_street_stats()
@@ -628,6 +631,7 @@ func update_labels() -> void:
 		# unfortunately this cannot be elif anymore
 		# In the case that 2+ items are picked up at once
 		# we need to check each one.
+		controls_tooltip.show_controls()
 		var label_children : Array[Node] = hboxlabels.get_children()
 		if Global.playerspeedlabelon:
 			if Global.player_speed_mod == 0:
@@ -749,7 +753,7 @@ func terrain_check() -> void:
 		$CanvasLayer/Score.text = "Score " + str(Global.score)
 		Global.spawnTerrain = false
 		terrainSpawnLogic(score_diff)
-		Global.incrementDifficulty(2, score_diff)
+		Global.incrementDifficulty(2, score_diff * 0.5)
 		if Global.score % 100 == 0:
 			spawnBorder(960, Global.player_pos_y)
 

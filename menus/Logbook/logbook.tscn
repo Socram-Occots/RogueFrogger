@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://menus/Logbook/logbook.gd" id="1_k5r8i"]
 [ext_resource type="PackedScene" uid="uid://blaciwut42wag" path="res://menus/Logbook/logbook_tabs.tscn" id="2_8i2oe"]
-[ext_resource type="Texture2D" uid="uid://dylgqx8tcrhdh" path="res://RogueFroggerAssets/RFAssets/Level/fire-dash.png" id="3_jebtc"]
+[ext_resource type="Texture2D" uid="uid://dnvrjaq2e50w8" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png" id="3_gsirs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a07ir"]
 
@@ -70,8 +70,11 @@ grow_vertical = 2
 theme_override_constants/separation = 20
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(512, 512)
 layout_mode = 2
-texture = ExtResource("3_jebtc")
+size_flags_vertical = 3
+size_flags_stretch_ratio = 300.0
+texture = ExtResource("3_gsirs")
 stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -88,7 +91,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_a07ir")
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(464, 50)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 25
 text = "Test"
 vertical_alignment = 2
 autowrap_mode = 3

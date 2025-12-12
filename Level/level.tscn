@@ -1,12 +1,164 @@
-[gd_scene load_steps=7 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=24 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
+[ext_resource type="Script" path="res://Level/controls_tooltip.gd" id="3_eheqs"]
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="4_e5m7e"]
 [ext_resource type="Script" path="res://Level/stopwatch.gd" id="5_moa77"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="8_3m3b3"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iu5ys"]
+
+[sub_resource type="Texture2D" id="Texture2D_npxyw"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "up_w"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_61dhu"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "left_a"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_idp83"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "down_s"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_v3fsi"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "right_d"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_6ypjt"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "up_cont_stick"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_42yga"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "walk"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_w2odw"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "walk_cont"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_wuxx7"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "dash"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_dn1mt"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "dash_cont"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_h5m2c"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "glide"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_gj7af"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "glide_cont"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_2b80f"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "rope"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_t0va8"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "rope_cont"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_l1hdd"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "throw"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_wxk4d"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "throw_cont"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
 
 [node name="Level" type="Node"]
 script = ExtResource("1_v6cxu")
@@ -77,7 +229,7 @@ gizmo_extents = 32.5
 [node name="Tiles" type="Node2D" parent="."]
 
 [node name="PlayerStart" type="Marker2D" parent="."]
-position = Vector2(959.992, 1008)
+position = Vector2(960, 1008)
 
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -113,6 +265,134 @@ grow_vertical = 0
 scale = Vector2(0.25, 0.25)
 mouse_filter = 2
 alignment = 2
+
+[node name="ControlsTooltip" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -322.0
+offset_top = 27.0
+offset_right = 170.0
+offset_bottom = 602.0
+grow_horizontal = 0
+scale = Vector2(0.6, 0.6)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("3_eheqs")
+
+[node name="Run" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlsTooltip/Run"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Run"
+
+[node name="TextureRectKey" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Run"]
+layout_mode = 2
+texture = SubResource("Texture2D_npxyw")
+
+[node name="TextureRectKey2" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Run"]
+layout_mode = 2
+texture = SubResource("Texture2D_61dhu")
+
+[node name="TextureRectKey3" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Run"]
+layout_mode = 2
+texture = SubResource("Texture2D_idp83")
+
+[node name="TextureRectKey4" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Run"]
+layout_mode = 2
+texture = SubResource("Texture2D_v3fsi")
+
+[node name="TextureRectCont" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Run"]
+layout_mode = 2
+texture = SubResource("Texture2D_6ypjt")
+
+[node name="Walk" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlsTooltip/Walk"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Walk"
+
+[node name="TextureRectKey" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Walk"]
+layout_mode = 2
+texture = SubResource("Texture2D_42yga")
+
+[node name="TextureRectCont" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Walk"]
+layout_mode = 2
+texture = SubResource("Texture2D_w2odw")
+
+[node name="Dash" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlsTooltip/Dash"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Dash"
+
+[node name="TextureRectKey" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Dash"]
+layout_mode = 2
+texture = SubResource("Texture2D_wuxx7")
+
+[node name="TextureRectCont" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Dash"]
+layout_mode = 2
+texture = SubResource("Texture2D_dn1mt")
+
+[node name="Glide" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlsTooltip/Glide"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Glide"
+
+[node name="TextureRectKey" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Glide"]
+layout_mode = 2
+texture = SubResource("Texture2D_h5m2c")
+
+[node name="TextureRectCont" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Glide"]
+layout_mode = 2
+texture = SubResource("Texture2D_gj7af")
+
+[node name="Grapple" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlsTooltip/Grapple"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Grapple"
+
+[node name="TextureRectKey" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Grapple"]
+layout_mode = 2
+texture = SubResource("Texture2D_2b80f")
+
+[node name="TextureRectCont" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Grapple"]
+layout_mode = 2
+texture = SubResource("Texture2D_t0va8")
+
+[node name="Throw" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlsTooltip/Throw"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Throw"
+
+[node name="TextureRectKey" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Throw"]
+layout_mode = 2
+texture = SubResource("Texture2D_l1hdd")
+
+[node name="TextureRectCont" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Throw"]
+layout_mode = 2
+texture = SubResource("Texture2D_wxk4d")
 
 [node name="Score" type="Label" parent="CanvasLayer"]
 offset_left = 865.0

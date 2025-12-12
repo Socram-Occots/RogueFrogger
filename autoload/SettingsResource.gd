@@ -112,20 +112,23 @@ const default_logbook_objects_dict : Dictionary = {
 	"ExplBarrel":{"bools":[false, false], 
 	"tooltip":
 		"Exploding Barrel:
-		-You can pick it up, throw it, and explode things! Omg wow that's crazy."},
+		-You can pick it up, throw it, and explode things! Omg wow that's crazy.
+		-Picking them up will slow you down."},
 	"Dumpster":{"bools":[false, false], 
 	"tooltip":
 		"Dumpster:
 			-It's a dumpster. Go around it. Please. 
-			I don't know why the neighbors insist on keeping it there."},
+			-I don't know why the neighbors insist on keeping it there."},
 	"Barrel":{"bools":[false, false], 
 	"tooltip":
 		"Barrel:
-		It's a barrel. Kinda just for decoration, can block you though."},
+		-It's a barrel. Kinda just for decoration, can block you though."},
 	"Hole_Sidewalk_Street":{"bools":[false, false], 
 	"tooltip":
 		"Hole:
-	Dont walk over it! The city really needs to do something about this pothole problem..."}
+	-Dont walk over it! The city really needs to do something about this pothole problem...
+	-These holes could be quite useful at stopping these cars.
+	If only there was a method to make them larger..."}
 }
 
 const default_logbook_items_dict : Dictionary = {
