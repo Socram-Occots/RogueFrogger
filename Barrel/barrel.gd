@@ -1,12 +1,10 @@
 extends StaticBody2D
-@onready var polygon_2d: Polygon2D = $CollisionShape2D/Polygon2D
+@onready var rectangle: Rectangle = $Rectangle
+
 
 func _ready() -> void:
-	pass
-	
-@warning_ignore("unused_parameter")
-func _physics_process(delta):
-	pass
+	rectangle.visible = SettingsDataContainer.get_show_hitboxes()
+	rectangle.size.y = 3
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	if !SettingsDataContainer.get_logbook_dict("Objects", "Barrel")[0]:

@@ -7,7 +7,7 @@ size = Vector2(111, 111)
 
 [node name="Teleportoutline" type="Area2D"]
 collision_layer = 0
-collision_mask = 1366
+collision_mask = 17750
 monitorable = false
 script = ExtResource("1_a2ecq")
 num_of_col = 118
@@ -485,4 +485,5 @@ position = Vector2(0, 111)
 shape = SubResource("RectangleShape2D_u57pi")
 
 [connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

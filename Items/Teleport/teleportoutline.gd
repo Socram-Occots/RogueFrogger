@@ -18,6 +18,10 @@ func _ready() -> void:
 	# look for its collisons after placing an entity
 	await get_tree().physics_frame
 	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	await get_tree().physics_frame
 
 	var qualified : Array[Vector2] = []
 	var temp_rigid : RigidBody2D = Global.follower_array[0]
@@ -49,7 +53,7 @@ func _ready() -> void:
 			Transform2D.IDENTITY.translated(winner_vect2)
 			)
 	
-		if Global.follower_mod > 1:
+		if Global.follower_mod > Global.follower_mod_base:
 			Global.wipe_null_followers()
 			var distance : Vector2 = winner_vect2 - temp_rigid_global
 			for i in range(1, Global.follower_array.size()):
@@ -82,3 +86,7 @@ func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, 
 @warning_ignore("unused_parameter")
 func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	canidates[local_shape_index] = false
+
+
+func _on_body_entered(body: Node2D) -> void:
+	print(body.get_meta_list())

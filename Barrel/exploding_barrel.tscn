@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://e7ohgba71xgm"]
+[gd_scene load_steps=18 format=3 uid="uid://e7ohgba71xgm"]
 
 [ext_resource type="Texture2D" uid="uid://r03cvcpomnbf" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png" id="1_ntsr0"]
 [ext_resource type="Script" path="res://Barrel/explodingbarrelrigidbody.gd" id="1_wmlc5"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dnq4eu3uidx8h" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_7.png" id="7_w3doq"]
 [ext_resource type="Texture2D" uid="uid://c0etpwjascnyq" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_8.png" id="8_y4rj8"]
 [ext_resource type="Texture2D" uid="uid://dpyaa7r8yoorr" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_9.png" id="9_00bwt"]
-[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="11_4j10k"]
 [ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="12_qbo12"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_trkfx"]
@@ -94,6 +93,13 @@ metadata/ExplodingBarrelImpulse = false
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_v677n")
 
+[node name="Rectangle" type="Node2D" parent="impulse"]
+position = Vector2(0, -3.5)
+script = ExtResource("12_qbo12")
+size = Vector2(30, 10)
+corner_radius = 0.0
+fill_color = Color(0, 1, 1, 0.196078)
+
 [node name="explosionbarrelexplosion" type="Area2D" parent="."]
 position = Vector2(-27, 1)
 scale = Vector2(1.5, 1.5)
@@ -115,16 +121,10 @@ position = Vector2(0.25, 25.5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_hdjvi")
 
-[node name="Ellipse" type="Node2D" parent="feet/CollisionShape2D"]
-rotation = -1.5708
-scale = Vector2(0.36, 0.36)
-script = ExtResource("11_4j10k")
-size = Vector2(127.61, 68.045)
-fill_color = Color(0, 1, 1, 0.196078)
-
 [node name="Rectangle" type="Node2D" parent="feet/CollisionShape2D"]
-scale = Vector2(0.36, 0.36)
 script = ExtResource("12_qbo12")
+size = Vector2(23, 46.5)
+corner_radius = 11.5
 fill_color = Color(0, 1, 1, 0.196078)
 
 [node name="Timer" type="Timer" parent="."]

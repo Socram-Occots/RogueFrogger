@@ -109,13 +109,11 @@ func player_animation() -> void:
 				animated.play("walk_side")
 				animated.flip_h = true
 
-func remove_follower(update_f_mod : bool = true) -> void:
+func remove_follower() -> void:
 	var self_index : int = Global.follower_array.find(self, 1)
 	if self_index != -1:
 		Global.follower_array.remove_at(self_index)
-		if update_f_mod:
-			Global.follower_mod -= 1
-			if Global.follower_mod == 1:
-				Global.followerlabelon = true
-			Global.updatelabels = true
+		Global.follower_mod = Global.follower_array.size()
+		Global.followerlabelon = true
+		Global.updatelabels = true
 	queue_free()

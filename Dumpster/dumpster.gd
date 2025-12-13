@@ -1,8 +1,10 @@
 extends StaticBody2D
+@onready var rectangle: Rectangle = $Rectangle
 
 @warning_ignore("unused_parameter")
-func _physics_process(delta):
-	pass
+func _ready() -> void:
+	rectangle.visible = SettingsDataContainer.get_show_hitboxes()
+	rectangle.size.y = 52
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	if !SettingsDataContainer.get_logbook_dict("Objects", "Dumpster")[0]:

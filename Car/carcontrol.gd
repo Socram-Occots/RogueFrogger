@@ -3,13 +3,17 @@ extends Node2D
 var car_speed : float = Global.car_base_speed
 var car_speed_l : float = car_speed
 var car_speed_h : float = car_speed
+@onready var rectangleGrey: Rectangle = $car/CollisionShapeGrey/Rectangle
+@onready var rectangleYellow: Rectangle = $car/CollisionShape2DYellow/Rectangle
+@onready var rectangleMotor: Rectangle = $car/CollisionShape2Dcolor/Rectangle
+@onready var rectangleColor: Rectangle = $car/CollisionShape2Dmotorcycle/Rectangle
 
 func _ready():
 	$car/CollisionShapeGrey.set_deferred("disabled", true)
 	$car/CollisionShape2DYellow.set_deferred("disabled", true)
 	$car/CollisionShape2Dmotorcycle.set_deferred("disabled", true)
 	$car/CollisionShape2Dcolor.set_deferred("disabled", true)
-	
+
 	car_speed_l = (Global.car_speed_scaling*0.7)
 	car_speed_h = (Global.car_speed_scaling*1.3)
 	

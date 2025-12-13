@@ -22,6 +22,8 @@ var mouse_aim_toggle : bool = false
 var controller_aim_toggle : bool = false
 # logbook data
 var logbook_dict : Dictionary = {}
+# show hitboxes
+var show_hitboxes : bool = false
 
 func _ready():
 	handle_signals()
@@ -40,7 +42,8 @@ func create_storage_dictionary() -> Dictionary:
 		"sandbox_seed": sandbox_seed,
 		"mouse_aim_toggle": mouse_aim_toggle,
 		"controller_aim_toggle": controller_aim_toggle,
-		"logbook_dict": logbook_dict
+		"logbook_dict": logbook_dict,
+		"show_hitboxes": show_hitboxes
 	}
 
 	return settings_container_dict
@@ -212,8 +215,14 @@ func get_logbook_dict_tooltip(type: String, object: String, default: bool = fals
 
 func get_logbook_dict_type(type: String, default : bool = false ) -> Dictionary:
 	if loaded_data.is_empty() || default:
-		return DEFAULT_SETTINGS.default_sandbox_dict[type]
+		return DEFAULT_SETTINGS.default_logbook_dict[type]
 	return logbook_dict[type]
+
+# get show hitboxes
+func get_show_hitboxes(default: bool = false) -> bool:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_show_hitboxes
+	return show_hitboxes
 
 # set settings
 func on_window_mode_selected(index : int) -> void:
@@ -322,6 +331,10 @@ func on_controller_aim_toggle_set(value : bool) -> void:
 func on_logbook_dict_set(type : String, object : String, value : bool, index : int) -> void:
 	logbook_dict[type][object]["bools"][index] = value
 
+# set show hitboxes
+func on_show_hitboxes_set(value : bool) -> void:
+	show_hitboxes = value
+
 func on_logbook_dict_setAll(dict : Dictionary) -> void:
 	var default : Dictionary = DEFAULT_SETTINGS.default_logbook_dict
 	for i in default.keys():
@@ -399,7 +412,10 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_logbook_dict_setAll(loaded_data["logbook_dict"])
 	else:
 		on_logbook_dict_setAll({})
-	
+	if loaded_data.has("show_hitboxes"):
+		on_show_hitboxes_set(loaded_data["show_hitboxes"])
+	else:
+		on_show_hitboxes_set(DEFAULT_SETTINGS.default_show_hitboxes)
 	loaded_data = create_storage_dictionary()
 
 func handle_signals() -> void:
@@ -422,6 +438,8 @@ func handle_signals() -> void:
 	# logbook data
 	SettingsSignalBus.on_logbook_dict_set.connect(on_logbook_dict_set)
 	SettingsSignalBus.on_logbook_dict_setAll.connect(on_logbook_dict_setAll)
+	# show hitboxes
+	SettingsSignalBus.on_show_hitboxes_set.connect(on_show_hitboxes_set)
 	
 	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

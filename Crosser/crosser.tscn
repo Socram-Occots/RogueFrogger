@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=57 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://b4vexjyfep41v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Up_9.png" id="25_ru7x7"]
 [ext_resource type="Texture2D" uid="uid://xrt5sglhhl86" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_1.png" id="27_bfqrl"]
 [ext_resource type="Texture2D" uid="uid://obv2oahysjrv" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_2.png" id="28_m7mmt"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="29_iclae"]
 [ext_resource type="Texture2D" uid="uid://d0u3ipsctqyg2" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_3.png" id="29_ta18e"]
 [ext_resource type="Texture2D" uid="uid://b6iuqwvcdwcyl" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_4.png" id="30_1bevo"]
 [ext_resource type="Texture2D" uid="uid://mf3foi33r87u" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_5.png" id="31_gupy3"]
@@ -306,6 +307,19 @@ position = Vector2(0, -14.575)
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_5abg2")
 animation = &"stand"
+
+[node name="CollisionReveal" type="Polygon2D" parent="."]
+color = Color(0, 1, 1, 0.196078)
+polygon = PackedVector2Array(-23, -1, -23, 16, -18, 37, 18, 37, 23, 16, 23, -1, 17, -28, 7, -37, -7, -37, -17, -28)
+
+[node name="FeetCollisionRevealMarker2D" type="Marker2D" parent="."]
+
+[node name="FeetCollisionReveal" type="Node2D" parent="FeetCollisionRevealMarker2D"]
+position = Vector2(0, 31.5)
+script = ExtResource("29_iclae")
+size = Vector2(36, 9)
+corner_radius = 0.0
+fill_color = Color(1, 0, 0.0166664, 0.552941)
 
 [node name="shield" type="AnimatedSprite2D" parent="."]
 visible = false

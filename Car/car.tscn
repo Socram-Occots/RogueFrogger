@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cv2mr8ur0uh6v"]
+[gd_scene load_steps=28 format=3 uid="uid://cv2mr8ur0uh6v"]
 
 [ext_resource type="Texture2D" uid="uid://cuxmglv3okft5" path="res://RogueFroggerAssets/RFAssets/Car/Yellow1.png" id="1_38gab"]
 [ext_resource type="Script" path="res://Car/car.gd" id="1_nm587"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://d1qbiyrxjoimo" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORpink.png" id="11_wo5ob"]
 [ext_resource type="Texture2D" uid="uid://cns6rw4xgm52p" path="res://RogueFroggerAssets/RFAssets/Car/othercoloredCars/motocycleRORred.png" id="12_ennyj"]
 [ext_resource type="Texture2D" uid="uid://b526hjt06fmh8" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORblue.png" id="13_7pdqw"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="13_p7qsy"]
 [ext_resource type="Texture2D" uid="uid://d2opqams5lq1c" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORcyan.png" id="14_5wij1"]
 [ext_resource type="Texture2D" uid="uid://bp761ha787k6r" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORgreen.png" id="15_7aumu"]
 [ext_resource type="Texture2D" uid="uid://md50hmxad2pt" path="res://RogueFroggerAssets/RFAssets/RORmotorcycles/motocycleRORorange.png" id="15_ph4mg"]
@@ -189,21 +190,38 @@ script = ExtResource("1_nm587")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="car"]
 sprite_frames = SubResource("SpriteFrames_m6aqc")
-animation = &"Grey2"
+animation = &"Grey1"
 
 [node name="CollisionShapeGrey" type="CollisionShape2D" parent="car"]
 y_sort_enabled = true
 shape = SubResource("RectangleShape2D_rlwrd")
 disabled = true
 
+[node name="Rectangle" type="Node2D" parent="car/CollisionShapeGrey"]
+script = ExtResource("13_p7qsy")
+size = Vector2(171, 47)
+corner_radius = 0.0
+fill_color = Color(0, 1, 1, 0.196078)
+
 [node name="CollisionShape2DYellow" type="CollisionShape2D" parent="car"]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_2fqrn")
 disabled = true
+
+[node name="Rectangle" type="Node2D" parent="car/CollisionShape2DYellow"]
+script = ExtResource("13_p7qsy")
+size = Vector2(159.6, 45)
+corner_radius = 0.0
+fill_color = Color(0, 1, 1, 0.196078)
 
 [node name="CollisionShape2Dcolor" type="CollisionShape2D" parent="car"]
 shape = SubResource("RectangleShape2D_p1il7")
 disabled = true
+
+[node name="Rectangle" type="Node2D" parent="car/CollisionShape2Dcolor"]
+script = ExtResource("13_p7qsy")
+size = Vector2(150.1, 40)
+corner_radius = 0.0
+fill_color = Color(0, 1, 1, 0.196078)
 
 [node name="AnimatedSprite2DMotorcycle" type="AnimatedSprite2D" parent="car"]
 position = Vector2(3, 0)
@@ -214,6 +232,12 @@ animation = &"blue"
 [node name="CollisionShape2Dmotorcycle" type="CollisionShape2D" parent="car"]
 shape = SubResource("RectangleShape2D_0wql5")
 disabled = true
+
+[node name="Rectangle" type="Node2D" parent="car/CollisionShape2Dmotorcycle"]
+script = ExtResource("13_p7qsy")
+size = Vector2(100.7, 8)
+corner_radius = 0.0
+fill_color = Color(0, 1, 1, 0.196078)
 
 [node name="Timer" type="Timer" parent="."]
 

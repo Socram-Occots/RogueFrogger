@@ -8,6 +8,8 @@ extends RigidBody2D
 @onready var impulse_collision_shape_2d: CollisionShape2D = $impulse/CollisionShape2D
 @onready var expl_collision_shape_2d: CollisionShape2D = $explosionbarrelexplosion/CollisionShape2D
 @onready var feet_collision_shape_2d: CollisionShape2D = $feet/CollisionShape2D
+@onready var rectangle: Rectangle = $impulse/Rectangle
+@onready var feetrectangle: Rectangle = $feet/CollisionShape2D/Rectangle
 
 var carry : bool = false
 var thrown : bool = false
@@ -31,6 +33,11 @@ func _ready():
 	if carry:
 		impulse_collision_shape_2d.set_deferred("disabled", true)
 	
+	rectangle.visible = SettingsDataContainer.get_show_hitboxes() && !carry
+	rectangle.size.y = 10
+	feetrectangle.visible = SettingsDataContainer.get_show_hitboxes() && !carry
+	feetrectangle.size.y = 46.5
+
 func explosion() -> void:
 	if exploding: return
 	if carry: Global.follower_array[0].carrying = false

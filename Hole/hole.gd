@@ -3,10 +3,13 @@ extends Area2D
 @onready var coyote : bool = false
 @onready var entered : bool = false
 @onready var timer: Timer = $Timer
+@onready var rectangle: Rectangle = $CollisionShape2D/Rectangle
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer.one_shot = true
+	rectangle.visible = SettingsDataContainer.get_show_hitboxes()
+	rectangle.size.y = 18
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 @warning_ignore("unused_parameter")

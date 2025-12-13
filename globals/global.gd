@@ -521,7 +521,7 @@ func inc_Follower(times : int) -> void:
 		times = 0
 		follower_mod = follower_mod_base
 		for i in range(follower_array.size() - 1, 0, -1):
-			follower_array[i].remove_follower(false)
+			follower_array[i].remove_follower()
 	follower_mod += times
 	if times > 0:
 		spawn_follower_bool = true
@@ -531,7 +531,7 @@ func inc_Follower(times : int) -> void:
 		var f_count_idx : int = follower_array.size() - 1
 		var f_count : int = 0
 		while f_count < -1*times and f_count_idx > 0:
-			follower_array[f_count_idx].remove_follower(false)
+			follower_array[f_count_idx].remove_follower()
 			f_count_idx -= 1
 			f_count += 1
 	
@@ -724,6 +724,8 @@ func change_player_follower_size() -> void:
 			follower_array[i].get_node("GlideBoots").scale = temp_shrink
 			follower_array[i].get_node("FollowerCollision").scale = temp_shrink
 			follower_array[i].get_node("feet").scale = temp_shrink
+			follower_array[i].get_node("CollisionReveal").scale = temp_shrink
+			follower_array[i].get_node("FeetCollisionRevealMarker2D").scale = temp_shrink
 
 func logbook_tracking(type : String, object : String) -> void:
 	SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 0)

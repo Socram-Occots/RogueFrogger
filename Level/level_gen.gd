@@ -276,7 +276,8 @@ node_num: int = 15) -> void:
 	
 	# both arrays need to be same length and exist
 	if spawn_length != chances_length \
-	|| item_length != item_chances_length: return
+	|| item_length != item_chances_length \
+	|| items.is_empty(): return
 
 	# at least one space must be open
 	var open : int  = GRand.maprand.randi_range(0, node_num - 1)
@@ -676,7 +677,7 @@ func update_labels() -> void:
 			elif follower_icon not in label_children:
 				hboxlabels.add_child(follower_icon)
 			Global.followerlabelon = false
-			follower_icon.get_node("Follower").text = str(Global.follower_mod - 1)
+			follower_icon.get_node("Follower").text = str(Global.follower_mod - Global.follower_mod_base)
 		if Global.shrinklabelon:
 			if Global.shrink_mod == 0:
 				hboxlabels.remove_child(shrink_icon)
@@ -690,7 +691,7 @@ func update_labels() -> void:
 			elif slow_icon not in label_children:
 				hboxlabels.add_child(slow_icon)
 			Global.playerslowlabelon = false
-			slow_icon.get_node("Slow").text = str(Global.playerslow_mod - 1)
+			slow_icon.get_node("Slow").text = str(Global.playerslow_mod - Global.playerslow_mod_base)
 		if Global.growlabelon:
 			if Global.grow_mod == 0:
 				hboxlabels.remove_child(grow_icon)
@@ -823,6 +824,9 @@ func create_follower() -> void:
 		follower.get_node("Camera2D").queue_free()
 		follower.get_node("follower_cleanup_timer").queue_free()
 		follower.get_node("AutoItemGrapple").queue_free()
+		follower.get_node("AutoItemGrapple").queue_free()
+		follower.get_node("CollisionReveal").visible = false
+		follower.get_node("FeetCollisionRevealMarker2D").visible = false
 		follower.remove_meta("Player")
 		curr_follower_id += 1
 		#follower.set_collision_layer_value(1, false)
@@ -843,6 +847,7 @@ func create_follower() -> void:
 		follower.get_node("shield").scale = follower_in_front.get_node("shield").scale
 		follower.get_node("GlideBoots").scale = follower_in_front.get_node("GlideBoots").scale
 		follower.get_node("FollowerCollision").scale = follower_in_front.get_node("FollowerCollision").scale
+		follower.get_node("feet").scale = follower_in_front.get_node("feet").scale
 		
 		Global.follower_array.append(follower)
 		$Ysort.add_child(follower)

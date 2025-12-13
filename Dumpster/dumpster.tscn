@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://6h12bg2ssg42"]
+[gd_scene load_steps=6 format=3 uid="uid://6h12bg2ssg42"]
 
 [ext_resource type="Texture2D" uid="uid://cxnno145xy7bn" path="res://RogueFroggerAssets/RFAssets/Level/dumpster_ROR.png" id="1_42wja"]
 [ext_resource type="Script" path="res://Dumpster/dumpster.gd" id="1_hjx3i"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="3_idpsq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wq1gt"]
+size = Vector2(170.667, 52)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ayfel"]
 size = Vector2(170.667, 52)
@@ -20,10 +24,25 @@ scale = Vector2(0.888889, 1)
 texture = ExtResource("1_42wja")
 region_rect = Rect2(130, 21.682, 28, 36.643)
 
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(53.3333, -4)
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_wq1gt")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(53.3333, -4)
 shape = SubResource("RectangleShape2D_ayfel")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Rectangle" type="Node2D" parent="."]
+position = Vector2(53.333, -4)
+script = ExtResource("3_idpsq")
+size = Vector2(170.667, 52)
+corner_radius = 0.0
+fill_color = Color(0, 1, 1, 0.196078)
 
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

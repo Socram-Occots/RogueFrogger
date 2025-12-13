@@ -183,3 +183,4 @@ libraries = {
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings2"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings3"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer/show_hitboxes"]

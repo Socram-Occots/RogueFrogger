@@ -229,7 +229,7 @@ const default_logbook_curses_dict : Dictionary = {
 	"LongTeleport":{"bools":[false, false], 
 	"tooltip":
 		"Long Teleport:
-		-Has the capability to teleport you over a random large distance on screen once.
+		-Has the capability to teleport you over a random long distance on screen once.
 		-Stacking cap: Infinite"},
 	"ShortTeleport":{"bools":[false, false], 
 	"tooltip":
@@ -250,3 +250,6 @@ const default_logbook_dict : Dictionary = {
 	"Items":default_logbook_items_dict,
 	"Curses":default_logbook_curses_dict
 }
+
+# show hitboxes
+const default_show_hitboxes : bool = false

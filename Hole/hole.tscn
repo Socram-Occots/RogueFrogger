@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://clrgiy6xg6k72"]
+[gd_scene load_steps=5 format=3 uid="uid://clrgiy6xg6k72"]
 
 [ext_resource type="Script" path="res://Hole/hole.gd" id="1_rtylf"]
 [ext_resource type="Texture2D" uid="uid://dqm706gbstpay" path="res://RogueFroggerAssets/RFAssets/Hole/RORhole.png" id="1_vs2lj"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Rectangle.gd" id="3_4powi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j7ybu"]
 radius = 9.0
@@ -21,6 +22,13 @@ texture = ExtResource("1_vs2lj")
 position = Vector2(0, 75)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_j7ybu")
+
+[node name="Rectangle" type="Node2D" parent="CollisionShape2D"]
+rotation = -1.5708
+script = ExtResource("3_4powi")
+size = Vector2(28, 18)
+corner_radius = 9.0
+fill_color = Color(0, 1, 1, 0.196078)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

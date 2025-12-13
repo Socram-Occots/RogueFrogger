@@ -28,6 +28,10 @@ extends RigidBody2D
 @onready var auto_item_grapple: Area2D = $AutoItemGrapple
 @onready var grappleitem_collision_shape_2d: CollisionShape2D = $AutoItemGrapple/CollisionShape2D
 
+@onready var collision_reveal: Polygon2D = $CollisionReveal
+@onready var feet_collision_reveal: Rectangle = $FeetCollisionRevealMarker2D/FeetCollisionReveal
+
+
 func _ready() -> void:
 	Globalpreload.delete_array.append_array([grapplehook,tele,itemgrapplehook])
 	# stop camera from being weird initially
@@ -55,7 +59,10 @@ func _ready() -> void:
 		#apply_central_force(velocityRigid)
 	
 	disable_itemgrapple()
-
+	
+	collision_reveal.visible = SettingsDataContainer.get_show_hitboxes()
+	feet_collision_reveal.visible = SettingsDataContainer.get_show_hitboxes()
+	feet_collision_reveal.size.y = 9
 
 func move_player() -> void:
 	var walking : bool = false
