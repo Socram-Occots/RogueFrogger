@@ -729,3 +729,29 @@ func change_player_follower_size() -> void:
 
 func logbook_tracking(type : String, object : String) -> void:
 	SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 0)
+
+func teleportation_activated() -> void:
+	var playermove: AnimatedSprite2D = follower_array[0].get_node("playermove")
+	var self_mod_red : Color = Color(1.0, 0.0 ,0.0)
+	var self_mod_none : Color = Color(1.0, 1.0 ,1.0)
+	playermove.self_modulate = self_mod_red
+	await get_tree().create_timer(1).timeout
+	playermove.self_modulate = self_mod_none
+	await get_tree().create_timer(0.5).timeout
+	playermove.self_modulate = self_mod_red
+	await get_tree().create_timer(0.25).timeout
+	playermove.self_modulate = self_mod_none
+	await get_tree().create_timer(0.125).timeout
+	playermove.self_modulate = self_mod_red
+	await get_tree().create_timer(0.0625).timeout
+	playermove.self_modulate = self_mod_none
+	await get_tree().create_timer(0.05).timeout
+	playermove.self_modulate = self_mod_red
+	await get_tree().create_timer(0.05).timeout
+	playermove.self_modulate = self_mod_none
+	await get_tree().create_timer(0.05).timeout
+	playermove.self_modulate = self_mod_red
+	await get_tree().create_timer(0.05).timeout
+	playermove.self_modulate = self_mod_none
+	await get_tree().create_timer(0.05).timeout
+	Global.follower_array[0].rand_teleport(Vector2.ZERO)

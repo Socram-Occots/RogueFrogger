@@ -234,6 +234,8 @@ position = Vector2(960, 1008)
 [node name="Ysort" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="teleportlines" type="Node2D" parent="."]
+
 [node name="border" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="border"]

@@ -24,6 +24,7 @@ const TELE : Resource = preload("res://Items/Teleport/teleportoutline.tscn")
 const HOLE : Resource = preload("res://Hole/hole.tscn")
 const ITEMGRAPPLESCRIPT : Script = preload("res://Grapplerope/itemgrapplelogic.gd")
 const TOOLTIPS : ItemToolTipDict = preload("res://menus/itemtooltipdescriptions.tres")
+const TELEPORTLINE : Resource = preload("res://Items/Teleport/teleportline.tscn")
 
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("dash"):
@@ -132,6 +133,9 @@ var delete_array : Array = []
 # game
 var DEFEAT_INST : Control = DEFEAT.instantiate()
 var PAUSE_INST : Control = PAUSE.instantiate()
+
+#teleport
+var teleportline : Line2D = TELEPORTLINE.instantiate()
 
 func delete_stray_nodes() -> void:
 	for i in delete_array:

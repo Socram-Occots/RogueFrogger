@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo6bmy2vr4bg4"]
+
+[ext_resource type="Texture2D" uid="uid://ccvsqublgnwk0" path="res://addons/2d_shapes/Arrow.svg" id="1_co06i"]
+[ext_resource type="Script" path="res://Items/Teleport/teleportline.gd" id="2_y5pn3"]
+
+[node name="Teleportline" type="Line2D"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 124.845, 0)
+width = 50.0
+default_color = Color(1, 0.180392, 0.176471, 1)
+texture = ExtResource("1_co06i")
+texture_mode = 1
+begin_cap_mode = 1
+script = ExtResource("2_y5pn3")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

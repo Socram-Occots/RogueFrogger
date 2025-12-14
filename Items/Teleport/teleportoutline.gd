@@ -18,10 +18,6 @@ func _ready() -> void:
 	# look for its collisons after placing an entity
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
-	await get_tree().physics_frame
 
 	var qualified : Array[Vector2] = []
 	var temp_rigid : RigidBody2D = Global.follower_array[0]
@@ -46,6 +42,12 @@ func _ready() -> void:
 	
 	if !qualified.is_empty():
 		var winner_vect2 : Vector2 = qualified.pick_random()
+		
+		var templine : Line2D = Globalpreload.teleportline.duplicate()
+		templine.set_point_position(0, temp_rigid.global_position)
+		templine.set_point_position(1, winner_vect2)
+		
+		get_tree().root.get_node("Level/teleportlines").add_child(templine)
 		
 		PhysicsServer2D.body_set_state(
 			temp_rigid.get_rid(),
@@ -74,11 +76,6 @@ func _ready() -> void:
 	
 	queue_free()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-@warning_ignore("unused_parameter")
-func _physics_process(delta: float) -> void:
-	pass
-
 @warning_ignore("unused_parameter")
 func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	canidates[local_shape_index] = false
@@ -86,7 +83,3 @@ func _on_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, 
 @warning_ignore("unused_parameter")
 func _on_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	canidates[local_shape_index] = false
-
-
-func _on_body_entered(body: Node2D) -> void:
-	print(body.get_meta_list())
