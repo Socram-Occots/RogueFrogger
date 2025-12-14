@@ -109,7 +109,7 @@ func present_winner() -> void:
 		"ShrinkGamba": Global.inc_Shrink(multi_result)
 		"SlowGamba": Global.inc_PlayerSlow(multi_result)
 		"GrowGamba": Global.inc_Grow(multi_result)
-		"LongTeleportGamba": Global.inc_LongTele(multi_result)
+		"TeleportGamba": Global.inc_Tele(multi_result)
 		"ShortTeleportGamba": Global.inc_ShortTele(multi_result)
 		"CleanseGamba": Global.cleanse_curse(multi_result)
 		"DVDBounceGamba": Global.inc_DVD(multi_result)

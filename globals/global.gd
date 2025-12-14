@@ -69,7 +69,7 @@ const playerslow_mod_limit_base : int = 99
 const grow_percent_base : float = 0.5
 const grow_mod_limit_base : int = 100
 # tele
-const longtele_cool_down_base : float = 0.5
+const tele_cool_down_base : float = 0.5
 const shortele_cool_down_base : float = 120
 #dvdbounce
 const dvd_vel_base : float = 250
@@ -212,11 +212,11 @@ var growlabelon : bool = false
 var game_line : Node2D = null
 
 # tele
-var longtele_mod : int = 0
+var tele_mod : int = 0
 var shorttele_mod : int = 0
-var longtele_cool_down : float = longtele_cool_down_base
+var tele_cool_down : float = tele_cool_down_base
 var shortele_cool_down : float = shortele_cool_down_base
-var longtelelabelon : bool = false
+var telelabelon : bool = false
 var shorttelelabelon : bool = false
 
 # dvd_bounce
@@ -301,7 +301,7 @@ func reset() -> void:
 	shrinklabelon = false
 	playerslowlabelon = false
 	growlabelon = false
-	longtelelabelon = false
+	telelabelon = false
 	shorttelelabelon = false
 	dvdbouncelabelon = false
 	holelabelon = false
@@ -362,9 +362,9 @@ func reset() -> void:
 		game_line.free()
 	
 	# tele
-	longtele_mod = 0
+	tele_mod = 0
 	shorttele_mod = 0
-	longtele_cool_down = longtele_cool_down_base
+	tele_cool_down = tele_cool_down_base
 	shortele_cool_down = shortele_cool_down_base
 	
 	# dvd_bounce
@@ -605,14 +605,14 @@ func inc_Grow(times : int) -> void:
 	updatelabels = true
 	logbook_tracking("Curses", "Grow")
 
-func inc_LongTele(times: int) -> void:
-	if longtele_mod + times < 0:
-		longtele_mod = 0
+func inc_Tele(times: int) -> void:
+	if tele_mod + times < 0:
+		tele_mod = 0
 		times = 0
-	longtele_mod += times
-	longtelelabelon = true
+	tele_mod += times
+	telelabelon = true
 	updatelabels = true
-	logbook_tracking("Curses", "LongTeleport")
+	logbook_tracking("Curses", "Teleport")
 
 func inc_ShortTele(times: int) -> void:
 	if shorttele_mod + times < 0:
@@ -653,8 +653,8 @@ func cleanse_curse(times: int):
 		curse_dict["playerslow"] = playerslow_mod
 	if grow_mod > 0:
 		curse_dict["grow"] = grow_mod
-	if longtele_mod > 0:
-		curse_dict["longtele"] = longtele_mod
+	if tele_mod > 0:
+		curse_dict["tele"] = tele_mod
 	if shorttele_mod > 0:
 		curse_dict["shorttele"] = shorttele_mod
 	if dvd_mod > 0:
@@ -678,9 +678,9 @@ func cleanse_curse(times: int):
 			inc_Grow(-1)
 			if grow_mod == 0:
 				curse_dict.erase(chosen)
-		elif chosen == "longtele":
-			inc_LongTele(-1)
-			if longtele_mod == 0:
+		elif chosen == "tele":
+			inc_Tele(-1)
+			if tele_mod == 0:
 				curse_dict.erase(chosen)
 		elif chosen == "shorttele":
 			inc_ShortTele(-1)
@@ -736,22 +736,40 @@ func teleportation_activated() -> void:
 	var self_mod_none : Color = Color(1.0, 1.0 ,1.0)
 	playermove.self_modulate = self_mod_red
 	await get_tree().create_timer(1).timeout
-	playermove.self_modulate = self_mod_none
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_none
+	else: return
 	await get_tree().create_timer(0.5).timeout
-	playermove.self_modulate = self_mod_red
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_red
+	else: return
 	await get_tree().create_timer(0.25).timeout
-	playermove.self_modulate = self_mod_none
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_none
+	else: return
 	await get_tree().create_timer(0.125).timeout
-	playermove.self_modulate = self_mod_red
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_red
+	else: return
 	await get_tree().create_timer(0.0625).timeout
-	playermove.self_modulate = self_mod_none
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_none
+	else: return
 	await get_tree().create_timer(0.05).timeout
-	playermove.self_modulate = self_mod_red
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_red
+	else: return
 	await get_tree().create_timer(0.05).timeout
-	playermove.self_modulate = self_mod_none
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_none
+	else: return
 	await get_tree().create_timer(0.05).timeout
-	playermove.self_modulate = self_mod_red
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_red
+	else: return
 	await get_tree().create_timer(0.05).timeout
-	playermove.self_modulate = self_mod_none
+	if is_instance_valid(playermove):
+		playermove.self_modulate = self_mod_none
+	else: return
 	await get_tree().create_timer(0.05).timeout
 	Global.follower_array[0].rand_teleport(Vector2.ZERO)

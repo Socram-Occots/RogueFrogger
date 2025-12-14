@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ca54rluno4rn8"
-path="res://.godot/imported/shortteleportglow.png-c6ca1d9be605104f3437bb8de9d068e1.ctex"
+path="res://.godot/imported/teleportglow.png-044670e11f1f14e58eaa13b7ad16f394.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://RogueFroggerAssets/RFAssets/Level/shortteleportglow.png"
-dest_files=["res://.godot/imported/shortteleportglow.png-c6ca1d9be605104f3437bb8de9d068e1.ctex"]
+source_file="res://RogueFroggerAssets/RFAssets/Level/teleportglow.png"
+dest_files=["res://.godot/imported/teleportglow.png-044670e11f1f14e58eaa13b7ad16f394.ctex"]
 
 [params]
 

@@ -52,7 +52,7 @@ const default_multi_sandbox_dict : Dictionary = {
 	"ShrinkMulti":500,
 	"SlowMulti":100,
 	"GrowMulti":100,
-	"LongTeleportMulti":100,
+	"TeleportMulti":100,
 	"ShortTeleportMulti":100,
 	"CleanseMulti":500,
 	"DVDBounceMulti":100,
@@ -68,7 +68,7 @@ const default_gamba_sandbox_dict : Dictionary = {
 	"ShrinkGamba":1,
 	"SlowGamba":1,
 	"GrowGamba":1,
-	"LongTeleportGamba":1,
+	"TeleportGamba":1,
 	"ShortTeleportGamba":1,
 	"CleanseGamba":1,
 	"DVDBounceGamba":1,
@@ -86,7 +86,7 @@ const default_shop_sandbox_dict : Dictionary = {
 	"ShrinkShop":1,
 	"SlowShop":1,
 	"GrowShop":1,
-	"LongTeleportShop":1,
+	"TeleportShop":1,
 	"ShortTeleportShop":1,
 	"CleanseShop":1,
 	"DVDBounceShop":1,
@@ -226,10 +226,11 @@ const default_logbook_curses_dict : Dictionary = {
 		-Makes your character larger.
 		-Stacking increases your size.
 		-Stacking cap: 100"},
-	"LongTeleport":{"bools":[false, false], 
+	"Teleport":{"bools":[false, false], 
 	"tooltip":
-		"Long Teleport:
-		-Has the capability to teleport you over a random long distance on screen once.
+		"Teleport:
+		-Periodically teleports you over a semi-random distance and direction.
+		-Stacking decreases the teleport cooldown.
 		-Stacking cap: Infinite"},
 	"ShortTeleport":{"bools":[false, false], 
 	"tooltip":

@@ -126,12 +126,12 @@ func set_properties() -> void:
 		"GrowShop" : 
 			set_sandbox_option(object, "Shop", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
-		"LongTeleportShop" : 
+		"TeleportShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/longteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
 		"ShortTeleportShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/shortteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"CleanseShop" :
 			set_sandbox_option(object, "Shop", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
@@ -168,12 +168,12 @@ func set_properties() -> void:
 		"GrowGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
-		"LongTeleportGamba" : 
+		"TeleportGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/longteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
 		"ShortTeleportGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/shortteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"CleanseGamba" :
 			set_sandbox_option(object, "Gamba", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
@@ -216,12 +216,12 @@ func set_properties() -> void:
 		"GrowMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
 			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
-		"LongTeleportMulti" : 
+		"TeleportMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/longteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
 		"ShortTeleportMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/shortteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"CleanseMulti" :
 			set_sandbox_option(object, "Multi", 999, 
 			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")

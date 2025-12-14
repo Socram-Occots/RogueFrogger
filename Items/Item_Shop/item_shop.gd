@@ -75,9 +75,9 @@ func _on_body_entered(body):
 						if pricenum <= Global.grow_mod:
 							Global.inc_Grow(-1*pricenum)
 							bought = true
-					"LongTeleportShop":
-						if pricenum <= Global.longtele_mod:
-							Global.inc_LongTele(-1*pricenum)
+					"TeleportShop":
+						if pricenum <= Global.tele_mod:
+							Global.inc_Tele(-1*pricenum)
 							bought = true
 					"ShortTeleportShop":
 						if pricenum <= Global.shorttele_mod:

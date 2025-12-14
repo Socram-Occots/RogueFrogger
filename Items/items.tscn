@@ -31,8 +31,8 @@
 [ext_resource type="Shader" uid="uid://b2b2amsr8cdws" path="res://Items/shadingMulti.tres" id="28_omakc"]
 [ext_resource type="Texture2D" uid="uid://d128o4talm3y1" path="res://RogueFroggerAssets/RFAssets/Level/growglow.png" id="30_v0hxw"]
 [ext_resource type="Texture2D" uid="uid://dbxqf1ahlspr0" path="res://RogueFroggerAssets/RFAssets/Level/slowglow.png" id="31_f1now"]
-[ext_resource type="Texture2D" uid="uid://ca54rluno4rn8" path="res://RogueFroggerAssets/RFAssets/Level/shortteleportglow.png" id="33_7ghwk"]
-[ext_resource type="Texture2D" uid="uid://ckh58jglfag4" path="res://RogueFroggerAssets/RFAssets/Level/longteleportglow.png" id="34_234jt"]
+[ext_resource type="Texture2D" uid="uid://ca54rluno4rn8" path="res://RogueFroggerAssets/RFAssets/Level/teleportglow.png" id="33_7ghwk"]
+[ext_resource type="Texture2D" uid="uid://ckh58jglfag4" path="res://RogueFroggerAssets/RFAssets/Level/itemteleportglow.png" id="34_234jt"]
 [ext_resource type="Shader" uid="uid://4l6vbo5vrtok" path="res://Items/shadingCleanse.tres" id="34_lmn5n"]
 [ext_resource type="Script" path="res://Items/Cleanse.gd" id="34_qv6pk"]
 [ext_resource type="Texture2D" uid="uid://c21wuwjfn52uf" path="res://RogueFroggerAssets/RFAssets/Level/cleanseglow.png" id="35_8hwh4"]
@@ -304,16 +304,16 @@ shape = SubResource("RectangleShape2D_j3dfj")
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("30_v0hxw")
 
-[node name="LongTeleport" type="Area2D" parent="."]
+[node name="Teleport" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="LongTeleport"]
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="Teleport"]
 shape = SubResource("RectangleShape2D_j3dfj")
 
-[node name="Sprite2D" type="Sprite2D" parent="LongTeleport"]
+[node name="Sprite2D" type="Sprite2D" parent="Teleport"]
 scale = Vector2(0.805, 0.805)
 texture = ExtResource("34_234jt")
 

@@ -7,11 +7,6 @@ extends TextureRect
 @onready var on : bool = false
 @onready var cool_down_time : float = Global.glide_cool_down
 
-func _ready():
-	time_label.hide()
-	bar.value = 0
-	bar.hide()
-	
 @warning_ignore("unused_parameter")
 func _process(delta):
 	if Global.glide_cool_down_bool && !on:
@@ -33,3 +28,9 @@ func _on_timer_timeout():
 	time_label.hide()
 	bar.hide()
 	Global.glide_cool_down_bool = false
+
+
+func _on_teleport_vbox_tree_exited() -> void:
+	time_label.hide()
+	bar.value = 0
+	bar.hide()

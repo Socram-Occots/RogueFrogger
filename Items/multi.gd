@@ -25,7 +25,7 @@ func _on_body_entered(body):
 				"GambaMulti": Global.inc_Gamba(multi_result)
 				"ShieldMulti": Global.follower_array[0].shield_up = true
 				"SlowMulti": Global.inc_PlayerSlow(multi_result)
-				"LongTeleportMulti": Global.inc_LongTele(multi_result)
+				"TeleportMulti": Global.inc_Tele(multi_result)
 				"ShortTeleportMulti": Global.inc_ShortTele(multi_result)
 				"DVDBounceMulti": Global.inc_DVD(multi_result)
 				"CleanseMulti": Global.cleanse_curse(multi_result)

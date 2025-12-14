@@ -80,12 +80,12 @@ func set_properties() -> void:
 		"Grow" : 
 			set_texture(
 			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
-		"LongTeleport" : 
+		"Teleport" : 
 			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/longteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
 		"ShortTeleport" : 
 			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/shortteleport.png")
+			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"DVDBounce" : 
 			set_texture( 
 			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")

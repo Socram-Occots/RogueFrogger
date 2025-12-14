@@ -13,9 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://bsgtvoo6c4xp0" path="res://RogueFroggerAssets/RFAssets/Level/shrink.png" id="11_iu5ds"]
 [ext_resource type="Texture2D" uid="uid://dfere3w8t7ltm" path="res://RogueFroggerAssets/RFAssets/Level/grow.png" id="12_3k61l"]
 [ext_resource type="Texture2D" uid="uid://cs0qooiqw33d8" path="res://RogueFroggerAssets/RFAssets/Level/slow.png" id="12_x4ent"]
-[ext_resource type="Texture2D" uid="uid://bc4ttcvhtphmn" path="res://RogueFroggerAssets/RFAssets/Level/longteleport.png" id="14_15xxr"]
-[ext_resource type="Script" path="res://Items/LongTeleportIcon.gd" id="15_wfvy4"]
-[ext_resource type="Texture2D" uid="uid://cgld5amthxxui" path="res://RogueFroggerAssets/RFAssets/Level/shortteleport.png" id="16_ld7j3"]
+[ext_resource type="Texture2D" uid="uid://bc4ttcvhtphmn" path="res://RogueFroggerAssets/RFAssets/Level/itemteleport.png" id="14_15xxr"]
+[ext_resource type="Script" path="res://Items/TeleportIcon.gd" id="15_wfvy4"]
+[ext_resource type="Texture2D" uid="uid://cgld5amthxxui" path="res://RogueFroggerAssets/RFAssets/Level/teleport.png" id="16_ld7j3"]
 [ext_resource type="Script" path="res://Items/ShortTeleportIcon.gd" id="17_4pnj5"]
 [ext_resource type="Texture2D" uid="uid://higq8l0sgxc" path="res://RogueFroggerAssets/RFAssets/Level/cleanse.png" id="18_0vjan"]
 [ext_resource type="Texture2D" uid="uid://drnt0dnrelgry" path="res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png" id="19_5jfjl"]
@@ -306,21 +306,21 @@ size_flags_vertical = 3
 texture = ExtResource("12_3k61l")
 expand_mode = 3
 
-[node name="LongTeleportVbox" type="VBoxContainer" parent="."]
+[node name="TeleportVbox" type="VBoxContainer" parent="."]
 offset_right = 512.0
 offset_bottom = 792.0
 scale = Vector2(0.2, 0.2)
 alignment = 2
-metadata/ItemType = "LongTeleport"
+metadata/ItemType = "Teleport"
 metadata/Nature = "Curses"
 
-[node name="LongTeleport" type="Label" parent="LongTeleportVbox"]
+[node name="Teleport" type="Label" parent="TeleportVbox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 200
 text = "99"
 horizontal_alignment = 1
 
-[node name="Sprite2D" type="TextureRect" parent="LongTeleportVbox"]
+[node name="Sprite2D" type="TextureRect" parent="TeleportVbox"]
 texture_filter = 1
 layout_mode = 2
 size_flags_vertical = 3
@@ -328,7 +328,7 @@ texture = ExtResource("14_15xxr")
 expand_mode = 3
 script = ExtResource("15_wfvy4")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="LongTeleportVbox/Sprite2D"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="TeleportVbox/Sprite2D"]
 self_modulate = Color(0.470588, 0.470588, 0.470588, 1)
 texture_filter = 1
 layout_mode = 1
@@ -338,10 +338,10 @@ offset_bottom = 512.0
 fill_mode = 5
 texture_progress = ExtResource("14_15xxr")
 
-[node name="Timer" type="Timer" parent="LongTeleportVbox/Sprite2D/TextureProgressBar"]
+[node name="Timer" type="Timer" parent="TeleportVbox/Sprite2D/TextureProgressBar"]
 one_shot = true
 
-[node name="MarginContainer" type="MarginContainer" parent="LongTeleportVbox/Sprite2D"]
+[node name="MarginContainer" type="MarginContainer" parent="TeleportVbox/Sprite2D"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -349,7 +349,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="LongTeleportVbox/Sprite2D/MarginContainer"]
+[node name="Label" type="Label" parent="TeleportVbox/Sprite2D/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("5_r4njp")
@@ -507,6 +507,8 @@ clip_text = true
 [connection signal="timeout" from="GlideVbox/Sprite2D/TextureProgressBar/Timer" to="GlideVbox/Sprite2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="DashVbox/Sprite2D/TextureProgressBar/Timer" to="DashVbox/Sprite2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="GrappleVbox/Sprite2D/TextureProgressBar/Timer" to="GrappleVbox/Sprite2D" method="_on_timer_timeout"]
-[connection signal="timeout" from="LongTeleportVbox/Sprite2D/TextureProgressBar/Timer" to="LongTeleportVbox/Sprite2D" method="_on_timer_timeout"]
+[connection signal="tree_entered" from="TeleportVbox" to="TeleportVbox/Sprite2D" method="_on_teleport_vbox_tree_entered"]
+[connection signal="tree_exiting" from="TeleportVbox" to="TeleportVbox/Sprite2D" method="_on_teleport_vbox_tree_exiting"]
+[connection signal="timeout" from="TeleportVbox/Sprite2D/TextureProgressBar/Timer" to="TeleportVbox/Sprite2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="ShortTeleportVbox/Sprite2D/TextureProgressBar/Timer" to="ShortTeleportVbox/Sprite2D" method="_on_timer_timeout"]
 [connection signal="timeout" from="HoleVbox/Sprite2D/TextureProgressBar/Timer" to="HoleVbox/Sprite2D" method="_on_timer_timeout"]

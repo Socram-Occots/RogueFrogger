@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc4ttcvhtphmn"
-path="res://.godot/imported/longteleport.png-759e6148f406433a12f6cef3d445219f.ctex"
+uid="uid://cgld5amthxxui"
+path="res://.godot/imported/teleport.png-cfc08fb00b9f5f84e9ecb666e094ac16.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://RogueFroggerAssets/RFAssets/Level/longteleport.png"
-dest_files=["res://.godot/imported/longteleport.png-759e6148f406433a12f6cef3d445219f.ctex"]
+source_file="res://RogueFroggerAssets/RFAssets/Level/teleport.png"
+dest_files=["res://.godot/imported/teleport.png-cfc08fb00b9f5f84e9ecb666e094ac16.ctex"]
 
 [params]
 
