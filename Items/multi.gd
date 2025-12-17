@@ -26,7 +26,7 @@ func _on_body_entered(body):
 				"ShieldMulti": Global.follower_array[0].shield_up = true
 				"SlowMulti": Global.inc_PlayerSlow(multi_result)
 				"TeleportMulti": Global.inc_Tele(multi_result)
-				"ShortTeleportMulti": Global.inc_ShortTele(multi_result)
+				"ItemTeleportMulti": Global.inc_ItemTele(multi_result)
 				"DVDBounceMulti": Global.inc_DVD(multi_result)
 				"CleanseMulti": Global.cleanse_curse(multi_result)
 				"GrowMulti": Global.inc_Grow(multi_result)

@@ -148,12 +148,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_bottom = 0.0
-offset_left = -375.125
-offset_right = 249.875
-offset_bottom = 200.0
+offset_left = -587.0
+offset_bottom = 308.0
 grow_horizontal = 0
 grow_vertical = 1
-scale = Vector2(0.6, 0.6)
 
 [node name="Navigate" parent="UiControls" index="0"]
 alignment = 2

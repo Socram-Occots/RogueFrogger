@@ -129,7 +129,7 @@ func set_properties() -> void:
 		"TeleportShop" : 
 			set_sandbox_option(object, "Shop", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
-		"ShortTeleportShop" : 
+		"ItemTeleportShop" : 
 			set_sandbox_option(object, "Shop", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"CleanseShop" :
@@ -171,7 +171,7 @@ func set_properties() -> void:
 		"TeleportGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
-		"ShortTeleportGamba" : 
+		"ItemTeleportGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"CleanseGamba" :
@@ -219,7 +219,7 @@ func set_properties() -> void:
 		"TeleportMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
 			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
-		"ShortTeleportMulti" : 
+		"ItemTeleportMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
 			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"CleanseMulti" :

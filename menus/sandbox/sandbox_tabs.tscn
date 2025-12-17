@@ -393,7 +393,7 @@ theme_override_constants/separation = 550
 
 [node name="SandboxSetter" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
-object = "ShortTeleportMulti"
+object = "ItemTeleportMulti"
 group = "tab2"
 
 [node name="SandboxSetter2" parent="TabContainer/MultiItem/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
@@ -524,7 +524,7 @@ group = "tab3"
 
 [node name="SandboxSetter2" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
 layout_mode = 2
-object = "ShortTeleportGamba"
+object = "ItemTeleportGamba"
 group = "tab3"
 
 [node name="SandboxSetter3" parent="TabContainer/Gamba/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
@@ -670,7 +670,7 @@ theme_override_constants/separation = 550
 
 [node name="SandboxSetter" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
 layout_mode = 2
-object = "ShortTeleportShop"
+object = "ItemTeleportShop"
 group = "tab4"
 
 [node name="SandboxSetter2" parent="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]

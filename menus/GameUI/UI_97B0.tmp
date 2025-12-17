@@ -1,0 +1,165 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfs4y1gaosswr"]
+
+[ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="1_wmrt1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qc21g"]
+
+[sub_resource type="Texture2D" id="Texture2D_ujh3y"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_wmrt1")
+path = "ui_up"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_t3wr3"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_wmrt1")
+path = "ui_down"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_2foah"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_wmrt1")
+path = "ui_left"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_3q3xa"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_wmrt1")
+path = "ui_right"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_qi6yf"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_wmrt1")
+path = "ui_accept"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_6o1na"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_wmrt1")
+path = "ui_pause"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[node name="UiControls" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Navigate" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Navigate"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")
+
+[node name="Label" type="Label" parent="Navigate"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Navigate"
+
+[node name="up" type="TextureRect" parent="Navigate"]
+layout_mode = 2
+texture = SubResource("Texture2D_ujh3y")
+
+[node name="down" type="TextureRect" parent="Navigate"]
+layout_mode = 2
+texture = SubResource("Texture2D_t3wr3")
+
+[node name="left" type="TextureRect" parent="Navigate"]
+layout_mode = 2
+texture = SubResource("Texture2D_2foah")
+
+[node name="right" type="TextureRect" parent="Navigate"]
+layout_mode = 2
+texture = SubResource("Texture2D_3q3xa")
+
+[node name="VSeparator2" type="VSeparator" parent="Navigate"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")
+
+[node name="Accept" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Accept"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")
+
+[node name="Label" type="Label" parent="Accept"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Accept"
+
+[node name="Accept" type="TextureRect" parent="Accept"]
+layout_mode = 2
+texture = SubResource("Texture2D_qi6yf")
+
+[node name="VSeparator2" type="VSeparator" parent="Accept"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")
+
+[node name="Unpause" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Unpause"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")
+
+[node name="Label" type="Label" parent="Unpause"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Unpause"
+
+[node name="unpause" type="TextureRect" parent="Unpause"]
+layout_mode = 2
+texture = SubResource("Texture2D_6o1na")
+
+[node name="VSeparator2" type="VSeparator" parent="Unpause"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")

@@ -79,9 +79,9 @@ func _on_body_entered(body):
 						if pricenum <= Global.tele_mod:
 							Global.inc_Tele(-1*pricenum)
 							bought = true
-					"ShortTeleportShop":
-						if pricenum <= Global.shorttele_mod:
-							Global.inc_ShortTele(-1*pricenum)
+					"ItemTeleportShop":
+						if pricenum <= Global.itemtele_mod:
+							Global.inc_ItemTele(-1*pricenum)
 							bought = true
 					"DVDBounceShop":
 						if pricenum <= Global.dvd_mod:

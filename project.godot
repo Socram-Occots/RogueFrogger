@@ -18,14 +18,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+GRand="*res://globals/GRand.gd"
 Global="*res://globals/global.tscn"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+Globalpreload="*res://globals/globalpreload.gd"
 SettingsSignalBus="*res://autoload/SettingsSignalBus.gd"
 SettingsDataContainer="*res://autoload/SettingsDataContainer.gd"
 SaveManager="*res://autoload/SaveManager.gd"
-GRand="*res://globals/GRand.gd"
-Globalpreload="*res://globals/globalpreload.gd"
-ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]
 

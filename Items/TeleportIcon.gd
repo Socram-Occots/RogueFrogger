@@ -5,7 +5,8 @@ extends TextureRect
 @onready var bar : TextureProgressBar = $TextureProgressBar
 @onready var timer : Timer = $"../Sprite2D/TextureProgressBar/Timer"
 @onready var on : bool = false
-@onready var cool_down_time : float = Global.tele_cool_down * 3
+@onready var cool_down_time : float = Global.tele_cool_down
+@onready var crosser : RigidBody2D = Global.follower_array[0]
 var added_to_tree : bool = false
 var active : bool = true
 
@@ -24,21 +25,21 @@ func icon_activated() -> void:
 	bar.hide()
 	time_label.hide()
 	Global.teleportation_activated()
-	if active:
-		await Global.follower_array[0].get_tree().create_timer(2.1375).timeout
+	if active && is_instance_valid(crosser):
+		await crosser.get_tree().create_timer(2.1375).timeout
 	else: return
-	if active:
-		await Global.follower_array[0].get_tree().physics_frame
+	if active && is_instance_valid(crosser):
+		await crosser.get_tree().physics_frame
 	else: return
-	if active:
-		await Global.follower_array[0].get_tree().physics_frame
+	if active && is_instance_valid(crosser):
+		await crosser.get_tree().physics_frame
 	else: return
-	if active:
+	if active && is_instance_valid(crosser):
 		start_timer()
  
 func start_timer() -> void:
 	on = true
-	cool_down_time = Global.tele_cool_down * 3
+	cool_down_time = Global.tele_cool_down
 	timer.start(cool_down_time)
 	time_label.show()
 	bar.show()
@@ -57,4 +58,5 @@ func _on_teleport_vbox_tree_entered() -> void:
 func _on_teleport_vbox_tree_exiting() -> void:
 	on = false
 	active = false
+	timer.stop()
 	

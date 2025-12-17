@@ -10,6 +10,7 @@ extends RigidBody2D
 @onready var feet_collision_shape_2d: CollisionShape2D = $feet/CollisionShape2D
 @onready var rectangle: Rectangle = $impulse/Rectangle
 @onready var feetrectangle: Rectangle = $feet/CollisionShape2D/Rectangle
+@onready var explrectangle: Rectangle = $explosionbarrelexplosion/CollisionShape2D/Rectangle
 
 var carry : bool = false
 var thrown : bool = false
@@ -18,6 +19,7 @@ var settled : bool = false
 @warning_ignore("unused_parameter")
 func _physics_process(delta):
 	if animationExplo.frame == 3:
+		explrectangle.visible = false
 		explosionCol.set_deferred("disabled", true)
 	elif animationExplo.frame == 8:
 		queue_free()
@@ -37,6 +39,8 @@ func _ready():
 	rectangle.size.y = 10
 	feetrectangle.visible = SettingsDataContainer.get_show_hitboxes() && !carry
 	feetrectangle.size.y = 46.5
+	explrectangle.visible = false
+	explrectangle.size.y = 86
 
 func explosion() -> void:
 	if exploding: return
@@ -53,6 +57,7 @@ func explosion() -> void:
 	impulse_collision_shape_2d.set_deferred("disabled", true)
 	explosionCol.set_deferred("disabled", false)
 	animationExplo.play("explosion")
+	explrectangle.visible = SettingsDataContainer.get_show_hitboxes()
 
 @warning_ignore("unused_parameter")
 func _input(event: InputEvent) -> void:

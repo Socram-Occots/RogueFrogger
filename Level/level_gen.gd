@@ -42,7 +42,7 @@ extends Node
 @onready var slow_icon : VBoxContainer = Globalpreload.slow_icon.duplicate()
 @onready var grow_icon : VBoxContainer = Globalpreload.grow_icon.duplicate()
 @onready var tele_icon : VBoxContainer = Globalpreload.tele_icon.duplicate()
-@onready var shorttele_icon : VBoxContainer = Globalpreload.shorttele_icon.duplicate()
+@onready var itemtele_icon : VBoxContainer = Globalpreload.itemtele_icon.duplicate()
 @onready var cleanse_icon : VBoxContainer = Globalpreload.cleanse_icon.duplicate()
 @onready var dvdbounce_icon : VBoxContainer = Globalpreload.dvdbounce_icon.duplicate()
 @onready var hole_icon : VBoxContainer = Globalpreload.hole_icon.duplicate()
@@ -60,7 +60,7 @@ extends Node
 @onready var slow_glowicon : Texture2D =  Globalpreload.slow_glowicon.duplicate()
 @onready var grow_glowicon : Texture2D =  Globalpreload.grow_glowicon.duplicate()
 @onready var tele_glowicon : Texture2D =  Globalpreload.tele_glowicon.duplicate()
-@onready var shorttele_glowicon : Texture2D =  Globalpreload.shorttele_glowicon.duplicate()
+@onready var itemtele_glowicon : Texture2D =  Globalpreload.itemtele_glowicon.duplicate()
 @onready var cleanse_glowicon : Texture2D =  Globalpreload.cleanse_glowicon.duplicate()
 @onready var dvdbounce_glowicon : Texture2D =  Globalpreload.dvdbounce_glowicon.duplicate()
 @onready var hole_glowicon : Texture2D =  Globalpreload.hole_glowicon.duplicate()
@@ -72,7 +72,7 @@ extends Node
 @onready var pausepopup : Control 
 
 @onready var arr_to_del : Array = [playerspeedicon, glideicon, dashicon,expl_B_icon,grapple_icon,
-follower_icon,shrink_icon,slow_icon,grow_icon,tele_icon,shorttele_icon,cleanse_icon,
+follower_icon,shrink_icon,slow_icon,grow_icon,tele_icon,itemtele_icon,cleanse_icon,
 dvdbounce_icon,DVDarea,losepopup,pausepopup,hole_icon]
 
 # multichances
@@ -209,9 +209,9 @@ func load_gamba_stats() -> void:
 					"TeleportGamba":
 						gamba_array_bad.append([tempstring, 
 						get_Icon_texture2D(tele_icon)])
-					"ShortTeleportGamba":
+					"ItemTeleportGamba":
 						gamba_array_bad.append([tempstring, 
-						get_Icon_texture2D(shorttele_icon)])
+						get_Icon_texture2D(itemtele_icon)])
 					"DVDBounceGamba":
 						gamba_array_bad.append([tempstring, 
 						get_Icon_texture2D(dvdbounce_icon)])
@@ -232,7 +232,7 @@ func load_shop_stats() -> void:
 			var tempint : int = shop_dict[tempstring]
 			if tempint > 0:
 				if tempstring in \
-				["DVDBounceShop", "ShortTeleportShop", "TeleportShop",
+				["DVDBounceShop", "ItemTeleportShop", "TeleportShop",
 				"GrowShop", "SlowShop"]:
 					shoppricecurses.append(tempstring)
 				elif tempstring in \
@@ -398,7 +398,7 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 			"SlowMulti": result_multi_list[i] = [lucky_multi, slow_glowicon]
 			"GrowMulti": result_multi_list[i] = [lucky_multi, grow_glowicon]
 			"TeleportMulti": result_multi_list[i] = [lucky_multi, tele_glowicon]
-			"ShortTeleportMulti": result_multi_list[i] = [lucky_multi, shorttele_glowicon]
+			"ItemTeleportMulti": result_multi_list[i] = [lucky_multi, itemtele_glowicon]
 			"CleanseMulti": result_multi_list[i] = [lucky_multi, cleanse_glowicon]
 			"DVDBounceMulti": result_multi_list[i] = [lucky_multi, dvdbounce_glowicon]
 			"HoleMulti": result_multi_list[i] = [lucky_multi, hole_glowicon]
@@ -513,7 +513,7 @@ func chooseShopTextures(shopstr: String) -> Texture2D:
 		"SlowShop": return slow_glowicon
 		"GrowShop": return grow_glowicon
 		"TeleportShop": return tele_glowicon
-		"ShortTeleportShop": return shorttele_glowicon
+		"ItemTeleportShop": return itemtele_glowicon
 		"CleanseShop": return cleanse_glowicon
 		"DVDBounceShop": return dvdbounce_glowicon
 		"HoleShop": return hole_glowicon
@@ -706,13 +706,13 @@ func update_labels() -> void:
 				hboxlabels.add_child(tele_icon)
 			Global.telelabelon = false
 			tele_icon.get_node("Teleport").text = str(Global.tele_mod)
-		if Global.shorttelelabelon:
-			if Global.shorttele_mod == 0:
-				hboxlabels.remove_child(shorttele_icon)
-			elif shorttele_icon not in label_children:
-				hboxlabels.add_child(shorttele_icon)
-			Global.shorttelelabelon = false
-			shorttele_icon.get_node("ShortTeleport").text = str(Global.shorttele_mod)
+		if Global.itemtelelabelon:
+			if Global.itemtele_mod == 0:
+				hboxlabels.remove_child(itemtele_icon)
+			elif itemtele_icon not in label_children:
+				hboxlabels.add_child(itemtele_icon)
+			Global.itemtelelabelon = false
+			itemtele_icon.get_node("ItemTeleport").text = str(Global.itemtele_mod)
 		if Global.dvdbouncelabelon:
 			if Global.dvd_mod == 0:
 				hboxlabels.remove_child(dvdbounce_icon)

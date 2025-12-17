@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=27 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
 [ext_resource type="Script" path="res://Level/controls_tooltip.gd" id="3_eheqs"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="4_e5m7e"]
 [ext_resource type="Script" path="res://Level/stopwatch.gd" id="5_moa77"]
+[ext_resource type="Script" path="res://Level/watermarks.gd" id="7_upmlt"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="8_3m3b3"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
 
@@ -75,6 +76,16 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("4_e5m7e")
 path = "walk_cont"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_dk2mr"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "ui_pause"
 show_mode = 0
 force_controller_icon_style = -1
 force_type = 0
@@ -159,6 +170,8 @@ show_mode = 0
 force_controller_icon_style = -1
 force_type = 0
 force_device = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umnek"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_v6cxu")
@@ -328,6 +341,19 @@ texture = SubResource("Texture2D_42yga")
 layout_mode = 2
 texture = SubResource("Texture2D_w2odw")
 
+[node name="Pause" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ControlsTooltip/Pause"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Pause"
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ControlsTooltip/Pause"]
+layout_mode = 2
+texture = SubResource("Texture2D_dk2mr")
+
 [node name="Dash" type="HBoxContainer" parent="CanvasLayer/ControlsTooltip"]
 layout_mode = 2
 alignment = 2
@@ -418,13 +444,29 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_moa77")
 
-[node name="Version" type="Label" parent="CanvasLayer"]
-z_index = 2
+[node name="Watermarks" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -26.0
-offset_right = 72.0
+offset_top = -40.0
+offset_right = 40.0
 grow_vertical = 0
+theme_override_constants/separation = 10
+script = ExtResource("7_upmlt")
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/Watermarks"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/separator = SubResource("StyleBoxEmpty_umnek")
+
+[node name="Version" type="Label" parent="CanvasLayer/Watermarks"]
+z_index = 2
+layout_mode = 2
 script = ExtResource("8_3m3b3")
+metadata/_edit_use_anchors_ = true
+
+[node name="GameMode" type="Label" parent="CanvasLayer/Watermarks"]
+z_index = 2
+layout_mode = 2
 metadata/_edit_use_anchors_ = true

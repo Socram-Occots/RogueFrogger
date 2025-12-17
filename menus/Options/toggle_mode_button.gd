@@ -28,6 +28,8 @@ func set_toggle_text() -> void:
 			label.text = "Aim with Stick"
 		"show_hitboxes":
 			label.text = "Show Hitboxes"
+		"show_controls":
+			label.text = "Show Controls"
 		_: print("Failed to set toggle name: ", t_name)
 
 func save_value() -> void:
@@ -38,6 +40,8 @@ func save_value() -> void:
 			SettingsSignalBus.emit_on_controller_aim_toggle_set(mode)
 		"show_hitboxes":
 			SettingsSignalBus.emit_on_show_hitboxes_set(mode)
+		"show_controls":
+			SettingsSignalBus.emit_on_show_controls_set(mode)
 		_: print("Failed to save toggle value: ", t_name)
 
 func set_state() -> void:
@@ -51,12 +55,14 @@ func load_data(default : bool = false) -> void:
 		"mouse_aim":
 			on_toggle_selected(
 				SettingsDataContainer.get_mouse_aim_toggle(default))
-			
 		"controller_aim":
 			on_toggle_selected(
 				SettingsDataContainer.get_controller_aim_toggle(default))
 		"show_hitboxes":
 			on_toggle_selected(
 				SettingsDataContainer.get_show_hitboxes(default))
+		"show_controls":
+			on_toggle_selected(
+				SettingsDataContainer.get_show_controls(default))
 		_: print("Failed to load_ data: ", t_name)
 	set_state()

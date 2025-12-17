@@ -83,7 +83,7 @@ func set_properties() -> void:
 		"Teleport" : 
 			set_texture( 
 			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
-		"ShortTeleport" : 
+		"ItemTeleport" : 
 			set_texture( 
 			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 		"DVDBounce" : 

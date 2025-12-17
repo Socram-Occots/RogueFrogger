@@ -18,9 +18,12 @@ signal on_mouse_aim_toggle_set(value: bool)
 signal on_controller_aim_toggle_set(value: bool)
 # logbook data
 signal on_logbook_dict_set(type : String, object : String, value : bool, index : int)
+
 signal on_logbook_dict_setAll(dict: Dictionary)
 # show hitboxes
 signal on_show_hitboxes_set(value : bool)
+# show controls
+signal on_show_controls_set(value : bool)
 
 signal set_settings_dictionary(settings_dict : Dictionary)
 
@@ -68,3 +71,6 @@ func emit_on_logbook_dict_setAll(dict : Dictionary) -> void:
 # show hitboxes
 func emit_on_show_hitboxes_set(value : bool) -> void:
 	on_show_hitboxes_set.emit(value)
+# show controls
+func emit_on_show_controls_set(value : bool) -> void:
+	on_show_controls_set.emit(value)

@@ -96,7 +96,7 @@ shape = SubResource("RectangleShape2D_v677n")
 [node name="Rectangle" type="Node2D" parent="impulse"]
 position = Vector2(0, -3.5)
 script = ExtResource("12_qbo12")
-size = Vector2(30, 10)
+size = Vector2(30, 20)
 corner_radius = 0.0
 fill_color = Color(0, 1, 1, 0.196078)
 
@@ -111,6 +111,12 @@ position = Vector2(17.995, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_snvwa")
 disabled = true
+
+[node name="Rectangle" type="Node2D" parent="explosionbarrelexplosion/CollisionShape2D"]
+script = ExtResource("12_qbo12")
+size = Vector2(64, 86)
+corner_radius = 32.0
+fill_color = Color(0, 1, 1, 0.196078)
 
 [node name="feet" type="Area2D" parent="."]
 collision_layer = 32768

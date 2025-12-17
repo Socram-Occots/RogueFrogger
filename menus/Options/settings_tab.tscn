@@ -63,6 +63,11 @@ theme_override_constants/separation = 128
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 
+[node name="show_controls" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_8evcb")]
+layout_mode = 2
+t_name = "show_controls"
+group = "tab0"
+
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Gameplay/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")

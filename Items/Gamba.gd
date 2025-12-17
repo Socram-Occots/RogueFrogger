@@ -11,3 +11,4 @@ func _on_body_entered(body):
 
 func _ready() -> void:
 	set_meta("Item", false)
+	set_meta("Gamba", false)

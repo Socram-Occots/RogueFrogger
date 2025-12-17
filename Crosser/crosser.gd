@@ -22,6 +22,7 @@ extends RigidBody2D
 
 @onready var grapplehook : Line2D = Globalpreload.grapplehook.duplicate()
 @onready var tele : Area2D = Globalpreload.tele.duplicate()
+@onready var itemtele : Area2D = Globalpreload.itemtele.duplicate()
 @onready var itemgrapplehook : Line2D = Globalpreload.itemgrapplehook.duplicate()
 
 @onready var arr_of_items_to_grapple : Array[Array] = []
@@ -33,7 +34,7 @@ extends RigidBody2D
 
 
 func _ready() -> void:
-	Globalpreload.delete_array.append_array([grapplehook,tele,itemgrapplehook])
+	Globalpreload.delete_array.append_array([grapplehook,tele,itemtele,itemgrapplehook])
 	# stop camera from being weird initially
 	$Camera2D.reset_smoothing()
 	
@@ -258,6 +259,12 @@ func rand_teleport(constraint_2dvec : Vector2 = Vector2.ZERO) -> void:
 	temp_tele.constraint_2dvec = constraint_2dvec
 	get_parent().add_child(temp_tele)
 
+func rand_itemteleport(constraint_2dvec : Vector2 = Vector2.ZERO) -> void:
+	var itemtemp_tele : Area2D = itemtele.duplicate()
+	itemtemp_tele.global_position = global_position
+	itemtemp_tele.constraint_2dvec = constraint_2dvec
+	get_parent().add_child(itemtemp_tele)
+
 func _on_follower_cleanup_timer_timeout() -> void:
 	if Global.follower_mod > 1:
 		for i in range(Global.follower_array.size() - 1, 0, -1):
@@ -272,7 +279,7 @@ func _on_auto_item_grapple_area_entered(area: Area2D) -> void:
 	if Global.grapple_item_chosen:
 		return
 	var metalist : PackedStringArray = area.get_meta_list()
-	if  !("Multi" in metalist || "Shop" in metalist || "marked_for_grapple" in metalist) && \
+	if  !("Gamba" in metalist || "Multi" in metalist || "Shop" in metalist || "marked_for_grapple" in metalist) && \
 	"Item" in metalist:
 		arr_of_items_to_grapple.append([area, (area.global_position - global_position).length()])
 	await get_tree().physics_frame

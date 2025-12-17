@@ -18,6 +18,9 @@ extends VBoxContainer
 @onready var glidelabel: Label = $Glide/Label
 @onready var grapplelabel: Label = $Grapple/Label
 @onready var throwlabel: Label = $Throw/Label
+@onready var run: HBoxContainer = $Run
+@onready var walk: HBoxContainer = $Walk
+@onready var pause: HBoxContainer = $Pause
 
 @onready var cont_mode : bool = false
 
@@ -25,11 +28,15 @@ func _ready() -> void:
 	show_controls()
 
 func show_controls() -> void:
-	if Global.using_cont:
-		show_controller_controls()
+	if SettingsDataContainer.get_show_controls():
+		visible = true
+		if Global.using_cont:
+			show_controller_controls()
+		else:
+			show_key_controls()
+		show_labels()
 	else:
-		show_key_controls()
-	show_labels()
+		visible = false
 
 func show_labels() -> void:
 	dashlabel.visible = texture_rect_keyDash.visible || texture_rect_contDash.visible

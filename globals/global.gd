@@ -69,8 +69,8 @@ const playerslow_mod_limit_base : int = 99
 const grow_percent_base : float = 0.5
 const grow_mod_limit_base : int = 100
 # tele
-const tele_cool_down_base : float = 0.5
-const shortele_cool_down_base : float = 120
+const tele_cool_down_base : float = 120
+const itemtele_cool_down_base : float = 120
 #dvdbounce
 const dvd_vel_base : float = 250
 #expl_b
@@ -213,11 +213,11 @@ var game_line : Node2D = null
 
 # tele
 var tele_mod : int = 0
-var shorttele_mod : int = 0
+var itemtele_mod : int = 0
 var tele_cool_down : float = tele_cool_down_base
-var shortele_cool_down : float = shortele_cool_down_base
+var itemtele_cool_down : float = itemtele_cool_down_base
 var telelabelon : bool = false
-var shorttelelabelon : bool = false
+var itemtelelabelon : bool = false
 
 # dvd_bounce
 var dvd_spawn : bool = false
@@ -302,7 +302,7 @@ func reset() -> void:
 	playerslowlabelon = false
 	growlabelon = false
 	telelabelon = false
-	shorttelelabelon = false
+	itemtelelabelon = false
 	dvdbouncelabelon = false
 	holelabelon = false
 	updatelabels = false
@@ -363,15 +363,17 @@ func reset() -> void:
 	
 	# tele
 	tele_mod = 0
-	shorttele_mod = 0
+	itemtele_mod = 0
 	tele_cool_down = tele_cool_down_base
-	shortele_cool_down = shortele_cool_down_base
+	itemtele_cool_down = itemtele_cool_down_base
 	
 	# dvd_bounce
 	dvd_spawn = false
 	dvd_mod = 0
 	dvd_vel = dvd_vel_base
 	dvd_spawn_num = 0
+	for i in range(dvd_array.size()):
+		if is_instance_valid(dvd_array[i]): dvd_array[i].queue_free()
 	dvd_array.clear()
 	
 	#hole
@@ -458,7 +460,7 @@ func inc_GlideBoots(times : int) -> void:
 	elif glide_mod + times == 0:
 		glide = false
 	glide_mod += times
-	glide_cool_down = glide_cool_down_base * ((1/1.005) ** glide_mod)
+	glide_cool_down = glide_cool_down_base * ((1/1.01) ** glide_mod)
 	glide_time = glide_base_time + 0.025 * glide_mod
 	glidelabelon = true
 	updatelabels = true
@@ -477,7 +479,7 @@ func inc_Dash(times : int) -> void:
 	dash_mod += times
 	dash_scaling = dash_base + 0.02 * dash_mod
 	dash_time = dash_base_time/(dash_scaling/dash_base)
-	dash_cool_down = dash_cool_down_base * ((1/1.005) ** dash_mod)
+	dash_cool_down = dash_cool_down_base * ((1/1.01) ** dash_mod)
 	dashlabelon = true
 	updatelabels = true
 	logbook_tracking("Items", "Dash")
@@ -510,7 +512,7 @@ func inc_GrappleRope(times : int) -> void:
 	grapple_speed = grapple_speed_base + 5 * grapple_mod
 	grapple_strength = grapple_strength_base + 25 * grapple_mod
 	grapple_length = grapple_length_base + 5 * grapple_mod
-	grapple_cool_down = grapple_cool_down_base * ((1/1.005) ** grapple_mod)
+	grapple_cool_down = grapple_cool_down_base * ((1/1.01) ** grapple_mod)
 	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.01) ** grapple_mod)
 	grapplelabelon = true
 	updatelabels = true
@@ -610,27 +612,28 @@ func inc_Tele(times: int) -> void:
 		tele_mod = 0
 		times = 0
 	tele_mod += times
+	tele_cool_down = tele_cool_down_base * ((1/1.005) ** tele_mod)
 	telelabelon = true
 	updatelabels = true
 	logbook_tracking("Curses", "Teleport")
 
-func inc_ShortTele(times: int) -> void:
-	if shorttele_mod + times < 0:
-		shorttele_mod = 0
+func inc_ItemTele(times: int) -> void:
+	if itemtele_mod + times < 0:
+		itemtele_mod = 0
 		times = 0
-	shorttele_mod += times
-	shortele_cool_down = shortele_cool_down_base * ((1/1.005) ** shorttele_mod)
-	shorttelelabelon = true
+	itemtele_mod += times
+	itemtele_cool_down = itemtele_cool_down_base * ((1/1.005) ** itemtele_mod)
+	itemtelelabelon = true
 	updatelabels = true
-	logbook_tracking("Curses", "ShortTeleport")
+	logbook_tracking("Curses", "ItemTeleport")
 
 func inc_DVD(times : int) -> void:
 	if dvd_mod + times < 0:
 		dvd_mod = 0
 		times = 0
 		for i in range(0, dvd_array.size()):
-			dvd_array[i].queue_free()
-			dvd_array.remove_at(i)
+			if is_instance_valid(dvd_array[i]): dvd_array[i].queue_free()
+		dvd_array.clear()
 	dvd_mod += times
 	dvd_spawn_num = times
 	if times > 0:
@@ -640,61 +643,60 @@ func inc_DVD(times : int) -> void:
 			if dvd_array.is_empty():
 				break
 			else:
-				dvd_array[0].queue_free()
+				if is_instance_valid(dvd_array[0]): dvd_array[0].queue_free()
 				dvd_array.remove_at(0)
 	dvdbouncelabelon = true
 	updatelabels = true
 	logbook_tracking("Curses", "DVDBounce")
 
 func cleanse_curse(times: int):
+	logbook_tracking("Items", "Cleanse")
 	var curse_dict : Dictionary = {}
-	
+
 	if playerslow_mod > playerslow_mod_base:
 		curse_dict["playerslow"] = playerslow_mod
 	if grow_mod > 0:
 		curse_dict["grow"] = grow_mod
 	if tele_mod > 0:
 		curse_dict["tele"] = tele_mod
-	if shorttele_mod > 0:
-		curse_dict["shorttele"] = shorttele_mod
+	if itemtele_mod > 0:
+		curse_dict["itemtele"] = itemtele_mod
 	if dvd_mod > 0:
 		curse_dict["DVDBounce"] = dvd_mod
 	
-	if curse_dict.is_empty():
-		return
-		
-	
-	var curse_size : int = curse_dict.keys().size()
+	if curse_dict.is_empty(): return
 	
 	for i in range(times):
+		var curse_size : int = curse_dict.keys().size()
+		if curse_dict.is_empty() || curse_size == 0: return
 		var chosen : String = curse_dict.keys()[
 			GRand.itemrand.randi() % curse_size]
 		
 		if chosen == "playerslow":
 			inc_PlayerSlow(-1)
-			if playerslow_mod == playerslow_mod_base:
+			curse_dict[chosen] = curse_dict[chosen] - 1
+			if curse_dict[chosen] == playerslow_mod_base:
 				curse_dict.erase(chosen)
 		elif chosen == "grow":
 			inc_Grow(-1)
-			if grow_mod == 0:
+			curse_dict[chosen] = curse_dict[chosen] - 1
+			if curse_dict[chosen] == 0:
 				curse_dict.erase(chosen)
 		elif chosen == "tele":
 			inc_Tele(-1)
-			if tele_mod == 0:
+			curse_dict[chosen] = curse_dict[chosen] - 1
+			if curse_dict[chosen] == 0:
 				curse_dict.erase(chosen)
-		elif chosen == "shorttele":
-			inc_ShortTele(-1)
-			if shorttele_mod == 0:
+		elif chosen == "itemtele":
+			inc_ItemTele(-1)
+			curse_dict[chosen] = curse_dict[chosen] - 1
+			if curse_dict[chosen] == 0:
 				curse_dict.erase(chosen)
 		elif chosen == "DVDBounce":
 			inc_DVD(-1)
-			if dvd_mod == 0:
+			curse_dict[chosen] = curse_dict[chosen] - 1
+			if curse_dict[chosen] == 0:
 				curse_dict.erase(chosen)
-		
-		if curse_dict.is_empty():
-			return
-	
-	logbook_tracking("Items", "Cleanse")
 
 func inc_Hole(times : int) -> void:
 	if hole_mod + times < 0:

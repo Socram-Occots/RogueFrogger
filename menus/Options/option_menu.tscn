@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxbxrwvsg5xpv"]
+[gd_scene load_steps=9 format=3 uid="uid://cxbxrwvsg5xpv"]
 
 [ext_resource type="PackedScene" uid="uid://dnm3jpqa7k30c" path="res://menus/Options/settings_tab.tscn" id="1_bgu4d"]
 [ext_resource type="Script" path="res://menus/Options/option_menu.gd" id="1_drq1f"]
 [ext_resource type="Material" uid="uid://dw5ry2b5wv5ra" path="res://RogueFroggerAssets/RFAssets/shaders/blur.tres" id="2_viuqr"]
+[ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="4_beays"]
+[ext_resource type="Script" path="res://menus/Version.gd" id="5_qawna"]
 
 [sub_resource type="Animation" id="Animation_wqa0x"]
 length = 0.001
@@ -143,6 +145,35 @@ libraries = {
 "": SubResource("AnimationLibrary_we8tw")
 }
 
+[node name="UiControls" parent="." instance=ExtResource("4_beays")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -106.0
+offset_right = 625.0
+offset_bottom = 94.0
+grow_horizontal = 1
+grow_vertical = 0
+scale = Vector2(0.53, 0.53)
+
+[node name="Unpause" parent="UiControls" index="2"]
+visible = false
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("5_qawna")
+metadata/_edit_use_anchors_ = true
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ResetTab" to="." method="_on_reset_tab_pressed"]
@@ -184,3 +215,4 @@ libraries = {
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings2"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings3"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer/show_hitboxes"]
+[editable path="UiControls"]

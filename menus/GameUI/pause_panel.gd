@@ -17,6 +17,11 @@ func _ready():
 	add_to_group("UI_FOCUS", true)
 	label.visible = false
 	label_tooltip.visible = false
+	#var uicont : VBoxContainer = Globalpreload.uicontrols.duplicate()
+	#uicont.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	#for i in uicont.get_children():
+		#i.set_alignment(2)
+	#add_child(uicont)
 
 func load_itemtooltips() -> void:
 	var items : Array[Node] = get_tree().root.get_node(

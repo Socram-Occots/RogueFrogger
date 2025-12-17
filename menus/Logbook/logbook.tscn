@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0leoibyd8yrj"]
+[gd_scene load_steps=7 format=3 uid="uid://d0leoibyd8yrj"]
 
 [ext_resource type="Script" path="res://menus/Logbook/logbook.gd" id="1_k5r8i"]
 [ext_resource type="PackedScene" uid="uid://blaciwut42wag" path="res://menus/Logbook/logbook_tabs.tscn" id="2_8i2oe"]
 [ext_resource type="Texture2D" uid="uid://dnvrjaq2e50w8" path="res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png" id="3_gsirs"]
+[ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="4_2qjos"]
+[ext_resource type="Script" path="res://menus/Version.gd" id="5_ej0am"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a07ir"]
 
@@ -112,6 +114,41 @@ layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_a07ir")
 
+[node name="UiControls" parent="." instance=ExtResource("4_2qjos")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+offset_left = -331.265
+offset_top = -106.0
+offset_right = 293.735
+offset_bottom = 94.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.53, 0.53)
+
+[node name="Navigate" parent="UiControls" index="0"]
+alignment = 2
+
+[node name="Accept" parent="UiControls" index="1"]
+alignment = 2
+
+[node name="Unpause" parent="UiControls" index="2"]
+visible = false
+alignment = 2
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -72.0
+offset_bottom = 26.0
+grow_horizontal = 0
+script = ExtResource("5_ej0am")
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit and Save" to="." method="_on_exit_and_save_pressed"]
 
 [editable path="MarginContainer/VBoxContainer/LogbookTabs"]
+[editable path="UiControls"]

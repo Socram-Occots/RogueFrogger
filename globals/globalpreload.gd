@@ -25,6 +25,8 @@ const HOLE : Resource = preload("res://Hole/hole.tscn")
 const ITEMGRAPPLESCRIPT : Script = preload("res://Grapplerope/itemgrapplelogic.gd")
 const TOOLTIPS : ItemToolTipDict = preload("res://menus/itemtooltipdescriptions.tres")
 const TELEPORTLINE : Resource = preload("res://Items/Teleport/teleportline.tscn")
+const ITEMTELE : Resource = preload("res://Items/Teleport/itemteleportoutline.tscn")
+#var UICONTROLS : Resource = preload("res://menus/GameUI/UI_Controls.tscn")
 
 #func _input(event: InputEvent) -> void:
 	#if event.is_action_pressed("dash"):
@@ -98,7 +100,7 @@ var shrink_icon : VBoxContainer = iconlabels.get_node("ShrinkVbox")
 var slow_icon : VBoxContainer = iconlabels.get_node("SlowVbox")
 var grow_icon : VBoxContainer = iconlabels.get_node("GrowVbox")
 var tele_icon : VBoxContainer = iconlabels.get_node("TeleportVbox")
-var shorttele_icon : VBoxContainer = iconlabels.get_node("ShortTeleportVbox")
+var itemtele_icon : VBoxContainer = iconlabels.get_node("ItemTeleportVbox")
 var cleanse_icon : VBoxContainer = iconlabels.get_node("CleanseVbox")
 var dvdbounce_icon : VBoxContainer = iconlabels.get_node("DVDBounceVbox")
 var hole_icon : VBoxContainer = iconlabels.get_node("HoleVbox")
@@ -117,7 +119,7 @@ var shield_glowicon : Texture2D = items_instantiate.get_node("Shield/Sprite2D").
 var slow_glowicon : Texture2D = items_instantiate.get_node("Slow/Sprite2D").texture
 var grow_glowicon : Texture2D = items_instantiate.get_node("Grow/Sprite2D").texture
 var tele_glowicon : Texture2D = items_instantiate.get_node("Teleport/Sprite2D").texture
-var shorttele_glowicon : Texture2D = items_instantiate.get_node("ShortTeleport/Sprite2D").texture
+var itemtele_glowicon : Texture2D = items_instantiate.get_node("ItemTeleport/Sprite2D").texture
 var cleanse_glowicon : Texture2D = items_instantiate.get_node("Cleanse/Sprite2D").texture
 var dvdbounce_glowicon : Texture2D = items_instantiate.get_node("DVDBounce/Sprite2D").texture
 var hole_glowicon : Texture2D = items_instantiate.get_node("Hole/Sprite2D").texture
@@ -127,6 +129,7 @@ var follower_basic : RigidBody2D = CROSSER.instantiate()
 var grapplehook : Line2D = GRAPPLE.instantiate()
 var itemgrapplehook : Line2D = grapplehook.duplicate()
 var tele : Area2D = TELE.instantiate()
+var itemtele : Area2D = ITEMTELE.instantiate()
 var delete_array : Array = []
 
 # game
@@ -135,6 +138,9 @@ var PAUSE_INST : Control = PAUSE.instantiate()
 
 #teleport
 var teleportline : Line2D = TELEPORTLINE.instantiate()
+
+# UI
+#var uicontrols : VBoxContainer = UICONTROLS.instantiate()
 
 func delete_stray_nodes() -> void:
 	for i in delete_array:

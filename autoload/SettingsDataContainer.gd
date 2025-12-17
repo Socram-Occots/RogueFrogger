@@ -24,7 +24,8 @@ var controller_aim_toggle : bool = false
 var logbook_dict : Dictionary = {}
 # show hitboxes
 var show_hitboxes : bool = false
-
+# show controls
+var show_controls : bool = false
 func _ready():
 	handle_signals()
 	
@@ -43,7 +44,8 @@ func create_storage_dictionary() -> Dictionary:
 		"mouse_aim_toggle": mouse_aim_toggle,
 		"controller_aim_toggle": controller_aim_toggle,
 		"logbook_dict": logbook_dict,
-		"show_hitboxes": show_hitboxes
+		"show_hitboxes": show_hitboxes,
+		"show_controls": show_controls
 	}
 
 	return settings_container_dict
@@ -224,6 +226,12 @@ func get_show_hitboxes(default: bool = false) -> bool:
 		return DEFAULT_SETTINGS.default_show_hitboxes
 	return show_hitboxes
 
+# get show controls
+func get_show_controls(default: bool = false) -> bool:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_show_controls
+	return show_controls
+
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index
@@ -340,20 +348,33 @@ func on_logbook_dict_setAll(dict : Dictionary) -> void:
 	for i in default.keys():
 		if dict.has(i):
 			for a in default[i].keys():
-				if !dict[i].has(a):
+				if dict[i].has(a):
+					dict[i][a]["tooltip"] = default[i][a]["tooltip"]
+					for b in default[i][a].keys():
+						if !dict[i][a].has(b):
+							dict[i][a][b] = default[i][a][b]
+				else:
 					dict[i][a] = default[i][a]
 		else:
 			dict[i] = default[i]
-	# getting rid of any unknown keys from other versions
+	# getting rid of any unknown/unused keys from other versions
 	for i in dict.keys():
 		if default.has(i):
 			for a in dict[i].keys():
-				if !default[i].has(a):
+				if default[i].has(a):
+					for b in dict[i][a].keys():
+						if !default[i][a].has(b):
+							dict[i][a].erase(b)
+				else:
 					dict[i].erase(a)
 		else:
 			dict.erase(i)
+			
 	logbook_dict = dict.duplicate(true)
 
+# set controls
+func on_show_controls_set(value : bool) -> void:
+	show_controls = value
 #settings data set
 func on_settings_data_loaded(data: Dictionary) -> void:
 	loaded_data = data
@@ -416,6 +437,10 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_show_hitboxes_set(loaded_data["show_hitboxes"])
 	else:
 		on_show_hitboxes_set(DEFAULT_SETTINGS.default_show_hitboxes)
+	if loaded_data.has("show_controls"):
+		on_show_controls_set(loaded_data["show_controls"])
+	else:
+		on_show_controls_set(DEFAULT_SETTINGS.default_show_controls)
 	loaded_data = create_storage_dictionary()
 
 func handle_signals() -> void:
@@ -440,6 +465,8 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_logbook_dict_setAll.connect(on_logbook_dict_setAll)
 	# show hitboxes
 	SettingsSignalBus.on_show_hitboxes_set.connect(on_show_hitboxes_set)
-	
+	# show_controls
+	SettingsSignalBus.on_show_controls_set.connect(on_show_controls_set)
+
 	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

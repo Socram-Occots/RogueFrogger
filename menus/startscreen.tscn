@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bw2h6olocn3pw"]
+[gd_scene load_steps=5 format=3 uid="uid://bw2h6olocn3pw"]
 
 [ext_resource type="Script" path="res://menus/startscreen.gd" id="1_mco7v"]
+[ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="4_5t7af"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="5_851gh"]
 [ext_resource type="Script" path="res://menus/Highscore.gd" id="6_1jup0"]
 
@@ -117,6 +118,21 @@ script = ExtResource("6_1jup0")
 autoplay = true
 bus = &"Music"
 
+[node name="UiControls" parent="." instance=ExtResource("4_5t7af")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -145.0
+offset_right = 625.0
+offset_bottom = 55.0
+grow_horizontal = 1
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+
+[node name="Unpause" parent="UiControls" index="2"]
+visible = false
+
 [connection signal="pressed" from="Options/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Options/Sandbox" to="." method="_on_sandbox_pressed"]
 [connection signal="pressed" from="Options/Logbook" to="." method="_on_logbook_pressed"]
@@ -124,3 +140,5 @@ bus = &"Music"
 [connection signal="pressed" from="Options/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Options/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="Options/Quit" to="." method="_on_quit_pressed"]
+
+[editable path="UiControls"]

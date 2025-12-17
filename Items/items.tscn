@@ -315,20 +315,20 @@ shape = SubResource("RectangleShape2D_j3dfj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Teleport"]
 scale = Vector2(0.805, 0.805)
-texture = ExtResource("34_234jt")
+texture = ExtResource("33_7ghwk")
 
-[node name="ShortTeleport" type="Area2D" parent="."]
+[node name="ItemTeleport" type="Area2D" parent="."]
 visible = false
 scale = Vector2(1.5, 1.5)
 collision_layer = 8
 collision_mask = 1921
 
-[node name="CollisionPolygon2D" type="CollisionShape2D" parent="ShortTeleport"]
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="ItemTeleport"]
 shape = SubResource("RectangleShape2D_j3dfj")
 
-[node name="Sprite2D" type="Sprite2D" parent="ShortTeleport"]
+[node name="Sprite2D" type="Sprite2D" parent="ItemTeleport"]
 scale = Vector2(0.805, 0.805)
-texture = ExtResource("33_7ghwk")
+texture = ExtResource("34_234jt")
 
 [node name="Cleanse" type="Area2D" parent="."]
 visible = false

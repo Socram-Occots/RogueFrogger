@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://qjm1e00amf4x"]
+[gd_scene load_steps=5 format=3 uid="uid://qjm1e00amf4x"]
 
 [ext_resource type="Script" path="res://menus/sandbox/sandbox_options.gd" id="1_bv4pc"]
 [ext_resource type="PackedScene" uid="uid://rmxm5r67j8cg" path="res://menus/sandbox/sandbox_tabs.tscn" id="2_mw015"]
+[ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="3_26coe"]
+[ext_resource type="Script" path="res://menus/Version.gd" id="4_2t3iu"]
 
 [node name="SandboxOptions" type="Control"]
 layout_mode = 3
@@ -205,6 +207,35 @@ theme_override_font_sizes/font_size = 40
 text = "Save/Play
 "
 
+[node name="UiControls" parent="." instance=ExtResource("3_26coe")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+offset_top = -106.0
+offset_right = 625.0
+offset_bottom = 94.0
+grow_horizontal = 1
+grow_vertical = 0
+scale = Vector2(0.53, 0.53)
+
+[node name="Unpause" parent="UiControls" index="2"]
+visible = false
+
+[node name="Version" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -26.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("4_2t3iu")
+metadata/_edit_use_anchors_ = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ResetTab" to="." method="_on_reset_tab_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Save" to="." method="_on_save_pressed"]
@@ -279,3 +310,4 @@ text = "Save/Play
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]
+[editable path="UiControls"]

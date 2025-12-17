@@ -53,7 +53,7 @@ const default_multi_sandbox_dict : Dictionary = {
 	"SlowMulti":100,
 	"GrowMulti":100,
 	"TeleportMulti":100,
-	"ShortTeleportMulti":100,
+	"ItemTeleportMulti":100,
 	"CleanseMulti":500,
 	"DVDBounceMulti":100,
 	"HoleMulti":500
@@ -69,7 +69,7 @@ const default_gamba_sandbox_dict : Dictionary = {
 	"SlowGamba":1,
 	"GrowGamba":1,
 	"TeleportGamba":1,
-	"ShortTeleportGamba":1,
+	"ItemTeleportGamba":1,
 	"CleanseGamba":1,
 	"DVDBounceGamba":1,
 	"HoleGamba":1
@@ -87,7 +87,7 @@ const default_shop_sandbox_dict : Dictionary = {
 	"SlowShop":1,
 	"GrowShop":1,
 	"TeleportShop":1,
-	"ShortTeleportShop":1,
+	"ItemTeleportShop":1,
 	"CleanseShop":1,
 	"DVDBounceShop":1,
 	"HoleShop":1
@@ -141,7 +141,7 @@ const default_logbook_items_dict : Dictionary = {
 	"tooltip":
 		"Glide:
 		-Activate: Glide without friction. You can not move normally, 
-		but you can boost youself using othe special items.
+		but you can boost youself using other special items.
 		-Activate while active: Cancel the glide early.
 		-Stacking increases gliding time.
 		-Stacking decreases cooldown.
@@ -232,10 +232,11 @@ const default_logbook_curses_dict : Dictionary = {
 		-Periodically teleports you over a semi-random distance and direction.
 		-Stacking decreases the teleport cooldown.
 		-Stacking cap: Infinite"},
-	"ShortTeleport":{"bools":[false, false], 
+	"ItemTeleport":{"bools":[false, false], 
 	"tooltip":
-		"Short Teleport:
-		-Has the capability to teleport you over a random short distance on screen periodically.
+		"Item Teleport:
+		-Has the capability to teleport a random item you have you over a random distance on screen periodically.
+		-You lose the item as its teleported, but you can still pick it up again.
 		-Stacking decreases the teleport cooldown.
 		-Stacking cap: Infinite"},
 	"DVDBounce":{"bools":[false, false], 
@@ -254,3 +255,5 @@ const default_logbook_dict : Dictionary = {
 
 # show hitboxes
 const default_show_hitboxes : bool = false
+# show controls
+const default_show_controls : bool = false
