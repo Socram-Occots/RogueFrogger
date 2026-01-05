@@ -91,6 +91,15 @@ dvdbounce_icon,DVDarea,losepopup,pausepopup,hole_icon]
 # tooltips
 @onready var controls_tooltip: VBoxContainer = $CanvasLayer/ControlsTooltip
 
+# speedrun
+@onready var speed_run_checkpoints : Dictionary = {
+	100: true,
+	250: true,
+	500: true,
+	750: true,
+	1000: true,
+}
+
 func load_element_stats() -> void:
 	load_general_stats()
 	load_street_stats()
@@ -734,6 +743,22 @@ func dash_check() -> void:
 		var dash_pop_up : Control = Globalpreload.POP_INST.duplicate()
 		$CanvasLayer.add_child(dash_pop_up)
 
+func speed_run_check() -> void:
+	if Global.sandbox:
+		return
+	var newtime : bool = false
+	var checkpoint := speed_run_checkpoints.keys()
+	for i in checkpoint:
+		if Global.score >= i && (Global.stopwatch_time < \
+		SettingsDataContainer.get_speedrun_dict_type("speedrun_" + str(i)) || \
+		SettingsDataContainer.get_speedrun_dict_type("speedrun_" + str(i)) == 0):
+			speed_run_checkpoints.erase(i)
+			SettingsSignalBus.emit_on_speedrun_dict_set(
+				"speedrun_" + str(i), Global.stopwatch_time)
+			newtime = true
+	if newtime:
+		SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
+		
 func terrain_check() -> void:
 	if Global.spawnTerrain:
 		if Global.race_condition_tiles.is_empty():
@@ -745,6 +770,7 @@ func terrain_check() -> void:
 		var score_diff : int = max_tile_int - Global.score  
 		if score_diff > -1:
 			Global.score = max_tile_int
+			speed_run_check()
 			if Global.finish_line_tile and \
 			max_tile_int > SettingsDataContainer.get_high_score() \
 			and !high_score_reached:
@@ -755,7 +781,7 @@ func terrain_check() -> void:
 		Global.spawnTerrain = false
 		terrainSpawnLogic(score_diff)
 		Global.incrementDifficulty(2, score_diff * 0.5)
-		if Global.score % 100 == 0:
+		if Global.score % 100 == 0 || score_diff > -1:
 			spawnBorder(960, Global.player_pos_y)
 
 func spawnBorder(x : float, y : float) -> void:

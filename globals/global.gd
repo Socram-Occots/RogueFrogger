@@ -1,7 +1,7 @@
 extends Node
 
 #verison
-var version : String = "V 0.0.0.7"
+var version : String = "V 0.0.0.8"
 
 #score
 var score : int = 0
@@ -234,6 +234,9 @@ var hole_mod : int = 0
 var hole_cool_down_bool : bool = false
 var holelabelon = false
 var coyote_status_cool_down_bool : bool = false
+
+#time
+var stopwatch_time : float = 0
 #endregion
 
 func reset() -> void:
@@ -382,6 +385,9 @@ func reset() -> void:
 	hole_mod = 0
 	hole_cool_down_bool = false
 	coyote_status_cool_down_bool = false
+	
+	#time
+	stopwatch_time  = 0
 
 func incrementDifficulty(x : int = 2, int_multiple : float = 1) -> void:
 	if score != 0 && score % x == 0:

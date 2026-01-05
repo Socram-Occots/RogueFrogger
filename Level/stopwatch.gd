@@ -10,3 +10,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	time_elapsed += delta
 	text = str(time_elapsed).pad_decimals(4)
+	Global.stopwatch_time = time_elapsed

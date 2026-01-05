@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bw2h6olocn3pw"]
 
 [ext_resource type="Script" path="res://menus/startscreen.gd" id="1_mco7v"]
+[ext_resource type="Script" path="res://menus/stats.gd" id="3_bdm52"]
 [ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="4_5t7af"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="5_851gh"]
-[ext_resource type="Script" path="res://menus/Highscore.gd" id="6_1jup0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -107,12 +107,37 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Stats" type="VBoxContainer" parent="."]
 layout_mode = 1
+script = ExtResource("3_bdm52")
 
 [node name="Highscore" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Highscore: "
-script = ExtResource("6_1jup0")
+
+[node name="Speedrun100" type="Label" parent="Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Speedrun100: "
+
+[node name="Speedrun250" type="Label" parent="Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Speedrun250: "
+
+[node name="Speedrun500" type="Label" parent="Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Speedrun500: "
+
+[node name="Speedrun750" type="Label" parent="Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Speedrun500: "
+
+[node name="Speedrun1000" type="Label" parent="Stats"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Speedrun1000: "
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true

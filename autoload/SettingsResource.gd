@@ -10,6 +10,13 @@ const default_music_volume : float = 0.5
 const default_sfx_volume : float = 0.5
 # game data
 const default_high_score : int = 0
+const default_speedrun_dict : Dictionary = {
+	"speedrun_100":0,
+	"speedrun_250":0,
+	"speedrun_500":0,
+	"speedrun_750":0,
+	"speedrun_1000":0
+}
 # sandbox data
 const default_general_sandbox_dict : Dictionary = {
 	"ExplBarrel":50,
@@ -122,11 +129,11 @@ const default_logbook_objects_dict : Dictionary = {
 	"Barrel":{"bools":[false, false], 
 	"tooltip":
 		"Barrel:
-		-It's a barrel. Kinda just for decoration, can block you though."},
+		-It's a barrel. It's kinda just for decoration. It can block you though."},
 	"Hole_Sidewalk_Street":{"bools":[false, false], 
 	"tooltip":
 		"Hole:
-	-Dont walk over it! The city really needs to do something about this pothole problem...
+	-Don't walk over it! The city really needs to do something about this pothole problem...
 	-These holes could be quite useful at stopping these cars.
 	If only there was a method to make them larger..."}
 }
@@ -166,7 +173,7 @@ const default_logbook_items_dict : Dictionary = {
 	"Grapple":{"bools":[false, false], 
 	"tooltip":
 		"Grapple: 
-		-Activate: Shoot a grappling rope that pulls you once it hits a target.
+		-Activate: Shoot a grappling rope which pulls you in a direction.
 		-Passive: A rope will occasionally grab the farthest item on screen for you.
 		-Stacking increases:
 			Grapple speed
@@ -236,7 +243,7 @@ const default_logbook_curses_dict : Dictionary = {
 	"tooltip":
 		"Item Teleport:
 		-Has the capability to teleport a random item you have you over a random distance on screen periodically.
-		-You lose the item as its teleported, but you can still pick it up again.
+		-You lose the item as it's teleported, but you can still pick it up again.
 		-Stacking decreases the teleport cooldown.
 		-Stacking cap: Infinite"},
 	"DVDBounce":{"bools":[false, false], 

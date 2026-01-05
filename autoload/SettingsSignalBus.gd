@@ -9,6 +9,8 @@ signal on_music_sound_set(value: float)
 signal on_sfx_sound_set(value: float)
 # game data
 signal on_high_score_set(value: int)
+signal on_speedrun_dict_set(type: String, value: float)
+signal on_speedrun_dict_setAll(dict: Dictionary)
 # sandbox data
 signal on_sandbox_dict_set(type: String, object: String, num: int)
 signal on_sandbox_dict_setAll(dict: Dictionary)
@@ -51,6 +53,10 @@ func emit_on_sfx_sound_set(value: float) -> void:
 # game data
 func emit_on_high_score_set(value: int) -> void:
 	on_high_score_set.emit(value)
+func emit_on_speedrun_dict_set(type: String, value: float) -> void:
+	on_speedrun_dict_set.emit(type, value)
+func emit_on_speedrun_dict_setAll(dict: Dictionary) -> void:
+	on_speedrun_dict_setAll.emit(dict)
 # sandbox data
 func emit_on_sandbox_dict_set(type: String, object: String, num: int) -> void:
 	on_sandbox_dict_set.emit(type, object, num)

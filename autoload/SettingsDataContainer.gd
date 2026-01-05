@@ -12,6 +12,7 @@ var music_volume : float = 0.0
 var sfx_volume : float = 0.0
 # game data
 var high_score : int = 0
+var speedrun_dict : Dictionary = {}
 # sandbox data
 var sandbox_dict : Dictionary = {}
 var sandbox_seed : String = ""
@@ -45,7 +46,8 @@ func create_storage_dictionary() -> Dictionary:
 		"controller_aim_toggle": controller_aim_toggle,
 		"logbook_dict": logbook_dict,
 		"show_hitboxes": show_hitboxes,
-		"show_controls": show_controls
+		"show_controls": show_controls,
+		"speedrun_dict":speedrun_dict
 	}
 
 	return settings_container_dict
@@ -177,7 +179,12 @@ func get_high_score(default : bool = false) -> int:
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_high_score
 	return high_score
-	
+
+func get_speedrun_dict_type(type: String, default : bool = false) -> float:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_speedrun_dict[type]
+	return speedrun_dict[type]
+
 func get_sandbox_dict(type: String, object: String, default : bool = false) -> int:
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_sandbox_dict[type][object]
@@ -283,6 +290,18 @@ func set_keybind(action: String, event) -> void:
 # set game data
 func on_high_score_set(value : int) -> void:
 	high_score = value
+func on_speedrun_dict_set(type: String, value: float) -> void:
+	speedrun_dict[type] = value
+func on_speedrun_dict_setAll(dict: Dictionary) -> void:
+	var default : Dictionary = DEFAULT_SETTINGS.default_speedrun_dict
+	for i in default.keys():
+		if !dict.has(i):
+			dict[i] = default[i]
+	# getting rid of any unknown keys from other versions
+	for i in dict.keys():
+		if !default.has(i):
+			dict.erase(i)
+	speedrun_dict = dict.duplicate(true)
 
 func on_keybinds_loaded(data: Dictionary) -> void:
 	var keybind_array : Array[String] = \
@@ -442,6 +461,10 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 	else:
 		on_show_controls_set(DEFAULT_SETTINGS.default_show_controls)
 	loaded_data = create_storage_dictionary()
+	if loaded_data.has("speedrun_dict"):
+		on_speedrun_dict_setAll(loaded_data["speedrun_dict"])
+	else:
+		on_speedrun_dict_setAll({})
 
 func handle_signals() -> void:
 	# settings
@@ -453,6 +476,8 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_sfx_sound_set.connect(on_sfx_sound_set)
 	# game data
 	SettingsSignalBus.on_high_score_set.connect(on_high_score_set)
+	SettingsSignalBus.on_speedrun_dict_set.connect(on_speedrun_dict_set)
+	SettingsSignalBus.on_speedrun_dict_setAll.connect(on_speedrun_dict_setAll)
 	# sandbox data
 	SettingsSignalBus.on_sandbox_dict_set.connect(on_sandbox_dict_set)
 	SettingsSignalBus.on_sandbox_dict_setAll.connect(on_sandbox_dict_setAll)
