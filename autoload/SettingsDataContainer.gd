@@ -47,7 +47,7 @@ func create_storage_dictionary() -> Dictionary:
 		"logbook_dict": logbook_dict,
 		"show_hitboxes": show_hitboxes,
 		"show_controls": show_controls,
-		"speedrun_dict":speedrun_dict
+		"speedrun_dict": speedrun_dict
 	}
 
 	return settings_container_dict
@@ -460,11 +460,11 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_show_controls_set(loaded_data["show_controls"])
 	else:
 		on_show_controls_set(DEFAULT_SETTINGS.default_show_controls)
-	loaded_data = create_storage_dictionary()
 	if loaded_data.has("speedrun_dict"):
 		on_speedrun_dict_setAll(loaded_data["speedrun_dict"])
 	else:
 		on_speedrun_dict_setAll({})
+	loaded_data = create_storage_dictionary()
 
 func handle_signals() -> void:
 	# settings

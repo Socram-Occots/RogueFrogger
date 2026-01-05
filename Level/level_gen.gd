@@ -417,10 +417,14 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 		mulit_list_copy.remove_at(selected_multi)
 	return result_multi_list
 
+func rand_vector_variance(pos : float) -> Vector2:
+	var postemp : float =  abs(pos)
+	return Vector2(GRand.maprand.randf_range(-1 * postemp, postemp), GRand.maprand.randf_range(-1 * postemp, postemp))
+
 func spawnBarrel(dir : String, i : int) -> int:
 	var barrel : StaticBody2D = Globalpreload.BARREL_INST.duplicate()
 	barrel.visible = true
-	barrel.position = get_node(dir).global_position
+	barrel.position = get_node(dir).global_position + rand_vector_variance(25)
 	$Ysort.add_child(barrel)
 	return i
 
@@ -437,7 +441,7 @@ func spawnDumpster(dir : String, node_num : int, i : int) -> int:
 func spawnExplBarrel(dir : String, i : int) -> int:
 	var explbarrel : RigidBody2D = Globalpreload.EXPLBARREL_INST.duplicate()
 	explbarrel.visible = true
-	explbarrel.position = get_node(dir).global_position
+	explbarrel.position = get_node(dir).global_position + rand_vector_variance(25)
 	$Ysort.add_child(explbarrel)
 	return i
 
@@ -448,7 +452,7 @@ func spawnItems(dir : String, item_str: String, i : int) -> int:
 			return i
 		item.item_pool = multiItemPicker()
 	item.visible = true
-	item.position = get_node(dir).global_position
+	item.position = get_node(dir).global_position + rand_vector_variance(15)
 	item.set_meta("Item", null)
 	$Ysort.add_child(item)
 	return i
@@ -460,7 +464,7 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	if generated[0] == null: return i
 	var shop : Area2D = Globalpreload.SHOP_INST.duplicate()
 	shop.visible = true
-	shop.position = get_node(dir).global_position
+	shop.position = get_node(dir).global_position + rand_vector_variance(10)
 	shop.priceItemName = generated[0]
 	shop.productItemName = generated[1]
 	shop.pricenum = generated[2]
@@ -546,7 +550,7 @@ func carSpawn() -> void:
 func spawnHole(dir : String, i : int) -> int:
 	var hole : Area2D = Globalpreload.HOLE_INST.duplicate()
 	hole.visible = true
-	hole.position = get_node(dir).global_position
+	hole.position = get_node(dir).global_position + rand_vector_variance(25)
 	hole.position.y -= Global.player_height_px
 	$Ysort.add_child(hole)
 	return i
