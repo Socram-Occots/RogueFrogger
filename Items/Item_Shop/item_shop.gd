@@ -31,6 +31,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+func shopFailed() -> void:
+	polygon_2d.color = Color(225, 0, 0)
+
+func shopSuccess() -> void:
+	polygon_2d.color = Color(0, 225, 0)
+
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if not_entered:
@@ -38,6 +44,11 @@ func _on_body_entered(body):
 			if i in metalist:
 				var bought : bool = false
 				not_entered = false
+				
+				if productItemName == "ShieldShop" && Global.follower_array[0].shield_up:
+					shopFailed()
+					return
+				
 				match priceItemName:
 					"PlayerSpeedShop": 
 						if pricenum <= Global.player_speed_mod:
@@ -93,7 +104,7 @@ func _on_body_entered(body):
 							bought = true
 					_: print("Price Item not found: ", priceItemName)
 				if bought:
-					polygon_2d.color = Color(0, 225, 0)
+					shopSuccess()
 					match productItemName:
 						"PlayerSpeedShop": Global.inc_PlayerSpeed(productnum)
 						"GlideBootsShop": Global.inc_GlideBoots(productnum)
@@ -108,7 +119,7 @@ func _on_body_entered(body):
 						"HoleShop": Global.inc_Hole(productnum)
 						_: print("Product item was not found: ", productItemName)
 				else:
-					polygon_2d.color = Color(225, 0, 0)
+					shopFailed()
 
 func _on_body_exited(body: Node2D) -> void:
 	var metalist : PackedStringArray = body.get_meta_list()

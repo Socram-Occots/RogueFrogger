@@ -22,11 +22,11 @@ const default_general_sandbox_dict : Dictionary = {
 	"ExplBarrel":50,
 	"Dumpster":50,
 	"Barrel":200,
-	"Shop":5,
-	"Items":50,
+	"Shop":10,
+	"Items":75,
 	"None":800,
-	"Hole_Sidewalk":10,
-	"Deals":5
+	"Hole_Sidewalk":20,
+	"Deals":10
 }
 
 const default_street_sandbox_dict : Dictionary = {
