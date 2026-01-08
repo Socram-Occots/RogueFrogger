@@ -26,6 +26,7 @@ const ITEMGRAPPLESCRIPT : Script = preload("res://Grapplerope/itemgrapplelogic.g
 const TOOLTIPS : ItemToolTipDict = preload("res://menus/itemtooltipdescriptions.tres")
 const TELEPORTLINE : Resource = preload("res://Items/Teleport/teleportline.tscn")
 const ITEMTELE : Resource = preload("res://Items/Teleport/itemteleportoutline.tscn")
+const DEAL : Resource = preload("res://Items/Item_Deal/Item_Deal.tscn")
 #var UICONTROLS : Resource = preload("res://menus/GameUI/UI_Controls.tscn")
 
 #func _input(event: InputEvent) -> void:
@@ -83,6 +84,7 @@ var DVD_INST : Node2D = DVDBOUNCE.instantiate()
 var SHOP_INST : Area2D = SHOP.instantiate()
 var DEATHLINE_INST : Area2D = LINE.instantiate()
 var HOLE_INST : Area2D = HOLE.instantiate()
+var DEAL_INST : Area2D = DEAL.instantiate()
 
 # DVD Bounce
 var DVDarea : Node2D = DVDBOUNCE.instantiate()

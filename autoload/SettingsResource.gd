@@ -25,7 +25,8 @@ const default_general_sandbox_dict : Dictionary = {
 	"Shop":5,
 	"Items":50,
 	"None":800,
-	"Hole_Sidewalk":10
+	"Hole_Sidewalk":10,
+	"Deals":5
 }
 
 const default_street_sandbox_dict : Dictionary = {
@@ -100,13 +101,33 @@ const default_shop_sandbox_dict : Dictionary = {
 	"HoleShop":1
 }
 
+const default_deal_sandbox_dict : Dictionary = {
+	"PlayerSpeedDeal":1,
+	"GlideBootsDeal":1,
+	"DashDeal":1,
+	"expl_BDeal":1,
+	"GrappleDeal":1,
+	"FollowerDeal":1,
+	"GambaDeal":1,
+	"ShieldDeal":1,
+	"ShrinkDeal":1,
+	"SlowDeal":1,
+	"GrowDeal":1,
+	"TeleportDeal":1,
+	"ItemTeleportDeal":1,
+	"CleanseDeal":1,
+	"DVDBounceDeal":1,
+	"HoleDeal":1
+}
+
 const default_sandbox_dict : Dictionary = {
 	"General" : default_general_sandbox_dict,
 	"Items" : default_items_sandbox_dict,
 	"Multi" : default_multi_sandbox_dict,
 	"Gamba" : default_gamba_sandbox_dict,
 	"Shop" : default_shop_sandbox_dict,
-	"Street" : default_street_sandbox_dict
+	"Street" : default_street_sandbox_dict,
+	"Deals" : default_deal_sandbox_dict
 }
 
 const default_sandbox_seed : String = ""

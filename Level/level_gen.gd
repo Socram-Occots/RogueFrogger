@@ -21,10 +21,60 @@ extends Node
 @onready var MULTI_LIST : Array[String] = []
 @onready var MULTI_CHANCE_LIST : Array[int] = []
 
-@onready var shoppricecurses : Array[String] = []
-@onready var shoppriceitems : Array[String] = []
-@onready var shopproductitems : Array[String] = []
-@onready var shopproductitemsrare : Array[String] = []
+@onready var shoppriceitems_l_nEmpty : bool = false
+@onready var shoppriceitems_m_nEmpty  : bool = false
+@onready var shoppriceitems_h_nEmpty  : bool = false
+@onready var shopproductitems_l_nEmpty : bool = false
+@onready var shopproductitems_m_nEmpty  : bool = false
+@onready var shopproductitems_h_nEmpty  : bool = false
+
+@onready var dealitems_l_nEmpty : bool = false
+@onready var dealitems_m_nEmpty : bool = false
+@onready var dealitems_h_nEmpty : bool = false
+@onready var dealcurses_l_nEmpty : bool = false
+
+@onready var shopitemtier : Array[String] = []
+@onready var shopitemtierchances : Array[int] = []
+#@onready var dealitemtier : Array[String] = []
+#@onready var dealitemtierchances : Array[int] = []
+
+@onready var itemtierchancedict : Dictionary = {
+	"l->h":2,"l->m":3,"l->l":5,"m->l":1,"m->m":5,
+	"m->h":2,"h->l":1,"h->m":1,"h->h":1
+}
+
+@onready var itemtierdict : Dictionary = {
+	"shoppriceitems" : {
+		"l": [],
+		"m": [],
+		"h": []
+	},"shopproductitems" : {
+		"l": [],
+		"m": [],
+		"h": []
+	},"dealitems" : {
+		"l": [],
+		"m": [],
+		"h": []
+	},"dealcurses" : {
+		"l": []
+	}
+}
+
+@onready var shopitemtierdictref : Dictionary = {
+	"GlideBootsShop":"l", "expl_BShop":"l", "GrappleShop":"l", "HoleShop":"l",
+	"DashShop":"m", "GambaShop":"m", "ShrinkShop":"m", "CleanseShop":"m",
+	"PlayerSpeedShop":"h", "FollowerShop":"h", "ShieldShop":"h",
+	"DVDBounceShop":"l", "ItemTeleportShop":"l", "TeleportShop":"l", 
+	"GrowShop":"l", "SlowShop":"l"
+}
+@onready var dealitemtierdictref : Dictionary = {
+	"GlideBootsDeal":"l", "expl_BDeal":"l", "GrappleDeal":"l", "HoleDeal":"l",
+	"DashDeal":"m", "GambaDeal":"m", "ShrinkDeal":"m", "CleanseDeal":"m",
+	"PlayerSpeedDeal":"h", "FollowerDeal":"h", "ShieldDeal":"h",
+	"DVDBounceDeal":"l", "ItemTeleportDeal":"l", "TeleportDeal":"l", 
+	"GrowDeal":"l", "SlowDeal":"l"
+}
 
 @onready var gamba_array_good : Array[Array] = []
 @onready var gamba_array_bad : Array[Array] = []
@@ -107,6 +157,7 @@ func load_element_stats() -> void:
 	load_multi_stats()
 	load_gamba_stats()
 	load_shop_stats()
+	load_deals_stats()
 	load_seed()
 
 func load_general_stats() -> void:
@@ -243,22 +294,73 @@ func load_shop_stats() -> void:
 				if tempstring in \
 				["DVDBounceShop", "ItemTeleportShop", "TeleportShop",
 				"GrowShop", "SlowShop"]:
-					shoppricecurses.append(tempstring)
+					itemtierdict["shoppriceitems"][shopitemtierdictref[tempstring]].append(tempstring)
 				elif tempstring in \
 				["PlayerSpeedShop","GlideBootsShop","DashShop","expl_BShop",
-				"GrappleShop", "ShrinkShop", "HoleShop"]:
-					shoppriceitems.append(tempstring)
-					shopproductitems.append(tempstring)
+				"GrappleShop", "ShrinkShop", "HoleShop", "FollowerShop"]:
+					itemtierdict["shoppriceitems"][shopitemtierdictref[tempstring]].append(tempstring)
+					itemtierdict["shopproductitems"][shopitemtierdictref[tempstring]].append(tempstring)
 				elif  tempstring in \
-				["GambaShop", "CleanseShop"]:
-					shopproductitems.append(tempstring)
+				["GambaShop", "CleanseShop", "ShieldShop"]:
+					itemtierdict["shopproductitems"][shopitemtierdictref[tempstring]].append(tempstring)
+	shoppriceitems_l_nEmpty = itemtierdict["shoppriceitems"]["l"].size() > 0
+	shoppriceitems_m_nEmpty = itemtierdict["shoppriceitems"]["m"].size() > 0
+	shoppriceitems_h_nEmpty = itemtierdict["shoppriceitems"]["h"].size() > 0
+	shopproductitems_l_nEmpty = itemtierdict["shopproductitems"]["l"].size() > 0
+	shopproductitems_m_nEmpty = itemtierdict["shopproductitems"]["m"].size() > 0
+	shopproductitems_h_nEmpty = itemtierdict["shopproductitems"]["h"].size() > 0
+	
+	if shoppriceitems_l_nEmpty && shopproductitems_l_nEmpty:
+		shopitemtier.append("l->l")
+		shopitemtierchances.append(itemtierchancedict["l->l"])
+		if shopproductitems_m_nEmpty:
+			shopitemtier.append("l->m")
+			shopitemtierchances.append(itemtierchancedict["l->m"])
+		if shoppriceitems_h_nEmpty:
+			shopitemtier.append("l->h")
+			shopitemtierchances.append(itemtierchancedict["l->h"])
+	if shoppriceitems_m_nEmpty && shoppriceitems_m_nEmpty:
+		shopitemtier.append("m->m")
+		shopitemtierchances.append(itemtierchancedict["m->m"])
+		if shopproductitems_l_nEmpty:
+			shopitemtier.append("m->l")
+			shopitemtierchances.append(itemtierchancedict["m->l"])
+		if shoppriceitems_h_nEmpty:
+			shopitemtier.append("m->h")
+			shopitemtierchances.append(itemtierchancedict["m->h"])
+	if shoppriceitems_h_nEmpty && shoppriceitems_h_nEmpty:
+		shopitemtier.append("h->h")
+		shopitemtierchances.append(itemtierchancedict["h->h"])
+		if shopproductitems_l_nEmpty:
+			shopitemtier.append("h->l")
+			shopitemtierchances.append(itemtierchancedict["h->l"])
+		if shoppriceitems_m_nEmpty:
+			shopitemtier.append("h->m")
+			shopitemtierchances.append(itemtierchancedict["h->m"])
+
+func load_deals_stats() -> void:
+	var deals_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
+		"Deals", !Global.sandbox)
+	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
+		"Deals", true).keys()
+	var deals_dict_keys := deals_dict.keys()
+	for i in range(0, deals_dict_keys.size()):
+		var tempstring : String = deals_dict_keys[i]
+		if tempstring in default_keys:
+			var tempint : int = deals_dict[tempstring]
+			if tempint > 0:
+				if tempstring in \
+				["PlayerSpeedDeal","GlideBootsDeal","DashDeal","expl_BDeal", "GrappleDeal",
+				"ShrinkDeal", "HoleDeal", "GambaDeal", "CleanseDeal", "FollowerDeal", 
+				"ShieldDeal"]:
+					itemtierdict["dealitems"][dealitemtierdictref[tempstring]].append(tempstring)
 				elif tempstring in \
-				["FollowerShop"]:
-					shoppriceitems.append(tempstring)
-					shopproductitemsrare.append(tempstring)
-				elif tempstring in \
-				["ShieldShop"]:
-					shopproductitemsrare.append(tempstring)
+				["DVDBounceDeal", "ItemTeleportDeal", "TeleportDeal", "GrowDeal", "SlowDeal",]:
+					itemtierdict["dealcurses"][dealitemtierdictref[tempstring]].append(tempstring)
+	dealitems_l_nEmpty = itemtierdict["dealitems"]["l"].size() > 0
+	dealitems_m_nEmpty = itemtierdict["dealitems"]["m"].size() > 0
+	dealitems_h_nEmpty = itemtierdict["dealitems"]["h"].size() > 0
+	dealcurses_l_nEmpty = itemtierdict["dealcurses"]["h"].size() > 0
 
 func load_seed() -> void:
 	var seedy : String = SettingsDataContainer.get_sandbox_seed(
@@ -274,9 +376,9 @@ func load_seed() -> void:
 		GRand.itemrand.randomize()
 
 func itemSpawn(spawns : Array[String] = SPAWN_LIST, 
-chances : Array[float] = CHANCE_LIST, 
+chances : Array[float] = CHANCE_LIST.duplicate(true), 
 items : Array[String] = ITEMS_LIST, 
-items_chances : Array[float] = ITEMS_CHANCE_LIST, 
+items_chances : Array[float] = ITEMS_CHANCE_LIST.duplicate(true), 
 node_num: int = 15) -> void:
 	var spawn_length : int = spawns.size()
 	var chances_length : int = chances.size()
@@ -419,7 +521,8 @@ multi_chance_list : Array[int] = MULTI_CHANCE_LIST, num_of_multi : int = multi_n
 
 func rand_vector_variance(pos : float) -> Vector2:
 	var postemp : float =  abs(pos)
-	return Vector2(GRand.maprand.randf_range(-1 * postemp, postemp), GRand.maprand.randf_range(-1 * postemp, postemp))
+	return Vector2(GRand.maprand.randf_range(-1 * postemp, postemp), 
+	GRand.maprand.randf_range(-1 * postemp, postemp))
 
 func spawnBarrel(dir : String, i : int) -> int:
 	var barrel : StaticBody2D = Globalpreload.BARREL_INST.duplicate()
@@ -469,14 +572,65 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	shop.productItemName = generated[1]
 	shop.pricenum = generated[2]
 	shop.productnum = generated[3]
-	shop.priceItem = chooseShopTextures(generated[0])
-	shop.productItem = chooseShopTextures(generated[1])
+	shop.priceItem = chooseShopDealTextures(generated[0])
+	shop.productItem = chooseShopDealTextures(generated[1])
 	shop.position.y -= Global.player_height_px
 	$Ysort.add_child(shop)
 	# shops are two wide so we need to skip a spawn node
 	return i + 1
 
+func spawnDeal(dir : String, node_num : int, i : int) -> int:
+	# we have to check if this is the last node to prevent clipping out of bounds
+	if i + 1 >= node_num: return i
+	var generated : Array = chooseShopItems()
+	if generated[0] == null: return i
+	var deal : Area2D = Globalpreload.DEAL_INST.duplicate()
+	deal.visible = true
+	deal.position = get_node(dir).global_position + rand_vector_variance(10)
+	deal.priceItemName = generated[0]
+	deal.productItemName = generated[1]
+	deal.pricenum = generated[2]
+	deal.productnum = generated[3]
+	deal.priceItem = chooseShopDealTextures(generated[0])
+	deal.productItem = chooseShopDealTextures(generated[1])
+	deal.position.y -= Global.player_height_px
+	$Ysort.add_child(deal)
+	# shops are two wide so we need to skip a spawn node
+	return i + 1
+
 func chooseShopItems() -> Array:
+	if !(shoppriceitems_l_nEmpty || shoppriceitems_m_nEmpty || shoppriceitems_h_nEmpty) && \
+	!(shopproductitems_l_nEmpty || shopproductitems_m_nEmpty || shopproductitems_h_nEmpty):
+		return [null]
+	
+	var chosenInput : String = ""
+	var chosenOutput : String = ""
+
+	var shop_cost : int = floor(abs(GRand.maprand.randfn(0, 4)) + 1)
+	if shop_cost > 99: shop_cost = 99
+	var shop_reward_num : int = floor(abs(GRand.maprand.randfn(0, 3)) + 1)
+	if shop_reward_num > 99: shop_reward_num = 99
+	
+	# choose to make the price a curse or an item
+	if priceempty || (!curseempty && GRand.maprand.randf_range(0, 9) < 1):
+		chosenInput = shoppricecurses[GRand.maprand.randi() % shoppricecurses.size()]
+	else:
+		chosenInput = shoppriceitems[GRand.maprand.randi() % shoppriceitems.size()]
+	# 1 in 20 chance you get a rare product
+	if productempty || (!rareproductempty && GRand.maprand.randf_range(0, 19) < 1):
+		var arraytemp : Array[String] = shopproductitemsrare.duplicate(true)
+		arraytemp.erase(chosenInput)
+		if arraytemp.is_empty(): return [null]
+		chosenOutput = arraytemp[GRand.maprand.randi() % arraytemp.size()]
+	else:
+		var arraytemp : Array[String] = shopproductitems.duplicate(true)
+		arraytemp.erase(chosenInput)
+		if arraytemp.is_empty(): return [null]
+		chosenOutput = arraytemp[GRand.maprand.randi() % arraytemp.size()]
+	
+	return [chosenInput, chosenOutput, shop_cost, shop_reward_num]
+
+func chooseDealItems() -> Array:
 	var curseempty : bool = shoppricecurses.is_empty()
 	var priceempty : bool = shoppriceitems.is_empty()
 	var productempty : bool = shopproductitems.is_empty()
@@ -511,27 +665,27 @@ func chooseShopItems() -> Array:
 	
 	return [chosenInput, chosenOutput, shop_cost, shop_reward_num]
 
-func chooseShopTextures(shopstr: String) -> Texture2D:
+func chooseShopDealTextures(shopstr: String) -> Texture2D:
 	match shopstr:
 		"None": return null
-		"PlayerSpeedShop": return playerspeedglowicon
-		"GlideBootsShop": return glideglowicon
-		"DashShop": return dashglowicon
-		"expl_BShop": return expl_B_glowicon
-		"GrappleShop": return grapple_glowicon
-		"ShieldShop": return shield_glowicon
-		"GambaShop": return gamba_glowicon
-		"FollowerShop": return follower_glowicon
-		"ShrinkShop": return shrink_glowicon
-		"SlowShop": return slow_glowicon
-		"GrowShop": return grow_glowicon
-		"TeleportShop": return tele_glowicon
-		"ItemTeleportShop": return itemtele_glowicon
-		"CleanseShop": return cleanse_glowicon
-		"DVDBounceShop": return dvdbounce_glowicon
-		"HoleShop": return hole_glowicon
+		["PlayerSpeedShop", "PlayerSpeedDeal"]: return playerspeedglowicon
+		["GlideBootsShop", "GlideBootsDeal"]: return glideglowicon
+		["DashShop", "DashDeal"]: return dashglowicon
+		["expl_BShop", "expl_BDeal"]: return expl_B_glowicon
+		["GrappleShop", "GrappleDeal"]: return grapple_glowicon
+		["ShieldShop", "ShieldDeal"]: return shield_glowicon
+		["GambaShop", "GambaDeal"]: return gamba_glowicon
+		["FollowerShop", "FollowerDeal"]: return follower_glowicon
+		["ShrinkShop", "ShrinkDeal"]: return shrink_glowicon
+		["SlowShop", "SlowDeal"]: return slow_glowicon
+		["GrowShop", "GrowDeal"]: return grow_glowicon
+		["TeleportShop", "TeleportDeal"]: return tele_glowicon
+		["ItemTeleportShop", "ItemTeleportDeal"]: return itemtele_glowicon
+		["CleanseShop", "CleanseDeal"]: return cleanse_glowicon
+		["DVDBounceShop", "DVDBounceDeal"]: return dvdbounce_glowicon
+		["HoleShop", "HoleDeal"]: return hole_glowicon
 		_: 
-			print("This randomly selected Shop String does not exist!:", shopstr)
+			print("This randomly selected Shop/Deal String does not exist!:", shopstr)
 			return null
 
 func carSpawn() -> void:

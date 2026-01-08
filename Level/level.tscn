@@ -444,6 +444,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_moa77")
 
+[node name="stopwatch" type="Label" parent="CanvasLayer/stopwatch"]
+offset_right = 400.0
+offset_bottom = 104.0
+theme_override_font_sizes/font_size = 30
+text = "stopwatch"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_moa77")
+
 [node name="Watermarks" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0

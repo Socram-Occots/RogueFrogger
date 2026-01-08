@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://c615gt52xkm6h"]
+
+[ext_resource type="Script" path="res://Items/Item_Deal/item_deal.gd" id="1_1r154"]
+[ext_resource type="Texture2D" uid="uid://ca660f23prfyc" path="res://RogueFroggerAssets/RFAssets/Level/speedometerglow.png" id="2_q6xkp"]
+[ext_resource type="Shader" uid="uid://b2b2amsr8cdws" path="res://Items/shadingMulti.tres" id="3_vxkgh"]
+[ext_resource type="Texture2D" uid="uid://djkbax0mdicfw" path="res://addons/2d_essentials/icons/arrow_cross.svg" id="4_isbku"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d3wpi"]
+shader = ExtResource("3_vxkgh")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkbcq"]
+size = Vector2(223, 74)
+
+[node name="ItemShop" type="Area2D"]
+collision_layer = 8
+collision_mask = 1921
+script = ExtResource("1_1r154")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 74)
+
+[node name="Polygon2D" type="Polygon2D" parent="Node2D"]
+position = Vector2(0.999985, 1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(45, 16, 113, 16, 113, -37, 185, -37, 185, 35, 113, 35, 113, 16, 101, 16, 101, 47, 197, 47, 197, -49, 101, -49, 101, -18, 57, -18, 57, -49, -39, -49, -39, 47, 57, 47, 57, 16, 45, 16, 45, 35, -27, 35, -27, -37, 45, -37)
+
+[node name="ItemDeal" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(10, 0)
+scale = Vector2(1.2075, 1.2075)
+texture = ExtResource("2_q6xkp")
+region_rect = Rect2(-80, -64, 736, 680)
+
+[node name="MarginContainer" type="MarginContainer" parent="Node2D/ItemDeal"]
+anchors_preset = -1
+anchor_left = 0.67
+anchor_top = 0.627
+anchor_right = 0.927
+anchor_bottom = 0.814
+offset_left = -69.6
+offset_top = -58.24
+offset_right = -71.24
+offset_bottom = -57.68
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/ItemDeal/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Node2D/ItemDeal/MarginContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 8
+text = "x"
+
+[node name="CurseDeal" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+position = Vector2(150, 0)
+scale = Vector2(1.2075, 1.2075)
+texture = ExtResource("2_q6xkp")
+region_rect = Rect2(-80, -64, 736, 680)
+
+[node name="MarginContainer" type="MarginContainer" parent="Node2D/CurseDeal"]
+anchors_preset = -1
+anchor_left = 0.67
+anchor_top = 0.627
+anchor_right = 0.927
+anchor_bottom = 0.814
+offset_left = -69.6
+offset_top = -58.24
+offset_right = -71.24
+offset_bottom = -57.68
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Node2D/CurseDeal/MarginContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Node2D/CurseDeal/MarginContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 8
+text = "x"
+
+[node name="cross" type="Sprite2D" parent="Node2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_d3wpi")
+position = Vector2(80, 0)
+rotation = 0.785398
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_isbku")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(80, 74)
+shape = SubResource("RectangleShape2D_fkbcq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
