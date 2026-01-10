@@ -116,6 +116,11 @@ layout_mode = 2
 object = "Hole_Sidewalk"
 group = "tab0"
 
+[node name="SandboxSetter2" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "Deals"
+group = "tab0"
+
 [node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
@@ -697,11 +702,156 @@ group = "tab4"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 
+[node name="Deals" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Deals"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Deals/MarginContainer"]
+layout_mode = 2
+follow_focus = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Deals/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 128
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "PlayerSpeedDeal"
+group = "tab5"
+
+[node name="SandboxSetter2" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "GlideBootsDeal"
+group = "tab5"
+
+[node name="SandboxSetter3" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "DashDeal"
+group = "tab5"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "expl_BDeal"
+group = "tab5"
+
+[node name="SandboxSetter2" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "GrappleDeal"
+group = "tab5"
+
+[node name="SandboxSetter3" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "FollowerDeal"
+group = "tab5"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "GambaDeal"
+group = "tab5"
+
+[node name="SandboxSetter2" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "ShieldDeal"
+group = "tab5"
+
+[node name="SandboxSetter3" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "ShrinkDeal"
+group = "tab5"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "SlowDeal"
+group = "tab5"
+
+[node name="SandboxSetter2" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "GrowDeal"
+group = "tab5"
+
+[node name="SandboxSetter3" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "TeleportDeal"
+group = "tab5"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "ItemTeleportDeal"
+group = "tab5"
+
+[node name="SandboxSetter2" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "CleanseDeal"
+group = "tab5"
+
+[node name="SandboxSetter3" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "DVDBounceDeal"
+group = "tab5"
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 550
+
+[node name="SandboxSetter" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "HoleDeal"
+group = "tab5"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
+
 [node name="Seed" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
 focus_mode = 0
-metadata/_tab_index = 5
+metadata/_tab_index = 6
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Seed"]
 layout_mode = 1
@@ -744,6 +894,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter2"]
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter3"]
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
+[editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
 [editable path="TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter2"]
 [editable path="TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
@@ -804,4 +955,20 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
 [editable path="TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter2"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter3"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter2"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter3"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter2"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter3"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
+[editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
 [editable path="TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]

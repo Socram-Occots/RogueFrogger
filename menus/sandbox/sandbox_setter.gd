@@ -84,6 +84,9 @@ func set_properties() -> void:
 		"None" : 
 			set_sandbox_option(object, "General", 999, 
 			"None")
+		"Deals" :
+			set_sandbox_option(object, "General", 999,
+			"Deals")
 		"Hole_Sidewalk" : 
 			set_sandbox_option(object, "General", 999, 
 			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
@@ -140,6 +143,54 @@ func set_properties() -> void:
 			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
 		"HoleShop" : 
 			set_sandbox_option(object, "Shop", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
+		"PlayerSpeedDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
+		"GlideBootsDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
+		"DashDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
+		"expl_BDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
+		"GrappleDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
+		"FollowerDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/follower.png")
+		"GambaDeal" :
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/gamba.png")
+		"ShieldDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/PlayerShield/vibrating-shield.png")
+		"ShrinkDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/shrink.png")
+		"SlowDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/slow.png")
+		"GrowDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
+		"TeleportDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
+		"ItemTeleportDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
+		"CleanseDeal" :
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
+		"DVDBounceDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
+			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+		"HoleDeal" : 
+			set_sandbox_option(object, "Deals", 1, 
 			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
 		"PlayerSpeedGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
@@ -237,9 +288,10 @@ func set_sandbox_option(topic : String, type : String, maxint : int, texture : S
 	sandbox_type = type
 	match texture:
 		"Multi": set_Multi()
-		"Shop": set_label("Shop")
-		"None": set_label("None")
-		"Items": set_label("Items")
+		"Shop": set_label(texture)
+		"None": set_label(texture)
+		"Items": set_label(texture)
+		"Deals": set_label(texture)
 		_: set_texture(texture)
 	
 	set_slider(

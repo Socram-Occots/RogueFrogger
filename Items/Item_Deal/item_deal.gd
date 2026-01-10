@@ -19,11 +19,11 @@ func _ready() -> void:
 	sprite_deal_item.texture = dealItem
 	sprite_product_item.texture = dealCurse
 	polygon_2d.color = Color(0, 0, 0)
-	productlabel.text = str(dealnum) + "x"
+	productlabel.text = str(cursenum) + "x"
 	if dealItemName == "ShieldDeal":
 		deallabel.text = "1x"
 	else:
-		deallabel.text = str(cursenum) + "x"
+		deallabel.text = str(dealnum) + "x"
 
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()

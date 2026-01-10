@@ -41,6 +41,12 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="SandboxSetter" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" index="0"]
+focus_neighbor_right = NodePath("../SandboxSetter2/HBoxContainer/Button")
+
+[node name="SandboxSetter2" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" index="1"]
+focus_neighbor_left = NodePath("../SandboxSetter/HBoxContainer/Button")
+
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter/HBoxContainer" index="0"]
 focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
 
@@ -165,6 +171,9 @@ focus_neighbor_right = NodePath("../../../SandboxSetter3/HBoxContainer/Button")
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3/HBoxContainer" index="0"]
 focus_neighbor_left = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
 
+[node name="SandboxLineTextSetter" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
+group = "tab6"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -249,6 +258,7 @@ metadata/_edit_use_anchors_ = true
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter2"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter3"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter2"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
@@ -309,5 +319,21 @@ metadata/_edit_use_anchors_ = true
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter2"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter3"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter2"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer3/SandboxSetter3"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter2"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter3"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]
 [editable path="UiControls"]

@@ -407,7 +407,7 @@ func load_deals_stats() -> void:
 	dealitems_l_nEmpty = itemtierdict["dealitems"]["l"].size() > 0
 	dealitems_m_nEmpty = itemtierdict["dealitems"]["m"].size() > 0
 	dealitems_h_nEmpty = itemtierdict["dealitems"]["h"].size() > 0
-	dealcurses_l_nEmpty = itemtierdict["dealcurses"]["h"].size() > 0
+	dealcurses_l_nEmpty = itemtierdict["dealcurses"]["l"].size() > 0
 	if dealitems_l_nEmpty: 
 		itemtierdeal.append("l")
 		itemtierdealchances.append(itemtierdealdict["l"])
@@ -644,12 +644,12 @@ func spawnDeal(dir : String, node_num : int, i : int) -> int:
 	var deal : Area2D = Globalpreload.DEAL_INST.duplicate()
 	deal.visible = true
 	deal.position = get_node(dir).global_position + rand_vector_variance(10)
-	deal.priceItemName = generated[0]
-	deal.productItemName = generated[1]
-	deal.pricenum = generated[2]
-	deal.productnum = generated[3]
-	deal.priceItem = chooseShopDealTextures(generated[0])
-	deal.productItem = chooseShopDealTextures(generated[1])
+	deal.dealItemName = generated[0]
+	deal.dealCurseName = generated[1]
+	deal.dealnum = generated[2]
+	deal.cursenum = generated[3]
+	deal.dealItem = chooseShopDealTextures(generated[0])
+	deal.dealCurse = chooseShopDealTextures(generated[1])
 	deal.position.y -= Global.player_height_px
 	$Ysort.add_child(deal)
 	# shops are two wide so we need to skip a spawn node
@@ -658,7 +658,7 @@ func spawnDeal(dir : String, node_num : int, i : int) -> int:
 func chooseShopItemTiers() -> Array:
 	var chosenTierIndex : int = GRand.maprand.rand_weighted(shopitemtierchances)
 	var chosenTier : String = shopitemtier[chosenTierIndex]
-	var chosenPricetemp : Array[String] = []
+	var chosenPricetemp : Array = []
 	# roll chance for it to be a curse
 	if shoppricecurses_l_nEmpty && chosenTier.left(1) == "l" &&\
 	 GRand.maprand.randi_range(0, 8) < 1:
@@ -674,8 +674,8 @@ func chooseShopItems() -> Array:
 		return [null]
 	
 	var chosenArray : Array = chooseShopItemTiers()
-	var chosenInputArray : Array[String] = chosenArray[0]
-	var chosenOutputArray : Array[String] = chosenArray[1]
+	var chosenInputArray : Array = chosenArray[0]
+	var chosenOutputArray : Array = chosenArray[1]
 	var chosenInput : String = ""
 	var chosenOutput : String = ""
 
@@ -687,7 +687,7 @@ func chooseShopItems() -> Array:
 	if shop_reward_num > 99: shop_reward_num = 99
 	
 	chosenInput = chosenInputArray[GRand.maprand.randi() % chosenInputArray.size()]
-	var arraytemp : Array[String] = chosenOutputArray.duplicate(true)
+	var arraytemp : Array = chosenOutputArray.duplicate(true)
 	arraytemp.erase(chosenInput)
 	if chosenOutputArray.is_empty(): return [null]
 	chosenOutput = arraytemp[GRand.maprand.randi() % arraytemp.size()]
@@ -704,10 +704,10 @@ func chooseDealItems() -> Array:
 		return [null]
 	var chosenTierIndex : int = GRand.maprand.rand_weighted(itemtierdealchances)
 	var chosenDealTier : String = itemtierdeal[chosenTierIndex]
-	var chosenDealArray : Array[String] = itemtierdict["dealitems"][chosenDealTier]
+	var chosenDealArray : Array = itemtierdict["dealitems"][chosenDealTier]
 	var chosenItem : String = chosenDealArray[GRand.maprand.randi() % chosenDealArray.size()]
-	var chosenCurse : String = itemtierdict["dealcurses"][GRand.maprand.randi() % itemtierdict["dealcurses"].size()]
-	
+	var chosenCurse : String = itemtierdict["dealcurses"]["l"][GRand.maprand.randi() % itemtierdict["dealcurses"]["l"].size()]
+
 	var deal_item_num : int = floor(abs(GRand.maprand.randfn(
 		dealtierprices[chosenDealTier][0], dealtierprices[chosenDealTier][1])) + 1)
 	if deal_item_num > 99: deal_item_num = 99
@@ -720,22 +720,22 @@ func chooseDealItems() -> Array:
 func chooseShopDealTextures(shopstr: String) -> Texture2D:
 	match shopstr:
 		"None": return null
-		["PlayerSpeedShop", "PlayerSpeedDeal"]: return playerspeedglowicon
-		["GlideBootsShop", "GlideBootsDeal"]: return glideglowicon
-		["DashShop", "DashDeal"]: return dashglowicon
-		["expl_BShop", "expl_BDeal"]: return expl_B_glowicon
-		["GrappleShop", "GrappleDeal"]: return grapple_glowicon
-		["ShieldShop", "ShieldDeal"]: return shield_glowicon
-		["GambaShop", "GambaDeal"]: return gamba_glowicon
-		["FollowerShop", "FollowerDeal"]: return follower_glowicon
-		["ShrinkShop", "ShrinkDeal"]: return shrink_glowicon
-		["SlowShop", "SlowDeal"]: return slow_glowicon
-		["GrowShop", "GrowDeal"]: return grow_glowicon
-		["TeleportShop", "TeleportDeal"]: return tele_glowicon
-		["ItemTeleportShop", "ItemTeleportDeal"]: return itemtele_glowicon
-		["CleanseShop", "CleanseDeal"]: return cleanse_glowicon
-		["DVDBounceShop", "DVDBounceDeal"]: return dvdbounce_glowicon
-		["HoleShop", "HoleDeal"]: return hole_glowicon
+		"PlayerSpeedShop", "PlayerSpeedDeal": return playerspeedglowicon
+		"GlideBootsShop", "GlideBootsDeal": return glideglowicon
+		"DashShop", "DashDeal": return dashglowicon
+		"expl_BShop", "expl_BDeal": return expl_B_glowicon
+		"GrappleShop", "GrappleDeal": return grapple_glowicon
+		"ShieldShop", "ShieldDeal": return shield_glowicon
+		"GambaShop", "GambaDeal": return gamba_glowicon
+		"FollowerShop", "FollowerDeal": return follower_glowicon
+		"ShrinkShop", "ShrinkDeal": return shrink_glowicon
+		"SlowShop", "SlowDeal": return slow_glowicon
+		"GrowShop", "GrowDeal": return grow_glowicon
+		"TeleportShop", "TeleportDeal": return tele_glowicon
+		"ItemTeleportShop", "ItemTeleportDeal": return itemtele_glowicon
+		"CleanseShop", "CleanseDeal": return cleanse_glowicon
+		"DVDBounceShop", "DVDBounceDeal": return dvdbounce_glowicon
+		"HoleShop", "HoleDeal": return hole_glowicon
 		_: 
 			print("This randomly selected Shop/Deal String does not exist!:", shopstr)
 			return null
