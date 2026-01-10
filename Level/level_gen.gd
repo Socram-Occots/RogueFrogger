@@ -56,12 +56,12 @@ extends Node
 }
 
 @onready var itemtierprices : Dictionary = {
-	"l->h":[5,5,0,2],"l->m":[3,5,2,4],"l->l":[0,5,0,5],"m->l":[2,4,5,5],"m->m":[0,5,0,5],
-	"m->h":[3,3,1,3],"h->l":[0,2,5,10],"h->m":[0,2,3,6],"h->h":[0,2,0,2]
+	"l->h":[4,4,0,2],"l->m":[3,4,2,4],"l->l":[0,4,0,4],"m->l":[2,4,4,4],"m->m":[0,4,0,4],
+	"m->h":[3,3,1,3],"h->l":[0,2,4,7],"h->m":[0,2,3,6],"h->h":[0,2,0,2]
 }
 
 @onready var dealtierprices : Dictionary = {
-	"l":[5,5,0,2],"m":[3,3,3,3],"h":[1,3,7,7]
+	"l":[4,4,0,2],"m":[3,3,3,3],"h":[1,3,6,6]
 }
 
 @onready var itemtierdict : Dictionary = {
@@ -624,7 +624,7 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	if generated[0] == null: return i
 	var shop : Area2D = Globalpreload.SHOP_INST.duplicate()
 	shop.visible = true
-	shop.position = get_node(dir).global_position + rand_vector_variance(10)
+	shop.position = get_node(dir).global_position + rand_vector_variance(5)
 	shop.priceItemName = generated[0]
 	shop.productItemName = generated[1]
 	shop.pricenum = generated[2]
@@ -643,7 +643,7 @@ func spawnDeal(dir : String, node_num : int, i : int) -> int:
 	if generated[0] == null: return i
 	var deal : Area2D = Globalpreload.DEAL_INST.duplicate()
 	deal.visible = true
-	deal.position = get_node(dir).global_position + rand_vector_variance(10)
+	deal.position = get_node(dir).global_position + rand_vector_variance(5)
 	deal.dealItemName = generated[0]
 	deal.dealCurseName = generated[1]
 	deal.dealnum = generated[2]
@@ -662,7 +662,7 @@ func chooseShopItemTiers() -> Array:
 	# roll chance for it to be a curse
 	if shoppricecurses_l_nEmpty && chosenTier.left(1) == "l" &&\
 	 GRand.maprand.randi_range(0, 8) < 1:
-		chosenPricetemp = itemtierdict["shoppricecurses"]
+		chosenPricetemp = itemtierdict["shoppricecurses"]["l"]
 	else:
 		chosenPricetemp = itemtierinventory[chosenTier][0]
 	return [chosenPricetemp, itemtierinventory[chosenTier][1], 
