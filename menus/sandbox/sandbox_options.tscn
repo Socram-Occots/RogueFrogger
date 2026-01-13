@@ -41,11 +41,54 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="TabContainer" parent="MarginContainer/VBoxContainer/SandboxTabs" index="0"]
+current_tab = 6
+
+[node name="General" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer" index="1"]
+visible = false
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter/HBoxContainer" index="0"]
+focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer2/SandboxSetter/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter2/HBoxContainer" index="0"]
+focus_neighbor_left = NodePath("../../../SandboxSetter/HBoxContainer/Button")
+focus_neighbor_right = NodePath("../../../SandboxSetter3/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer2/SandboxSetter2/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter3/HBoxContainer" index="0"]
+focus_neighbor_left = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer2/SandboxSetter3/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter/HBoxContainer" index="0"]
+focus_neighbor_top = NodePath("../../../../HBoxContainer/SandboxSetter/HBoxContainer/Button")
+focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer5/SandboxSetter/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter2/HBoxContainer" index="0"]
+focus_neighbor_left = NodePath("../../../SandboxSetter/HBoxContainer/Button")
+focus_neighbor_top = NodePath("../../../../HBoxContainer/SandboxSetter2/HBoxContainer/Button")
+focus_neighbor_right = NodePath("../../../SandboxSetter3/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer2/SandboxSetter3/HBoxContainer" index="0"]
+focus_neighbor_left = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
+focus_neighbor_top = NodePath("../../../../HBoxContainer/SandboxSetter3/HBoxContainer/Button")
+focus_neighbor_bottom = NodePath("../../../../HBoxContainer5/SandboxSetter2/HBoxContainer/Button")
+
 [node name="SandboxSetter" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" index="0"]
 focus_neighbor_right = NodePath("../SandboxSetter2/HBoxContainer/Button")
 
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter/HBoxContainer" index="0"]
+focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
+
 [node name="SandboxSetter2" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5" index="1"]
 focus_neighbor_left = NodePath("../SandboxSetter/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2/HBoxContainer" index="0"]
+focus_neighbor_left = NodePath("../../../SandboxSetter/HBoxContainer/Button")
+
+[node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter2/HBoxContainer" index="0"]
+focus_neighbor_top = NodePath("../../../../HBoxContainer5/SandboxSetter2/HBoxContainer/Button")
 
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Items/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter/HBoxContainer" index="0"]
 focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
@@ -170,6 +213,9 @@ focus_neighbor_right = NodePath("../../../SandboxSetter3/HBoxContainer/Button")
 
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3/HBoxContainer" index="0"]
 focus_neighbor_left = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
+
+[node name="Seed" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer" index="7"]
+visible = true
 
 [node name="SandboxLineTextSetter" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
 group = "tab6"

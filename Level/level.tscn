@@ -445,6 +445,7 @@ vertical_alignment = 1
 script = ExtResource("5_moa77")
 
 [node name="stopwatch" type="Label" parent="CanvasLayer/stopwatch"]
+layout_mode = 0
 offset_right = 400.0
 offset_bottom = 104.0
 theme_override_font_sizes/font_size = 30

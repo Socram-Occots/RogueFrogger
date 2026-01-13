@@ -29,6 +29,7 @@ extends Node
 @onready var shopproductitems_l_nEmpty : bool = false
 @onready var shopproductitems_m_nEmpty  : bool = false
 @onready var shopproductitems_h_nEmpty  : bool = false
+@onready var shop_is_closed : bool = false
 
 @onready var dealitems_l_nEmpty : bool = false
 @onready var dealitems_m_nEmpty : bool = false
@@ -356,34 +357,39 @@ func load_shop_stats() -> void:
 	itemtierinventory["h->h"][0] = itemtierdict["shoppriceitems"]["h"]
 	itemtierinventory["h->h"][1] = itemtierdict["shopproductitems"]["h"]
 	
-	if shoppriceboth_l_nEmpty && shopproductitems_l_nEmpty:
-		shopitemtier.append("l->l")
-		shopitemtierchances.append(itemtierchancedict["l->l"])
+	if shoppriceboth_l_nEmpty:
+		if shopproductitems_l_nEmpty:
+			shopitemtier.append("l->l")
+			shopitemtierchances.append(itemtierchancedict["l->l"])
 		if shopproductitems_m_nEmpty:
 			shopitemtier.append("l->m")
 			shopitemtierchances.append(itemtierchancedict["l->m"])
 		if shopproductitems_h_nEmpty:
 			shopitemtier.append("l->h")
 			shopitemtierchances.append(itemtierchancedict["l->h"])
-	if shoppriceitems_m_nEmpty && shopproductitems_m_nEmpty:
-		shopitemtier.append("m->m")
-		shopitemtierchances.append(itemtierchancedict["m->m"])
+	if shoppriceitems_m_nEmpty:
+		if shopproductitems_m_nEmpty:
+			shopitemtier.append("m->m")
+			shopitemtierchances.append(itemtierchancedict["m->m"])
 		if shopproductitems_l_nEmpty:
 			shopitemtier.append("m->l")
 			shopitemtierchances.append(itemtierchancedict["m->l"])
 		if shopproductitems_h_nEmpty:
 			shopitemtier.append("m->h")
 			shopitemtierchances.append(itemtierchancedict["m->h"])
-	if shoppriceitems_h_nEmpty && shopproductitems_h_nEmpty:
-		shopitemtier.append("h->h")
-		shopitemtierchances.append(itemtierchancedict["h->h"])
+	if shoppriceitems_h_nEmpty:
+		if shopproductitems_h_nEmpty:
+			shopitemtier.append("h->h")
+			shopitemtierchances.append(itemtierchancedict["h->h"])
 		if shopproductitems_l_nEmpty:
 			shopitemtier.append("h->l")
 			shopitemtierchances.append(itemtierchancedict["h->l"])
 		if shopproductitems_m_nEmpty:
 			shopitemtier.append("h->m")
 			shopitemtierchances.append(itemtierchancedict["h->m"])
-			
+	
+	shop_is_closed = !(shoppriceboth_l_nEmpty || shoppriceitems_m_nEmpty || shoppriceitems_h_nEmpty) ||\
+	 !(shopproductitems_l_nEmpty || shopproductitems_m_nEmpty || shopproductitems_h_nEmpty)
 
 func load_deals_stats() -> void:
 	var deals_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
@@ -660,18 +666,17 @@ func chooseShopItemTiers() -> Array:
 	var chosenTier : String = shopitemtier[chosenTierIndex]
 	var chosenPricetemp : Array = []
 	# roll chance for it to be a curse
+	
 	if shoppricecurses_l_nEmpty && chosenTier.left(1) == "l" &&\
-	 GRand.maprand.randi_range(0, 8) < 1:
+	 (!shoppriceitems_l_nEmpty || GRand.maprand.randi_range(0, 7) < 1):
 		chosenPricetemp = itemtierdict["shoppricecurses"]["l"]
 	else:
 		chosenPricetemp = itemtierinventory[chosenTier][0]
 	return [chosenPricetemp, itemtierinventory[chosenTier][1], 
-	itemtierprices[chosenTier]]
+	itemtierprices[chosenTier], chosenTierIndex]
 	
 func chooseShopItems() -> Array:
-	if !(shoppriceboth_l_nEmpty || shoppriceitems_m_nEmpty || shoppriceitems_h_nEmpty) && \
-	!(shopproductitems_l_nEmpty || shopproductitems_m_nEmpty || shopproductitems_h_nEmpty):
-		return [null]
+	if shop_is_closed: return [null]
 	
 	var chosenArray : Array = chooseShopItemTiers()
 	var chosenInputArray : Array = chosenArray[0]
@@ -679,6 +684,18 @@ func chooseShopItems() -> Array:
 	var chosenInput : String = ""
 	var chosenOutput : String = ""
 
+	chosenInput = chosenInputArray[GRand.maprand.randi() % chosenInputArray.size()]
+	var arraytemp : Array = chosenOutputArray.duplicate(true)
+	arraytemp.erase(chosenInput)
+	
+	if arraytemp.is_empty():
+		shopitemtier.remove_at(chosenArray[3])
+		shopitemtierchances.remove_at(chosenArray[3])
+		if shopitemtierchances.is_empty(): shop_is_closed = true
+		return [null]
+	
+	chosenOutput = arraytemp[GRand.maprand.randi() % arraytemp.size()]
+	
 	var shop_cost : int = floor(abs(GRand.maprand.randfn(
 		chosenArray[2][0], chosenArray[2][1])) + 1)
 	if shop_cost > 99: shop_cost = 99
@@ -686,15 +703,8 @@ func chooseShopItems() -> Array:
 		chosenArray[2][2], chosenArray[2][3])) + 1)
 	if shop_reward_num > 99: shop_reward_num = 99
 	
-	chosenInput = chosenInputArray[GRand.maprand.randi() % chosenInputArray.size()]
-	var arraytemp : Array = chosenOutputArray.duplicate(true)
-	arraytemp.erase(chosenInput)
-	if chosenOutputArray.is_empty(): return [null]
-	chosenOutput = arraytemp[GRand.maprand.randi() % arraytemp.size()]
-	
 	# this serves to make early game shops actually usable (maybe)
-	if Global.score < 100:
-		shop_cost = 1
+	if Global.score < 50: shop_cost = 1
 	
 	return [chosenInput, chosenOutput, shop_cost, shop_reward_num]
 
