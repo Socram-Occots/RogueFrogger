@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfs4y1gaosswr"]
+[gd_scene load_steps=10 format=3 uid="uid://dfs4y1gaosswr"]
 
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="1_wmrt1"]
 
@@ -59,6 +59,16 @@ resource_local_to_scene = false
 resource_name = ""
 script = ExtResource("1_wmrt1")
 path = "ui_pause"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
+
+[sub_resource type="Texture2D" id="Texture2D_6v3ep"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("1_wmrt1")
+path = "ui_cancel"
 show_mode = 0
 force_controller_icon_style = -1
 force_type = 0
@@ -158,6 +168,32 @@ layout_mode = 2
 texture = SubResource("Texture2D_6o1na")
 
 [node name="VSeparator2" type="VSeparator" parent="Unpause"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")
+
+[node name="Cancel Selection" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Cancel Selection"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+theme_override_styles/separator = SubResource("StyleBoxEmpty_qc21g")
+
+[node name="Label" type="Label" parent="Cancel Selection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Cancel Selection"
+
+[node name="Cancel" type="TextureRect" parent="Cancel Selection"]
+layout_mode = 2
+texture = SubResource("Texture2D_6v3ep")
+
+[node name="VSeparator2" type="VSeparator" parent="Cancel Selection"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0

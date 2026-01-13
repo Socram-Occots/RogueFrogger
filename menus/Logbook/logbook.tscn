@@ -137,6 +137,10 @@ alignment = 2
 visible = false
 alignment = 2
 
+[node name="Cancel Selection" parent="UiControls" index="3"]
+visible = false
+alignment = 2
+
 [node name="Version" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 1

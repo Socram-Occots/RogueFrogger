@@ -150,12 +150,12 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_right = 0.0
-offset_top = -106.0
+offset_top = -180.0
 offset_right = 625.0
-offset_bottom = 94.0
+offset_bottom = 120.0
 grow_horizontal = 1
 grow_vertical = 0
-scale = Vector2(0.53, 0.53)
+scale = Vector2(0.5, 0.5)
 
 [node name="Unpause" parent="UiControls" index="2"]
 visible = false

@@ -705,6 +705,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [node name="Deals" type="TabBar" parent="TabContainer"]
 visible = false
 layout_mode = 2
+focus_mode = 0
 metadata/_tab_index = 5
 
 [node name="MarginContainer" type="MarginContainer" parent="TabContainer/Deals"]

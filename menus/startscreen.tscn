@@ -158,6 +158,9 @@ scale = Vector2(0.6, 0.6)
 [node name="Unpause" parent="UiControls" index="2"]
 visible = false
 
+[node name="Cancel Selection" parent="UiControls" index="3"]
+visible = false
+
 [connection signal="pressed" from="Options/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Options/Sandbox" to="." method="_on_sandbox_pressed"]
 [connection signal="pressed" from="Options/Logbook" to="." method="_on_logbook_pressed"]

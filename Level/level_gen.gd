@@ -21,9 +21,8 @@ extends Node
 @onready var MULTI_LIST : Array[String] = []
 @onready var MULTI_CHANCE_LIST : Array[int] = []
 
-@onready var shoppricecurses_l_nEmpty : bool = false
+@onready var shoppriceitems_c_nEmpty : bool = false
 @onready var shoppriceitems_l_nEmpty : bool = false
-@onready var shoppriceboth_l_nEmpty : bool = false
 @onready var shoppriceitems_m_nEmpty  : bool = false
 @onready var shoppriceitems_h_nEmpty  : bool = false
 @onready var shopproductitems_l_nEmpty : bool = false
@@ -35,6 +34,7 @@ extends Node
 @onready var dealitems_m_nEmpty : bool = false
 @onready var dealitems_h_nEmpty : bool = false
 @onready var dealcurses_l_nEmpty : bool = false
+@onready var deal_is_closed : bool = false
 
 @onready var shopitemtier : Array[String] = []
 @onready var shopitemtierchances : Array[int] = []
@@ -42,23 +42,29 @@ extends Node
 #@onready var dealitemtierchances : Array[int] = []
 
 @onready var itemtierchancedict : Dictionary = {
-	"l->h":2,"l->m":3,"l->l":5,"m->l":1,"m->m":5,
-	"m->h":2,"h->l":1,"h->m":1,"h->h":1
+	"l->h":2,"l->m":3,"l->l":5,
+	"m->l":1,"m->m":5,"m->h":2,
+	"h->l":1,"h->m":1,"h->h":1,
+	"c->l":2,"c->m":2,"c->h":1
 }
 @onready var itemtierdealdict : Dictionary = {
-	"l":4, "m":2,"h":1
+	"l":4,"m":2,"h":1
 }
 @onready var itemtierdeal : Array[String] = []
 @onready var itemtierdealchances : Array[int] = []
 
 @onready var itemtierinventory : Dictionary = {
-	"l->h":[[],[]],"l->m":[[],[]],"l->l":[[],[]],"m->l":[[],[]],"m->m":[[],[]],
-	"m->h":[[],[]],"h->l":[[],[]],"h->m":[[],[]],"h->h":[[],[]]
+	"l->h":[[],[]],"l->m":[[],[]],"l->l":[[],[]],
+	"m->l":[[],[]],"m->m":[[],[]],"m->h":[[],[]],
+	"h->l":[[],[]],"h->m":[[],[]],"h->h":[[],[]],
+	"c->l":[[],[]],"c->m":[[],[]],"c->h":[[],[]]
 }
 
 @onready var itemtierprices : Dictionary = {
-	"l->h":[4,4,0,2],"l->m":[3,4,2,4],"l->l":[0,4,0,4],"m->l":[2,4,4,4],"m->m":[0,4,0,4],
-	"m->h":[3,3,1,3],"h->l":[0,2,4,7],"h->m":[0,2,3,6],"h->h":[0,2,0,2]
+	"l->h":[4,4,0,2],"l->m":[3,4,2,4],"l->l":[0,4,0,4],
+	"m->l":[2,4,4,4],"m->m":[0,4,0,4],"m->h":[3,3,1,3],
+	"h->l":[0,2,4,7],"h->m":[0,2,3,6],"h->h":[0,2,0,2],
+	"c->l":[0,1,0,1],"c->m":[0,1,0,1],"c->h":[0,1,0,1]
 }
 
 @onready var dealtierprices : Dictionary = {
@@ -66,9 +72,8 @@ extends Node
 }
 
 @onready var itemtierdict : Dictionary = {
-	"shoppricecurses" : {
-		"l": []
-	},"shoppriceitems" : {
+	"shoppriceitems" : {
+		"c": [],
 		"l": [],
 		"m": [],
 		"h": []
@@ -81,7 +86,7 @@ extends Node
 		"m": [],
 		"h": []
 	},"dealcurses" : {
-		"l": []
+		"c": []
 	}
 }
 
@@ -89,15 +94,15 @@ extends Node
 	"GlideBootsShop":"l", "expl_BShop":"l", "GrappleShop":"l", "HoleShop":"l",
 	"DashShop":"m", "GambaShop":"m", "ShrinkShop":"m", "CleanseShop":"m",
 	"PlayerSpeedShop":"h", "FollowerShop":"h", "ShieldShop":"h",
-	"DVDBounceShop":"l", "ItemTeleportShop":"l", "TeleportShop":"l", 
-	"GrowShop":"l", "SlowShop":"l"
+	"DVDBounceShop":"c", "ItemTeleportShop":"c", "TeleportShop":"c", 
+	"GrowShop":"c", "SlowShop":"c"
 }
 @onready var dealitemtierdictref : Dictionary = {
 	"GlideBootsDeal":"l", "expl_BDeal":"l", "GrappleDeal":"l", "HoleDeal":"l",
 	"DashDeal":"m", "GambaDeal":"m", "ShrinkDeal":"m", "CleanseDeal":"m",
 	"PlayerSpeedDeal":"h", "FollowerDeal":"h", "ShieldDeal":"h",
-	"DVDBounceDeal":"l", "ItemTeleportDeal":"l", "TeleportDeal":"l", 
-	"GrowDeal":"l", "SlowDeal":"l"
+	"DVDBounceDeal":"c", "ItemTeleportDeal":"c", "TeleportDeal":"c", 
+	"GrowDeal":"c", "SlowDeal":"c"
 }
 
 @onready var gamba_array_good : Array[Array] = []
@@ -318,7 +323,7 @@ func load_shop_stats() -> void:
 				if tempstring in \
 				["DVDBounceShop", "ItemTeleportShop", "TeleportShop",
 				"GrowShop", "SlowShop"]:
-					itemtierdict["shoppricecurses"][shopitemtierdictref[tempstring]].append(tempstring)
+					itemtierdict["shoppriceitems"][shopitemtierdictref[tempstring]].append(tempstring)
 				elif tempstring in \
 				["PlayerSpeedShop","GlideBootsShop","DashShop","expl_BShop",
 				"GrappleShop", "ShrinkShop", "HoleShop", "FollowerShop"]:
@@ -328,15 +333,13 @@ func load_shop_stats() -> void:
 				["GambaShop", "CleanseShop", "ShieldShop"]:
 					itemtierdict["shopproductitems"][shopitemtierdictref[tempstring]].append(tempstring)
 	
-	shoppricecurses_l_nEmpty = itemtierdict["shoppricecurses"]["l"].size() > 0
 	shoppriceitems_l_nEmpty = itemtierdict["shoppriceitems"]["l"].size() > 0
 	shoppriceitems_m_nEmpty = itemtierdict["shoppriceitems"]["m"].size() > 0
 	shoppriceitems_h_nEmpty = itemtierdict["shoppriceitems"]["h"].size() > 0
+	shoppriceitems_c_nEmpty = itemtierdict["shoppriceitems"]["c"].size() > 0
 	shopproductitems_l_nEmpty = itemtierdict["shopproductitems"]["l"].size() > 0
 	shopproductitems_m_nEmpty = itemtierdict["shopproductitems"]["m"].size() > 0
 	shopproductitems_h_nEmpty = itemtierdict["shopproductitems"]["h"].size() > 0
-	
-	shoppriceboth_l_nEmpty = shoppricecurses_l_nEmpty || shoppriceitems_l_nEmpty
 	
 	itemtierinventory["l->l"][0] = itemtierdict["shoppriceitems"]["l"]
 	itemtierinventory["l->l"][1] = itemtierdict["shopproductitems"]["l"]
@@ -356,8 +359,14 @@ func load_shop_stats() -> void:
 	itemtierinventory["h->m"][1] = itemtierdict["shopproductitems"]["m"]
 	itemtierinventory["h->h"][0] = itemtierdict["shoppriceitems"]["h"]
 	itemtierinventory["h->h"][1] = itemtierdict["shopproductitems"]["h"]
+	itemtierinventory["c->l"][0] = itemtierdict["shoppriceitems"]["c"]
+	itemtierinventory["c->l"][1] = itemtierdict["shopproductitems"]["l"]
+	itemtierinventory["c->m"][0] = itemtierdict["shoppriceitems"]["c"]
+	itemtierinventory["c->m"][1] = itemtierdict["shopproductitems"]["m"]
+	itemtierinventory["c->h"][0] = itemtierdict["shoppriceitems"]["c"]
+	itemtierinventory["c->h"][1] = itemtierdict["shopproductitems"]["h"]
 	
-	if shoppriceboth_l_nEmpty:
+	if shoppriceitems_l_nEmpty:
 		if shopproductitems_l_nEmpty:
 			shopitemtier.append("l->l")
 			shopitemtierchances.append(itemtierchancedict["l->l"])
@@ -387,8 +396,19 @@ func load_shop_stats() -> void:
 		if shopproductitems_m_nEmpty:
 			shopitemtier.append("h->m")
 			shopitemtierchances.append(itemtierchancedict["h->m"])
+	if shoppriceitems_c_nEmpty:
+		if shopproductitems_l_nEmpty:
+			shopitemtier.append("c->l")
+			shopitemtierchances.append(itemtierchancedict["c->l"])
+		if shopproductitems_m_nEmpty:
+			shopitemtier.append("c->m")
+			shopitemtierchances.append(itemtierchancedict["c->m"])
+		if shopproductitems_h_nEmpty:
+			shopitemtier.append("c->h")
+			shopitemtierchances.append(itemtierchancedict["c->h"])
 	
-	shop_is_closed = !(shoppriceboth_l_nEmpty || shoppriceitems_m_nEmpty || shoppriceitems_h_nEmpty) ||\
+	shop_is_closed = !(shoppriceitems_c_nEmpty || shoppriceitems_l_nEmpty || \
+	shoppriceitems_m_nEmpty || shoppriceitems_h_nEmpty) ||\
 	 !(shopproductitems_l_nEmpty || shopproductitems_m_nEmpty || shopproductitems_h_nEmpty)
 
 func load_deals_stats() -> void:
@@ -413,7 +433,7 @@ func load_deals_stats() -> void:
 	dealitems_l_nEmpty = itemtierdict["dealitems"]["l"].size() > 0
 	dealitems_m_nEmpty = itemtierdict["dealitems"]["m"].size() > 0
 	dealitems_h_nEmpty = itemtierdict["dealitems"]["h"].size() > 0
-	dealcurses_l_nEmpty = itemtierdict["dealcurses"]["l"].size() > 0
+	dealcurses_l_nEmpty = itemtierdict["dealcurses"]["c"].size() > 0
 	if dealitems_l_nEmpty: 
 		itemtierdeal.append("l")
 		itemtierdealchances.append(itemtierdealdict["l"])
@@ -423,7 +443,10 @@ func load_deals_stats() -> void:
 	if dealitems_h_nEmpty:
 		itemtierdeal.append("h")
 		itemtierdealchances.append(itemtierdealdict["h"])
-
+		
+	deal_is_closed = !(dealitems_l_nEmpty || dealitems_m_nEmpty || dealitems_h_nEmpty) || \
+	!dealcurses_l_nEmpty
+	
 func load_seed() -> void:
 	var seedy : String = SettingsDataContainer.get_sandbox_seed(
 		!Global.sandbox)
@@ -438,9 +461,9 @@ func load_seed() -> void:
 		GRand.itemrand.randomize()
 
 func itemSpawn(spawns : Array[String] = SPAWN_LIST, 
-chances : Array[float] = CHANCE_LIST.duplicate(true), 
+chances : Array[float] = CHANCE_LIST, 
 items : Array[String] = ITEMS_LIST, 
-items_chances : Array[float] = ITEMS_CHANCE_LIST.duplicate(true), 
+items_chances : Array[float] = ITEMS_CHANCE_LIST, 
 node_num: int = 15) -> void:
 	var spawn_length : int = spawns.size()
 	var chances_length : int = chances.size()
@@ -500,6 +523,11 @@ node_num: int = 15) -> void:
 			_: print("This randomly selected item does not exist!:", lucky_spawn)
 			
 		i += 1
+	# removing in-game modified chances so the don't stack every spawn request
+	if expl_Bidx != -1:
+		chances[expl_Bidx] -= Global.expl_B_chance_mod
+		# extra precaution in case we somehow go negative
+		chances[expl_Bidx] = abs(chances[expl_Bidx])
 
 func spawnStreetItems(spawns : Array[String] = STREET_SPAWN_LIST, 
 chances : Array[float] = STREET_CHANCE_LIST, 
@@ -664,15 +692,7 @@ func spawnDeal(dir : String, node_num : int, i : int) -> int:
 func chooseShopItemTiers() -> Array:
 	var chosenTierIndex : int = GRand.maprand.rand_weighted(shopitemtierchances)
 	var chosenTier : String = shopitemtier[chosenTierIndex]
-	var chosenPricetemp : Array = []
-	# roll chance for it to be a curse
-	
-	if shoppricecurses_l_nEmpty && chosenTier.left(1) == "l" &&\
-	 (!shoppriceitems_l_nEmpty || GRand.maprand.randi_range(0, 7) < 1):
-		chosenPricetemp = itemtierdict["shoppricecurses"]["l"]
-	else:
-		chosenPricetemp = itemtierinventory[chosenTier][0]
-	return [chosenPricetemp, itemtierinventory[chosenTier][1], 
+	return [itemtierinventory[chosenTier][0], itemtierinventory[chosenTier][1], 
 	itemtierprices[chosenTier], chosenTierIndex]
 	
 func chooseShopItems() -> Array:
@@ -709,14 +729,13 @@ func chooseShopItems() -> Array:
 	return [chosenInput, chosenOutput, shop_cost, shop_reward_num]
 
 func chooseDealItems() -> Array:
-	if !(dealitems_l_nEmpty || dealitems_m_nEmpty || dealitems_h_nEmpty) || \
-	!dealcurses_l_nEmpty:
-		return [null]
+	if deal_is_closed: return [null]
 	var chosenTierIndex : int = GRand.maprand.rand_weighted(itemtierdealchances)
 	var chosenDealTier : String = itemtierdeal[chosenTierIndex]
 	var chosenDealArray : Array = itemtierdict["dealitems"][chosenDealTier]
 	var chosenItem : String = chosenDealArray[GRand.maprand.randi() % chosenDealArray.size()]
-	var chosenCurse : String = itemtierdict["dealcurses"]["l"][GRand.maprand.randi() % itemtierdict["dealcurses"]["l"].size()]
+	var chosenCurse : String = itemtierdict["dealcurses"]["c"]\
+	[GRand.maprand.randi() % itemtierdict["dealcurses"]["c"].size()]
 
 	var deal_item_num : int = floor(abs(GRand.maprand.randfn(
 		dealtierprices[chosenDealTier][0], dealtierprices[chosenDealTier][1])) + 1)

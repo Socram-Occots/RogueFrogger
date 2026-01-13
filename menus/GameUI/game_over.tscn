@@ -165,6 +165,10 @@ alignment = 2
 visible = false
 alignment = 2
 
+[node name="Cancel Selection" parent="UiControls" index="3"]
+visible = false
+alignment = 2
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry" to="." method="_on_retry_pressed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/menu" to="." method="_on_menu_pressed"]
