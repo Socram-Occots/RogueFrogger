@@ -129,16 +129,19 @@ func _on_impulse_area_entered(area):
 # bodies
 func _on_explosionbarrelexplosion_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
-	if "Player" in metalist:
-		if !body.shield_up:
-			Global.defeat()
-		else:
-			body.shield_comp = true
-	elif "Follower" in metalist:
-		body.remove_follower()
-	for i in ["Element"]:
-		if i in metalist:
-			body.queue_free()
+	for i in metalist:
+		match i:
+			"Player":
+				if !body.shield_up:
+					Global.defeat()
+				else:
+					body.shield_comp = true
+			"Follower":
+				body.remove_follower()
+			"Element":
+				body.queue_free()
+			"Dumpster":
+				print("activated")
 	
 func _on_explosionbarrelexplosion_body_exited(body):
 	var metalist : PackedStringArray = body.get_meta_list()
