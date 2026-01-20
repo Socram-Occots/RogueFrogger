@@ -66,7 +66,7 @@ height = 46.5
 [node name="explodingbarrelbody" type="RigidBody2D"]
 collision_layer = 1024
 collision_mask = 0
-mass = 0.05
+mass = 0.03
 physics_material_override = SubResource("PhysicsMaterial_trkfx")
 gravity_scale = 0.0
 lock_rotation = true

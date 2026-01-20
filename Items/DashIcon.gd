@@ -1,6 +1,5 @@
 extends TextureRect
 
-
 @onready var time_label : Label = $"../Sprite2D/MarginContainer/Label"
 @onready var bar : TextureProgressBar = $"../Sprite2D/TextureProgressBar"
 @onready var timer : Timer = $"../Sprite2D/TextureProgressBar/Timer"

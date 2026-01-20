@@ -1,4 +1,4 @@
-extends Area2D
+extends Item
 
 @warning_ignore("unused_parameter")
 func _on_body_entered(body):
@@ -8,6 +8,3 @@ func _on_body_entered(body):
 			Global.inc_Dash(1 * Global.follower_mod)
 			queue_free()
 			break
-
-func _ready() -> void:
-	set_meta("Item", false)

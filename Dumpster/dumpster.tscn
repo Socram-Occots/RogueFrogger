@@ -45,4 +45,7 @@ size = Vector2(170.667, 52)
 corner_radius = 0.0
 fill_color = Color(0, 1, 1, 0.196078)
 
+[node name="ItemMarker" type="Marker2D" parent="."]
+position = Vector2(53.3, 0)
+
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]

@@ -137,11 +137,14 @@ func _on_explosionbarrelexplosion_body_entered(body):
 				else:
 					body.shield_comp = true
 			"Follower":
-				body.remove_follower()
+				if body.get_meta(i) != 0:
+					body.remove_follower()
 			"Element":
 				body.queue_free()
 			"Dumpster":
-				print("activated")
+				if GRand.itemrand.randi_range(0, 3) == 0:
+					get_tree().root.get_node("Level").call_deferred(
+						"chooseItem", body.get_node("ItemMarker").global_position, 0)
 	
 func _on_explosionbarrelexplosion_body_exited(body):
 	var metalist : PackedStringArray = body.get_meta_list()

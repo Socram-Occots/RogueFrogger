@@ -131,6 +131,9 @@ animations = [{
 [node name="crosser" parent="." instance=ExtResource("1_37dtc")]
 position = Vector2(1000, 500)
 
+[node name="FeetCollisionReveal" parent="crosser/FeetCollisionRevealMarker2D" index="0"]
+size = Vector2(36, 20)
+
 [node name="Follower1" type="RigidBody2D" parent="."]
 texture_filter = 1
 position = Vector2(1000, 540)

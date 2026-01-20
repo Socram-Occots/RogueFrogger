@@ -460,20 +460,13 @@ func load_seed() -> void:
 		GRand.maprand.randomize()
 		GRand.itemrand.randomize()
 
-func itemSpawn(spawns : Array[String] = SPAWN_LIST, 
-chances : Array[float] = CHANCE_LIST, 
-items : Array[String] = ITEMS_LIST, 
-items_chances : Array[float] = ITEMS_CHANCE_LIST, 
-node_num: int = 15) -> void:
+func objectSpawn(spawns : Array[String] = SPAWN_LIST, 
+chances : Array[float] = CHANCE_LIST, node_num: int = 15) -> void:
 	var spawn_length : int = spawns.size()
 	var chances_length : int = chances.size()
-	var item_length : int = items.size()
-	var item_chances_length : int = items_chances.size()
-	
+
 	# both arrays need to be same length and exist
-	if spawn_length != chances_length \
-	|| item_length != item_chances_length \
-	|| items.is_empty(): return
+	if spawn_length != chances_length || spawns.is_empty(): return
 
 	# at least one space must be open
 	var open : int  = GRand.maprand.randi_range(0, node_num - 1)
@@ -495,32 +488,19 @@ node_num: int = 15) -> void:
 			selected = GRand.maprand.rand_weighted(chances)
 			lucky_spawn = spawns[selected]
 		
-		if lucky_spawn == "Items":
-			var selected_item : int = GRand.maprand.rand_weighted(items_chances)
-			lucky_spawn = items[selected_item]
+		var dirposition : Vector2 = get_node(dir).global_position
 		
-		# spawn the lucky item
+		# spawn the lucky object
 		match lucky_spawn:
 			"None": pass
-			"Barrel": i = spawnBarrel(dir, i)
-			"Dumpster": i = spawnDumpster(dir, node_num, i)
-			"ExplBarrel": i = spawnExplBarrel(dir, i)
-			"PlayerSpeed": i = spawnItems(dir, lucky_spawn, i)
-			"GlideBoots": i = spawnItems(dir, lucky_spawn, i)
-			"Dash": i = spawnItems(dir, lucky_spawn, i)
-			"expl_B": i = spawnItems(dir, lucky_spawn, i)
-			"Grapple": i = spawnItems(dir, lucky_spawn, i)
-			"Shield": i = spawnItems(dir, lucky_spawn, i)
-			"Gamba": i = spawnItems(dir, lucky_spawn,i)
-			"Follower": i = spawnItems(dir, lucky_spawn,i)
-			"Shrink": i = spawnItems(dir,lucky_spawn, i)
-			"Multi": i = spawnItems(dir,lucky_spawn, i)
-			"Cleanse": i = spawnItems(dir,lucky_spawn, i)
-			"Shop" : i = spawnShop(dir, node_num, i)
-			"Hole_Sidewalk" : i = spawnHole(dir, i)
-			"Hole" : i = spawnItems(dir,lucky_spawn, i)
-			"Deals" : i = spawnDeal(dir, node_num, i)
-			_: print("This randomly selected item does not exist!:", lucky_spawn)
+			"Items": chooseItem(dirposition, i)
+			"Barrel": i = spawnBarrel(dirposition, i)
+			"Dumpster": i = spawnDumpster(dirposition, node_num, i)
+			"ExplBarrel": i = spawnExplBarrel(dirposition, i)
+			"Shop" : i = spawnShop(dirposition, node_num, i)
+			"Hole_Sidewalk" : i = spawnHole(dirposition, i)
+			"Deals" : i = spawnDeal(dirposition, node_num, i)
+			_: print("This randomly selected object does not exist!:", lucky_spawn)
 			
 		i += 1
 	# removing in-game modified chances so the don't stack every spawn request
@@ -529,7 +509,36 @@ node_num: int = 15) -> void:
 		# extra precaution in case we somehow go negative
 		chances[expl_Bidx] = abs(chances[expl_Bidx])
 
-func spawnStreetItems(spawns : Array[String] = STREET_SPAWN_LIST, 
+func chooseItem(dirposition : Vector2, i : int, items : Array[String] = ITEMS_LIST, 
+items_chances : Array[float] = ITEMS_CHANCE_LIST) -> int:
+	var item_length : int = items.size()
+	var item_chances_length : int = items_chances.size()
+	
+	# both arrays need to be same length and exist
+	if item_length != item_chances_length || items.is_empty(): return i
+	
+	var selected_item : int = GRand.maprand.rand_weighted(items_chances)
+	var lucky_spawn : String = items[selected_item]
+		# spawn the lucky item
+	match lucky_spawn:
+		"None": pass
+		"PlayerSpeed": i = spawnItems(dirposition, lucky_spawn, i)
+		"GlideBoots": i = spawnItems(dirposition, lucky_spawn, i)
+		"Dash": i = spawnItems(dirposition, lucky_spawn, i)
+		"expl_B": i = spawnItems(dirposition, lucky_spawn, i)
+		"Grapple": i = spawnItems(dirposition, lucky_spawn, i)
+		"Shield": i = spawnItems(dirposition, lucky_spawn, i)
+		"Gamba": i = spawnItems(dirposition, lucky_spawn,i)
+		"Follower": i = spawnItems(dirposition, lucky_spawn,i)
+		"Shrink": i = spawnItems(dirposition,lucky_spawn, i)
+		"Multi": i = spawnItems(dirposition,lucky_spawn, i)
+		"Cleanse": i = spawnItems(dirposition,lucky_spawn, i)
+		"Hole" : i = spawnItems(dirposition,lucky_spawn, i)
+		_: print("This randomly selected item does not exist!:", lucky_spawn)
+	
+	return i
+
+func spawnStreetObjects(spawns : Array[String] = STREET_SPAWN_LIST, 
 chances : Array[float] = STREET_CHANCE_LIST, 
 items : Array[String] = [], 
 items_chances : Array[float] = [], 
@@ -560,10 +569,13 @@ node_num: int = 15) -> void:
 		else:
 			selected = GRand.maprand.rand_weighted(chances)
 			lucky_spawn = spawns[selected]
+		
+		var dirposition : Vector2 = get_node(dir).global_position
+		
 		# spawn the lucky item
 		match lucky_spawn:
 			"None_Street": pass
-			"Hole_Street" : i = spawnHole(dir, i)
+			"Hole_Street" : i = spawnHole(dirposition, i)
 			_: print("This randomly selected street item does not exist!:", lucky_spawn)
 			
 		i += 1
@@ -615,50 +627,51 @@ func rand_vector_variance(pos : float) -> Vector2:
 	return Vector2(GRand.maprand.randf_range(-1 * postemp, postemp), 
 	GRand.maprand.randf_range(-1 * postemp, postemp))
 
-func spawnBarrel(dir : String, i : int) -> int:
+func spawnBarrel(dir : Vector2, i : int) -> int:
 	var barrel : StaticBody2D = Globalpreload.BARREL_INST.duplicate()
 	barrel.visible = true
-	barrel.position = get_node(dir).global_position + rand_vector_variance(25)
+	barrel.position = dir + rand_vector_variance(25)
 	$Ysort.add_child(barrel)
 	return i
 
-func spawnDumpster(dir : String, node_num : int, i : int) -> int:
+func spawnDumpster(dir : Vector2, node_num : int, i : int) -> int:
 	# we have to check if this is the last node to prevent clipping out of bounds
 	if i + 1 >= node_num: return i
 	var dump : StaticBody2D = Globalpreload.DUMP_INST.duplicate()
 	dump.visible = true
-	dump.position = get_node(dir).global_position
+	dump.position = dir
 	$Ysort.add_child(dump)
 	# dumpsters are two wide so we need to skip a spawn node
 	return i + 1
 
-func spawnExplBarrel(dir : String, i : int) -> int:
+func spawnExplBarrel(dir : Vector2, i : int) -> int:
 	var explbarrel : RigidBody2D = Globalpreload.EXPLBARREL_INST.duplicate()
 	explbarrel.visible = true
-	explbarrel.position = get_node(dir).global_position + rand_vector_variance(25)
+	explbarrel.position = dir + rand_vector_variance(25)
 	$Ysort.add_child(explbarrel)
 	return i
 
-func spawnItems(dir : String, item_str: String, i : int) -> int:
+func spawnItems(dir : Vector2, item_str: String, i : int) -> int:
 	var item : Area2D = Globalpreload.items_instantiate.get_node(item_str).duplicate()
 	if item_str == "Multi":
 		if MULTI_LIST.is_empty():
+			item.queue_free()
 			return i
 		item.item_pool = multiItemPicker()
 	item.visible = true
-	item.position = get_node(dir).global_position + rand_vector_variance(15)
+	item.position = dir + rand_vector_variance(15)
 	item.set_meta("Item", null)
 	$Ysort.add_child(item)
 	return i
 
-func spawnShop(dir : String, node_num : int, i : int) -> int:
+func spawnShop(dir : Vector2, node_num : int, i : int) -> int:
 	# we have to check if this is the last node to prevent clipping out of bounds
 	if i + 1 >= node_num: return i
 	var generated : Array = chooseShopItems()
 	if generated[0] == null: return i
 	var shop : Area2D = Globalpreload.SHOP_INST.duplicate()
 	shop.visible = true
-	shop.position = get_node(dir).global_position + rand_vector_variance(5)
+	shop.position = dir + rand_vector_variance(5)
 	shop.priceItemName = generated[0]
 	shop.productItemName = generated[1]
 	shop.pricenum = generated[2]
@@ -670,14 +683,14 @@ func spawnShop(dir : String, node_num : int, i : int) -> int:
 	# shops are two wide so we need to skip a spawn node
 	return i + 1
 
-func spawnDeal(dir : String, node_num : int, i : int) -> int:
+func spawnDeal(dir : Vector2, node_num : int, i : int) -> int:
 	# we have to check if this is the last node to prevent clipping out of bounds
 	if i + 1 >= node_num: return i
 	var generated : Array = chooseDealItems()
 	if generated[0] == null: return i
 	var deal : Area2D = Globalpreload.DEAL_INST.duplicate()
 	deal.visible = true
-	deal.position = get_node(dir).global_position + rand_vector_variance(5)
+	deal.position = dir + rand_vector_variance(5)
 	deal.dealItemName = generated[0]
 	deal.dealCurseName = generated[1]
 	deal.dealnum = generated[2]
@@ -782,10 +795,10 @@ func carSpawn() -> void:
 		
 	$Ysort.add_child(car)
 
-func spawnHole(dir : String, i : int) -> int:
+func spawnHole(dir : Vector2, i : int) -> int:
 	var hole : Area2D = Globalpreload.HOLE_INST.duplicate()
 	hole.visible = true
-	hole.position = get_node(dir).global_position + rand_vector_variance(25)
+	hole.position = dir + rand_vector_variance(25)
 	hole.position.y -= Global.player_height_px
 	$Ysort.add_child(hole)
 	return i
@@ -820,10 +833,10 @@ func terrainSpawn(type : int, xpos : float, ypos : float) -> void:
 	$Tiles.add_child(tile)
 	# item or car spawn
 	if type == 0:
-		itemSpawn()
+		objectSpawn()
 	elif type == 1:
 		carSpawn()
-		spawnStreetItems()
+		spawnStreetObjects()
 	
 	$spawnterrain.global_position.y -= 144
 
@@ -983,8 +996,7 @@ func dash_check() -> void:
 		$CanvasLayer.add_child(dash_pop_up)
 
 func speed_run_check() -> void:
-	if Global.sandbox:
-		return
+	if Global.sandbox: return
 	var newtime : bool = false
 	var checkpoint := speed_run_checkpoints.keys()
 	for i in checkpoint:
@@ -1000,8 +1012,7 @@ func speed_run_check() -> void:
 		
 func terrain_check() -> void:
 	if Global.spawnTerrain:
-		if Global.race_condition_tiles.is_empty():
-			return
+		if Global.race_condition_tiles.is_empty(): return
 		
 		var max_tile_int : int = Global.race_condition_tiles.max()
 
@@ -1054,8 +1065,7 @@ func loadPause() -> void:
 	Global.pause_popup = pausepopup
 
 func spawn_high_score_line() -> void:
-	if Global.sandbox:
-		return
+	if Global.sandbox: return
 	var high_score : int = SettingsDataContainer.get_high_score()
 	# don't spawn line too close
 	if high_score < 10: return
@@ -1125,8 +1135,7 @@ func follower_check() ->void:
 		create_follower()
 
 func highscore_notif() -> void:
-	if Global.sandbox:
-		return
+	if Global.sandbox: return
 	var high_score_pop_up : Control = Globalpreload.POP_INST.duplicate()
 	high_score_pop_up.get_node("dashpopup/Label").text = "New High Score!"
 	canvas_layer.add_child(high_score_pop_up)
