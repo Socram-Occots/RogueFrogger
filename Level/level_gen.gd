@@ -661,6 +661,8 @@ func spawnItems(dir : Vector2, item_str: String, i : int) -> int:
 	item.visible = true
 	item.position = dir + rand_vector_variance(15)
 	item.set_meta("Item", null)
+	# is there a grace period so it does not get deleted imediately?
+	item.explImmume = i == -999
 	$Ysort.add_child(item)
 	return i
 

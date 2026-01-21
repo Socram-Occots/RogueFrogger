@@ -1,4 +1,4 @@
-extends Area2D
+extends Item
 
 @export var dealItem : Texture2D
 @export var dealCurse : Texture2D

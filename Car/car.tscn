@@ -235,7 +235,7 @@ disabled = true
 
 [node name="Rectangle" type="Node2D" parent="car/CollisionShape2Dmotorcycle"]
 script = ExtResource("13_p7qsy")
-size = Vector2(100.7, 8)
+size = Vector2(100.7, 20)
 corner_radius = 0.0
 fill_color = Color(0, 1, 1, 0.196078)
 

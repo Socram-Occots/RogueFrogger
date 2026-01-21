@@ -146,7 +146,10 @@ const default_logbook_objects_dict : Dictionary = {
 	"tooltip":
 		"Dumpster:
 			-It's a dumpster. Go around it. Please. 
-			-I don't know why the neighbors insist on keeping it there."},
+			-I don't know why the neighbors insist on keeping it there.
+			-But... Sometimes the neighbors throw away some good stuff
+			-They even hide little goodies in their cars.
+			-Only one way to find out..."},
 	"Barrel":{"bools":[false, false], 
 	"tooltip":
 		"Barrel:

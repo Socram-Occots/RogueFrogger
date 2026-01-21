@@ -8,3 +8,7 @@ func _on_body_entered(body):
 			Global.inc_Dash(1 * Global.follower_mod)
 			queue_free()
 			break
+
+func _ready() -> void:
+	defaultMeta()
+	gracePeriod()

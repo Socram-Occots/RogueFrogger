@@ -1,4 +1,4 @@
-extends Area2D
+extends Item
 
 @warning_ignore("unused_parameter")
 func _on_body_entered(body):
@@ -8,3 +8,7 @@ func _on_body_entered(body):
 			Global.inc_Follower(1)
 			queue_free()
 			break
+
+func _ready() -> void:
+	defaultMeta()
+	gracePeriod()

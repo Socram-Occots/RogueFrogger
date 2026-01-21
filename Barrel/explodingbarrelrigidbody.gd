@@ -44,6 +44,7 @@ func _ready():
 
 func explosion() -> void:
 	if exploding: return
+	exploding = true
 	if carry: Global.follower_array[0].carrying = false
 	call_deferred("set_freeze_enabled", true)
 	expl_collision_shape_2d.scale.x = Global.expl_B_size_mod
@@ -53,7 +54,6 @@ func explosion() -> void:
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0
 	sleeping = true
-	exploding = true
 	impulse_collision_shape_2d.set_deferred("disabled", true)
 	explosionCol.set_deferred("disabled", false)
 	animationExplo.play("explosion")
@@ -142,10 +142,13 @@ func _on_explosionbarrelexplosion_body_entered(body):
 			"Element":
 				body.queue_free()
 			"Dumpster":
-				if GRand.itemrand.randi_range(0, 3) == 0:
-					get_tree().root.get_node("Level").call_deferred(
-						"chooseItem", body.get_node("ItemMarker").global_position, 0)
-	
+				spawnItem(body.get_node("ItemMarker"))
+
+func spawnItem(marker) -> void:
+	if GRand.itemrand.randi_range(0, 2) == 0:
+		get_tree().root.get_node("Level").call_deferred(
+			"chooseItem", marker.global_position, -999)
+
 func _on_explosionbarrelexplosion_body_exited(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
@@ -155,10 +158,12 @@ func _on_explosionbarrelexplosion_body_exited(body):
 # areas
 func _on_explosionbarrelexplosion_area_entered(area):
 	var metalist : PackedStringArray = area.get_meta_list()
-	for i in ["Car", "Item", "Grapplehead"]:
+	for i in ["Car", "Grapplehead"]:
 		if i in metalist:
 			area.queue_free()
-	if "ExplodingBarrelImpulse" in metalist:
+	if "Item" in metalist && !area.explImmume:
+		area.queue_free()
+	elif "ExplodingBarrelImpulse" in metalist:
 		area.explosion()
 	elif "Hole" in metalist:
 		if !area.crater:
@@ -168,6 +173,8 @@ func _on_explosionbarrelexplosion_area_entered(area):
 			area.get_node("Sprite2D").position.y += 50
 			area.get_node("CollisionShape2D").scale *= 4
 			area.get_node("CollisionShape2D").position.y += 50
+	elif "Car" in metalist:
+		spawnItem(area)
 
 func _on_feet_area_entered(area: Area2D) -> void:
 	var metalist : PackedStringArray = area.get_meta_list()

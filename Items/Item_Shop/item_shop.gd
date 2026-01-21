@@ -1,4 +1,4 @@
-extends Area2D
+extends Item
 
 @export var priceItem : Texture2D
 @export var productItem : Texture2D

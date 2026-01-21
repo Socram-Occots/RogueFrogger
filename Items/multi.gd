@@ -1,4 +1,4 @@
-extends Area2D
+extends Item
 
 @export var cycletime : float = 3.0
 @export var item_pool : Array[Array] = []
@@ -36,13 +36,14 @@ func _on_body_entered(body):
 			break
 
 func _ready() -> void:
-	set_meta("Item", false)
+	defaultMeta()
 	set_meta("Multi", false)
 	if item_pool.is_empty():
 		queue_free()
 	item_pool_len = item_pool.size()
 	sprite_2d.texture = item_pool[winner][1]
 	cycletimestep = cycletime/item_pool.size()
+	gracePeriod()
 	item_cycle_timer.start(cycletimestep)
 	#print(item_pool_len)
 
