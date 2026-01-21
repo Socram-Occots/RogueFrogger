@@ -95,6 +95,5 @@ func scan_for_logbook() -> void:
 			if temp[i][a]["bools"][0] != temp[i][a]["bools"][1]:
 				tempbool = true
 				break
-		if tempbool:
-			break
+		if tempbool: break
 	logbook_notif.visible = tempbool

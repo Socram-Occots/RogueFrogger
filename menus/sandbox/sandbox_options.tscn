@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://qjm1e00amf4x"]
+[gd_scene load_steps=6 format=3 uid="uid://qjm1e00amf4x"]
 
 [ext_resource type="Script" path="res://menus/sandbox/sandbox_options.gd" id="1_bv4pc"]
 [ext_resource type="PackedScene" uid="uid://rmxm5r67j8cg" path="res://menus/sandbox/sandbox_tabs.tscn" id="2_mw015"]
 [ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="3_26coe"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="4_2t3iu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcxor"]
 
 [node name="SandboxOptions" type="Control"]
 layout_mode = 3
@@ -40,12 +42,6 @@ vertical_alignment = 1
 [node name="SandboxTabs" parent="MarginContainer/VBoxContainer" instance=ExtResource("2_mw015")]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="TabContainer" parent="MarginContainer/VBoxContainer/SandboxTabs" index="0"]
-current_tab = 5
-
-[node name="General" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer" index="1"]
-visible = false
 
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/General/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer/SandboxSetter/HBoxContainer" index="0"]
 focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
@@ -216,9 +212,6 @@ focus_neighbor_right = NodePath("../../../SandboxSetter3/HBoxContainer/Button")
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Shop/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3/HBoxContainer" index="0"]
 focus_neighbor_left = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
 
-[node name="Deals" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer" index="6"]
-visible = true
-
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer4/SandboxSetter/HBoxContainer" index="0"]
 focus_neighbor_right = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
 
@@ -312,6 +305,45 @@ grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("4_2t3iu")
 metadata/_edit_use_anchors_ = true
+
+[node name="SandboxTip" type="HBoxContainer" parent="."]
+offset_left = 15.0
+offset_top = 30.0
+offset_right = 433.0
+offset_bottom = 130.0
+size_flags_horizontal = 0
+size_flags_vertical = 6
+size_flags_stretch_ratio = 23.15
+
+[node name="VSeparator" type="VSeparator" parent="SandboxTip"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_wcxor")
+
+[node name="Label" type="Label" parent="SandboxTip"]
+custom_minimum_size = Vector2(350, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Tip: The higher the number, the more often it spawns!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="SandboxTip/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="VSeparator2" type="VSeparator" parent="SandboxTip"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_wcxor")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/ResetTab" to="." method="_on_reset_tab_pressed"]
