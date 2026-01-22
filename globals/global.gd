@@ -736,7 +736,12 @@ func change_player_follower_size() -> void:
 			follower_array[i].get_node("FeetCollisionRevealMarker2D").scale = temp_shrink
 
 func logbook_tracking(type : String, object : String) -> void:
+	var firsttime : bool = SettingsDataContainer.get_logbook_dict(
+		type, object)[0]
 	SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 0)
+	if firsttime:
+		get_tree().root.get_node("Level/CanvasLayer/TipPopup").call_deferred(
+			"loadTip", object)
 
 func teleportation_activated() -> void:
 	var playermove: AnimatedSprite2D = follower_array[0].get_node("playermove")

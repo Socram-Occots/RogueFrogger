@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=30 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" path="res://Level/watermarks.gd" id="7_upmlt"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="8_3m3b3"]
 [ext_resource type="Theme" uid="uid://j537pvn5vvqf" path="res://roguecrossytheme.tres" id="8_5vect"]
+[ext_resource type="Script" path="res://Level/tip_popup.gd" id="9_rxtml"]
+[ext_resource type="Texture2D" uid="uid://biscs04ru388f" path="res://RogueFroggerAssets/RFAssets/Level/gamba.png" id="10_qlf2b"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_iu5ys"]
 
@@ -172,6 +174,8 @@ force_type = 0
 force_device = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umnek"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nindn"]
 
 [node name="Level" type="Node"]
 script = ExtResource("1_v6cxu")
@@ -480,3 +484,100 @@ metadata/_edit_use_anchors_ = true
 z_index = 2
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="TipPopup" type="VBoxContainer" parent="CanvasLayer"]
+layout_direction = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 10.0
+offset_right = 368.0
+offset_bottom = 210.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("9_rxtml")
+
+[node name="TipPopupTitle" type="HBoxContainer" parent="CanvasLayer/TipPopup"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 23.15
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/TipPopup/TipPopupTitle"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nindn")
+
+[node name="Label" type="Label" parent="CanvasLayer/TipPopup/TipPopupTitle"]
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Title
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TipPopup/TipPopupTitle/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/TipPopup/TipPopupTitle"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nindn")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/TipPopup"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 300.0
+texture = ExtResource("10_qlf2b")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TipPopupText" type="HBoxContainer" parent="CanvasLayer/TipPopup"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 23.15
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/TipPopup/TipPopupText"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nindn")
+
+[node name="Label" type="Label" parent="CanvasLayer/TipPopup/TipPopupText"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TipPopup/TipPopupText/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/TipPopup/TipPopupText"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nindn")

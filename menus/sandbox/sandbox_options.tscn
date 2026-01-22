@@ -307,6 +307,7 @@ script = ExtResource("4_2t3iu")
 metadata/_edit_use_anchors_ = true
 
 [node name="SandboxTip" type="HBoxContainer" parent="."]
+layout_mode = 0
 offset_left = 15.0
 offset_top = 30.0
 offset_right = 433.0
