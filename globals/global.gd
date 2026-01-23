@@ -739,9 +739,9 @@ func logbook_tracking(type : String, object : String) -> void:
 	var firsttime : bool = SettingsDataContainer.get_logbook_dict(
 		type, object)[0]
 	SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 0)
-	if firsttime:
+	if firsttime || true:
 		get_tree().root.get_node("Level/CanvasLayer/TipPopup").call_deferred(
-			"loadTip", object)
+			"loadTip", object, type)
 
 func teleportation_activated() -> void:
 	var playermove: AnimatedSprite2D = follower_array[0].get_node("playermove")
@@ -786,3 +786,30 @@ func teleportation_activated() -> void:
 	else: return
 	await get_tree().create_timer(0.05).timeout
 	Global.follower_array[0].rand_teleport(Vector2.ZERO)
+
+func get_texture_icons(object : String, topic : String) -> Texture2D:
+	match object:
+		"PlayerSpeed" : return Globalpreload.PlayerSpeed_t
+		"GlideBoots" : return Globalpreload.GlideBoots_t
+		"Dash" :  return Globalpreload.Dash_t
+		"expl_B" : return Globalpreload.expl_B_t
+		"Grapple" : return Globalpreload.Grapple_t
+		"Follower" : return Globalpreload.Follower_t
+		"Gamba" : return Globalpreload.Gamba_t
+		"Shield" :  return Globalpreload.Shield_t
+		"Shrink" :  return Globalpreload.Shrink_t
+		"Cleanse" : return Globalpreload.Cleanse_t
+		"Hole" : return Globalpreload.Hole_t
+		"ExplBarrel" : return Globalpreload.ExplBarrel_t
+		"Dumpster" : return Globalpreload.Dumpster_t
+		"Barrel" : return Globalpreload.Barrel_t
+		"Hole_Sidewalk_Street" : return Globalpreload.HolePrev_t
+		"Hole_Sidewalk" : return Globalpreload.HolePrev_t
+		"Hole_Street" : return Globalpreload.HolePrev_t
+		"Slow" : return Globalpreload.Slow_t
+		"Grow" : return Globalpreload.Grow_t
+		"Teleport" : return Globalpreload.Teleport_t
+		"ItemTeleport" :  return Globalpreload.ItemTeleport_t
+		"DVDBounce" :  return Globalpreload.DVDBounce_t
+		_: print("set texture string was not there for {topic}: {object}".format({"topic": topic, "object": object}))
+	return null

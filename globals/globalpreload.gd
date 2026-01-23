@@ -150,6 +150,30 @@ func delete_stray_nodes() -> void:
 			i.queue_free()
 	delete_array.clear()
 
+# load full general/street textures
+const ExplBarrel_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png") 
+const Dumpster_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/dumpster_ROR.png") 
+const Barrel_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/BarrelPreview.png") 
+const HolePrev_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Hole/RORhole.png") 
+# load full item textures
+const PlayerSpeed_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
+const GlideBoots_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
+const Dash_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
+const expl_B_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
+const Grapple_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
+const Follower_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/follower.png")
+const Gamba_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/gamba.png")
+const Shield_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/PlayerShield/vibrating-shield.png")
+const Shrink_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/shrink.png")
+const Cleanse_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
+const Hole_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
+# load full curse textures
+const Slow_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/slow.png")
+const Grow_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/grow.png")
+const Teleport_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/teleport.png")
+const ItemTeleport_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
+const DVDBounce_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+
 func _ready() -> void:
 	itemgrapplehook.set_script(ITEMGRAPPLESCRIPT)
 	itemgrapplehook.get_node("grappleHead/CollisionShape2D").set_deferred("disabled", true)

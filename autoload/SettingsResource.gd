@@ -141,7 +141,9 @@ const default_logbook_objects_dict : Dictionary = {
 	"tooltip":
 		"Exploding Barrel:
 		-You can pick it up, throw it, and explode things! Omg wow that's crazy.
-		-Picking them up will slow you down."},
+		-Picking them up will slow you down.",
+	"popuptooltip":
+		""},
 	"Dumpster":{"bools":[false, false], 
 	"tooltip":
 		"Dumpster:
@@ -149,17 +151,23 @@ const default_logbook_objects_dict : Dictionary = {
 			-I don't know why the neighbors insist on keeping it there.
 			-But... Sometimes the neighbors throw away some good stuff
 			-They even hide little goodies in their cars.
-			-Only one way to find out..."},
+			-Only one way to find out...",
+	"popuptooltip":
+		""},
 	"Barrel":{"bools":[false, false], 
 	"tooltip":
 		"Barrel:
-		-It's a barrel. It's kinda just for decoration. It can block you though."},
+		-It's a barrel. It's kinda just for decoration. It can block you though.",
+	"popuptooltip":
+		""},
 	"Hole_Sidewalk_Street":{"bools":[false, false], 
 	"tooltip":
 		"Hole:
 	-Don't walk over it! The city really needs to do something about this pothole problem...
 	-These holes could be quite useful at stopping these cars.
-	If only there was a method to make them larger..."}
+	If only there was a method to make them larger...",
+	"popuptooltip":
+		""}
 }
 
 const default_logbook_items_dict : Dictionary = {
@@ -167,7 +175,9 @@ const default_logbook_items_dict : Dictionary = {
 	"tooltip":
 		"Player Speed:
 		-Stacking increases the player's speed.
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Faster!"},
 	"GlideBoots":{"bools":[false, false], 
 	"tooltip":
 		"Glide:
@@ -176,14 +186,18 @@ const default_logbook_items_dict : Dictionary = {
 		-Activate while active: Cancel the glide early.
 		-Stacking increases gliding time.
 		-Stacking decreases cooldown.
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Activate it to go frictionless."},
 	"Dash":{"bools":[false, false], 
 	"tooltip":
 		"Dash:
 		-Activate: Gain a quick boost in speed, but you cannot change direction.
 		-Stacking increases dashing speed.
 		-Stacking decreases cooldown.
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Activate to gain a surge of uncontrolable speed."},
 	"expl_B":{"bools":[false, false], 
 	"tooltip":
 		"Exploding Barrel (Expl-B.):
@@ -193,7 +207,9 @@ const default_logbook_items_dict : Dictionary = {
 			Expl-B explosion radius
 		-Stacking decreases:
 			Speed penalty when carrying Expl-B 
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Throw explosives farther. And better explosions!"},
 	"Grapple":{"bools":[false, false], 
 	"tooltip":
 		"Grapple: 
@@ -206,42 +222,59 @@ const default_logbook_items_dict : Dictionary = {
 		-Stacking decreases:
 			Active Grapple cooldown
 			Passive Grapple cooldown
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Activate to shoot a grappling rope.
+		Also gets far away items for you."},
 	"Follower":{"bools":[false, false], 
 	"tooltip":
 		"Follower:
-		-Produce a clone of yourself. Almost every item you recieve is
-		muliplied by the number of followers you have.
+		-Produce a clone of yourself. Almost every item you pick up 
+		is muliplied by the number of followers you have.
 		-Stacking increases: Number of followers.
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Make a clone of yourself.
+		More clones means more items!"},
 	"Gamba":{"bools":[false, false], 
 	"tooltip":
 		"Random:
 		-Grants you a random item/curse.
 		-Stacking increases the stack of the random item/curse you receive.
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Gives you a random item/curse."},
 	"Shield":{"bools":[false, false], 
 	"tooltip":
 		"Shield:
 		-Provides a one time protection against cars and explosions.
-		-Does not stack."},
+		-Does not stack.",
+	"popuptooltip":
+		"A rare one time protection from danger!
+		But it doesn't stack!"},
 	"Shrink":{"bools":[false, false], 
 	"tooltip":
 		"Shrink:
 		-Makes your character smaller.
 		-Stacking decreases your size.
-		-Stacking cap: 100"},
+		-Stacking cap: 100",
+	"popuptooltip":
+		"Makes you smaller."},
 	"Cleanse":{"bools":[false, false], 
 	"tooltip":
 		"Cleanse:
-		-Removes one stack of a random curse."},
+		-Removes one point of a random curse from you.",
+	"popuptooltip":
+		"Removes one point of a random curse from you."},
 	"Hole":{"bools":[false, false], 
 	"tooltip":
 		"Coyote Time:
 		-Prevents you from falling down a hole momentarily.
 		-Stacking increases the protection time.
 		-Stacking decreases Coyote Time cooldown.
-		-Stacking cap: Infinite"}
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Prevents you from falling down a hole momentarily"}
 }
 
 const default_logbook_curses_dict : Dictionary = {
@@ -250,32 +283,42 @@ const default_logbook_curses_dict : Dictionary = {
 		"Slow:
 		-Makes your character slower.
 		-Stacking decreases your speed
-		-Stacking cap: 99"},
+		-Stacking cap: 99",
+	"popuptooltip":
+		"Makes your character slower."},
 	"Grow":{"bools":[false, false], 
 	"tooltip":
 		"Grow:
 		-Makes your character larger.
 		-Stacking increases your size.
-		-Stacking cap: 100"},
+		-Stacking cap: 100",
+	"popuptooltip":
+		"Makes your character larger."},
 	"Teleport":{"bools":[false, false], 
 	"tooltip":
 		"Teleport:
 		-Periodically teleports you over a semi-random distance and direction.
 		-Stacking decreases the teleport cooldown.
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Periodically teleports you."},
 	"ItemTeleport":{"bools":[false, false], 
 	"tooltip":
 		"Item Teleport:
 		-Has the capability to teleport a random item you have you over a random distance on screen periodically.
 		-You lose the item as it's teleported, but you can still pick it up again.
 		-Stacking decreases the teleport cooldown.
-		-Stacking cap: Infinite"},
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Periodically teleports your items."},
 	"DVDBounce":{"bools":[false, false], 
 	"tooltip":
 		"DVD Bounce:
 		-Blocks your vision with a bouncing rectangle.
 		-Stacking increases the number of rectangles.
-		-Stacking cap: Infinite"}
+		-Stacking cap: Infinite",
+	"popuptooltip":
+		"Blocks your vision with a bouncing rectangle."}
 }
 
 const default_logbook_dict : Dictionary = {

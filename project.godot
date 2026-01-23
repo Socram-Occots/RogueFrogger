@@ -19,9 +19,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
-GRand="*res://globals/GRand.gd"
 Global="*res://globals/global.tscn"
 Globalpreload="*res://globals/globalpreload.gd"
+GRand="*res://globals/GRand.gd"
 SettingsSignalBus="*res://autoload/SettingsSignalBus.gd"
 SettingsDataContainer="*res://autoload/SettingsDataContainer.gd"
 SaveManager="*res://autoload/SaveManager.gd"

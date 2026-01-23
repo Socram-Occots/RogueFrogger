@@ -222,6 +222,11 @@ func get_logbook_dict_tooltip(type: String, object: String, default: bool = fals
 		return DEFAULT_SETTINGS.default_logbook_dict[type][object]["tooltip"]
 	return logbook_dict[type][object]["tooltip"]
 
+func get_logbook_dict_popuptooltip(type: String, object: String, default: bool = false) -> String:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_logbook_dict[type][object]["popuptooltip"]
+	return logbook_dict[type][object]["popuptooltip"]
+
 func get_logbook_dict_type(type: String, default : bool = false ) -> Dictionary:
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_logbook_dict[type]
@@ -369,6 +374,7 @@ func on_logbook_dict_setAll(dict : Dictionary) -> void:
 			for a in default[i].keys():
 				if dict[i].has(a):
 					dict[i][a]["tooltip"] = default[i][a]["tooltip"]
+					dict[i][a]["popuptooltip"] = default[i][a]["popuptooltip"]
 					for b in default[i][a].keys():
 						if !dict[i][a].has(b):
 							dict[i][a][b] = default[i][a][b]

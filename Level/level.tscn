@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=33 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
@@ -176,6 +176,42 @@ force_device = 16
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umnek"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nindn"]
+
+[sub_resource type="Animation" id="Animation_qcvtq"]
+resource_name = "popup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 3),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qw5my"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_00kjo"]
+_data = {
+"RESET": SubResource("Animation_qw5my"),
+"popup": SubResource("Animation_qcvtq")
+}
 
 [node name="Level" type="Node"]
 script = ExtResource("1_v6cxu")
@@ -581,3 +617,10 @@ color = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_nindn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/TipPopup"]
+libraries = {
+"": SubResource("AnimationLibrary_00kjo")
+}
+
+[connection signal="animation_finished" from="CanvasLayer/TipPopup/AnimationPlayer" to="CanvasLayer/TipPopup" method="_on_animation_player_animation_finished"]

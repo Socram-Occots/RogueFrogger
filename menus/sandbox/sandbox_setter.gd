@@ -32,266 +32,267 @@ func set_properties() -> void:
 	match object:
 		"PlayerSpeed" : 
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
+			"", Globalpreload.PlayerSpeed_t)
 		"GlideBoots" : 
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
+			"", Globalpreload.GlideBoots_t)
 		"Dash" : 
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
+			"", Globalpreload.Dash_t)
 		"expl_B" :
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
+			"", Globalpreload.expl_B_t)
 		"Grapple" : 
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
+			"", Globalpreload.Grapple_t)
 		"Follower" : 
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/follower.png")
+			"", Globalpreload.Follower_t)
 		"Gamba" :
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/gamba.png")
+			"", Globalpreload.Gamba_t)
 		"Shield" : 
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/PlayerShield/vibrating-shield.png")
+			"", Globalpreload.Shield_t)
 		"Shrink" : 
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/shrink.png")
+			"", Globalpreload.Shrink_t)
 		"Multi" : 
 			set_sandbox_option(object, "Items", 999, 
-			"Multi")
+			"Multi", null)
 		"Cleanse" :
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
+			"", Globalpreload.Cleanse_t)
 		"Hole" :
 			set_sandbox_option(object, "Items", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
+			"", Globalpreload.Hole_t)
 		"ExplBarrel" : 
 			set_sandbox_option(object, "General", 999, 
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png")
+			"", Globalpreload.ExplBarrel_t)
 		"Dumpster" : 
 			set_sandbox_option(object, "General", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/dumpster_ROR.png")
+			"", Globalpreload.Dumpster_t)
 		"Barrel" : 
 			set_sandbox_option(object, "General", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/BarrelPreview.png")
+			"", Globalpreload.Barrel_t)
 		"Shop" : 
 			set_sandbox_option(object, "General", 999, 
-			"Shop")
+			"Shop", null)
 		"Items" :
 			set_sandbox_option(object, "General", 999, 
-			"Items")
+			"Items", null)
 		"None" : 
 			set_sandbox_option(object, "General", 999, 
-			"None")
+			"None", null)
 		"Deals" :
 			set_sandbox_option(object, "General", 999,
-			"Deals")
+			"Deals", null)
 		"Hole_Sidewalk" : 
 			set_sandbox_option(object, "General", 999, 
-			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
+			"", Globalpreload.HolePrev_t)
 		"None_Street" : 
 			set_sandbox_option(object, "Street", 999, 
-			"None")
+			"None", null)
 		"Hole_Street" : 
 			set_sandbox_option(object, "Street", 999, 
-			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
+			"", Globalpreload.HolePrev_t)
 		"PlayerSpeedShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
+			"", Globalpreload.PlayerSpeed_t)
 		"GlideBootsShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
+			"", Globalpreload.GlideBoots_t)
 		"DashShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
+			"", Globalpreload.Dash_t)
 		"expl_BShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
+			"", Globalpreload.expl_B_t)
 		"GrappleShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
+			"", Globalpreload.Grapple_t)
 		"FollowerShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/follower.png")
+			"", Globalpreload.Follower_t)
 		"GambaShop" :
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/gamba.png")
+			"", Globalpreload.Gamba_t)
 		"ShieldShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/PlayerShield/vibrating-shield.png")
+			"", Globalpreload.Shield_t)
 		"ShrinkShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/shrink.png")
+			"", Globalpreload.Shrink_t)
 		"SlowShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/slow.png")
+			"", Globalpreload.Slow_t)
 		"GrowShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
+			"", Globalpreload.Grow_t)
 		"TeleportShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
+			"", Globalpreload.Teleport_t)
 		"ItemTeleportShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
+			"", Globalpreload.ItemTeleport_t)
 		"CleanseShop" :
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
+			"", Globalpreload.Cleanse_t)
 		"DVDBounceShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+			"", Globalpreload.DVDBounce_t)
 		"HoleShop" : 
 			set_sandbox_option(object, "Shop", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
+			"", Globalpreload.Hole_t)
 		"PlayerSpeedDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
+			"", Globalpreload.PlayerSpeed_t)
 		"GlideBootsDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
+			"", Globalpreload.GlideBoots_t)
 		"DashDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
+			"", Globalpreload.Dash_t)
 		"expl_BDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
+			"", Globalpreload.expl_B_t)
 		"GrappleDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
+			"", Globalpreload.Grapple_t)
 		"FollowerDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/follower.png")
+			"", Globalpreload.Follower_t)
 		"GambaDeal" :
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/gamba.png")
+			"", Globalpreload.Gamba_t)
 		"ShieldDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/PlayerShield/vibrating-shield.png")
+			"", Globalpreload.Shield_t)
 		"ShrinkDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/shrink.png")
+			"", Globalpreload.Shrink_t)
 		"SlowDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/slow.png")
+			"", Globalpreload.Slow_t)
 		"GrowDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
+			"", Globalpreload.Grow_t)
 		"TeleportDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
+			"", Globalpreload.Teleport_t)
 		"ItemTeleportDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
+			"", Globalpreload.ItemTeleport_t)
 		"CleanseDeal" :
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
+			"", Globalpreload.Cleanse_t)
 		"DVDBounceDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+			"", Globalpreload.DVDBounce_t)
 		"HoleDeal" : 
 			set_sandbox_option(object, "Deals", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
+			"", Globalpreload.Hole_t)
 		"PlayerSpeedGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
+			"", Globalpreload.PlayerSpeed_t)
 		"GlideBootsGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
+			"", Globalpreload.GlideBoots_t)
 		"DashGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
+			"", Globalpreload.Dash_t)
 		"expl_BGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
+			"", Globalpreload.expl_B_t)
 		"GrappleGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
+			"", Globalpreload.Grapple_t)
 		"FollowerGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/follower.png")
+			"", Globalpreload.Follower_t)
 		"ShrinkGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/shrink.png")
+			"", Globalpreload.Shrink_t)
 		"SlowGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/slow.png")
+			"", Globalpreload.Slow_t)
 		"GrowGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
+			"", Globalpreload.Grow_t)
 		"TeleportGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
+			"", Globalpreload.Teleport_t)
 		"ItemTeleportGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
+			"", Globalpreload.ItemTeleport_t)
 		"CleanseGamba" :
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
+			"", Globalpreload.Cleanse_t)
 		"DVDBounceGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+			"", Globalpreload.DVDBounce_t)
 		"HoleGamba" : 
 			set_sandbox_option(object, "Gamba", 1, 
-			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
+			"", Globalpreload.Hole_t)
 		"PlayerSpeedMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
+			"", Globalpreload.PlayerSpeed_t)
 		"GlideBootsMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
+			"", Globalpreload.GlideBoots_t)
 		"DashMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
+			"", Globalpreload.Dash_t)
 		"expl_BMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
+			"", Globalpreload.expl_B_t)
 		"GrappleMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
+			"", Globalpreload.Grapple_t)
 		"FollowerMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/follower.png")
+			"", Globalpreload.Follower_t)
 		"GambaMulti" :
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/gamba.png")
+			"", Globalpreload.Gamba_t)
 		"ShieldMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/PlayerShield/vibrating-shield.png")
+			"", Globalpreload.Shield_t)
 		"ShrinkMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/shrink.png")
+			"", Globalpreload.Shrink_t)
 		"SlowMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/slow.png")
+			"", Globalpreload.Slow_t)
 		"GrowMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
+			"", Globalpreload.Grow_t)
 		"TeleportMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
+			"", Globalpreload.Teleport_t)
 		"ItemTeleportMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
+			"", Globalpreload.ItemTeleport_t)
 		"CleanseMulti" :
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
+			"", Globalpreload.Cleanse_t)
 		"DVDBounceMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+			"", Globalpreload.DVDBounce_t)
 		"HoleMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
-			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
+			"", Globalpreload.Hole_t)
 		_: print("set texture string was not there for sandbox: ", object)
 
-func set_sandbox_option(topic : String, type : String, maxint : int, texture : String) -> void:
+func set_sandbox_option(topic : String, type : String, maxint : int, 
+labelstr : String, texture : Texture2D) -> void:
 	sandbox_type = type
 	match texture:
 		"Multi": set_Multi()
-		"Shop": set_label(texture)
-		"None": set_label(texture)
-		"Items": set_label(texture)
-		"Deals": set_label(texture)
+		"Shop": set_label(labelstr)
+		"None": set_label(labelstr)
+		"Items": set_label(labelstr)
+		"Deals": set_label(labelstr)
 		_: set_texture(texture)
 	
 	set_slider(
@@ -300,14 +301,14 @@ func set_sandbox_option(topic : String, type : String, maxint : int, texture : S
 		)
 		
 
-func set_texture(texture_path : String) -> void:
-	sprite_2d.texture = load(texture_path)
+func set_texture(texture : Texture2D) -> void:
+	sprite_2d.texture = texture
 	
 func set_Multi() -> void:
 	texture_array.resize(3)
-	texture_array[0] = load("res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
-	texture_array[1] = load("res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
-	texture_array[2] = load("res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+	texture_array[0] = Globalpreload.PlayerSpeed_t
+	texture_array[1] = Globalpreload.Dash_t
+	texture_array[2] = Globalpreload.DVDBounce_t
 	sprite_2d.texture = texture_array[index]
 	label.text = "Multi-Item"
 	label.visible = true

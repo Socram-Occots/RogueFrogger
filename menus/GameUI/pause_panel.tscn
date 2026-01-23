@@ -235,6 +235,7 @@ text = "Quit"
 libraries = {
 "": SubResource("AnimationLibrary_we8tw")
 }
+playback_auto_capture = false
 
 [node name="UiControls" parent="." instance=ExtResource("5_vi5u5")]
 layout_mode = 1

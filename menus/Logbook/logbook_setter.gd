@@ -24,72 +24,11 @@ func _ready() -> void:
 	else:
 		visible = false
 	
-func set_texture(texture_path : String) -> void:
-	sprite_2d.texture = load(texture_path)
+func set_texture(texture : Texture2D) -> void:
+	sprite_2d.texture = texture
 
 func set_properties() -> void:
-	match object:
-		"PlayerSpeed" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
-		"GlideBoots" : 
-			set_texture(
-			"res://RogueFroggerAssets/RFAssets/Level/glideboots.png")
-		"Dash" : 
-			set_texture(
-			"res://RogueFroggerAssets/RFAssets/Level/fire-dash.png")
-		"expl_B" :
-			set_texture(
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/explbarrelicon.png")
-		"Grapple" : 
-			set_texture(
-			"res://RogueFroggerAssets/RFAssets/Level/grappleropeicon.png")
-		"Follower" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/follower.png")
-		"Gamba" :
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/gamba.png")
-		"Shield" : 
-			set_texture(
-			"res://RogueFroggerAssets/RFAssets/PlayerShield/vibrating-shield.png")
-		"Shrink" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/shrink.png")
-		"Cleanse" :
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/cleanse.png")
-		"Hole" :
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/holeicon.png")
-		"ExplBarrel" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/ExplodingBarrel/exploding_barrel_1.png")
-		"Dumpster" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/dumpster_ROR.png")
-		"Barrel" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/BarrelPreview.png")
-		"Hole_Sidewalk_Street" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Hole/RORhole.png")
-		"Slow" : 
-			set_texture(
-			"res://RogueFroggerAssets/RFAssets/Level/slow.png")
-		"Grow" : 
-			set_texture(
-			"res://RogueFroggerAssets/RFAssets/Level/grow.png")
-		"Teleport" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/teleport.png")
-		"ItemTeleport" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
-		"DVDBounce" : 
-			set_texture( 
-			"res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
-		_: print("set texture string was not there for logbook: ", object)
+	set_texture(Global.get_texture_icons(object, "Logbook"))
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	if unlocked and !SettingsDataContainer.get_logbook_dict(type ,object)[1]:
