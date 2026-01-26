@@ -287,7 +287,7 @@ func set_properties() -> void:
 func set_sandbox_option(topic : String, type : String, maxint : int, 
 labelstr : String, texture : Texture2D) -> void:
 	sandbox_type = type
-	match texture:
+	match labelstr:
 		"Multi": set_Multi()
 		"Shop": set_label(labelstr)
 		"None": set_label(labelstr)

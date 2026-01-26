@@ -330,4 +330,6 @@ const default_logbook_dict : Dictionary = {
 # show hitboxes
 const default_show_hitboxes : bool = false
 # show controls
-const default_show_controls : bool = false
+const default_show_controls : bool = true
+# tutorial always on
+const default_tutorials_always_on : bool = false

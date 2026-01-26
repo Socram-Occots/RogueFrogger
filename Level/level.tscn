@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://m58x3uoufppm"]
+[gd_scene load_steps=34 format=3 uid="uid://m58x3uoufppm"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_v6cxu"]
 [ext_resource type="Script" path="res://Level/bottomborder.gd" id="2_xp0ov"]
@@ -177,20 +177,15 @@ force_device = 16
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nindn"]
 
-[sub_resource type="Animation" id="Animation_qcvtq"]
-resource_name = "popup"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 3),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(1, 1)]
-}
+[sub_resource type="Texture2D" id="Texture2D_51caf"]
+resource_local_to_scene = false
+resource_name = ""
+script = ExtResource("4_e5m7e")
+path = "dash"
+show_mode = 0
+force_controller_icon_style = -1
+force_type = 0
+force_device = 16
 
 [sub_resource type="Animation" id="Animation_qw5my"]
 length = 0.001
@@ -205,6 +200,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qcvtq"]
+resource_name = "popup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 3),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_00kjo"]
@@ -617,6 +627,44 @@ color = Color(0, 0, 0, 1)
 layout_mode = 2
 theme_override_constants/separation = 30
 theme_override_styles/separator = SubResource("StyleBoxEmpty_nindn")
+
+[node name="TipPopupKey" type="HBoxContainer" parent="CanvasLayer/TipPopup"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TipPopup/TipPopupKey"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+size_flags_stretch_ratio = 23.15
+
+[node name="Label" type="Label" parent="CanvasLayer/TipPopup/TipPopupKey/HBoxContainer"]
+custom_minimum_size = Vector2(138.62, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Press:"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/TipPopup/TipPopupKey/HBoxContainer/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/TipPopup/TipPopupKey"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+texture = SubResource("Texture2D_51caf")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/TipPopup"]
 libraries = {

@@ -26,6 +26,8 @@ signal on_logbook_dict_setAll(dict: Dictionary)
 signal on_show_hitboxes_set(value : bool)
 # show controls
 signal on_show_controls_set(value : bool)
+# on tutorials always
+signal on_tutorials_always_on_set(value : bool)
 
 signal set_settings_dictionary(settings_dict : Dictionary)
 
@@ -80,3 +82,6 @@ func emit_on_show_hitboxes_set(value : bool) -> void:
 # show controls
 func emit_on_show_controls_set(value : bool) -> void:
 	on_show_controls_set.emit(value)
+# always on tutorials
+func emit_on_tutorials_always_on_set(value : bool) -> void:
+	on_tutorials_always_on_set.emit(value)

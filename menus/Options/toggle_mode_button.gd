@@ -30,6 +30,8 @@ func set_toggle_text() -> void:
 			label.text = "Show Hitboxes"
 		"show_controls":
 			label.text = "Show Controls"
+		"tutorial_always_on":
+			label.text = "Keep Tutorials On"
 		_: print("Failed to set toggle name: ", t_name)
 
 func save_value() -> void:
@@ -42,6 +44,8 @@ func save_value() -> void:
 			SettingsSignalBus.emit_on_show_hitboxes_set(mode)
 		"show_controls":
 			SettingsSignalBus.emit_on_show_controls_set(mode)
+		"tutorial_always_on":
+			SettingsSignalBus.emit_on_tutorials_always_on_set(mode)
 		_: print("Failed to save toggle value: ", t_name)
 
 func set_state() -> void:
@@ -64,5 +68,8 @@ func load_data(default : bool = false) -> void:
 		"show_controls":
 			on_toggle_selected(
 				SettingsDataContainer.get_show_controls(default))
-		_: print("Failed to load_ data: ", t_name)
+		"tutorial_always_on":
+			on_toggle_selected(
+				SettingsDataContainer.get_tutorials_always_on(default))
+		_: print("Failed to load data: ", t_name)
 	set_state()

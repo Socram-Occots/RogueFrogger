@@ -1,11 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bohs6v2xxurxh"]
+[gd_scene load_steps=7 format=3 uid="uid://bohs6v2xxurxh"]
 
 [ext_resource type="Script" path="res://menus/Options/hotkey_rebind_button.gd" id="1_8gu3d"]
 [ext_resource type="Script" path="res://addons/controller_icons/objects/ControllerIconTexture.gd" id="2_7fk7i"]
-
-[sub_resource type="InputEventJoypadButton" id="InputEventJoypadButton_pf6x7"]
-button_index = 3
-pressed = true
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wer5"]
 
@@ -31,7 +27,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8gu3d")
-temp = SubResource("InputEventJoypadButton_pf6x7")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1

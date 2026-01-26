@@ -27,6 +27,9 @@ var logbook_dict : Dictionary = {}
 var show_hitboxes : bool = false
 # show controls
 var show_controls : bool = false
+# tutorials always on
+var tutorials_always_on : bool = false
+
 func _ready():
 	handle_signals()
 	
@@ -47,7 +50,8 @@ func create_storage_dictionary() -> Dictionary:
 		"logbook_dict": logbook_dict,
 		"show_hitboxes": show_hitboxes,
 		"show_controls": show_controls,
-		"speedrun_dict": speedrun_dict
+		"speedrun_dict": speedrun_dict,
+		"tutorials_always_on": tutorials_always_on
 	}
 
 	return settings_container_dict
@@ -244,6 +248,12 @@ func get_show_controls(default: bool = false) -> bool:
 		return DEFAULT_SETTINGS.default_show_controls
 	return show_controls
 
+# tutorials always on
+func get_tutorials_always_on(default: bool = false) -> bool:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_tutorials_always_on
+	return tutorials_always_on
+
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index
@@ -400,6 +410,11 @@ func on_logbook_dict_setAll(dict : Dictionary) -> void:
 # set controls
 func on_show_controls_set(value : bool) -> void:
 	show_controls = value
+
+# always on tutorials
+func on_tutorials_always_on_set(value : bool) -> void:
+	tutorials_always_on = value
+
 #settings data set
 func on_settings_data_loaded(data: Dictionary) -> void:
 	loaded_data = data
@@ -470,6 +485,10 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_speedrun_dict_setAll(loaded_data["speedrun_dict"])
 	else:
 		on_speedrun_dict_setAll({})
+	if loaded_data.has("tutorials_always_on"):
+		on_tutorials_always_on_set(loaded_data["tutorials_always_on"])
+	else:
+		on_tutorials_always_on_set(DEFAULT_SETTINGS.default_tutorials_always_on)
 	loaded_data = create_storage_dictionary()
 
 func handle_signals() -> void:
@@ -498,6 +517,8 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_show_hitboxes_set.connect(on_show_hitboxes_set)
 	# show_controls
 	SettingsSignalBus.on_show_controls_set.connect(on_show_controls_set)
+	# always on tutorials
+	SettingsSignalBus.on_tutorials_always_on_set.connect(on_tutorials_always_on_set)
 
 	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

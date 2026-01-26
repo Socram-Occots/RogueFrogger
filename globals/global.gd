@@ -45,7 +45,7 @@ const timer_base_l : float = 4.2
 const timer_base_h : float = 5.4
 #grapple
 const grapple_cool_down_base : float = 2.0
-const grapple_speed_base : float = 500
+const grapple_speed_base : float = 750
 const grapple_strength_base : float = 725
 const grapple_length_base : float = 250
 const grapple_item_cool_down_base : float = 60
@@ -466,7 +466,7 @@ func inc_GlideBoots(times : int) -> void:
 	elif glide_mod + times == 0:
 		glide = false
 	glide_mod += times
-	glide_cool_down = glide_cool_down_base * ((1/1.01) ** glide_mod)
+	glide_cool_down = glide_cool_down_base * ((1/1.05) ** glide_mod)
 	glide_time = glide_base_time + 0.025 * glide_mod
 	glidelabelon = true
 	updatelabels = true
@@ -485,7 +485,7 @@ func inc_Dash(times : int) -> void:
 	dash_mod += times
 	dash_scaling = dash_base + 0.02 * dash_mod
 	dash_time = dash_base_time/(dash_scaling/dash_base)
-	dash_cool_down = dash_cool_down_base * ((1/1.01) ** dash_mod)
+	dash_cool_down = dash_cool_down_base * ((1/1.05) ** dash_mod)
 	dashlabelon = true
 	updatelabels = true
 	logbook_tracking("Items", "Dash")
@@ -515,11 +515,11 @@ func inc_GrappleRope(times : int) -> void:
 		grapple = false
 
 	grapple_mod += times
-	grapple_speed = grapple_speed_base + 5 * grapple_mod
+	grapple_speed = grapple_speed_base + 10 * grapple_mod
 	grapple_strength = grapple_strength_base + 25 * grapple_mod
 	grapple_length = grapple_length_base + 5 * grapple_mod
-	grapple_cool_down = grapple_cool_down_base * ((1/1.01) ** grapple_mod)
-	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.01) ** grapple_mod)
+	grapple_cool_down = grapple_cool_down_base * ((1/1.1) ** grapple_mod)
+	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.1) ** grapple_mod)
 	grapplelabelon = true
 	updatelabels = true
 	logbook_tracking("Items", "Grapple")
@@ -618,7 +618,7 @@ func inc_Tele(times: int) -> void:
 		tele_mod = 0
 		times = 0
 	tele_mod += times
-	tele_cool_down = tele_cool_down_base * ((1/1.005) ** tele_mod)
+	tele_cool_down = tele_cool_down_base * ((1/1.01) ** tele_mod)
 	telelabelon = true
 	updatelabels = true
 	logbook_tracking("Curses", "Teleport")
@@ -628,7 +628,7 @@ func inc_ItemTele(times: int) -> void:
 		itemtele_mod = 0
 		times = 0
 	itemtele_mod += times
-	itemtele_cool_down = itemtele_cool_down_base * ((1/1.005) ** itemtele_mod)
+	itemtele_cool_down = itemtele_cool_down_base * ((1/1.01) ** itemtele_mod)
 	itemtelelabelon = true
 	updatelabels = true
 	logbook_tracking("Curses", "ItemTeleport")
@@ -710,7 +710,7 @@ func inc_Hole(times : int) -> void:
 		times = 0
 	hole_mod += times
 	hole_coyote_time = hole_coyote_time_base * hole_mod
-	hole_cool_down = hole_cool_down_base * ((1/1.005) ** hole_mod)
+	hole_cool_down = hole_cool_down_base * ((1/1.05) ** hole_mod)
 	holelabelon = true
 	updatelabels = true
 	logbook_tracking("Items", "Hole")
@@ -739,7 +739,7 @@ func logbook_tracking(type : String, object : String) -> void:
 	var firsttime : bool = SettingsDataContainer.get_logbook_dict(
 		type, object)[0]
 	SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 0)
-	if firsttime || true:
+	if !firsttime || SettingsDataContainer.get_tutorials_always_on():
 		get_tree().root.get_node("Level/CanvasLayer/TipPopup").call_deferred(
 			"loadTip", object, type)
 
