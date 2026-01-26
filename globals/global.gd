@@ -801,6 +801,7 @@ func get_texture_icons(object : String, topic : String) -> Texture2D:
 		"Cleanse" : return Globalpreload.Cleanse_t
 		"Hole" : return Globalpreload.Hole_t
 		"ExplBarrel" : return Globalpreload.ExplBarrel_t
+		"ExplBarrelPickUpEvent" : return Globalpreload.ExplBarrel_t
 		"Dumpster" : return Globalpreload.Dumpster_t
 		"Barrel" : return Globalpreload.Barrel_t
 		"Hole_Sidewalk_Street" : return Globalpreload.HolePrev_t
@@ -813,3 +814,10 @@ func get_texture_icons(object : String, topic : String) -> Texture2D:
 		"DVDBounce" :  return Globalpreload.DVDBounce_t
 		_: print("set texture string was not there for {topic}: {object}".format({"topic": topic, "object": object}))
 	return null
+
+func convert_keyword_to_title(keyword : String) -> String:
+	match keyword:
+		"ExplBarrel" : return "Exploding Barrel"
+		"expl_B" : return "Exploding Barrel (Item)"
+		"ExplBarrelPickUpEvent" : return "Exploding Barrel"
+	return keyword

@@ -23,12 +23,14 @@ func set_properties() -> void:
 	
 func save_value() -> void:
 	match object:
-		"Seed": SettingsSignalBus.emit_on_sandbox_seed_set(
+		"Seed": 
+			SettingsSignalBus.emit_on_sandbox_seed_set(
 			line_edit.get_text().strip_edges().strip_escapes())
 		_: print("Object does not exist in LineTextSetter Save: ", object)
 		
 func reset_value() -> void:
 	match object:
-		"Seed": line_edit.set_text(
+		"Seed": 
+			line_edit.set_text(
 			SettingsDataContainer.get_sandbox_seed(true))
 		_: print("Object does not exist in LineTextSetter Reset: ", object)

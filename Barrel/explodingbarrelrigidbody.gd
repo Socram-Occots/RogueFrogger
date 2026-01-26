@@ -114,6 +114,9 @@ func _on_impulse_body_entered(body):
 		new_expl_barrel.sleeping = true
 		nodeanchor.call_deferred("add_child", new_expl_barrel)
 		Global.expl_B_speed_penalty_curr = Global.expl_B_speed_penalty
+		#logbook tracking
+		Global.logbook_tracking("Objects", "ExplBarrelPickUpEvent")
+		
 	for i in ["Element", "Border"]:
 		if i in metalist:
 			explosion()

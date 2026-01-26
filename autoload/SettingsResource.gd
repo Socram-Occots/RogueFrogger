@@ -144,6 +144,11 @@ const default_logbook_objects_dict : Dictionary = {
 		-Picking them up will slow you down.",
 	"popuptooltip":
 		""},
+	"ExplBarrelPickUpEvent":{"bools":[false, false], 
+	"tooltip":
+		"",
+	"popuptooltip":
+		"Throw it and blow things up!"},
 	"Dumpster":{"bools":[false, false], 
 	"tooltip":
 		"Dumpster:
@@ -200,7 +205,7 @@ const default_logbook_items_dict : Dictionary = {
 		"Activate to gain a surge of uncontrolable speed."},
 	"expl_B":{"bools":[false, false], 
 	"tooltip":
-		"Exploding Barrel (Expl-B.):
+		"Exploding Barrel (Item):
 		-Stacking increases:
 			Chances of finding Expl-B
 			Distance when throwing Expl-B
@@ -322,9 +327,9 @@ const default_logbook_curses_dict : Dictionary = {
 }
 
 const default_logbook_dict : Dictionary = {
-	"Objects":default_logbook_objects_dict,
-	"Items":default_logbook_items_dict,
-	"Curses":default_logbook_curses_dict
+	"Objects" : default_logbook_objects_dict,
+	"Items" : default_logbook_items_dict,
+	"Curses" : default_logbook_curses_dict
 }
 
 # show hitboxes

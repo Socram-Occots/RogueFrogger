@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func displayTip(popuparray : Array) -> void:
 	visible = true
-	title.text = popuparray[0]
+	title.text = Global.convert_keyword_to_title(popuparray[0])
 	description.text = SettingsDataContainer.get_logbook_dict_popuptooltip(popuparray[1], popuparray[0])
 	var keystring : String =  get_icon_string(popuparray[0])
 	if keystring != "None":
