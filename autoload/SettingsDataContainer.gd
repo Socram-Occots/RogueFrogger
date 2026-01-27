@@ -427,7 +427,7 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_resolution_selected(loaded_data["resolution_index"])
 	else:
 		on_resolution_selected(DEFAULT_SETTINGS.default_resolution_index)
-	if loaded_data.has(aspect_selected):
+	if loaded_data.has("aspect_selected"):
 		on_aspect_selected(loaded_data["aspect_selected"])
 	else:
 		on_aspect_selected(DEFAULT_SETTINGS.default_aspect_selected)

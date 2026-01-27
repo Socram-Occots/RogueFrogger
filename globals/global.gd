@@ -9,6 +9,7 @@ var score : int = 0
 #gamestate
 var defeat_var : bool = false
 var sandbox : bool = false
+var back_to_startscreen : bool = false
 
 #input
 var input_active : bool = false
@@ -218,6 +219,7 @@ var tele_cool_down : float = tele_cool_down_base
 var itemtele_cool_down : float = itemtele_cool_down_base
 var telelabelon : bool = false
 var itemtelelabelon : bool = false
+var teleanilength : float = 1.8875
 
 # dvd_bounce
 var dvd_spawn : bool = false

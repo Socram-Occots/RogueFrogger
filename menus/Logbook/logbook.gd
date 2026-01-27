@@ -12,6 +12,7 @@ func _ready():
 
 func _on_exit_and_save_pressed() -> void:
 	SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
+	Global.back_to_startscreen = true
 	get_tree().change_scene_to_file("res://menus/startscreen.tscn")
 
 func begin_focus() -> void:

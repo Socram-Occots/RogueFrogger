@@ -12,6 +12,7 @@ func begin_focus() -> void:
 		tab_container.get_tab_bar().grab_focus()
 
 func _on_exit_pressed() -> void:
+	Global.back_to_startscreen = true
 	get_tree().change_scene_to_file("res://menus/startscreen.tscn")
 
 func _on_reset_tab_pressed() -> void:

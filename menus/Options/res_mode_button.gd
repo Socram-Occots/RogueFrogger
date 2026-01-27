@@ -52,8 +52,11 @@ func add_resolution_items() -> void:
 func on_resoltion_selected(index: int) -> void:
 	# default dpi is 96
 	#var dpi = DisplayServer.screen_get_dpi() as float
-	DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
-	center_window()
+	if !Global.back_to_startscreen:
+		DisplayServer.window_set_size(RESOLUTION_DICTIONARY.values()[index])
+		center_window()
+	else:
+		Global.back_to_startscreen = false
 	
 func center_window() -> void:
 	var center_screen : Vector2i = DisplayServer.screen_get_position() + DisplayServer.screen_get_size()/2

@@ -31,6 +31,7 @@ extends RigidBody2D
 
 @onready var collision_reveal: Polygon2D = $CollisionReveal
 @onready var feet_collision_reveal: Rectangle = $FeetCollisionRevealMarker2D/FeetCollisionReveal
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
@@ -64,6 +65,11 @@ func _ready() -> void:
 	collision_reveal.visible = SettingsDataContainer.get_show_hitboxes()
 	feet_collision_reveal.visible = SettingsDataContainer.get_show_hitboxes()
 	feet_collision_reveal.size.y = 9
+	
+	animation_player.play("teleport")
+	Global.teleanilength = animation_player.get_current_animation_length()
+	animation_player.stop()
+	animation_player.play("normal")
 
 func move_player() -> void:
 	var walking : bool = false
@@ -316,3 +322,7 @@ func choose_furthest_item() -> void:
 			Global.grapple_item_chosen = false
 			if Global.grapple_mod > 0:
 				enable_itemgrapple()
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "teleport": rand_teleport()

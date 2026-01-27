@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=61 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -228,6 +228,48 @@ size = Vector2(20, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldtew"]
 size = Vector2(36, 9)
 
+[sub_resource type="Animation" id="Animation_m8k8f"]
+resource_name = "teleport"
+length = 1.8875
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playermove:self_modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.25, 1.375, 1.4875, 1.5875, 1.6875, 1.7875, 1.8875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4h5h1"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_tydq4"]
+resource_name = "normal"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playermove:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wpkj7"]
+_data = {
+"RESET": SubResource("Animation_4h5h1"),
+"normal": SubResource("Animation_tydq4"),
+"teleport": SubResource("Animation_m8k8f")
+}
+
 [node name="crosser" type="RigidBody2D"]
 texture_filter = 1
 collision_mask = 3038
@@ -317,7 +359,7 @@ polygon = PackedVector2Array(-23, -1, -23, 16, -18, 37, 18, 37, 23, 16, 23, -1, 
 [node name="FeetCollisionReveal" type="Node2D" parent="FeetCollisionRevealMarker2D"]
 position = Vector2(0, 31.5)
 script = ExtResource("29_iclae")
-size = Vector2(36, 20)
+size = Vector2(36, 9)
 corner_radius = 0.0
 fill_color = Color(1, 0, 0.0166664, 0.552941)
 
@@ -387,7 +429,13 @@ metadata/Feet = false
 position = Vector2(0, 31.5)
 shape = SubResource("RectangleShape2D_ldtew")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wpkj7")
+}
+
 [connection signal="area_entered" from="AutoItemGrapple" to="." method="_on_auto_item_grapple_area_entered"]
 [connection signal="timeout" from="follower_cleanup_timer" to="." method="_on_follower_cleanup_timer_timeout"]
 [connection signal="area_entered" from="despawn_cage" to="despawn_cage" method="_on_area_entered"]
 [connection signal="body_entered" from="despawn_cage" to="despawn_cage" method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

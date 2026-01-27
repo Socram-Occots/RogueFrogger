@@ -117,27 +117,27 @@ text = "Highscore: "
 [node name="Speedrun100" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Speedrun100: "
+text = "Best Time 100: "
 
 [node name="Speedrun250" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Speedrun250: "
+text = "Best Time 250: "
 
 [node name="Speedrun500" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Speedrun500: "
+text = "Best Time 500: "
 
 [node name="Speedrun750" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Speedrun500: "
+text = "Best Time 500: "
 
 [node name="Speedrun1000" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Speedrun1000: "
+text = "Best Time 1000: "
 
 [node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
