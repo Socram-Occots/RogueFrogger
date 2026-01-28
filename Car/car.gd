@@ -6,13 +6,12 @@ const MOTORC_COlORS : Array[String] = ["red", "blue", "green", "yellow", "cyan",
 var no_ignore : bool = false
 var car_speed : float = 0
 var direction : int = 0
+var not_exploded : bool = true
 #var current_car = ""
 @onready var rectangleGrey: Rectangle = $CollisionShapeGrey/Rectangle
 @onready var rectangleYellow: Rectangle = $CollisionShape2DYellow/Rectangle
 @onready var rectangleColor: Rectangle = $CollisionShape2Dcolor/Rectangle
 @onready var rectangleMotor: Rectangle = $CollisionShape2Dmotorcycle/Rectangle
-
-
 
 func _ready():
 	set_meta("Car", false)

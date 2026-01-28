@@ -231,6 +231,11 @@ func get_logbook_dict_popuptooltip(type: String, object: String, default: bool =
 		return DEFAULT_SETTINGS.default_logbook_dict[type][object]["popuptooltip"]
 	return logbook_dict[type][object]["popuptooltip"]
 
+func get_logbook_dict_stats(type: String, object: String, index : int, default: bool = false) -> int:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_logbook_dict[type][object]["stats"][index]
+	return logbook_dict[type][object]["stats"][index]
+
 func get_logbook_dict_type(type: String, default : bool = false ) -> Dictionary:
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_logbook_dict[type]
@@ -373,6 +378,12 @@ func on_controller_aim_toggle_set(value : bool) -> void:
 func on_logbook_dict_set(type : String, object : String, value : bool, index : int) -> void:
 	logbook_dict[type][object]["bools"][index] = value
 
+func on_logbook_dict_stats_set(type : String, object : String, value : int, index : int) -> void:
+	logbook_dict[type][object]["stats"][index] = value
+
+func on_logbook_dict_stats_inc(type : String, object : String, value : int, index : int) -> void:
+	logbook_dict[type][object]["stats"][index] += value
+
 # set show hitboxes
 func on_show_hitboxes_set(value : bool) -> void:
 	show_hitboxes = value
@@ -388,6 +399,11 @@ func on_logbook_dict_setAll(dict : Dictionary) -> void:
 					for b in default[i][a].keys():
 						if !dict[i][a].has(b):
 							dict[i][a][b] = default[i][a][b]
+					# resize arrays if they are diff
+					for c in ["bools", "stats"]:
+						if dict[i][a][c].size() != default[i][a][c].size():
+							dict[i][a][c].resize(default[i][a][c].size())
+					
 				else:
 					dict[i][a] = default[i][a]
 		else:
@@ -512,6 +528,8 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_controller_aim_toggle_set.connect(on_controller_aim_toggle_set)
 	# logbook data
 	SettingsSignalBus.on_logbook_dict_set.connect(on_logbook_dict_set)
+	SettingsSignalBus.on_logbook_dict_stats_set.connect(on_logbook_dict_stats_set)
+	SettingsSignalBus.on_logbook_dict_stats_inc.connect(on_logbook_dict_stats_inc)
 	SettingsSignalBus.on_logbook_dict_setAll.connect(on_logbook_dict_setAll)
 	# show hitboxes
 	SettingsSignalBus.on_show_hitboxes_set.connect(on_show_hitboxes_set)

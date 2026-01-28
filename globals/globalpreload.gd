@@ -155,6 +155,8 @@ const ExplBarrel_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Expl
 const Dumpster_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/dumpster_ROR.png") 
 const Barrel_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/BarrelPreview.png") 
 const HolePrev_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Hole/RORhole.png") 
+const CarsPrev_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Car/CarWeapons_preview.png")
+
 # load full item textures
 const PlayerSpeed_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/speedometer.png")
 const GlideBoots_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/glideboots.png")

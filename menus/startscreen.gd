@@ -18,6 +18,7 @@ func loadOptions() -> void:
 
 func _ready() -> void:
 	Global.sandbox = false
+	SettingsSignalBus.emit_on_logbook_dict_set("Objects", "Cars", true, 0)
 	loadOptions()
 	add_to_group("UI_FOCUS", true)
 	add_to_group("UI_FOCUS_OPTIONS", true)

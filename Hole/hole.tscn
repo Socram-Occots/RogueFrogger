@@ -26,7 +26,7 @@ shape = SubResource("CapsuleShape2D_j7ybu")
 [node name="Rectangle" type="Node2D" parent="CollisionShape2D"]
 rotation = -1.5708
 script = ExtResource("3_4powi")
-size = Vector2(28, 18)
+size = Vector2(28, 20)
 corner_radius = 9.0
 fill_color = Color(0, 1, 1, 0.196078)
 

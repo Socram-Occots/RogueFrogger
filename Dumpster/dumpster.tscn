@@ -16,7 +16,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 16
 collision_mask = 1921
 script = ExtResource("1_hjx3i")
-metadata/Element = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(53.3333, 0)

@@ -58,6 +58,8 @@ func explosion() -> void:
 	explosionCol.set_deferred("disabled", false)
 	animationExplo.play("explosion")
 	explrectangle.visible = SettingsDataContainer.get_show_hitboxes()
+	#logbook tracking exploding
+	SettingsSignalBus.emit_on_logbook_dict_stats_inc("Objects", "ExplBarrel", 1, 0)
 
 @warning_ignore("unused_parameter")
 func _input(event: InputEvent) -> void:
@@ -94,6 +96,8 @@ func _input(event: InputEvent) -> void:
 				"add_child", new_expl_barrel)
 			Global.expl_B_speed_penalty_curr = 1
 			Global.updatelabels = true
+			# tracking Expl Barrels thrown
+			SettingsSignalBus.emit_on_logbook_dict_stats_inc("Objects", "ExplBarrel", 1, 1)
 
 # impulse
 @warning_ignore("unused_parameter")
@@ -115,9 +119,9 @@ func _on_impulse_body_entered(body):
 		nodeanchor.call_deferred("add_child", new_expl_barrel)
 		Global.expl_B_speed_penalty_curr = Global.expl_B_speed_penalty
 		#logbook tracking
-		Global.logbook_tracking("Objects", "ExplBarrelPickUpEvent")
+		Global.logbook_tracking("Objects", "ExplBarrelPickUpEvent", 1)
 		
-	for i in ["Element", "Border"]:
+	for i in ["Dumpster", "Barrel", "Element", "Border"]:
 		if i in metalist:
 			explosion()
 
@@ -142,10 +146,17 @@ func _on_explosionbarrelexplosion_body_entered(body):
 			"Follower":
 				if body.get_meta(i) != 0:
 					body.remove_follower()
-			"Element":
-				body.queue_free()
 			"Dumpster":
-				spawnItem(body.get_node("ItemMarker"))
+				if body.not_exploded:
+					body.not_exploded = false
+					body.queue_free()
+					SettingsSignalBus.emit_on_logbook_dict_stats_inc("Objects", i, 1, 0)
+					spawnItem(body.get_node("ItemMarker"))
+			"Barrel":
+				if body.not_exploded:
+					body.not_exploded = false
+					body.queue_free()
+					SettingsSignalBus.emit_on_logbook_dict_stats_inc("Objects", i, 1, 0)
 
 func spawnItem(marker) -> void:
 	if GRand.itemrand.randi_range(0, 2) == 0:
@@ -170,6 +181,7 @@ func _on_explosionbarrelexplosion_area_entered(area):
 		area.explosion()
 	elif "Hole" in metalist:
 		if !area.crater:
+			SettingsSignalBus.emit_on_logbook_dict_stats_inc("Objects", "Hole_Sidewalk_Street", 1, 0)
 			area.crater = true
 			area.global_position.y -= 50
 			area.get_node("Sprite2D").scale *= 3
@@ -177,7 +189,10 @@ func _on_explosionbarrelexplosion_area_entered(area):
 			area.get_node("CollisionShape2D").scale *= 4
 			area.get_node("CollisionShape2D").position.y += 50
 	elif "Car" in metalist:
-		spawnItem(area)
+		if area.not_exploded:
+			area.not_exploded = false
+			SettingsSignalBus.emit_on_logbook_dict_stats_inc("Objects", "Cars", 1, 0)
+			spawnItem(area)
 
 func _on_feet_area_entered(area: Area2D) -> void:
 	var metalist : PackedStringArray = area.get_meta_list()

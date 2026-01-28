@@ -1,7 +1,6 @@
-extends StaticBody2D
+extends StaticElement
 @onready var rectangle: Rectangle = $Rectangle
 
-@warning_ignore("unused_parameter")
 func _ready() -> void:
 	rectangle.visible = SettingsDataContainer.get_show_hitboxes()
 	rectangle.size.y = 52

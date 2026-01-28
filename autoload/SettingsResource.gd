@@ -136,20 +136,25 @@ const default_mouse_aim_toggle : bool = false
 const default_controller_aim_toggle : bool = false
 
 # tooltip data
+const boolarrayhelper : Array[bool] = [false, false]
+const statarrayhelper : Array[int] = [0, 0]
 const default_logbook_objects_dict : Dictionary = {
-	"ExplBarrel":{"bools":[false, false], 
+	"ExplBarrel":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Exploding Barrel:
 		-You can pick it up, throw it, and explode things! Omg wow that's crazy.
 		-Picking them up will slow you down.",
 	"popuptooltip":
 		""},
-	"ExplBarrelPickUpEvent":{"bools":[false, false], 
+	"ExplBarrelPickUpEvent":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"",
 	"popuptooltip":
 		"Throw it and blow things up!"},
-	"Dumpster":{"bools":[false, false], 
+	"Dumpster":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Dumpster:
 			-It's a dumpster. Go around it. Please. 
@@ -159,31 +164,42 @@ const default_logbook_objects_dict : Dictionary = {
 			-Only one way to find out...",
 	"popuptooltip":
 		""},
-	"Barrel":{"bools":[false, false], 
+	"Barrel":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Barrel:
 		-It's a barrel. It's kinda just for decoration. It can block you though.",
 	"popuptooltip":
 		""},
-	"Hole_Sidewalk_Street":{"bools":[false, false], 
+	"Hole_Sidewalk_Street":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Hole:
 	-Don't walk over it! The city really needs to do something about this pothole problem...
 	-These holes could be quite useful at stopping these cars.
 	If only there was a method to make them larger...",
 	"popuptooltip":
+		""},
+	"Cars":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
+	"tooltip":
+		"Cars:
+	-The sworn enemy of the Crosser...",
+	"popuptooltip":
 		""}
 }
 
 const default_logbook_items_dict : Dictionary = {
-	"PlayerSpeed":{"bools":[false, false], 
+	"PlayerSpeed":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Player Speed:
 		-Stacking increases the player's speed.
 		-Stacking cap: Infinite",
 	"popuptooltip":
 		"Faster!"},
-	"GlideBoots":{"bools":[false, false], 
+	"GlideBoots":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Glide:
 		-Activate: Glide without friction. You can not move normally, 
@@ -194,7 +210,8 @@ const default_logbook_items_dict : Dictionary = {
 		-Stacking cap: Infinite",
 	"popuptooltip":
 		"Activate it to go frictionless."},
-	"Dash":{"bools":[false, false], 
+	"Dash":{"bools":boolarrayhelper,
+	"stats":statarrayhelper, 
 	"tooltip":
 		"Dash:
 		-Activate: Gain a quick boost in speed, but you cannot change direction.
@@ -203,7 +220,8 @@ const default_logbook_items_dict : Dictionary = {
 		-Stacking cap: Infinite",
 	"popuptooltip":
 		"Activate to gain a surge of uncontrolable speed."},
-	"expl_B":{"bools":[false, false], 
+	"expl_B":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Exploding Barrel (Item):
 		-Stacking increases:
@@ -215,7 +233,8 @@ const default_logbook_items_dict : Dictionary = {
 		-Stacking cap: Infinite",
 	"popuptooltip":
 		"Throw explosives farther. And better explosions!"},
-	"Grapple":{"bools":[false, false], 
+	"Grapple":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Grapple: 
 		-Activate: Shoot a grappling rope which pulls you in a direction.
@@ -231,7 +250,8 @@ const default_logbook_items_dict : Dictionary = {
 	"popuptooltip":
 		"Activate to shoot a grappling rope.
 		Also gets far away items for you."},
-	"Follower":{"bools":[false, false], 
+	"Follower":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Follower:
 		-Produce a clone of yourself. Almost every item you pick up 
@@ -241,7 +261,8 @@ const default_logbook_items_dict : Dictionary = {
 	"popuptooltip":
 		"Make a clone of yourself.
 		More clones means more items!"},
-	"Gamba":{"bools":[false, false], 
+	"Gamba":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Random:
 		-Grants you a random item/curse.
@@ -249,7 +270,8 @@ const default_logbook_items_dict : Dictionary = {
 		-Stacking cap: Infinite",
 	"popuptooltip":
 		"Gives you a random item/curse."},
-	"Shield":{"bools":[false, false], 
+	"Shield":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Shield:
 		-Provides a one time protection against cars and explosions.
@@ -257,7 +279,8 @@ const default_logbook_items_dict : Dictionary = {
 	"popuptooltip":
 		"A rare one time protection from danger!
 		But it doesn't stack!"},
-	"Shrink":{"bools":[false, false], 
+	"Shrink":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Shrink:
 		-Makes your character smaller.
@@ -265,13 +288,15 @@ const default_logbook_items_dict : Dictionary = {
 		-Stacking cap: 100",
 	"popuptooltip":
 		"Makes you smaller."},
-	"Cleanse":{"bools":[false, false], 
+	"Cleanse":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Cleanse:
 		-Removes one point of a random curse from you.",
 	"popuptooltip":
 		"Removes one point of a random curse from you."},
-	"Hole":{"bools":[false, false], 
+	"Hole":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Coyote Time:
 		-Prevents you from falling down a hole momentarily.
@@ -283,7 +308,8 @@ const default_logbook_items_dict : Dictionary = {
 }
 
 const default_logbook_curses_dict : Dictionary = {
-	"Slow":{"bools":[false, false], 
+	"Slow":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Slow:
 		-Makes your character slower.
@@ -291,7 +317,8 @@ const default_logbook_curses_dict : Dictionary = {
 		-Stacking cap: 99",
 	"popuptooltip":
 		"Makes your character slower."},
-	"Grow":{"bools":[false, false], 
+	"Grow":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Grow:
 		-Makes your character larger.
@@ -299,7 +326,8 @@ const default_logbook_curses_dict : Dictionary = {
 		-Stacking cap: 100",
 	"popuptooltip":
 		"Makes your character larger."},
-	"Teleport":{"bools":[false, false], 
+	"Teleport":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Teleport:
 		-Periodically teleports you over a semi-random distance and direction.
@@ -307,7 +335,8 @@ const default_logbook_curses_dict : Dictionary = {
 		-Stacking cap: Infinite",
 	"popuptooltip":
 		"Periodically teleports you."},
-	"ItemTeleport":{"bools":[false, false], 
+	"ItemTeleport":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"Item Teleport:
 		-Has the capability to teleport a random item you have you over a random distance on screen periodically.
@@ -316,7 +345,8 @@ const default_logbook_curses_dict : Dictionary = {
 		-Stacking cap: Infinite",
 	"popuptooltip":
 		"Periodically teleports your items."},
-	"DVDBounce":{"bools":[false, false], 
+	"DVDBounce":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
 	"tooltip":
 		"DVD Bounce:
 		-Blocks your vision with a bouncing rectangle.

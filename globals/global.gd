@@ -456,7 +456,7 @@ func inc_PlayerSpeed(times : int) -> void:
 	player_speed_scaling = player_base_speed + 20 * player_speed_mod
 	playerspeedlabelon = true
 	updatelabels = true
-	logbook_tracking("Items", "PlayerSpeed")
+	logbook_tracking("Items", "PlayerSpeed", times)
 
 func inc_GlideBoots(times : int) -> void:
 	if glide_mod + times < 0:
@@ -472,7 +472,7 @@ func inc_GlideBoots(times : int) -> void:
 	glide_time = glide_base_time + 0.025 * glide_mod
 	glidelabelon = true
 	updatelabels = true
-	logbook_tracking("Items", "GlideBoots")
+	logbook_tracking("Items", "GlideBoots", times)
 	
 func inc_Dash(times : int) -> void:
 	if dash_mod + times < 0:
@@ -490,7 +490,7 @@ func inc_Dash(times : int) -> void:
 	dash_cool_down = dash_cool_down_base * ((1/1.05) ** dash_mod)
 	dashlabelon = true
 	updatelabels = true
-	logbook_tracking("Items", "Dash")
+	logbook_tracking("Items", "Dash", times)
 	
 func inc_expl_B(times : int) -> void:
 	if expl_B_mod + times < 0:
@@ -503,7 +503,7 @@ func inc_expl_B(times : int) -> void:
 	expl_B_chance_mod = expl_B_mod * 3
 	expl_B_labelon = true
 	updatelabels = true
-	logbook_tracking("Items", "expl_B")
+	logbook_tracking("Items", "expl_B", times)
 
 func inc_GrappleRope(times : int) -> void:
 	if grapple_mod + times < 0:
@@ -524,7 +524,7 @@ func inc_GrappleRope(times : int) -> void:
 	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.1) ** grapple_mod)
 	grapplelabelon = true
 	updatelabels = true
-	logbook_tracking("Items", "Grapple")
+	logbook_tracking("Items", "Grapple", times)
 
 func inc_Follower(times : int) -> void:
 	if follower_mod + times < follower_mod_base:
@@ -547,7 +547,7 @@ func inc_Follower(times : int) -> void:
 	
 	followerlabelon = true
 	updatelabels = true
-	logbook_tracking("Items", "Follower")
+	logbook_tracking("Items", "Follower", times)
 
 func inc_Shrink(times : int) -> void:
 	if shrink_mod + times < 0:
@@ -564,7 +564,7 @@ func inc_Shrink(times : int) -> void:
 	
 	shrinklabelon = true
 	updatelabels = true
-	logbook_tracking("Items", "Shrink")
+	logbook_tracking("Items", "Shrink", times)
 
 func inc_Gamba(times : int) -> void:
 	if gamba_running:
@@ -572,7 +572,7 @@ func inc_Gamba(times : int) -> void:
 	elif !(gamba_update || gamba_done):
 		gamba_mod += times - 1
 		gamba_update = true
-	logbook_tracking("Items", "Gamba")
+	logbook_tracking("Items", "Gamba", times)
 
 func wipe_null_followers() -> void:
 	var temp_array : Array[int] = []
@@ -596,7 +596,7 @@ func inc_PlayerSlow(times: int) -> void:
 	
 	playerslowlabelon = true
 	updatelabels = true
-	logbook_tracking("Curses", "Slow")
+	logbook_tracking("Curses", "Slow", times)
 
 func inc_Grow(times : int) -> void:
 	if grow_mod + times < 0:
@@ -613,7 +613,7 @@ func inc_Grow(times : int) -> void:
 	
 	growlabelon = true
 	updatelabels = true
-	logbook_tracking("Curses", "Grow")
+	logbook_tracking("Curses", "Grow", times)
 
 func inc_Tele(times: int) -> void:
 	if tele_mod + times < 0:
@@ -623,7 +623,7 @@ func inc_Tele(times: int) -> void:
 	tele_cool_down = tele_cool_down_base * ((1/1.01) ** tele_mod)
 	telelabelon = true
 	updatelabels = true
-	logbook_tracking("Curses", "Teleport")
+	logbook_tracking("Curses", "Teleport", times)
 
 func inc_ItemTele(times: int) -> void:
 	if itemtele_mod + times < 0:
@@ -633,7 +633,7 @@ func inc_ItemTele(times: int) -> void:
 	itemtele_cool_down = itemtele_cool_down_base * ((1/1.01) ** itemtele_mod)
 	itemtelelabelon = true
 	updatelabels = true
-	logbook_tracking("Curses", "ItemTeleport")
+	logbook_tracking("Curses", "ItemTeleport", times)
 
 func inc_DVD(times : int) -> void:
 	if dvd_mod + times < 0:
@@ -655,10 +655,10 @@ func inc_DVD(times : int) -> void:
 				dvd_array.remove_at(0)
 	dvdbouncelabelon = true
 	updatelabels = true
-	logbook_tracking("Curses", "DVDBounce")
+	logbook_tracking("Curses", "DVDBounce", times)
 
 func cleanse_curse(times: int):
-	logbook_tracking("Items", "Cleanse")
+	logbook_tracking("Items", "Cleanse", times)
 	var curse_dict : Dictionary = {}
 
 	if playerslow_mod > playerslow_mod_base:
@@ -715,7 +715,7 @@ func inc_Hole(times : int) -> void:
 	hole_cool_down = hole_cool_down_base * ((1/1.05) ** hole_mod)
 	holelabelon = true
 	updatelabels = true
-	logbook_tracking("Items", "Hole")
+	logbook_tracking("Items", "Hole", times)
 
 func change_player_follower_size() -> void:
 		wipe_null_followers()
@@ -737,57 +737,17 @@ func change_player_follower_size() -> void:
 			follower_array[i].get_node("CollisionReveal").scale = temp_shrink
 			follower_array[i].get_node("FeetCollisionRevealMarker2D").scale = temp_shrink
 
-func logbook_tracking(type : String, object : String) -> void:
+func logbook_tracking(type : String, object : String, value : int) -> void:
 	var firsttime : bool = SettingsDataContainer.get_logbook_dict(
 		type, object)[0]
+		
 	SettingsSignalBus.emit_on_logbook_dict_set(type, object, true, 0)
+	if value > 0:
+		SettingsSignalBus.emit_on_logbook_dict_stats_inc(type, object, value, 0)
+	
 	if !firsttime || SettingsDataContainer.get_tutorials_always_on():
 		get_tree().root.get_node("Level/CanvasLayer/TipPopup").call_deferred(
 			"loadTip", object, type)
-
-func teleportation_activated() -> void:
-	var playermove: AnimatedSprite2D = follower_array[0].get_node("playermove")
-	var self_mod_red : Color = Color(1.0, 0.0 ,0.0)
-	var self_mod_none : Color = Color(1.0, 1.0 ,1.0)
-	playermove.self_modulate = self_mod_red
-	await get_tree().create_timer(1).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_none
-	else: return
-	await get_tree().create_timer(0.5).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_red
-	else: return
-	await get_tree().create_timer(0.25).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_none
-	else: return
-	await get_tree().create_timer(0.125).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_red
-	else: return
-	await get_tree().create_timer(0.0625).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_none
-	else: return
-	await get_tree().create_timer(0.05).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_red
-	else: return
-	await get_tree().create_timer(0.05).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_none
-	else: return
-	await get_tree().create_timer(0.05).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_red
-	else: return
-	await get_tree().create_timer(0.05).timeout
-	if is_instance_valid(playermove):
-		playermove.self_modulate = self_mod_none
-	else: return
-	await get_tree().create_timer(0.05).timeout
-	Global.follower_array[0].rand_teleport(Vector2.ZERO)
 
 func get_texture_icons(object : String, topic : String) -> Texture2D:
 	match object:
@@ -814,6 +774,7 @@ func get_texture_icons(object : String, topic : String) -> Texture2D:
 		"Teleport" : return Globalpreload.Teleport_t
 		"ItemTeleport" :  return Globalpreload.ItemTeleport_t
 		"DVDBounce" :  return Globalpreload.DVDBounce_t
+		"Cars": return Globalpreload.CarsPrev_t
 		_: print("set texture string was not there for {topic}: {object}".format({"topic": topic, "object": object}))
 	return null
 

@@ -15,7 +15,6 @@ scale = Vector2(1.5, 1.5)
 collision_layer = 16
 collision_mask = 1921
 script = ExtResource("1_e8ssv")
-metadata/Element = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -34,7 +33,7 @@ shape = SubResource("RectangleShape2D_8i74n")
 [node name="Rectangle" type="Node2D" parent="."]
 position = Vector2(0, -5.5)
 script = ExtResource("3_mtyjh")
-size = Vector2(26, 3)
+size = Vector2(26, 20)
 corner_radius = 0.0
 fill_color = Color(0, 1, 1, 0.196078)
 

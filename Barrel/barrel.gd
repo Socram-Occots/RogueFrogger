@@ -1,10 +1,10 @@
-extends StaticBody2D
+extends StaticElement
 @onready var rectangle: Rectangle = $Rectangle
-
 
 func _ready() -> void:
 	rectangle.visible = SettingsDataContainer.get_show_hitboxes()
 	rectangle.size.y = 3
+	set_meta("Barrel", false)
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	if !SettingsDataContainer.get_logbook_dict("Objects", "Barrel")[0]:
