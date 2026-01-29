@@ -232,9 +232,6 @@ focus_neighbor_right = NodePath("../../../SandboxSetter3/HBoxContainer/Button")
 [node name="Button" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3/HBoxContainer" index="0"]
 focus_neighbor_left = NodePath("../../../SandboxSetter2/HBoxContainer/Button")
 
-[node name="SandboxLineTextSetter" parent="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
-group = "tab6"
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
@@ -436,5 +433,6 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_wcxor")
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
 [editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
-[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]
+[editable path="MarginContainer/VBoxContainer/SandboxTabs/TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer/SandboxSetter"]
 [editable path="UiControls"]
