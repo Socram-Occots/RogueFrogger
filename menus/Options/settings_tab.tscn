@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnm3jpqa7k30c"]
+[gd_scene load_steps=9 format=3 uid="uid://dnm3jpqa7k30c"]
 
 [ext_resource type="PackedScene" uid="uid://0n7qpykp378" path="res://menus/Options/window_mode_button.tscn" id="1_fhmqv"]
 [ext_resource type="PackedScene" uid="uid://bohs6v2xxurxh" path="res://menus/Options/hotkey_rebind_button.tscn" id="1_xuhdp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dvsoqe4amh0by" path="res://menus/Options/aspect_display_button.tscn" id="3_70ynh"]
 [ext_resource type="PackedScene" uid="uid://ddsuytwutbfm4" path="res://menus/Options/toggle_mode_button.tscn" id="5_8evcb"]
 [ext_resource type="PackedScene" uid="uid://djbepejsb6dtm" path="res://menus/Options/audio_slider_settings.tscn" id="5_pp5yu"]
+[ext_resource type="PackedScene" uid="uid://crp0o52lkqlwc" path="res://menus/Options/colorblind_optionbutton.tscn" id="7_t244a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvlmq"]
 
@@ -30,9 +31,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
 tab_alignment = 1
-current_tab = 0
+current_tab = 5
 
 [node name="Gameplay" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 focus_mode = 0
 metadata/_tab_index = 0
@@ -521,7 +523,6 @@ layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 
 [node name="Accessibility" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 focus_mode = 0
 metadata/_tab_index = 5
@@ -557,6 +558,12 @@ layout_mode = 2
 t_name = "show_hitboxes"
 group = "tab5"
 
+[node name="ColorBlindOptions" parent="TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("7_t244a")]
+layout_mode = 2
+
+[node name="DaltonismoItemList" parent="TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer/ColorBlindOptions/HBoxContainer" index="3"]
+group = "tab5"
+
 [node name="HSeparator2" type="HSeparator" parent="TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
@@ -589,3 +596,4 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jvlmq")
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_right"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/aim_left"]
 [editable path="TabContainer/Controller/MarginContainer/ScrollContainer/VBoxContainer/controller_aim"]
+[editable path="TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer/ColorBlindOptions"]

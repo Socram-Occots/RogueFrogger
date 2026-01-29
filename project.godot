@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 ControllerIcons="*res://addons/controller_icons/ControllerIcons.gd"
+GlobalAccesibilitySignal="*res://addons/accesibilitytools/global_accesibility_signal.gd"
 Global="*res://globals/global.tscn"
 Globalpreload="*res://globals/globalpreload.gd"
 GRand="*res://globals/GRand.gd"
@@ -26,6 +27,7 @@ SettingsSignalBus="*res://autoload/SettingsSignalBus.gd"
 SettingsDataContainer="*res://autoload/SettingsDataContainer.gd"
 SaveManager="*res://autoload/SaveManager.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+ColorblindShaderscreen="*res://menus/Options/colorblind_shaderscreen.tscn"
 
 [debug]
 
@@ -47,7 +49,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/2d_shapes/plugin.cfg", "res://addons/accesibilitytools/plugin.cfg", "res://addons/controller_icons/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg")
 
 [input]
 

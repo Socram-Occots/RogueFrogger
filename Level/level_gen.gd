@@ -1133,6 +1133,8 @@ func create_follower() -> void:
 		follower.get_node("FollowerCollision").scale = follower_in_front.get_node("FollowerCollision").scale
 		follower.get_node("feet").scale = follower_in_front.get_node("feet").scale
 		
+		follower.modulate = Color(1,1,2)
+		
 		Global.follower_array.append(follower)
 		$Ysort.add_child(follower)
 	

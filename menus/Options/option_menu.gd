@@ -18,6 +18,10 @@ func _ready():
 
 func _on_exit_pressed():
 	Global.options_down()
+	# reseting colorblind mode in case settings were not saved
+	GlobalAccesibilitySignal.color_blind_selected = SettingsDataContainer.get_colorblind_mode()
+	GlobalAccesibilitySignal.emit_change_shader(
+		GlobalAccesibilitySignal.color_blind_selected)
 
 func _on_reset_tab_pressed() -> void:
 	get_tree().call_group("tab" + str(tab_path.current_tab), "reset_value")

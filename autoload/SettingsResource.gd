@@ -1,14 +1,26 @@
 class_name DefaultSettingsResource
 extends Resource
 
-# settings
+#region Settings
+# windows
 const default_window_mode_index : int = 0
 const default_resolution_index : int = 7
 const default_aspect_selected : int = 0
+# audio
 const default_master_volume : float = 0.5
 const default_music_volume : float = 0.5
 const default_sfx_volume : float = 0.5
-# game data
+# show hitboxes
+const default_show_hitboxes : bool = false
+# show controls
+const default_show_controls : bool = true
+# tutorial always on
+const default_tutorials_always_on : bool = false
+# colorblind
+const default_colorblind_mode : int = 0
+#endregion
+
+#region game data
 const default_high_score : int = 0
 const default_speedrun_dict : Dictionary = {
 	"speedrun_100":0,
@@ -366,10 +378,4 @@ const default_logbook_dict : Dictionary = {
 	"Items" : default_logbook_items_dict,
 	"Curses" : default_logbook_curses_dict
 }
-
-# show hitboxes
-const default_show_hitboxes : bool = false
-# show controls
-const default_show_controls : bool = true
-# tutorial always on
-const default_tutorials_always_on : bool = false
+#endregion

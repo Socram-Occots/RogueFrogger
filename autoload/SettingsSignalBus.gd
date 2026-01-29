@@ -7,6 +7,7 @@ signal on_aspect_selected(index: int)
 signal on_master_sound_set(value: float)
 signal on_music_sound_set(value: float)
 signal on_sfx_sound_set(value: float)
+signal on_colorblind_mode_set(index: int)
 # game data
 signal on_high_score_set(value: int)
 signal on_speedrun_dict_set(type: String, value: float)
@@ -53,6 +54,8 @@ func emit_on_music_sound_set(value: float) -> void:
 	on_music_sound_set.emit(value)
 func emit_on_sfx_sound_set(value: float) -> void:
 	on_sfx_sound_set.emit(value)
+func emit_on_colorblind_mode_set(index: int) -> void:
+	on_colorblind_mode_set.emit(index)
 # game data
 func emit_on_high_score_set(value: int) -> void:
 	on_high_score_set.emit(value)

@@ -10,6 +10,7 @@ var aspect_selected : int = 0
 var master_volume : float = 0.0
 var music_volume : float = 0.0
 var sfx_volume : float = 0.0
+var colorblind_mode : int = 0
 # game data
 var high_score : int = 0
 var speedrun_dict : Dictionary = {}
@@ -51,7 +52,8 @@ func create_storage_dictionary() -> Dictionary:
 		"show_hitboxes": show_hitboxes,
 		"show_controls": show_controls,
 		"speedrun_dict": speedrun_dict,
-		"tutorials_always_on": tutorials_always_on
+		"tutorials_always_on": tutorials_always_on,
+		"colorblind_mode": colorblind_mode
 	}
 
 	return settings_container_dict
@@ -117,6 +119,11 @@ func get_sfx_volume(default : bool = false) -> float:
 	if loaded_data.is_empty() || default:
 		return DEFAULT_SETTINGS.default_sfx_volume
 	return sfx_volume
+
+func get_colorblind_mode(default : bool = false) -> int:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_colorblind_mode
+	return colorblind_mode
 
 # get keybinds
 func get_keybind(action: String, default : bool = false):
@@ -278,6 +285,10 @@ func on_music_sound_set(value : float) -> void:
 func on_sfx_sound_set(value : float) -> void:
 	sfx_volume = value
 # set keybind 
+
+func on_colorblind_mode_set(index : int) -> void:
+	colorblind_mode = index
+
 func set_keybind(action: String, event) -> void:
 	match action:
 		KEYBIND_RESOURCE.MOVE_UP: KEYBIND_RESOURCE.move_up_key = event
@@ -505,6 +516,11 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 		on_tutorials_always_on_set(loaded_data["tutorials_always_on"])
 	else:
 		on_tutorials_always_on_set(DEFAULT_SETTINGS.default_tutorials_always_on)
+	if loaded_data.has("colorblind_mode"):
+		on_colorblind_mode_set(loaded_data["colorblind_mode"])
+	else:
+		on_colorblind_mode_set(DEFAULT_SETTINGS.default_colorblind_mode)
+	
 	loaded_data = create_storage_dictionary()
 
 func handle_signals() -> void:
@@ -515,6 +531,7 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_master_sound_set.connect(on_master_sound_set)
 	SettingsSignalBus.on_music_sound_set.connect(on_music_sound_set)
 	SettingsSignalBus.on_sfx_sound_set.connect(on_sfx_sound_set)
+	SettingsSignalBus.on_colorblind_mode_set.connect(on_colorblind_mode_set)
 	# game data
 	SettingsSignalBus.on_high_score_set.connect(on_high_score_set)
 	SettingsSignalBus.on_speedrun_dict_set.connect(on_speedrun_dict_set)

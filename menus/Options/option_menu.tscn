@@ -215,4 +215,5 @@ metadata/_edit_use_anchors_ = true
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings2"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Sound/MarginContainer/ScrollContainer/VBoxContainer/audio_slider_settings3"]
 [editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer/show_hitboxes"]
+[editable path="MarginContainer/VBoxContainer/Settings_Tabs/TabContainer/Accessibility/MarginContainer/ScrollContainer/VBoxContainer/ColorBlindOptions"]
 [editable path="UiControls"]

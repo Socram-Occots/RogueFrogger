@@ -175,6 +175,13 @@ const Grow_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/grow
 const Teleport_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/teleport.png")
 const ItemTeleport_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/itemteleport.png")
 const DVDBounce_t : Texture2D = preload("res://RogueFroggerAssets/RFAssets/Level/dvdbounceicon.png")
+# colorblind
+const shader_normal : Shader = preload("res://addons/accesibilitytools/shaders/normal_shader.gdshader")
+const shader_deuteranopia : Shader = preload("res://addons/accesibilitytools/shaders/deuteranopia_shader.gdshader")
+const shader_protanopia : Shader = preload("res://addons/accesibilitytools/shaders/protanopia_shader.gdshader")
+const shader_tritanopia : Shader = preload("res://addons/accesibilitytools/shaders/tritanopia_shader.gdshader")
+#const COLORBLIND_SHADERSCREEN : Resource = preload("res://menus/Options/colorblind_shaderscreen.tscn")
+#var colorblind_shaderscreen : CanvasLayer = COLORBLIND_SHADERSCREEN.instantiate()
 
 func _ready() -> void:
 	itemgrapplehook.set_script(ITEMGRAPPLESCRIPT)
