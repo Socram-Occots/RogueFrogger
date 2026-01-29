@@ -3,7 +3,7 @@ extends StaticElement
 
 func _ready() -> void:
 	rectangle.visible = SettingsDataContainer.get_show_hitboxes()
-	rectangle.size.y = 3
+	rectangle.size.y = 6
 	set_meta("Barrel", false)
 
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:

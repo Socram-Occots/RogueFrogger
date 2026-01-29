@@ -120,6 +120,10 @@ const default_deal_sandbox_dict : Dictionary = {
 	"HoleDeal":1
 }
 
+const default_misc_sandbox_dict : Dictionary = {
+	"CarSpeed" : 100
+}
+
 const default_sandbox_dict : Dictionary = {
 	"General" : default_general_sandbox_dict,
 	"Items" : default_items_sandbox_dict,
@@ -127,7 +131,8 @@ const default_sandbox_dict : Dictionary = {
 	"Gamba" : default_gamba_sandbox_dict,
 	"Shop" : default_shop_sandbox_dict,
 	"Street" : default_street_sandbox_dict,
-	"Deals" : default_deal_sandbox_dict
+	"Deals" : default_deal_sandbox_dict,
+	"Misc" : default_misc_sandbox_dict
 }
 
 const default_sandbox_seed : String = ""

@@ -27,9 +27,10 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 40
 tab_alignment = 1
-current_tab = 0
+current_tab = 6
 
 [node name="General" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 focus_mode = 0
 metadata/_tab_index = 0
@@ -848,13 +849,12 @@ group = "tab5"
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 
-[node name="Seed" type="TabBar" parent="TabContainer"]
-visible = false
+[node name="Misc" type="TabBar" parent="TabContainer"]
 layout_mode = 2
 focus_mode = 0
 metadata/_tab_index = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Seed"]
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Misc"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -866,25 +866,30 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Seed/MarginContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Misc/MarginContainer"]
 layout_mode = 2
 follow_focus = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Seed/MarginContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Misc/MarginContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 128
+theme_override_constants/separation = 200
 
-[node name="HSeparator" type="HSeparator" parent="TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 
-[node name="SandboxLineTextSetter" parent="TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_tswco")]
+[node name="SandboxLineTextSetter" parent="TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("2_tswco")]
 layout_mode = 2
-group = "tab5"
+group = "tab6"
 
-[node name="HSeparator2" type="HSeparator" parent="TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer"]
+[node name="SandboxSetter" parent="TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer" instance=ExtResource("1_et5dn")]
+layout_mode = 2
+object = "CarSpeed"
+group = "tab6"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 
@@ -972,4 +977,5 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_oc240")
 [editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter2"]
 [editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer5/SandboxSetter3"]
 [editable path="TabContainer/Deals/MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer6/SandboxSetter"]
-[editable path="TabContainer/Seed/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]
+[editable path="TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer/SandboxLineTextSetter"]
+[editable path="TabContainer/Misc/MarginContainer/ScrollContainer/VBoxContainer/SandboxSetter"]

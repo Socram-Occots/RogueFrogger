@@ -188,6 +188,7 @@ func load_element_stats() -> void:
 	load_shop_stats()
 	load_deals_stats()
 	load_seed()
+	load_misc_stats()
 
 func load_general_stats() -> void:
 	var gen_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
@@ -220,7 +221,6 @@ func load_street_stats() -> void:
 				STREET_SPAWN_LIST.append(tempstring)
 				STREET_CHANCE_LIST.append(tempint)
 
-		
 func load_items_stats() -> void:
 	var item_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
 		"Items", !Global.sandbox)
@@ -249,6 +249,12 @@ func load_multi_stats() -> void:
 				MULTI_LIST.append(tempstring)
 				MULTI_CHANCE_LIST.append(tempint)
 	multi_num_limit = MULTI_LIST.size()
+
+func load_misc_stats() -> void:
+	var misc_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
+	"Misc", !Global.sandbox)
+	# load car speed modifier
+	Global.sandbox_car_speed_mod = misc_dict["CarSpeed"]/100.0
 
 func get_Icon_texture2D(containter : VBoxContainer) -> Texture2D:
 	return containter.get_node("Sprite2D").texture
@@ -1102,6 +1108,7 @@ func create_follower() -> void:
 		follower.get_node("follower_cleanup_timer").queue_free()
 		follower.get_node("AutoItemGrapple").queue_free()
 		follower.get_node("AutoItemGrapple").queue_free()
+		follower.get_node("AnimationPlayer").queue_free()
 		follower.get_node("CollisionReveal").visible = false
 		follower.get_node("FeetCollisionRevealMarker2D").visible = false
 		follower.remove_meta("Player")

@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://bydu6kcrwimri"]
+
+[ext_resource type="Script" path="res://menus/sandbox/sandbox_setter.gd" id="1_f8lq5"]
+[ext_resource type="Texture2D" uid="uid://biscs04ru388f" path="res://RogueFroggerAssets/RFAssets/Level/gamba.png" id="2_btvsx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fptfm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ce42l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cc12y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnb24"]
+
+[node name="SandboxGenericSetter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f8lq5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -62.5
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(260, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.835
+offset_top = -62.5
+offset_right = 274.165
+offset_bottom = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_fptfm")
+
+[node name="label" type="Label" parent="HBoxContainer/Button/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Empty"
+
+[node name="Sprite2D" type="TextureRect" parent="HBoxContainer/Button/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("2_btvsx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_ce42l")
+
+[node name="HSlider" type="HSlider" parent="HBoxContainer/Button/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_vertical = 1
+max_value = 999.0
+rounded = true
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_cc12y")
+
+[node name="Chance_Num" type="Label" parent="HBoxContainer/Button/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "999"
+
+[node name="VSeparator4" type="VSeparator" parent="HBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gnb24")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=62 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -50,6 +50,10 @@
 [ext_resource type="Texture2D" uid="uid://kudfyslcxv8j" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_19.png" id="45_era0l"]
 [ext_resource type="Texture2D" uid="uid://dlwpx7nyy8tdk" path="res://RogueFroggerAssets/RFAssets/PlayerShield/PlayerShield_20.png" id="46_6t7lh"]
 [ext_resource type="Script" path="res://Crosser/despawn_cage.gd" id="47_mk2mw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ny6ck"]
+friction = 0.0
+rough = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vhf1i"]
 size = Vector2(3840, 950)
@@ -221,28 +225,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ekbee"]
-size = Vector2(20, 2)
+size = Vector2(24, 10)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gkv01"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ldtew"]
 size = Vector2(36, 9)
-
-[sub_resource type="Animation" id="Animation_m8k8f"]
-resource_name = "teleport"
-length = 1.8875
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("playermove:self_modulate")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.25, 1.375, 1.4875, 1.5875, 1.6875, 1.7875, 1.8875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_4h5h1"]
 length = 0.001
@@ -263,6 +251,22 @@ tracks/0/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_m8k8f"]
+resource_name = "teleport"
+length = 1.8875
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("playermove:self_modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.25, 1.375, 1.4875, 1.5875, 1.6875, 1.7875, 1.8875),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wpkj7"]
 _data = {
 "RESET": SubResource("Animation_4h5h1"),
@@ -275,6 +279,7 @@ texture_filter = 1
 collision_mask = 3038
 collision_priority = 3.0
 mass = 0.001
+physics_material_override = SubResource("PhysicsMaterial_ny6ck")
 gravity_scale = 0.0
 lock_rotation = true
 freeze_mode = 1
@@ -291,13 +296,13 @@ monitorable = false
 shape = SubResource("RectangleShape2D_vhf1i")
 
 [node name="BotCollisionPolygon2D2" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-18, 37, 18, 37, 23, 16, 23, -1, 10, -1, 10, 1, -10, 1, -10, -1, -23, -1, -23, 16)
+polygon = PackedVector2Array(-18, 37, 18, 37, 23, 16, 23, -1, 12, -1, 12, 5, -12, 5, -12, -1, -23, -1, -23, 16)
 
 [node name="followerspawn" type="Node2D" parent="BotCollisionPolygon2D2"]
 position = Vector2(0, 40)
 
 [node name="TopCollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-7, -37, -17, -28, -23, -1, 23, -1, 17, -28, 7, -37)
+polygon = PackedVector2Array(-7, -37, -17, -28, -23, -1, -12, -1, -12, -5, 12, -5, 12, -1, 23, -1, 17, -28, 7, -37)
 
 [node name="StatusBar" type="Node2D" parent="TopCollisionPolygon2D"]
 position = Vector2(0, -55)
@@ -359,7 +364,7 @@ polygon = PackedVector2Array(-23, -1, -23, 16, -18, 37, 18, 37, 23, 16, 23, -1, 
 [node name="FeetCollisionReveal" type="Node2D" parent="FeetCollisionRevealMarker2D"]
 position = Vector2(0, 31.5)
 script = ExtResource("29_iclae")
-size = Vector2(36, 9)
+size = Vector2(36, 20)
 corner_radius = 0.0
 fill_color = Color(1, 0, 0.0166664, 0.552941)
 
@@ -393,6 +398,7 @@ texture_filter = 1
 [node name="FollowerCollision" type="StaticBody2D" parent="."]
 collision_layer = 2048
 collision_mask = 0
+collision_priority = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FollowerCollision"]
 shape = SubResource("RectangleShape2D_ekbee")

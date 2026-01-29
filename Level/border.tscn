@@ -7,6 +7,7 @@
 [node name="leftcol" type="StaticBody2D" parent="."]
 position = Vector2(-960, 0)
 collision_layer = 4
+collision_priority = 3.0
 metadata/Border = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="leftcol"]
@@ -16,6 +17,7 @@ shape = SubResource("WorldBoundaryShape2D_oc0wb")
 [node name="rightcol" type="StaticBody2D" parent="."]
 position = Vector2(960, 0)
 collision_layer = 4
+collision_priority = 3.0
 metadata/Border = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="rightcol"]

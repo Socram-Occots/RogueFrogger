@@ -29,6 +29,9 @@ func _ready():
 			minf(Global.prev_car_speed*1.2, car_speed_h), 
 			maxf(Global.prev_car_speed*1.2, car_speed_h))
 	
+	# car speed mod for sandbox
+	car_speed *= Global.sandbox_car_speed_mod
+	
 	Global.prev_car_speed = car_speed
 	
 	# set car spacing

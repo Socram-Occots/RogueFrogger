@@ -282,7 +282,17 @@ func set_properties() -> void:
 		"HoleMulti" : 
 			set_sandbox_option(object, "Multi", 999, 
 			"", Globalpreload.Hole_t)
-		_: print("set texture string was not there for sandbox: ", object)
+		"CarSpeed" : 
+			set_sandbox_option(object, "Misc", 200, 
+			"Car Speed (%)", null)
+		_: print("object string was not there for sandbox: ", object)
+
+func single_lane_button() -> void:
+	button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	h_slider.custom_minimum_size.x = 500
+
+func no_zero_allowed() -> void:
+	h_slider.min_value = 1
 
 func set_sandbox_option(topic : String, type : String, maxint : int, 
 labelstr : String, texture : Texture2D) -> void:
@@ -293,6 +303,10 @@ labelstr : String, texture : Texture2D) -> void:
 		"None": set_label(labelstr)
 		"Items": set_label(labelstr)
 		"Deals": set_label(labelstr)
+		"Car Speed (%)": 
+			set_label(labelstr)
+			single_lane_button()
+			no_zero_allowed()
 		_: set_texture(texture)
 	
 	set_slider(

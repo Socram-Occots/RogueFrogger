@@ -97,6 +97,7 @@ var player_speed_scaling = player_base_speed
 var car_speed_mod : float = 0.0
 var car_speed_scaling = car_base_speed
 var prev_car_speed : float = car_base_speed
+var sandbox_car_speed_mod : float = 1.0
 
 #dash
 var dash : bool = false
@@ -265,6 +266,7 @@ func reset() -> void:
 	car_speed_mod = 0
 	car_speed_scaling = car_base_speed
 	prev_car_speed = car_base_speed
+	sandbox_car_speed_mod = 1
 	#timing
 	timer_mod = 0
 	timer_l = timer_base_l
