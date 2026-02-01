@@ -17,6 +17,8 @@ var speedrun_dict : Dictionary = {}
 # sandbox data
 var sandbox_dict : Dictionary = {}
 var sandbox_seed : String = ""
+# challenge data
+var challenge_dict : Dictionary = {}
 
 var loaded_data : Dictionary = {}
 # aim toggle

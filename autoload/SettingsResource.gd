@@ -29,6 +29,7 @@ const default_speedrun_dict : Dictionary = {
 	"speedrun_750":0,
 	"speedrun_1000":0
 }
+
 # sandbox data
 const default_general_sandbox_dict : Dictionary = {
 	"ExplBarrel":50,
@@ -377,5 +378,11 @@ const default_logbook_dict : Dictionary = {
 	"Objects" : default_logbook_objects_dict,
 	"Items" : default_logbook_items_dict,
 	"Curses" : default_logbook_curses_dict
+}
+#endregion
+
+#region Challenges
+var default_callenges_dict : Dictionary = {
+	
 }
 #endregion

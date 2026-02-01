@@ -3,12 +3,12 @@ extends Control
 const OPTIONS : Resource = preload("res://menus/Options/option_menu.tscn")
 @onready var start: Button = $Options/Start
 @onready var sandbox: Button = $Options/Sandbox
-@onready var tutorial: Button = $Options/Tutorial
 @onready var options: Button = $Options/Options
 @onready var credits: Button = $Options/Credits
 @onready var quit: Button = $Options/Quit
 @onready var logbook: Button = $Options/Logbook
 @onready var logbook_notif: Polygon2D = $Options/Logbook/Polygon2D
+@onready var challenges: Button = $Options/Challenges
 
 func loadOptions() -> void:
 	var optionspopup : Control = OPTIONS.instantiate()
@@ -18,6 +18,7 @@ func loadOptions() -> void:
 
 func _ready() -> void:
 	Global.sandbox = false
+	Global.challenge = false
 	SettingsSignalBus.emit_on_logbook_dict_set("Objects", "Cars", true, 0)
 	loadOptions()
 	add_to_group("UI_FOCUS", true)
@@ -34,7 +35,7 @@ func become_background():
 		start.set_focus_mode(FOCUS_NONE)
 		sandbox.set_focus_mode(FOCUS_NONE)
 		logbook.set_focus_mode(FOCUS_NONE)
-		tutorial.set_focus_mode(FOCUS_NONE)
+		challenges.set_focus_mode(FOCUS_NONE)
 		options.set_focus_mode(FOCUS_NONE)
 		credits.set_focus_mode(FOCUS_NONE)
 		quit.set_focus_mode(FOCUS_NONE)
@@ -44,7 +45,7 @@ func become_foreground():
 		start.set_focus_mode(FOCUS_ALL)
 		sandbox.set_focus_mode(FOCUS_ALL)
 		logbook.set_focus_mode(FOCUS_ALL)
-		tutorial.set_focus_mode(FOCUS_ALL)
+		challenges.set_focus_mode(FOCUS_ALL)
 		options.set_focus_mode(FOCUS_ALL)
 		credits.set_focus_mode(FOCUS_ALL)
 		quit.set_focus_mode(FOCUS_ALL)
@@ -64,6 +65,9 @@ func begin_focus_credits() -> void:
 func begin_focus_logbook() -> void:
 	if visible:
 		logbook.grab_focus.call_deferred()
+func begin_focus_challenges() -> void:
+	if visible:
+		challenges.grab_focus.call_deferred()
 
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://Level/level.tscn")
@@ -74,9 +78,8 @@ func _on_sandbox_pressed() -> void:
 func _on_logbook_pressed() -> void:
 	get_tree().change_scene_to_file("res://menus/Logbook/logbook.tscn")
 
-func _on_tutorial_pressed() -> void:
-	pass
-	#get_tree().change_scene_to_file("res://tutorial/tutorial.tscn")
+func _on_challenges_pressed() -> void:
+	pass # Replace with function body.
 
 func _on_options_pressed() -> void:
 	Global.options_up()

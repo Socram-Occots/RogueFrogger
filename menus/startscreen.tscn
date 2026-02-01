@@ -60,12 +60,12 @@ position = Vector2(-11, 57)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(123, -1, 123, 23, 150, 23, 150, -1)
 
-[node name="Tutorial" type="Button" parent="Options"]
+[node name="Challenges" type="Button" parent="Options"]
 custom_minimum_size = Vector2(250, 154)
 layout_mode = 2
-theme_override_font_sizes/font_size = 70
+theme_override_font_sizes/font_size = 50
 action_mode = 0
-text = "Tutorial"
+text = "Challenges"
 icon_alignment = 1
 
 [node name="Options" type="Button" parent="Options"]
@@ -132,7 +132,7 @@ text = "Best Time 500: "
 [node name="Speedrun750" type="Label" parent="Stats"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
-text = "Best Time 500: "
+text = "Best Time 750: "
 
 [node name="Speedrun1000" type="Label" parent="Stats"]
 layout_mode = 2
@@ -164,7 +164,7 @@ visible = false
 [connection signal="pressed" from="Options/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Options/Sandbox" to="." method="_on_sandbox_pressed"]
 [connection signal="pressed" from="Options/Logbook" to="." method="_on_logbook_pressed"]
-[connection signal="pressed" from="Options/Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="Options/Challenges" to="." method="_on_challenges_pressed"]
 [connection signal="pressed" from="Options/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="Options/Credits" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="Options/Quit" to="." method="_on_quit_pressed"]

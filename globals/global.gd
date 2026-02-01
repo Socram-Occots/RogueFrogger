@@ -9,6 +9,7 @@ var score : int = 0
 #gamestate
 var defeat_var : bool = false
 var sandbox : bool = false
+var challenge : bool = false
 var back_to_startscreen : bool = false
 
 #input
