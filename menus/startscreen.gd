@@ -25,6 +25,7 @@ func _ready() -> void:
 	add_to_group("UI_FOCUS_OPTIONS", true)
 	add_to_group("UI_FOCUS_SANDBOX", true)
 	add_to_group("UI_FOCUS_LOGBOOK", true)
+	add_to_group("UI_FOCUS_CHALLENGES", true)
 	add_to_group("UI_FOCUS_CREDITS", true)
 	add_to_group("UI_FOCUS_STARTSCREEN")
 	begin_focus()
@@ -79,7 +80,7 @@ func _on_logbook_pressed() -> void:
 	get_tree().change_scene_to_file("res://menus/Logbook/logbook.tscn")
 
 func _on_challenges_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to_file("res://menus/Challenges/challenges.tscn")
 
 func _on_options_pressed() -> void:
 	Global.options_up()

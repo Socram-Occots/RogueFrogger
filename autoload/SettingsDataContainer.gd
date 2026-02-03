@@ -19,6 +19,7 @@ var sandbox_dict : Dictionary = {}
 var sandbox_seed : String = ""
 # challenge data
 var challenge_dict : Dictionary = {}
+var challenge_highschore_dict : Dictionary = {}
 
 var loaded_data : Dictionary = {}
 # aim toggle
@@ -55,7 +56,8 @@ func create_storage_dictionary() -> Dictionary:
 		"show_controls": show_controls,
 		"speedrun_dict": speedrun_dict,
 		"tutorials_always_on": tutorials_always_on,
-		"colorblind_mode": colorblind_mode
+		"colorblind_mode": colorblind_mode,
+		"challenge_highschore_dict": challenge_highschore_dict
 	}
 
 	return settings_container_dict
@@ -268,6 +270,27 @@ func get_tutorials_always_on(default: bool = false) -> bool:
 		return DEFAULT_SETTINGS.default_tutorials_always_on
 	return tutorials_always_on
 
+# challenges
+func get_challenges_All(default: bool = false) -> Dictionary:
+	if loaded_data.is_empty() || default:
+		return {}
+	return challenge_dict
+
+func get_challenges_dict(nameStr : String, default: bool = false) -> Dictionary:
+	if loaded_data.is_empty() || default:
+		return {}
+	return challenge_dict[nameStr]
+
+func get_challenges_Desc(nameStr : String, default: bool = false) -> String:
+	if loaded_data.is_empty() || default:
+		return ""
+	return challenge_dict[nameStr]["Desc"]
+
+func get_challenges_high_score(nameStr : String, default: bool = false) -> int:
+	if loaded_data.is_empty() || default:
+		return 0
+	return challenge_highschore_dict[nameStr]
+
 # set settings
 func on_window_mode_selected(index : int) -> void:
 	window_mode_index = index
@@ -444,6 +467,27 @@ func on_show_controls_set(value : bool) -> void:
 func on_tutorials_always_on_set(value : bool) -> void:
 	tutorials_always_on = value
 
+func on_challenges_set_dict() -> void:
+	var GenerateChanllengesScript : Script = load("res://autoload/GenerateChanllenges.gd")
+	var GenerateChanllenges : Node = GenerateChanllengesScript.new()
+	challenge_dict = GenerateChanllenges.generate_challenges(
+		DEFAULT_SETTINGS.default_sandbox_dict)
+	GenerateChanllengesScript = null
+	GenerateChanllenges.free()
+
+func on_challenges_high_score_setDictAll(dict : Dictionary) -> void:
+	for i in dict.keys():
+		if !challenge_dict.has(i):
+			dict.erase(i)
+	for i in challenge_dict.keys():
+		if !dict.has(i):
+			dict[i] = 0
+	
+	challenge_highschore_dict = dict.duplicate(true)
+
+func on_challenges_high_score_set(challenge : String, value : int) -> void:
+	challenge_highschore_dict[challenge] = value
+
 #settings data set
 func on_settings_data_loaded(data: Dictionary) -> void:
 	loaded_data = data
@@ -523,6 +567,12 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 	else:
 		on_colorblind_mode_set(DEFAULT_SETTINGS.default_colorblind_mode)
 	
+	on_challenges_set_dict()
+	if loaded_data.has("challenge_highschore_dict"):
+		on_challenges_high_score_setDictAll(loaded_data["challenge_highschore_dict"])
+	else:
+		on_challenges_high_score_setDictAll({})
+	
 	loaded_data = create_storage_dictionary()
 
 func handle_signals() -> void:
@@ -550,6 +600,9 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_logbook_dict_stats_set.connect(on_logbook_dict_stats_set)
 	SettingsSignalBus.on_logbook_dict_stats_inc.connect(on_logbook_dict_stats_inc)
 	SettingsSignalBus.on_logbook_dict_setAll.connect(on_logbook_dict_setAll)
+	# challenges data
+	SettingsSignalBus.on_challenges_high_score_set.connect(on_challenges_high_score_set)
+	SettingsSignalBus.on_challenges_high_score_setDictAll.connect(on_challenges_high_score_setDictAll)
 	# show hitboxes
 	SettingsSignalBus.on_show_hitboxes_set.connect(on_show_hitboxes_set)
 	# show_controls

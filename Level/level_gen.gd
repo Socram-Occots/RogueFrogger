@@ -190,11 +190,24 @@ func load_element_stats() -> void:
 	load_seed()
 	load_misc_stats()
 
+func return_dict_stats(topic : String) -> Dictionary:
+	var return_dict : Dictionary
+	if Global.challenge:
+		return_dict = SettingsDataContainer.get_challenges_dict(
+			Global.challenge_curr)["SandboxDict"][topic]
+	else:
+		return_dict = SettingsDataContainer.get_sandbox_dict_type(
+			topic, !Global.sandbox)
+	return return_dict
+
+func return_dict_key_stats(topic : String) -> Array:
+	var return_keys := SettingsDataContainer.get_sandbox_dict_type(
+		topic, true).keys()
+	return return_keys
+
 func load_general_stats() -> void:
-	var gen_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"General", !Global.sandbox)
-	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
-		"General", true).keys()
+	var gen_dict : Dictionary = return_dict_stats("General")
+	var default_keys := return_dict_key_stats("General")
 	var gen_dict_keys := gen_dict.keys()
 	for i in range(0, gen_dict_keys.size()):
 		var tempstring : String = gen_dict_keys[i]
@@ -208,10 +221,8 @@ func load_general_stats() -> void:
 	expl_Bidx = SPAWN_LIST.find("expl_B")
 
 func load_street_stats() -> void:
-	var str_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Street", !Global.sandbox)
-	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
-		"Street", true).keys()
+	var str_dict : Dictionary = return_dict_stats("Street")
+	var default_keys := return_dict_key_stats("Street")
 	var str_dict_keys := str_dict.keys()
 	for i in range(0, str_dict_keys.size()):
 		var tempstring : String = str_dict_keys[i]
@@ -222,10 +233,8 @@ func load_street_stats() -> void:
 				STREET_CHANCE_LIST.append(tempint)
 
 func load_items_stats() -> void:
-	var item_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Items", !Global.sandbox)
-	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
-		"Items", true).keys()
+	var item_dict : Dictionary = return_dict_stats("Items")
+	var default_keys := return_dict_key_stats("Items")
 	var item_dict_keys := item_dict.keys()
 	for i in range(0, item_dict_keys.size()):
 		var tempstring : String =  item_dict_keys[i]
@@ -236,10 +245,8 @@ func load_items_stats() -> void:
 				ITEMS_CHANCE_LIST.append(tempint)
 
 func load_multi_stats() -> void:
-	var multi_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Multi", !Global.sandbox)
-	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
-		"Multi", true).keys()
+	var multi_dict : Dictionary = return_dict_stats("Multi")
+	var default_keys := return_dict_key_stats("Multi")
 	var multi_dict_keys := multi_dict.keys()
 	for i in range(0, multi_dict_keys.size()):
 		var tempstring : String = multi_dict_keys[i]
@@ -251,8 +258,7 @@ func load_multi_stats() -> void:
 	multi_num_limit = MULTI_LIST.size()
 
 func load_misc_stats() -> void:
-	var misc_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-	"Misc", !Global.sandbox)
+	var misc_dict : Dictionary = return_dict_stats("Misc")
 	# load car speed modifier
 	Global.sandbox_car_speed_mod = misc_dict["CarSpeed"]/100.0
 
@@ -260,10 +266,8 @@ func get_Icon_texture2D(containter : VBoxContainer) -> Texture2D:
 	return containter.get_node("Sprite2D").texture
 
 func load_gamba_stats() -> void:
-	var gamba_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Gamba", !Global.sandbox)
-	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
-		"Gamba", true).keys()
+	var gamba_dict : Dictionary = return_dict_stats("Gamba")
+	var default_keys := return_dict_key_stats("Gamba")
 	var gamba_dict_keys := gamba_dict.keys()
 	for i in range(0, gamba_dict_keys.size()):
 		var tempstring : String = gamba_dict_keys[i]
@@ -316,10 +320,8 @@ func load_gamba_stats() -> void:
 					_: print("Could not pre load gamba: ", tempstring)
 
 func load_shop_stats() -> void:
-	var shop_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Shop", !Global.sandbox)
-	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
-		"Shop", true).keys()
+	var shop_dict : Dictionary = return_dict_stats("Shop")
+	var default_keys := return_dict_key_stats("Shop")
 	var shop_dict_keys := shop_dict.keys()
 	for i in range(0, shop_dict_keys.size()):
 		var tempstring : String = shop_dict_keys[i]
@@ -418,10 +420,8 @@ func load_shop_stats() -> void:
 	 !(shopproductitems_l_nEmpty || shopproductitems_m_nEmpty || shopproductitems_h_nEmpty)
 
 func load_deals_stats() -> void:
-	var deals_dict : Dictionary = SettingsDataContainer.get_sandbox_dict_type(
-		"Deals", !Global.sandbox)
-	var default_keys := SettingsDataContainer.get_sandbox_dict_type(
-		"Deals", true).keys()
+	var deals_dict : Dictionary = return_dict_stats("Deals")
+	var default_keys := return_dict_key_stats("Deals")
 	var deals_dict_keys := deals_dict.keys()
 	for i in range(0, deals_dict_keys.size()):
 		var tempstring : String = deals_dict_keys[i]
@@ -465,6 +465,45 @@ func load_seed() -> void:
 	else:
 		GRand.maprand.randomize()
 		GRand.itemrand.randomize()
+
+func load_starter_items() -> void:
+	if !Global.challenge: return
+	var starterdict : Dictionary = SettingsDataContainer.get_challenges_dict(
+		Global.challenge_curr)["StartingItems"]
+	for i in starterdict.keys():
+		match i:
+			"PlayerSpeed":
+				Global.inc_PlayerSpeed(starterdict[i])
+			"GlideBoots":
+				Global.inc_GlideBoots(starterdict[i])
+			"Dash":
+				Global.inc_Dash(starterdict[i])
+			"expl_B":
+				Global.inc_expl_B(starterdict[i])
+			"Grapple":
+				Global.inc_GrappleRope(starterdict[i])
+			"Follower":
+				Global.inc_Follower(starterdict[i])
+			"Gamba":
+				Global.inc_Gamba(starterdict[i])
+			"Shield":
+				Global.follower_array[0].shield_up = true
+			"Shrink":
+				Global.inc_Shrink(starterdict[i])
+			"Cleanse":
+				Global.cleanse_curse(starterdict[i])
+			"Hole":
+				Global.inc_Hole(starterdict[i])
+			"SlowMulti":
+				Global.inc_PlayerSlow(starterdict[i])
+			"GrowMulti":
+				Global.inc_Grow(starterdict[i])
+			"TeleportMulti":
+				Global.inc_Tele(starterdict[i])
+			"ItemTeleportMulti":
+				Global.inc_ItemTele(starterdict[i])
+			"DVDBounceMulti":
+				Global.inc_DVD(starterdict[i])
 
 func objectSpawn(spawns : Array[String] = SPAWN_LIST, 
 chances : Array[float] = CHANCE_LIST, node_num: int = 15) -> void:
@@ -1004,7 +1043,7 @@ func dash_check() -> void:
 		$CanvasLayer.add_child(dash_pop_up)
 
 func speed_run_check() -> void:
-	if Global.sandbox: return
+	if Global.sandbox || Global.challenge: return
 	var newtime : bool = false
 	var checkpoint := speed_run_checkpoints.keys()
 	for i in checkpoint:
@@ -1029,9 +1068,9 @@ func terrain_check() -> void:
 		if score_diff > -1:
 			Global.score = max_tile_int
 			speed_run_check()
-			if Global.finish_line_tile and \
-			max_tile_int > SettingsDataContainer.get_high_score() \
-			and !high_score_reached:
+			if (Global.finish_line_tile && !high_score_reached) && \
+			((Global.challenge && max_tile_int > SettingsDataContainer.get_challenges_high_score(Global.challenge_curr)) \
+			|| max_tile_int > SettingsDataContainer.get_high_score()):
 				high_score_reached = true
 				highscore_notif()
 		
@@ -1074,9 +1113,19 @@ func loadPause() -> void:
 
 func spawn_high_score_line() -> void:
 	if Global.sandbox: return
-	var high_score : int = SettingsDataContainer.get_high_score()
+	var high_score : int
+	if Global.challenge:
+		high_score = SettingsDataContainer.get_challenges_high_score(
+			Global.challenge_curr)
+	else:
+		high_score = SettingsDataContainer.get_high_score()
 	# don't spawn line too close
-	if high_score < 10: return
+	if high_score < 10:
+		if is_instance_valid(Global.finish_line_tile):
+			Global.finish_line_tile.free()
+		else:
+			Global.finish_line_tile = null
+		return
 	
 	var high_score_dist : int = (high_score * -144) + 936
 	var high_score_line : Node2D = Globalpreload.CHECKERDLINE.instantiate()

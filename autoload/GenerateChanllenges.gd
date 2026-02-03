@@ -2,7 +2,9 @@ extends Node
 
 var copied_sandbox_dict : Dictionary = {}
 var chal_result_dict : Dictionary = {}
+var chal_result_high_score_dict : Dictionary = {}
 const sdxdict : String = "SandboxDict"
+const StartingItems : String = "StartingItems"
 const gen : String = "General"
 const items : String = "Items"
 const multi : String = "Multi"
@@ -112,21 +114,31 @@ func import_dict(dict : Dictionary) -> void:
 
 func generate_challenges(dict : Dictionary) -> Dictionary:
 	import_dict(dict)
-	return {}
+	create_callenge("Glide & Dash Practice")
+	create_callenge("Oops! All Dumpsters!")
+	create_callenge("Swinging Through the Jungle")
+	create_callenge("The Curse of Crosser")
+	create_callenge("Speed Demon")
+	create_callenge("The Demoman")
+	create_callenge("The Art of the Deal")
+	create_callenge("Trypophobia")
+	create_callenge("Enough! Just you and me…")
+	create_callenge("Overcoming Trypophobia")
+	create_callenge("Little Big Crosser")
+	create_callenge("Hardcore")
+	return chal_result_dict
 
 func create_callenge(nameStr : String) -> void:
 	chal_result_dict[nameStr] = {}
-	chal_result_dict[nameStr]["HighScore"] = 0
 	chal_result_dict[nameStr]["SandboxDict"] = copied_sandbox_dict.duplicate(true)
 	chal_result_dict[nameStr][Desc] = ""
+	chal_result_dict[nameStr][StartingItems] = {}
 	match nameStr:
 		"Speed Demon":
-			chal_result_dict[nameStr][sdxdict][gen][shopGen] = 0
-			chal_result_dict[nameStr][sdxdict][gen][dealGen] = 0
-			chal_result_dict[nameStr][sdxdict][gen][explBarrel] = 0
-			chal_result_dict[nameStr][sdxdict][gen][dump] = 50
-			chal_result_dict[nameStr][sdxdict][gen][none] = 400
-			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 400
+			for i in chal_result_dict[nameStr][sdxdict][gen].keys():
+				chal_result_dict[nameStr][sdxdict][gen][i] = 0
+				
+			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 1
 			
 			for i in chal_result_dict[nameStr][sdxdict][items].keys():
 				chal_result_dict[nameStr][sdxdict][items][i] = 0
@@ -134,8 +146,10 @@ func create_callenge(nameStr : String) -> void:
 			chal_result_dict[nameStr][sdxdict][items][speed] = 15
 			chal_result_dict[nameStr][sdxdict][items][follower] = 1
 			chal_result_dict[nameStr][sdxdict][misc][CarSpeed] = 200
-			chal_result_dict[nameStr][Desc] = "Gotta go fast!
-			Disclamer: Getting far in this challenge will likely lead to the game breaking.
+			chal_result_dict[nameStr][StartingItems][speed] = 50
+			chal_result_dict[nameStr][Desc] = \
+			"Gotta go fast!
+			Disclamer: This challenge will likely lead to the game breaking.
 			If this happens, you will have to restart the run or return to the main menu."
 			
 		"Swinging Through the Jungle":
@@ -144,17 +158,20 @@ func create_callenge(nameStr : String) -> void:
 			chal_result_dict[nameStr][sdxdict][gen][explBarrel] = 0
 			chal_result_dict[nameStr][sdxdict][gen][dump] = 50
 			chal_result_dict[nameStr][sdxdict][gen][none] = 400
-			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 400
+			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 200
 			
 			for i in chal_result_dict[nameStr][sdxdict][items].keys():
 				chal_result_dict[nameStr][sdxdict][items][i] = 0
 				
 			chal_result_dict[nameStr][sdxdict][items][grapple] = 15
 			chal_result_dict[nameStr][sdxdict][items][follower] = 1
+			chal_result_dict[nameStr][StartingItems][grapple] = 1
 			chal_result_dict[nameStr][Desc] = "How far can you get swinging through traffic?"
 			
 		"The Curse of Crosser":
 			chal_result_dict[nameStr][sdxdict][gen][shopGen] = 0
+			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 500
+			chal_result_dict[nameStr][sdxdict][gen][none] = 50
 			
 			for i in chal_result_dict[nameStr][sdxdict][items].keys():
 				chal_result_dict[nameStr][sdxdict][items][i] = 0
@@ -184,6 +201,10 @@ func create_callenge(nameStr : String) -> void:
 			chal_result_dict[nameStr][sdxdict][deals][TeleportDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][ItemTeleportDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][DVDBounceDeal] = 1
+			chal_result_dict[nameStr][StartingItems][SlowMulti] = 5
+			chal_result_dict[nameStr][StartingItems][GrowMulti] = 20
+			chal_result_dict[nameStr][StartingItems][TeleportMulti] = 50
+			chal_result_dict[nameStr][StartingItems][DVDBounceMulti] = 20
 			chal_result_dict[nameStr][Desc] = "Curses! This challenge sure is cursed."
 			
 		"The Art of the Deal":
@@ -205,27 +226,57 @@ func create_callenge(nameStr : String) -> void:
 			chal_result_dict[nameStr][sdxdict][gamba][TeleportGamba] = 1
 			chal_result_dict[nameStr][sdxdict][gamba][ItemTeleportGamba] = 1
 			chal_result_dict[nameStr][sdxdict][gamba][DVDBounceShop] = 1
+			chal_result_dict[nameStr][StartingItems][SlowMulti] = 1
+			chal_result_dict[nameStr][StartingItems][GrowMulti] = 1
+			chal_result_dict[nameStr][StartingItems][TeleportMulti] = 1
+			chal_result_dict[nameStr][StartingItems][ItemTeleportMulti] = 1
+			chal_result_dict[nameStr][StartingItems][DVDBounceMulti] = 1
 			chal_result_dict[nameStr][Desc] = "Can you bargain your way out of this run?"
 		
 		"The Demoman":
 			chal_result_dict[nameStr][sdxdict][gen][barrel] = 0
-			chal_result_dict[nameStr][sdxdict][gen][explBarrel] = 100
+			chal_result_dict[nameStr][sdxdict][gen][explBarrel] = 200
+			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 200
+			chal_result_dict[nameStr][sdxdict][gen][none] = 400
 			
 			for i in chal_result_dict[nameStr][sdxdict][items].keys():
 				chal_result_dict[nameStr][sdxdict][items][i] = 0
 			for i in chal_result_dict[nameStr][sdxdict][deals].keys():
 				chal_result_dict[nameStr][sdxdict][deals][i] = 0
+			for i in chal_result_dict[nameStr][sdxdict][shop].keys():
+				chal_result_dict[nameStr][sdxdict][shop][i] = 0
+			for i in chal_result_dict[nameStr][sdxdict][gamba].keys():
+				chal_result_dict[nameStr][sdxdict][gamba][i] = 0
 			
 			chal_result_dict[nameStr][sdxdict][items][expl_B] = 15
 			chal_result_dict[nameStr][sdxdict][items][follower] = 1
+			chal_result_dict[nameStr][sdxdict][items][cleanse] = 1
 			chal_result_dict[nameStr][sdxdict][deals][expl_BDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][FollowerDeal] = 1
+			chal_result_dict[nameStr][sdxdict][deals][CleanseDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][GambaDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][SlowDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][GrowDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][TeleportDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][ItemTeleportDeal] = 1
 			chal_result_dict[nameStr][sdxdict][deals][DVDBounceDeal] = 1
+			chal_result_dict[nameStr][sdxdict][shop][expl_BShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][FollowerShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][CleanseShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][GambaShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][SlowShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][GrowShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][TeleportShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][ItemTeleportShop] = 1
+			chal_result_dict[nameStr][sdxdict][shop][DVDBounceShop] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][expl_BGamba] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][FollowerGamba] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][CleanseGamba] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][SlowGamba] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][GrowGamba] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][TeleportGamba] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][ItemTeleportGamba] = 1
+			chal_result_dict[nameStr][sdxdict][gamba][DVDBounceShop] = 1
 			chal_result_dict[nameStr][Desc] = "What makes me a good Demoman?"
 		"Trypophobia":
 			for i in chal_result_dict[nameStr][sdxdict][gen].keys():
@@ -254,17 +305,21 @@ func create_callenge(nameStr : String) -> void:
 				chal_result_dict[nameStr][sdxdict][Street][i] = 0
 			
 			chal_result_dict[nameStr][sdxdict][gen][dump] = 1
-			chal_result_dict[nameStr][sdxdict][misc][CarSpeed] = 50
+			chal_result_dict[nameStr][sdxdict][misc][CarSpeed] = 75
+			chal_result_dict[nameStr][StartingItems][speed] = 10
+			chal_result_dict[nameStr][StartingItems][shrink] = 50
 			chal_result_dict[nameStr][Desc] = "What a dumpster fire..."
 		"Enough! Just you and me…":
 			for i in chal_result_dict[nameStr][sdxdict][gen].keys():
 				chal_result_dict[nameStr][sdxdict][gen][i] = 0
 			for i in chal_result_dict[nameStr][sdxdict][Street].keys():
 				chal_result_dict[nameStr][sdxdict][Street][i] = 0
+			chal_result_dict[nameStr][Desc] = "Just you and the cars."
 		"Glide & Dash Practice":
 			chal_result_dict[nameStr][sdxdict][gen][shopGen] = 0
 			chal_result_dict[nameStr][sdxdict][gen][dealGen] = 0
 			chal_result_dict[nameStr][sdxdict][gen][explBarrel] = 0
+			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 200
 			
 			for i in chal_result_dict[nameStr][sdxdict][items].keys():
 				chal_result_dict[nameStr][sdxdict][items][i] = 0
@@ -272,7 +327,10 @@ func create_callenge(nameStr : String) -> void:
 			chal_result_dict[nameStr][sdxdict][items][dash] = 15
 			chal_result_dict[nameStr][sdxdict][items][glide] = 15
 			chal_result_dict[nameStr][sdxdict][items][follower] = 1
-			chal_result_dict[nameStr][Desc] = "Did you know you can glide then dash at the same time?
+			chal_result_dict[nameStr][StartingItems][dash] = 1
+			chal_result_dict[nameStr][StartingItems][glide] = 1
+			chal_result_dict[nameStr][Desc] = \
+			"Did you know you can glide then dash at the same time?
 			Test out the interaction between these two items here.
 			Mastering this can vasty improve your scores."
 		"Hardcore":
@@ -280,10 +338,12 @@ func create_callenge(nameStr : String) -> void:
 			chal_result_dict[nameStr][sdxdict][gen][dealGen] = 5
 			chal_result_dict[nameStr][sdxdict][gen][explBarrel] = 5
 			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 20
-			chal_result_dict[nameStr][Desc] = "Way less resources to help you on your journey."
+			chal_result_dict[nameStr][Desc] = \
+			"There are way less resources to help you on your journey."
 		"Little Big Crosser":
 			chal_result_dict[nameStr][sdxdict][gen][shopGen] = 0
-			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 250
+			chal_result_dict[nameStr][sdxdict][gen][deals] = 0
+			chal_result_dict[nameStr][sdxdict][gen][itemsGen] = 500
 			
 			for i in chal_result_dict[nameStr][sdxdict][items].keys():
 				chal_result_dict[nameStr][sdxdict][items][i] = 0
@@ -295,3 +355,5 @@ func create_callenge(nameStr : String) -> void:
 			chal_result_dict[nameStr][sdxdict][gamba][ShrinkGamba] = 1
 			chal_result_dict[nameStr][sdxdict][gamba][GrowGamba] = 1
 			chal_result_dict[nameStr][sdxdict][gamba][FollowerGamba] = 1
+			chal_result_dict[nameStr][Desc] = \
+			"Is it a small crosser in a big world, or a big crosser in a small world?"

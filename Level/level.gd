@@ -41,3 +41,6 @@ func _ready() -> void:
 	spawn_high_score_line()
 	#dvdbounce
 	spawn_dvd_bounce_area()
+	# spawn starter items
+	await get_tree().physics_frame
+	load_starter_items()

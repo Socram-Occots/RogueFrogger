@@ -22,8 +22,12 @@ func show_seed() -> void:
 
 func _on_visibility_changed():
 	if visible:
-		if Global.score > SettingsDataContainer.get_high_score() && !Global.sandbox:
+		if !Global.sandbox && Global.score > SettingsDataContainer.get_high_score():
 			SettingsSignalBus.emit_on_high_score_set(Global.score)
+			SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
+		elif Global.challenge && \
+		Global.score > SettingsDataContainer.get_challenges_high_score(Global.challenge_curr):
+			SettingsSignalBus.emit_on_challenges_high_score_set(Global.challenge_curr, Global.score)
 			SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
 		score.text = "Score: " + str(Global.score)
 		animation_player.play("startpause")

@@ -24,6 +24,9 @@ signal on_logbook_dict_set(type : String, object : String, value : bool, index :
 signal on_logbook_dict_stats_set(type : String, object : String, value : int, index : int)
 signal on_logbook_dict_stats_inc(type : String, object : String, value : int, index : int)
 signal on_logbook_dict_setAll(dict: Dictionary)
+# challenges data
+signal on_challenges_high_score_setDictAll(dict : Dictionary)
+signal on_challenges_high_score_set(challenge : String, value : int)
 # show hitboxes
 signal on_show_hitboxes_set(value : bool)
 # show controls
@@ -84,6 +87,11 @@ func emit_on_logbook_dict_stats_inc(type : String, object : String, value : int,
 	on_logbook_dict_stats_inc.emit(type, object, value, index)
 func emit_on_logbook_dict_setAll(dict : Dictionary) -> void:
 	on_logbook_dict_setAll.emit(dict)
+# challenges data
+func emit_on_challenges_high_score_setDictAll(dict : Dictionary) -> void:
+	on_challenges_high_score_setDictAll.emit(dict)
+func emit_on_challenges_high_score_set(challenge : String, value : int) -> void:
+	on_challenges_high_score_set.emit(challenge, value)
 # show hitboxes
 func emit_on_show_hitboxes_set(value : bool) -> void:
 	on_show_hitboxes_set.emit(value)

@@ -10,6 +10,7 @@ var score : int = 0
 var defeat_var : bool = false
 var sandbox : bool = false
 var challenge : bool = false
+var challenge_curr : String = ""
 var back_to_startscreen : bool = false
 
 #input
@@ -523,8 +524,8 @@ func inc_GrappleRope(times : int) -> void:
 	grapple_speed = grapple_speed_base + 10 * grapple_mod
 	grapple_strength = grapple_strength_base + 25 * grapple_mod
 	grapple_length = grapple_length_base + 5 * grapple_mod
-	grapple_cool_down = grapple_cool_down_base * ((1/1.1) ** grapple_mod)
-	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.1) ** grapple_mod)
+	grapple_cool_down = grapple_cool_down_base * ((1/1.05) ** grapple_mod)
+	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.05) ** grapple_mod)
 	grapplelabelon = true
 	updatelabels = true
 	logbook_tracking("Items", "Grapple", times)
