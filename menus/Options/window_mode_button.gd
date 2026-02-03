@@ -26,19 +26,20 @@ func add_window_mode_items() -> void:
 		
 	
 func on_window_mode_selected(index: int) -> void:
-	match index:
-		0: # fullscreen
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-		1: # Window Mode
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-		2: # Borderless Window Mode
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
-		3: # Borderless Full-Sreen
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+	if !Global.back_to_startscreen:
+		match index:
+			0: # fullscreen
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+				DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+			1: # Window Mode
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+			2: # Borderless Window Mode
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+				DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+			3: # Borderless Full-Sreen
+				DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+				DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 
 func select_current_window_mode() -> void:
 	var mode = DisplayServer.window_get_mode()

@@ -22,6 +22,7 @@ func _ready() -> void:
 	Global.challenge = false
 	SettingsSignalBus.emit_on_logbook_dict_set("Objects", "Cars", true, 0)
 	loadOptions()
+	Global.back_to_startscreen = false
 	add_to_group("UI_FOCUS", true)
 	add_to_group("UI_FOCUS_OPTIONS", true)
 	add_to_group("UI_FOCUS_SANDBOX", true)
