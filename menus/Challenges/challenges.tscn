@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://8tmvdaslxhy7"]
+[gd_scene load_steps=7 format=3 uid="uid://8tmvdaslxhy7"]
 
 [ext_resource type="Script" path="res://menus/Challenges/challenges.gd" id="1_3s3xk"]
+[ext_resource type="Material" uid="uid://dw5ry2b5wv5ra" path="res://RogueFroggerAssets/RFAssets/shaders/blur.tres" id="2_kqr38"]
 [ext_resource type="Script" path="res://menus/Version.gd" id="2_ttkty"]
 [ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="3_y7hnf"]
 
@@ -126,6 +127,52 @@ size_flags_vertical = 8
 focus_neighbor_right = NodePath("../Exit")
 theme_override_font_sizes/font_size = 40
 text = "Play"
+
+[node name="Block" type="Control" parent="."]
+custom_minimum_size = Vector2(1500, 700)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -750.0
+offset_top = -350.0
+offset_right = 750.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blur" type="ColorRect" parent="Block"]
+material = ExtResource("2_kqr38")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Black" type="ColorRect" parent="Block"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.870588)
+
+[node name="Label" type="Label" parent="Block"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "You need to reach a High Score of 50 to access Challeneges!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Version" type="Label" parent="."]
 layout_mode = 1

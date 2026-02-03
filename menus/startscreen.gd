@@ -9,6 +9,7 @@ const OPTIONS : Resource = preload("res://menus/Options/option_menu.tscn")
 @onready var logbook: Button = $Options/Logbook
 @onready var logbook_notif: Polygon2D = $Options/Logbook/Polygon2D
 @onready var challenges: Button = $Options/Challenges
+@onready var challenge_notif: Polygon2D = $Options/Challenges/Polygon2D
 
 func loadOptions() -> void:
 	var optionspopup : Control = OPTIONS.instantiate()
@@ -30,6 +31,7 @@ func _ready() -> void:
 	add_to_group("UI_FOCUS_STARTSCREEN")
 	begin_focus()
 	scan_for_logbook()
+	check_challenge_unlock()
 
 func become_background():
 	if visible:
@@ -102,3 +104,7 @@ func scan_for_logbook() -> void:
 				break
 		if tempbool: break
 	logbook_notif.visible = tempbool
+
+func check_challenge_unlock() -> void:
+	if SettingsDataContainer.get_high_score() > 50:
+		challenge_notif.visible = !SettingsDataContainer.get_reached_50_score()

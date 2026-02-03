@@ -33,6 +33,8 @@ var show_hitboxes : bool = false
 var show_controls : bool = false
 # tutorials always on
 var tutorials_always_on : bool = false
+# progress
+var reached_50_score : bool = false
 
 func _ready():
 	handle_signals()
@@ -57,7 +59,8 @@ func create_storage_dictionary() -> Dictionary:
 		"speedrun_dict": speedrun_dict,
 		"tutorials_always_on": tutorials_always_on,
 		"colorblind_mode": colorblind_mode,
-		"challenge_highschore_dict": challenge_highschore_dict
+		"challenge_highschore_dict": challenge_highschore_dict,
+		"reached_50_score": reached_50_score
 	}
 
 	return settings_container_dict
@@ -273,7 +276,7 @@ func get_tutorials_always_on(default: bool = false) -> bool:
 # challenges
 func get_challenges_All(default: bool = false) -> Dictionary:
 	if loaded_data.is_empty() || default:
-		return {}
+		return DEFAULT_SETTINGS.default_callenges_dict
 	return challenge_dict
 
 func get_challenges_dict(nameStr : String, default: bool = false) -> Dictionary:
@@ -290,6 +293,11 @@ func get_challenges_high_score(nameStr : String, default: bool = false) -> int:
 	if loaded_data.is_empty() || default:
 		return 0
 	return challenge_highschore_dict[nameStr]
+
+func get_reached_50_score(default: bool = false) -> bool:
+	if loaded_data.is_empty() || default:
+		return DEFAULT_SETTINGS.default_reached_50_score
+	return reached_50_score
 
 # set settings
 func on_window_mode_selected(index : int) -> void:
@@ -488,6 +496,9 @@ func on_challenges_high_score_setDictAll(dict : Dictionary) -> void:
 func on_challenges_high_score_set(challenge : String, value : int) -> void:
 	challenge_highschore_dict[challenge] = value
 
+func on_reached_50_score_set(value : bool) -> void:
+	reached_50_score = value
+
 #settings data set
 func on_settings_data_loaded(data: Dictionary) -> void:
 	loaded_data = data
@@ -571,7 +582,12 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 	if loaded_data.has("challenge_highschore_dict"):
 		on_challenges_high_score_setDictAll(loaded_data["challenge_highschore_dict"])
 	else:
-		on_challenges_high_score_setDictAll({})
+		on_challenges_high_score_setDictAll(DEFAULT_SETTINGS.default_callenges_dict)
+	
+	if loaded_data.has("reached_50_score"):
+		on_reached_50_score_set(loaded_data["reached_50_score"])
+	else:
+		on_reached_50_score_set(DEFAULT_SETTINGS.default_reached_50_score)
 	
 	loaded_data = create_storage_dictionary()
 
@@ -609,6 +625,8 @@ func handle_signals() -> void:
 	SettingsSignalBus.on_show_controls_set.connect(on_show_controls_set)
 	# always on tutorials
 	SettingsSignalBus.on_tutorials_always_on_set.connect(on_tutorials_always_on_set)
+
+	SettingsSignalBus.on_reached_50_score_set.connect(on_reached_50_score_set)
 
 	# load data
 	SettingsSignalBus.load_settings_data.connect(on_settings_data_loaded)

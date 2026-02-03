@@ -38,6 +38,8 @@ signal set_settings_dictionary(settings_dict : Dictionary)
 
 signal load_settings_data(settings_dict : Dictionary)
 
+signal on_reached_50_score_set(value : bool)
+
 func emit_load_settings_data(settings_dict : Dictionary) -> void:
 	load_settings_data.emit(settings_dict)
 
@@ -101,3 +103,6 @@ func emit_on_show_controls_set(value : bool) -> void:
 # always on tutorials
 func emit_on_tutorials_always_on_set(value : bool) -> void:
 	on_tutorials_always_on_set.emit(value)
+	
+func emit_on_reached_50_score_set(value : bool) -> void:
+	on_reached_50_score_set.emit(value)

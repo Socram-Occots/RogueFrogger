@@ -382,7 +382,9 @@ const default_logbook_dict : Dictionary = {
 #endregion
 
 #region Challenges
-var default_callenges_dict : Dictionary = {
+const default_callenges_dict : Dictionary = {
 	
 }
 #endregion
+
+const default_reached_50_score : bool = false
