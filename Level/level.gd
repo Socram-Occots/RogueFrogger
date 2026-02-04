@@ -4,7 +4,6 @@ extends "res://Level/level_gen.gd"
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	update_labels()
-	dash_check()
 	terrain_check()
 	gamba_check()
 	follower_check()

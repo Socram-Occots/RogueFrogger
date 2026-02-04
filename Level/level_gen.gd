@@ -1036,12 +1036,6 @@ func update_labels() -> void:
 			Global.holelabelon = false
 			hole_icon.get_node("Hole").text = str(Global.hole_mod)
 
-func dash_check() -> void:
-	if Global.dash && dashpopup: 
-		dashpopup = false
-		var dash_pop_up : Control = Globalpreload.POP_INST.duplicate()
-		$CanvasLayer.add_child(dash_pop_up)
-
 func speed_run_check() -> void:
 	if Global.sandbox || Global.challenge: return
 	var newtime : bool = false
@@ -1196,9 +1190,7 @@ func follower_check() ->void:
 
 func highscore_notif() -> void:
 	if Global.sandbox: return
-	var high_score_pop_up : Control = Globalpreload.POP_INST.duplicate()
-	high_score_pop_up.get_node("dashpopup/Label").text = "New High Score!"
-	canvas_layer.add_child(high_score_pop_up)
+	canvas_layer.get_node("TipPopup").loadTip("HighScoreReached", "HighScore")
 	Global.finish_line_tile.queue_free()
 
 func spawn_dvd_bounce_area() -> void:

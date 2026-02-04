@@ -97,6 +97,13 @@ func _on_quit_pressed() -> void:
 
 func scan_for_logbook() -> void:
 	var temp : Dictionary = SettingsDataContainer.loaded_data.get("logbook_dict")
+	# stoping invisible object stats from falsely flagging the logbook
+	SettingsDataContainer.on_logbook_dict_set(
+		"Objects", "ExplBarrelPickUpEvent", 
+		SettingsDataContainer.get_logbook_dict(
+			"Objects", "ExplBarrelPickUpEvent")[0], 
+			1)
+		
 	var tempbool : bool = false
 	for i in temp.keys():
 		for a in temp[i].keys():
@@ -109,3 +116,5 @@ func scan_for_logbook() -> void:
 func check_challenge_unlock() -> void:
 	if SettingsDataContainer.get_high_score() > 50:
 		challenge_notif.visible = !SettingsDataContainer.get_reached_50_score()
+	else:
+		challenge_notif.visible = false

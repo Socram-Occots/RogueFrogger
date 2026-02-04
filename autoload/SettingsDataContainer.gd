@@ -582,7 +582,7 @@ func on_settings_data_loaded(data: Dictionary) -> void:
 	if loaded_data.has("challenge_highschore_dict"):
 		on_challenges_high_score_setDictAll(loaded_data["challenge_highschore_dict"])
 	else:
-		on_challenges_high_score_setDictAll(DEFAULT_SETTINGS.default_callenges_dict)
+		on_challenges_high_score_setDictAll({})
 	
 	if loaded_data.has("reached_50_score"):
 		on_reached_50_score_set(loaded_data["reached_50_score"])

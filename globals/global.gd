@@ -787,4 +787,5 @@ func convert_keyword_to_title(keyword : String) -> String:
 		"ExplBarrel" : return "Exploding Barrel"
 		"expl_B" : return "Exploding Barrel (Item)"
 		"ExplBarrelPickUpEvent" : return "Exploding Barrel"
+		"HighScoreReached" : return "New High Score!"
 	return keyword

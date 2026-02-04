@@ -14,10 +14,20 @@ extends VBoxContainer
 func _ready() -> void:
 	visible = false
 
+func set_desc(titelStr: String, typeStr : String) -> void:
+	var resultStr : String  = ""
+	match titelStr:
+		"HighScoreReached" : resultStr = "Congrats!"
+		_ : 
+			description.text = SettingsDataContainer.get_logbook_dict_popuptooltip(
+				typeStr, titelStr)
+			return
+	description.text = resultStr
+	
 func displayTip(popuparray : Array) -> void:
 	visible = true
 	title.text = Global.convert_keyword_to_title(popuparray[0])
-	description.text = SettingsDataContainer.get_logbook_dict_popuptooltip(popuparray[1], popuparray[0])
+	set_desc(popuparray[0], popuparray[1])
 	var keystring : String =  get_icon_string(popuparray[0])
 	if keystring != "None":
 		tip_popup_key.visible = true
