@@ -16,8 +16,9 @@ func _ready() -> void:
 	
 	# we need two of these because the engine waits a tick to
 	# look for its collisons after placing an entity
-	await get_tree().physics_frame
-	await get_tree().physics_frame
+	await Global.secure_await_phy_frame(2)
+	if Global.follower_array.is_empty(): return
+	
 
 	var qualified : Array[Vector2] = []
 	var temp_rigid : RigidBody2D = Global.follower_array[0]

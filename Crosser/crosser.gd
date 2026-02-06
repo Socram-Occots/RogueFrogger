@@ -20,11 +20,6 @@ extends RigidBody2D
 @onready var grappled : bool = false
 @onready var carrying : bool = false
 
-@onready var grapplehook : Line2D = Globalpreload.grapplehook.duplicate()
-@onready var tele : Area2D = Globalpreload.tele.duplicate()
-@onready var itemtele : Area2D = Globalpreload.itemtele.duplicate()
-@onready var itemgrapplehook : Line2D = Globalpreload.itemgrapplehook.duplicate()
-
 @onready var arr_of_items_to_grapple : Array[Array] = []
 @onready var auto_item_grapple: Area2D = $AutoItemGrapple
 @onready var grappleitem_collision_shape_2d: CollisionShape2D = $AutoItemGrapple/CollisionShape2D
@@ -35,7 +30,7 @@ extends RigidBody2D
 
 
 func _ready() -> void:
-	Globalpreload.delete_array.append_array([grapplehook,tele,itemtele,itemgrapplehook])
+	#Globalpreload.delete_array.append_array([grapplehook,tele,itemtele,itemgrapplehook])
 	# stop camera from being weird initially
 	$Camera2D.reset_smoothing()
 	
@@ -51,10 +46,6 @@ func _ready() -> void:
 	# this will be an option for camera smoothing
 	#$Camera2D.position_smoothing_enabled = true
 	#$Camera2D.limit_smoothed = true
-	
-	# instantiate grapplie hook
-	#grapplehook = GRAPPLE.instantiate()
-	grapplehook.crosser = $"."
 
 #func move_and_slide_rigidbody() -> void:
 	#if !gliding:
@@ -139,7 +130,8 @@ func grapple_decision_tree() -> void:
 	if grapple_input_pressed && Global.grapple &&\
 	 !Global.grapple_cool_down_bool && !grappling:
 		grappling = true
-		var grappledupe : Line2D = grapplehook.duplicate()
+		var grappledupe : Line2D = Globalpreload.grapplehook.duplicate()
+		grappledupe.crosser = $"."
 		if Global.using_cont && SettingsDataContainer.get_controller_aim_toggle():
 			var contr_dir : Vector2 = Vector2.ZERO
 			contr_dir.y += -1 * Input.get_action_raw_strength("up_cont_aim")
@@ -260,13 +252,13 @@ func shield_compromised() -> void:
 		shieldAnimation.stop()
 
 func rand_teleport(constraint_2dvec : Vector2 = Vector2.ZERO) -> void:
-	var temp_tele : Area2D = tele.duplicate()
+	var temp_tele : Area2D = Globalpreload.tele.duplicate()
 	temp_tele.global_position = global_position
 	temp_tele.constraint_2dvec = constraint_2dvec
 	get_parent().add_child(temp_tele)
 
 func rand_itemteleport(constraint_2dvec : Vector2 = Vector2.ZERO) -> void:
-	var itemtemp_tele : Area2D = itemtele.duplicate()
+	var itemtemp_tele : Area2D = Globalpreload.itemtele.duplicate()
 	itemtemp_tele.global_position = global_position
 	itemtemp_tele.constraint_2dvec = constraint_2dvec
 	get_parent().add_child(itemtemp_tele)
@@ -290,7 +282,8 @@ func _on_auto_item_grapple_area_entered(area: Area2D) -> void:
 	"Deal" in metalist) && "Item" in metalist:
 		arr_of_items_to_grapple.append([area, (area.global_position - global_position).length()])
 	await get_tree().physics_frame
-	choose_furthest_item()
+	if is_instance_valid(area):
+		choose_furthest_item()
 
 func max_item_pos_from_arr(arr1 : Array, arr2: Array) -> bool:
 	return arr1[1] > arr2[1]
@@ -310,7 +303,7 @@ func choose_furthest_item() -> void:
 			chosen_item = arr_of_items_to_grapple[0]
 		if !chosen_item.is_empty():
 			Global.grapple_item_chosen = true
-			var itemgrapple : Line2D = itemgrapplehook.duplicate()
+			var itemgrapple : Line2D = Globalpreload.itemgrapplehook.duplicate()
 			itemgrapple.item = chosen_item[0]
 			chosen_item[0].set_meta("marked_for_grapple", false)
 			chosen_item[0].remove_meta("Item")

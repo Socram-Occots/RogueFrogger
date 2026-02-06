@@ -6,9 +6,11 @@ extends Line2D
 @onready var grapple_head: Area2D = $grappleHead
 @onready var velocity : Vector2 = Vector2(0, 0)
 @onready var collision_shape_2d: CollisionShape2D = $grappleHead/CollisionShape2D
+@onready var grappleassist: Area2D = $grappleHead/grappleassist
 var item : Area2D
 
 func _ready() -> void:
+	grappleassist.visible = false
 	grapple_head.global_position = crosser_global_pos
 	set_point_position(0, crosser_global_pos)
 	set_point_position(1, crosser_global_pos)

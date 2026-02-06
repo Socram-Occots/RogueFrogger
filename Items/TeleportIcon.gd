@@ -25,15 +25,8 @@ func icon_activated() -> void:
 	bar.hide()
 	time_label.hide()
 	Global.follower_array[0].get_node("AnimationPlayer").play("teleport")
-	if active && is_instance_valid(crosser):
-		await crosser.get_tree().create_timer(Global.teleanilength).timeout
-	else: return
-	if active && is_instance_valid(crosser):
-		await crosser.get_tree().physics_frame
-	else: return
-	if active && is_instance_valid(crosser):
-		await crosser.get_tree().physics_frame
-	else: return
+	await Global.secure_await_timer(Global.teleanilength)
+	await Global.secure_await_phy_frame(2)
 	if active && is_instance_valid(crosser):
 		start_timer()
  

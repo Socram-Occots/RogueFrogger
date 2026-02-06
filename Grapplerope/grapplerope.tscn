@@ -1,9 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnxxavl04bpt0"]
+[gd_scene load_steps=6 format=3 uid="uid://cnxxavl04bpt0"]
 
 [ext_resource type="Script" path="res://Grapplerope/grappleropelogic.gd" id="1_x8yr7"]
 [ext_resource type="Texture2D" uid="uid://djkbax0mdicfw" path="res://addons/2d_essentials/icons/arrow_cross.svg" id="2_oymgl"]
+[ext_resource type="Script" path="res://addons/2d_shapes/shapes/Ellipse.gd" id="3_1t1fq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q6w38"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bjosx"]
 
 [node name="grappleLine2D" type="Line2D"]
 points = PackedVector2Array(0, 0, 0, 0)
@@ -13,14 +16,601 @@ script = ExtResource("1_x8yr7")
 collision_layer = 0
 collision_mask = 286
 
+[node name="Ellipse" type="Node2D" parent="grappleHead"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="grappleHead"]
-scale = Vector2(0.3, 0.3)
 shape = SubResource("CircleShape2D_q6w38")
 metadata/grapplehead = false
 
 [node name="Sprite2D" type="Sprite2D" parent="grappleHead"]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_oymgl")
+
+[node name="grappleassist" type="Area2D" parent="grappleHead"]
+collision_layer = 0
+collision_mask = 282
+
+[node name="CollisionShape2D0" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(20, 0)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D0"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D1" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(20, 20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D1"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(0, 20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D2"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-20, 20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D3"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-20, 0)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D4"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-20, -20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D5"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(0, -20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D6"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(20, -20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D7"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(40, -20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D8"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(40, 0)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D9"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(40, 20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D10"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(40, 40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D11"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(20, 40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D12"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(0, 40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D13"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-20, 40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D14"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-40, 40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D15"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-40, 20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D16"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-40, 0)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D17"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-40, -20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D18"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-40, -40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D19"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-20, -40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D20"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(0, -40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D21"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D22" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(20, -40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D22"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D23" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(40, -40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D23"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D24" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(60, -40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D24"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D25" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(60, -20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D25"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D26" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(60, 0)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D26"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D27" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(60, 20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D27"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D28" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(60, 40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D28"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D29" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(60, 60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D29"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D30" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(40, 60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D30"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D31" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(20, 60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D31"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D32" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(0, 60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D32"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D33" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-20, 60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D33"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D34" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-40, 60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D34"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D35" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-60, 60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D35"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D36" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-60, 40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D36"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D37" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-60, 20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D37"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D38" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-60, 0)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D38"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D39" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-60, -20)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D39"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D40" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-60, -40)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D40"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D41" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-60, -60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D41"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D42" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-40, -60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D42"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D43" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(-20, -60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D43"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D44" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(0, -60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D44"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D45" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(20, -60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D45"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D46" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(40, -60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D46"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
+
+[node name="CollisionShape2D47" type="CollisionShape2D" parent="grappleHead/grappleassist"]
+position = Vector2(60, -60)
+shape = SubResource("CircleShape2D_bjosx")
+disabled = true
+metadata/grapplehead = false
+
+[node name="Ellipse" type="Node2D" parent="grappleHead/grappleassist/CollisionShape2D47"]
+script = ExtResource("3_1t1fq")
+size = Vector2(20, 20)
+circle = true
+fill_color = Color(0, 1, 1, 0.196078)
 
 [connection signal="area_entered" from="grappleHead" to="." method="_on_grapple_head_area_entered"]
 [connection signal="body_entered" from="grappleHead" to="." method="_on_grapple_head_body_entered"]
+[connection signal="area_shape_entered" from="grappleHead/grappleassist" to="." method="_on_grappleassist_area_shape_entered"]
+[connection signal="body_shape_entered" from="grappleHead/grappleassist" to="." method="_on_grappleassist_body_shape_entered"]

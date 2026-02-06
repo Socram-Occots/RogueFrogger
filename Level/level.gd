@@ -42,4 +42,5 @@ func _ready() -> void:
 	spawn_dvd_bounce_area()
 	# spawn starter items
 	await get_tree().physics_frame
-	load_starter_items()
+	if is_instance_valid(player):
+		load_starter_items()

@@ -42,6 +42,7 @@ func itemteleportation_activated() -> void:
 func _on_item_teleport_vbox_tree_entered() -> void:
 	if added_to_tree && !Global.follower_array.is_empty():
 		await Global.follower_array[0].get_tree().physics_frame 
+		if Global.follower_array.is_empty() : return
 		icon_activated()
 
 func _on_item_teleport_vbox_tree_exiting() -> void:

@@ -47,11 +47,11 @@ const dash_cool_down_base : float = 5.0
 const timer_base_l : float = 4.2
 const timer_base_h : float = 5.4
 #grapple
-const grapple_cool_down_base : float = 2.0
-const grapple_speed_base : float = 750
-const grapple_strength_base : float = 725
+const grapple_cool_down_base : float = 3.0
+const grapple_speed_base : float = 600
+const grapple_strength_base : float = 600
 const grapple_length_base : float = 250
-const grapple_item_cool_down_base : float = 60
+const grapple_item_cool_down_base : float = 90
 #glide
 const glide_cool_down_base : float = 5.0
 const glide_base_time : float = 0.5
@@ -521,8 +521,8 @@ func inc_GrappleRope(times : int) -> void:
 		grapple = false
 
 	grapple_mod += times
-	grapple_speed = grapple_speed_base + 10 * grapple_mod
-	grapple_strength = grapple_strength_base + 25 * grapple_mod
+	grapple_speed = grapple_speed_base + 7.5 * grapple_mod
+	grapple_strength = grapple_strength_base + 15 * grapple_mod
 	grapple_length = grapple_length_base + 5 * grapple_mod
 	grapple_cool_down = grapple_cool_down_base * ((1/1.05) ** grapple_mod)
 	grapple_item_cool_down = grapple_item_cool_down_base * ((1/1.05) ** grapple_mod)
@@ -789,3 +789,14 @@ func convert_keyword_to_title(keyword : String) -> String:
 		"ExplBarrelPickUpEvent" : return "Exploding Barrel"
 		"HighScoreReached" : return "New High Score!"
 	return keyword
+
+func secure_await_phy_frame(frames : int):
+	for i in range(0, frames):
+		await get_tree().physics_frame
+
+func secure_await_process_frame(frames : int):
+	for i in range(0, frames):
+		await get_tree().process_frame
+
+func secure_await_timer(time : float):
+	await get_tree().create_timer(time).timeout
