@@ -155,7 +155,7 @@ const default_controller_aim_toggle : bool = false
 
 # tooltip data
 const boolarrayhelper : Array[bool] = [false, false]
-const statarrayhelper : Array[int] = [0, 0]
+const statarrayhelper : Array[int] = [0, 0, 0]
 const default_logbook_objects_dict : Dictionary = {
 	"ExplBarrel":{"bools":boolarrayhelper,
 	"stats":statarrayhelper,
@@ -203,6 +203,13 @@ const default_logbook_objects_dict : Dictionary = {
 	"tooltip":
 		"Cars:
 	-The sworn enemy of the Crosser...",
+	"popuptooltip":
+		""},
+	"LineOfDeath":{"bools":boolarrayhelper,
+	"stats":statarrayhelper,
+	"tooltip":
+		"The Line of Death:
+	-Can't stall forever!",
 	"popuptooltip":
 		""}
 }

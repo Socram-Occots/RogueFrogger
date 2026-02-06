@@ -6,9 +6,17 @@ extends Control
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sandbox_seed : String = SettingsDataContainer.get_sandbox_seed(!Global.sandbox)
 @onready var retry: Button = $CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry
+@onready var deathreviewtexture_rect: TextureRect = $DeathReview/TextureRect
+@onready var deathreviewlabel: Label = $DeathReview/HBoxContainer/Label
+
+var deathcause : String = "Uknown"
 
 func _ready():
 	add_to_group("UI_FOCUS", true)
+
+func set_death_review() -> void:
+	deathreviewlabel.text = "Your run was ended by: " + Global.convert_keyword_to_title(deathcause) 
+	deathreviewtexture_rect.texture = Global.get_texture_icons(deathcause, "Death Review")
 
 func begin_focus() -> void:
 	if visible:
@@ -22,16 +30,10 @@ func show_seed() -> void:
 
 func _on_visibility_changed():
 	if visible:
-		if !Global.sandbox && Global.score > SettingsDataContainer.get_high_score():
-			SettingsSignalBus.emit_on_high_score_set(Global.score)
-			SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
-		elif Global.challenge && \
-		Global.score > SettingsDataContainer.get_challenges_high_score(Global.challenge_curr):
-			SettingsSignalBus.emit_on_challenges_high_score_set(Global.challenge_curr, Global.score)
-			SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
 		score.text = "Score: " + str(Global.score)
 		animation_player.play("startpause")
 		show_seed()
+		set_death_review()
 		begin_focus()
 
 func _on_retry_pressed():

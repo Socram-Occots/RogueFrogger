@@ -7,7 +7,6 @@ var version : String = "V 0.0.0.8"
 var score : int = 0
 
 #gamestate
-var defeat_var : bool = false
 var sandbox : bool = false
 var challenge : bool = false
 var challenge_curr : String = ""
@@ -87,6 +86,8 @@ const hole_cool_down_base : float = 60
 #endregion
 
 #region Values
+#game state
+var in_play : bool = true
 #tiles
 var tiles_spawned : int = 0
 var race_condition_tiles : Array[int] = []
@@ -260,7 +261,7 @@ func reset() -> void:
 	#score
 	score = 0
 	# gamestate
-	defeat_var = false
+	in_play = true
 	# playerspeed
 	player_speed_mod = 0
 	player_speed_scaling = player_base_speed
@@ -397,7 +398,7 @@ func reset() -> void:
 
 func incrementDifficulty(x : int = 2, int_multiple : float = 1) -> void:
 	if score != 0 && score % x == 0:
-		car_speed_scaling += 1 * int_multiple
+		car_speed_scaling += int_multiple
 		timer_l -= 0.01
 		timer_l-= 0.01
 		if (timer_l < 1.5):
@@ -405,9 +406,23 @@ func incrementDifficulty(x : int = 2, int_multiple : float = 1) -> void:
 		if (timer_h < 1.5):
 			timer_h = 1.5
 	
-func defeat() -> void:
-	get_tree().paused = true
-	game_over_pop_up.set_visible(true)
+func defeat(type : String, object: String = "Uknown", stat_track : bool = true) -> void:
+	if in_play:
+		in_play = false
+		follower_array[0]. play_crosser_defeat()
+		if !sandbox && score > SettingsDataContainer.get_high_score():
+			SettingsSignalBus.emit_on_high_score_set(score)
+			SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
+		elif challenge && \
+		score > SettingsDataContainer.get_challenges_high_score(challenge_curr):
+			SettingsSignalBus.emit_on_challenges_high_score_set(challenge_curr, score)
+			SettingsSignalBus.emit_set_settings_dictionary(SettingsDataContainer.create_storage_dictionary())
+		await get_tree().root.get_node("Level").death_timer_start(1)
+		get_tree().paused = true
+		if stat_track:
+			SettingsSignalBus.emit_on_logbook_dict_stats_inc(type, object, 1, 2)
+		game_over_pop_up.deathcause = object
+		game_over_pop_up.set_visible(true)
 	
 func pause() -> void:
 	if (game_over_pop_up != null && !game_over_pop_up.visible) &&\
@@ -788,6 +803,10 @@ func convert_keyword_to_title(keyword : String) -> String:
 		"expl_B" : return "Exploding Barrel (Item)"
 		"ExplBarrelPickUpEvent" : return "Exploding Barrel"
 		"HighScoreReached" : return "New High Score!"
+		"Hole_Sidewalk_Street" : return "Hole"
+		"Hole_Sidewalk" : return "Hole (Sidewalk)"
+		"Hole_Street" : return "Hole (Street)"
+		"LineOfDeath" : return "Line of Death"
 	return keyword
 
 func secure_await_phy_frame(frames : int):

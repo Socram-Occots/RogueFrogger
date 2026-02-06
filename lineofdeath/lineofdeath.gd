@@ -14,6 +14,6 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	var metalist : PackedStringArray = body.get_meta_list()
 	if "Player" in metalist:
-		Global.defeat()
+		Global.defeat("Objects", "LineOfDeath")
 	elif "Follower" in  metalist:
 		body.remove_follower()

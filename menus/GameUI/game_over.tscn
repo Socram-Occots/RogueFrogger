@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://drdva4t3w7na0"]
+[gd_scene load_steps=8 format=3 uid="uid://drdva4t3w7na0"]
 
 [ext_resource type="Script" path="res://menus/GameUI/game_over.gd" id="1_7gqty"]
 [ext_resource type="Material" uid="uid://dw5ry2b5wv5ra" path="res://RogueFroggerAssets/RFAssets/shaders/blur.tres" id="2_87331"]
 [ext_resource type="PackedScene" uid="uid://dfs4y1gaosswr" path="res://menus/GameUI/UI_Controls.tscn" id="3_dvw43"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ypln"]
 
 [sub_resource type="Animation" id="Animation_wqa0x"]
 length = 0.001
@@ -61,10 +63,67 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="DeathReview" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -25.0
+offset_right = 664.0
+offset_bottom = 25.0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="DeathReview"]
+layout_mode = 2
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DeathReview"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+size_flags_stretch_ratio = 23.15
+
+[node name="TextureRect" type="TextureRect" parent="DeathReview/HBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="DeathReview/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_7ypln")
+
+[node name="Label" type="Label" parent="DeathReview/HBoxContainer"]
+custom_minimum_size = Vector2(592, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Test
+"
+vertical_alignment = 2
+autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="DeathReview/HBoxContainer/Label"]
+show_behind_parent = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+color = Color(0, 0, 0, 1)
+
+[node name="VSeparator2" type="VSeparator" parent="DeathReview/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_7ypln")
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(600, 600)
@@ -168,6 +227,9 @@ alignment = 2
 [node name="Cancel Selection" parent="UiControls" index="3"]
 visible = false
 alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
 
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="pressed" from="CenterContainer/ColorRect/VBoxContainer/HBoxContainer/retry" to="." method="_on_retry_pressed"]

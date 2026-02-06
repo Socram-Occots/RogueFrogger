@@ -24,7 +24,7 @@ func coyote_time() -> void:
 
 func _on_timer_timeout() -> void:
 	if entered:
-		Global.defeat()
+		Global.defeat("Objects", "Hole_Sidewalk_Street")
 	coyote = false
 
 func _on_area_entered(area: Area2D) -> void:
@@ -35,13 +35,13 @@ func _on_area_entered(area: Area2D) -> void:
 		if "Player" in metalist:
 			entered = true
 			if !body.shield_up && coyote:
-				Global.defeat()
+				Global.defeat("Objects", "Hole_Sidewalk_Street")
 			elif body.shield_up:
 				body.shield_comp = true
 			elif Global.hole_mod > 0 && !Global.hole_cool_down_bool:
 				coyote_time()
 			else:
-				Global.defeat()
+				Global.defeat("Objects", "Hole_Sidewalk_Street")
 		elif "Follower" in metalist:
 			body.remove_follower()
 	elif "Car" in metalist && crater:

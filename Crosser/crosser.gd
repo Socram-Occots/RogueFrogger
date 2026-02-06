@@ -316,6 +316,10 @@ func choose_furthest_item() -> void:
 			if Global.grapple_mod > 0:
 				enable_itemgrapple()
 
-
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "teleport": rand_teleport()
+
+func play_crosser_defeat() -> void:
+	animated.play("death")
+	top_level = true
+	process_mode = PROCESS_MODE_DISABLED

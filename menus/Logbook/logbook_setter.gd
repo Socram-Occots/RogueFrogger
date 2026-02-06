@@ -41,6 +41,8 @@ func desc_stat_addons() -> void:
 					addedtxtarridx.append(0)
 					addedtxtarr.append("Thrown")
 					addedtxtarridx.append(1)
+					addedtxtarr.append("Deaths")
+					addedtxtarridx.append(2)
 				"Barrel":
 					addedtxtarr.append("Exploded")
 					addedtxtarridx.append(0)
@@ -50,9 +52,16 @@ func desc_stat_addons() -> void:
 				"Hole_Sidewalk_Street":
 					addedtxtarr.append("Exploded")
 					addedtxtarridx.append(0)
+					addedtxtarr.append("Deaths")
+					addedtxtarridx.append(2)
 				"Cars":
 					addedtxtarr.append("Exploded")
 					addedtxtarridx.append(0)
+					addedtxtarr.append("Deaths")
+					addedtxtarridx.append(2)
+				"LineOfDeath":
+					addedtxtarr.append("Deaths")
+					addedtxtarridx.append(2)
 	if !addedtxtarr.is_empty():
 		for i in range(0, addedtxtarr.size()):
 			text += "\n{modifier}: {stat}".format({"modifier":addedtxtarr[i],

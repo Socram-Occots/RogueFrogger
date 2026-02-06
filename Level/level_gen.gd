@@ -13,6 +13,7 @@ extends Node
 @onready var line : Area2D = null
 @onready var hboxlabels : HBoxContainer = $CanvasLayer/HBoxContainer 
 @onready var canvas_layer : CanvasLayer = $CanvasLayer
+@onready var death_timer: Timer = $DeathTimer
 
 @onready var curr_follower_id : int = 1
 
@@ -1210,3 +1211,8 @@ func dvd_bounce_check() -> void:
 			DVDarea.get_node("DVDnodes").add_child(DVDnodetemp)
 			Global.dvd_array.append(DVDnodetemp)
 		Global.dvd_spawn_num = 0
+
+func death_timer_start(time : float) -> bool:
+	death_timer.start(time)
+	await death_timer.timeout
+	return true

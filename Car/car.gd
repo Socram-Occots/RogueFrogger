@@ -75,7 +75,7 @@ func _on_body_entered(body):
 	if "Player" in metalist:
 #		print("car")
 		if !body.shield_up:
-			Global.defeat()
+			Global.defeat("Objects", "Cars")
 		else:
 			body.shield_comp = true
 	elif "Follower" in metalist:

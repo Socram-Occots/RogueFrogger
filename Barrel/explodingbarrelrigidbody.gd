@@ -140,7 +140,7 @@ func _on_explosionbarrelexplosion_body_entered(body):
 		match i:
 			"Player":
 				if !body.shield_up:
-					Global.defeat()
+					Global.defeat("Objects", "ExplBarrel")
 				else:
 					body.shield_comp = true
 			"Follower":

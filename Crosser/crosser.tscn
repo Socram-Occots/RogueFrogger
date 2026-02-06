@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://c1asyn1hn33d8"]
+[gd_scene load_steps=63 format=3 uid="uid://c1asyn1hn33d8"]
 
 [ext_resource type="Script" path="res://Crosser/crosser.gd" id="1_5p142"]
 [ext_resource type="Texture2D" uid="uid://bsabp4cneseh7" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_1.png" id="1_e3dyc"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Crosser/hole_coyote_status.gd" id="3_5qfj0"]
 [ext_resource type="Texture2D" uid="uid://bpyhavr5ll4rc" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_3.png" id="3_36v63"]
 [ext_resource type="Texture2D" uid="uid://bkhwepvfnhkdh" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_4.png" id="4_uoduy"]
+[ext_resource type="Texture2D" uid="uid://tnym8ragkd7p" path="res://RogueFroggerAssets/RFAssets/Player/crossserdead.png" id="4_x0cub"]
 [ext_resource type="Texture2D" uid="uid://v5u4i36dso07" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_5.png" id="5_44mg0"]
 [ext_resource type="Texture2D" uid="uid://dmnw4agi6lvlu" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_6.png" id="6_nad8e"]
 [ext_resource type="Texture2D" uid="uid://odwqk5smjh5v" path="res://RogueFroggerAssets/RFAssets/Player/Walk_Down_7.png" id="7_d1ap6"]
@@ -60,6 +61,14 @@ size = Vector2(3840, 950)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5abg2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_x0cub")
+}],
+"loop": true,
+"name": &"death",
+"speed": 1.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_e3dyc")
@@ -353,7 +362,7 @@ position = Vector2(0, -14.575)
 [node name="playermove" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_5abg2")
-animation = &"stand"
+animation = &"death"
 
 [node name="CollisionReveal" type="Polygon2D" parent="."]
 color = Color(0, 1, 1, 0.196078)
