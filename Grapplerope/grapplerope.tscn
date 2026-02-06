@@ -27,7 +27,7 @@ shape = SubResource("CircleShape2D_q6w38")
 metadata/grapplehead = false
 
 [node name="Sprite2D" type="Sprite2D" parent="grappleHead"]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(0.3, 0.3)
 texture = ExtResource("2_oymgl")
 
 [node name="grappleassist" type="Area2D" parent="grappleHead"]
