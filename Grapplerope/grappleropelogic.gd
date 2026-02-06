@@ -27,6 +27,8 @@ func _ready() -> void:
 	grappleassistanceTiers.fill(true)
 	for i in grappleassistArr:
 		i.visible = false
+	rotation_degrees = rad_to_deg(dir_vector.angle()) 
+	
 
 func delete_rope(headalive : bool = true) -> void:
 	seeking = false
